@@ -1,5 +1,6 @@
 const initialState = {
-
+    events: [],
+    details: []
 }
 
 const rootReducer = (state = initialState, action) => {
