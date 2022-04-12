@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import actionsCreator from '../../redux/actions/index';
 import EventCard from '../EventCard/EventCard';
+import Paginated from '../Paginated/Paginated';
 
 
 const EventsCards = () => {
@@ -20,18 +21,23 @@ const EventsCards = () => {
     
     return (
         <div>
-            {events && events.map(event => {
-                return <EventCard 
-                    key={event.id}
-                    id={event.id}
-                    name={event.name}
-                    imgEvent={event.imgEvent}
-                    date={event.date}
-                    artistName={event.artist.name}
-                    stageName={event.stage.name}
-                    location={event.stage.location}
-                />
-            })}
+            <div>
+                {events && events.map(event => {
+                    return <EventCard 
+                        key={event.id}
+                        id={event.id}
+                        name={event.name}
+                        imgEvent={event.imgEvent}
+                        date={event.date}
+                        artistName={event.artist.name}
+                        stageName={event.stage.name}
+                        location={event.stage.location}
+                    />
+                })}
+            </div>
+            <div>
+                <Paginated />
+            </div>
         </div>
     )
 }
