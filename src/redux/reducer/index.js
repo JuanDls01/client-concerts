@@ -16,7 +16,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.payload,
-        allEvents: action.paylaod,
+        allEvents: action.payload,
       };
     }
     case GET_GENRES_TYPES: {
