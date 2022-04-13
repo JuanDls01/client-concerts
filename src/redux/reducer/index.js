@@ -1,3 +1,5 @@
+import { GET_EVENTS, GET_EVENT_DETAIL, CLEAN_EVENT_DETAIL } from '../actions/index'
+
 import { GET_EVENTS } from "../actions/getEvents";
 import { FILT_BY_GENRE } from "../actions/filtByGenre";
 import { GET_GENRES_TYPES } from "../actions/getGenresTypes";
@@ -10,6 +12,33 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
+
+    switch(action.type) {
+        case GET_EVENTS:
+            //const event2 = state.events
+            
+            return {
+                ...state,
+                events: action.payload
+            }
+        
+        case GET_EVENT_DETAIL:
+            console.log(action.payload)
+            return {
+                ...state,
+                details: action.payload
+            }
+        
+        case CLEAN_EVENT_DETAIL:
+            return {
+                ...state,
+                details: []
+            }
+
+        default:
+            return state;
+    }
+}
   switch (action.type) {
     case GET_EVENTS: {
       console.log(action.payload);
