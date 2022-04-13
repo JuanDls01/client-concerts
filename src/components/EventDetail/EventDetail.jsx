@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getEventDetail, cleanEventDetail } from "../redux/actions";
+import actionsCreator from '../../redux/actions/index';
 //const json = require('../events.json')
 
 const EventDetail = () => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const id = 123456789 //useParams
+
+  const { getEventDetail, cleanEventDetail } = actionsCreator;
 
   useEffect(() => {
     dispatch(getEventDetail(id));

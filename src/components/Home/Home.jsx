@@ -9,12 +9,11 @@ import Footer from '../footer/footer'
 import s from "./Home.module.css"
 
 export default function Home(){
-
-
-    return (<div>
-            <Hero/>
+    return (
+        <div>
             <NavBar/>
-            <EventsCards />
+            <Hero/>
+            <EventsCards/>
             <Footer/>
         </div>
     )
