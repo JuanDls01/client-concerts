@@ -1,0 +1,66 @@
+.imagen {
+    position: absolute;
+    height: 550px;
+    width: 728px;
+    left: 101px;
+    top: 44px;
+    border-radius: 0px;
+}
+
+.body {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    left: 0px;
+    top: 0px;
+    background-image: url("../../assets/images/Fondo\ Hero.png");
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 0.09;
+
+}
+
+.externo {
+    position: relative;
+    width: 100%;
+    height: 720px;
+    left: 0px;
+    top: 0px;
+    background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
+    background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
+    mix-blend-mode: normal;
+}
+
+.titulo {
+    position: absolute;
+    height: 98px;
+    width: 500px;
+    left: 900px;
+    top: 100px;
+    border-radius: nullpx;
+    font-family: Proxima Nova;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 49px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: white;
+
+
+}
+
+.parrafo {
+    position: absolute;
+    width: 500px;
+    height: 69px;
+    left: 1000px;
+    top: 342px;
+
+    font-family: 'Proxima Nova';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 130%;
+
+    color: #FFFFFF;
+}

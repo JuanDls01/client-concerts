@@ -1,0 +1,43 @@
+.navbarExterno {
+    position: absolute;
+    width: 70%;
+    left: 880px;
+    top: 10px;
+}
+
+.navegacion ul {
+    display: flex;
+}
+
+.navegacion ul li {
+    margin: 0 15px;
+    width: 120px;
+    padding: 8px 0;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 50px;
+    display: block;
+}
+
+.navegacion ul li:hover {
+    background: #5522CC 63.58%;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+}
+
+.button {
+    position: absolute;
+    top: 14px;
+    left: 530px;
+    width: 101px;
+    height: 40px;
+    border: 1.5px solid #FFFFFF;
+    border-radius: 50px;
+}
+
+.button:hover{
+    background: #5522CC 63.58%;
+    color: white;
+}
