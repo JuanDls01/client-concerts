@@ -1,11 +1,10 @@
 import './App.css';
-import EventsCards from './components/EventsCards/EventsCards';
+import Home from './components/Home/Home'
 
 function App() {
   return (
     <div className="App">
-      <h1>PF FINAL GRUPO 02</h1>
-      <EventsCards />
+      <Home/>
     </div>
   );
 }
