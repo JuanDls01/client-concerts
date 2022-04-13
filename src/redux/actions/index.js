@@ -1,4 +1,4 @@
-cd //Here we import all de actions creator:
+ //Here we import all de actions creator:
 import ejemplo1 from './actionEj1';
 import getEvents, { GET_EVENTS } from './getEvents';
 import { filtEventsByDate ,FILT_BY_DATE } from './actionFiltByDate';

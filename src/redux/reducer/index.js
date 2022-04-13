@@ -3,7 +3,11 @@ import { FILT_BY_DATE } from "../actions/actionFiltByDate";
 
 const initialState = {
     events: [],
-    details: []
+    details: [],
+    filter:{
+        date:[],
+        genre:""
+    }
 }
 
 const rootReducer = (state = initialState, action) => {
