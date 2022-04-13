@@ -1,4 +1,5 @@
 import { GET_EVENTS } from "../actions/getEvents";
+import { FILT_BY_DATE } from "../actions/actionFiltByDate";
 
 const initialState = {
     events: [],
@@ -14,7 +15,7 @@ const rootReducer = (state = initialState, action) => {
                 events: action.payload,
             }
         }
-        case "FILT_BY_DATEs": {
+        case FILT_BY_DATE: {
             return {
                 ...state,
                 events: action.payload,
