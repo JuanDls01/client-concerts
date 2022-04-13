@@ -6,6 +6,8 @@ import actionsCreator from '../../redux/actions/index';
 import EventCard from '../EventCard/EventCard';
 import Paginated from '../Paginated/Paginated';
 
+const INITIALPAGE = 0;
+const EVENTSPERPAGE = 6;
 
 const EventsCards = () => {
 
@@ -16,13 +18,20 @@ const EventsCards = () => {
         dispatch(getEvents());
     },[])
 
+    // Eventos traídos del estado global: 
     const events = useSelector((state) => state.events);
-    console.log(events);
+
+    // Estado que indica la página actual:
+    const [currentPage, setCurrentPage] = useState(INITIALPAGE);
+    // Guardamos el índice de la primer carta que renderizamos:
+    const pagesVisited = currentPage*EVENTSPERPAGE;
+    // Array de las cartas que renderizamos en la página actual:
+    const currentEvents = events.slice(pagesVisited, pagesVisited + EVENTSPERPAGE);
     
     return (
         <div>
             <div>
-                {events && events.map(event => {
+                {currentEvents && currentEvents.map(event => {
                     return <EventCard 
                         key={event.id}
                         id={event.id}
@@ -36,7 +45,7 @@ const EventsCards = () => {
                 })}
             </div>
             <div>
-                <Paginated />
+                <Paginated currentPage={currentPage} setCurrentPage={setCurrentPage} eventsPerPage={EVENTSPERPAGE}/>
             </div>
         </div>
     )
