@@ -1,4 +1,4 @@
-import { GET_EVENT_DETAIL, CLEAN_EVENT_DETAIL } from '../actions/index'
+import { GET_EVENTS, GET_EVENT_DETAIL, CLEAN_EVENT_DETAIL } from '../actions/index'
 
 const initialState = {
     events: [],
@@ -7,15 +7,24 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
-        case GET_EVENT_DETAIL:
+        case GET_EVENTS:
+            //const event2 = state.events
+            
             return {
-                state,
+                ...state,
+                events: action.payload
+            }
+        
+        case GET_EVENT_DETAIL:
+            console.log(action.payload)
+            return {
+                ...state,
                 details: action.payload
             }
         
         case CLEAN_EVENT_DETAIL:
             return {
-                state,
+                ...state,
                 details: []
             }
 

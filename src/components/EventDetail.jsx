@@ -1,39 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { getEventDetail, cleanEventDetail } from "../redux/actions"; 
+import { getEventDetail, cleanEventDetail } from "../redux/actions";
+//const json = require('../events.json')
 
 const EventDetail = () => {
-  const dispatch = useDispatch;
-  const { id } = useParams();
+  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const id = 123456789 //useParams
 
   useEffect(() => {
     dispatch(getEventDetail(id));
     return () => {
       dispatch(cleanEventDetail());
     }
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   const event = useSelector(state => state.details);
+
+  const eventArray = []
+  eventArray[0] = event
+  
+  const dec = () => {
+    if (count > 0) {
+      setCount(count - 1)
+    }
+  }
+
+  const inc = () => {
+    setCount(count + 1)
+  }
 
   return (
     <>
       {
-        event.length > 0 ?
-        <>
-            <img src="#" alt="image">Event Image</img>
-            <h1>Event Name</h1>
-            <h3>Event Description</h3>
-            <p>Event Date</p>
-            <p>Event Location</p>
-            <p>Event Direction</p>
+        eventArray.length > 0 ?
+        <div>
           <div>
-              <Link to='/home'><button>Close</button></Link>
-              <label>Ticket</label>
-              <button>-</button><p>Numbre of tickest</p><button>+</button>
+            <img src={eventArray[0].imgEvent} alt="img" style={{width: "400px"}}/> ;
+            <h1>{eventArray[0].name}</h1>
+            <h3>{eventArray[0].description}</h3>
+            <p>Date: {eventArray[0].date}</p>
+            {/* <p>Location: {eventArray[0].stage.location}</p> */}
+            {/* <p>Event Direction: {eventArray[0]['stage']['address']}</p> */}
+          </div>
+          <div>
+              <Link to='/home'><button>Close</button></Link><br/><br/>
+              <label>Tickets</label><br/><br/>
+              <button onClick={() => dec()}>-</button>{count}<button onClick={() => inc()}>+</button><br/><br/>
               <button>Shopping Cart</button><button>Buy Now</button>
           </div>
-        </> : <p>Loading...</p>
+        </div> : <p>loading...</p>
       } 
     </>
   )
