@@ -1,25 +1,28 @@
 import { GET_EVENTS } from "../actions/getEvents";
-import { FILT_BY_DATE } from "../actions/actionFiltByDate";
+import {  FILT_EVENTS } from "../actions/actionFiltEvents";
+import { GET_GENRES } from "../actions/actionGenres";
 
 const initialState = {
     events: [],
     details: [],
-    filter:{
-        date:[],
-        genre:""
-    }
+    genres:[]
 }
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_EVENTS: {
-            console.log(action.payload);
             return {
                 ...state,
                 events: action.payload,
             }
         }
-        case FILT_BY_DATE: {
+        case GET_GENRES: {
+            return {
+                ...state,
+                genres: action.payload,
+            }
+        }
+        case FILT_EVENTS: {
             return {
                 ...state,
                 events: action.payload,
