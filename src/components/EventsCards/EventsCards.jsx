@@ -48,7 +48,7 @@ const EventsCards = () => {
                     />
                 })}
             </div>
-            <div>
+            <div className={style.paginatedContainner}>
                 <Paginated currentPage={currentPage} setCurrentPage={setCurrentPage} eventsPerPage={EVENTSPERPAGE}/>
             </div>
         </div>
