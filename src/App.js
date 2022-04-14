@@ -1,6 +1,6 @@
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
 
-import EventDetail from './components/EventDetail';
 import Home from './components/Home/Home'
 
 
