@@ -5,16 +5,12 @@ import { filterEventsByGenre ,FILT_BY_GENRE } from './filtByGenre';
 import { getGenres ,GET_GENRES_TYPES } from './getGenresTypes';
 
 export const actions = {
-    GET_EVENTS,
-    GET_GENRES_TYPES,
-    FILT_BY_GENRE
+    GET_EVENTS
 }
 
 const actionsCreator = {
     ejemplo1,
-    getEvents,
-    filterEventsByGenre,
-    getGenres
+    getEvents
 }
 
 export default actionsCreator;
