@@ -4,14 +4,13 @@ const {
   GET_EVENTS,
   GET_EVENT_DETAIL,
   CLEAN_EVENT_DETAIL, 
-  FILT_BY_GENRE, 
-  GET_GENRES_TYPES 
+  FILT_EVENTS,
+  GET_GENRES
 } = actions;
 
 const initialState = {
   events: [],
   details: [],
-  allEvents: [],
   genres: [],
 };
 
@@ -22,25 +21,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.payload,
-        allEvents: action.payload,
       };
     }
 
-    case GET_GENRES_TYPES: {
-      return {
-        ...state,
-        genres: action.payload,
-      };
+    case GET_GENRES: {
+        return {
+            ...state,
+            genres: action.payload,
+        }
     }
 
-    case FILT_BY_GENRE: {
-      const allEvents = state.allEvents;
-      const filterEvents = allEvents.filter((event) => event.artist.genre.name === action.payload);
-      console.log(filterEvents)
-      return {
-        ...state,
-        events: filterEvents,
-      };
+    case FILT_EVENTS: {
+        return {
+            ...state,
+            events: action.payload,
+        };
     }
 
     case GET_EVENT_DETAIL: {
