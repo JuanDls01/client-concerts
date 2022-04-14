@@ -1,5 +1,6 @@
 import actions from '../actions/index';
 
+
 const { 
   GET_EVENTS,
   GET_EVENT_DETAIL,
@@ -58,4 +59,4 @@ const rootReducer = (state = initialState, action) => {
   }
 };
 
-export default rootReducer;
+export default rootReducer
