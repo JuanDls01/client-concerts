@@ -25,8 +25,11 @@ const Paginated = ({ events, setCurrentPage, eventsPerPage }) => {
                 nextLabel={"Next"}
                 pageCount={pageCount}
                 onPageChange={changePage}
+
                 containerClassName={style.paginationBttns}
-                previousLinkClassName={style.previousBttn}
+                pageClassName={style.liBttns}
+                // disabledClassName={style.disabledPrevAndNext}
+                previousClassName={style.previousBttn}
                 nextLinkClassName={style.nextBttn}
                 disabledClassName={style.paginationDisabled}
                 activeClassName={style.paginationActive}

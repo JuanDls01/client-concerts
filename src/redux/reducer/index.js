@@ -1,4 +1,5 @@
-import actions from '../actions/index';
+import { actions } from '../actions/index';
+console.log(actions)
 
 
 const { 
