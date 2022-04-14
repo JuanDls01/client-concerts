@@ -1,3 +1,6 @@
+import {BsFacebook} from "react-icons/bs";
+import {AiFillTwitterCircle, AiFillLinkedin} from "react-icons/ai";
+
 
 import s from './footer.module.css'
 
@@ -7,12 +10,13 @@ export default function Footer(){
             <div className={s.contenedorInterno}>
             <div className={s.contenido}>
                 <div>
-                <h3>what do we do?</h3>
-                <p>My ticket is a global self-service ticketing platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives.</p>
-                <div>
-                <img/>   
-                <img/>
-                <img/>
+                <h3>What do we do?</h3>
+                <p className={s.parrafo}>My ticket is a global self-service ticketing platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives.</p>
+                <div className={s.redes}>
+                <BsFacebook className={s.iconoFacebook}/>
+                <AiFillTwitterCircle className={s.iconoTwitter}/>
+                <AiFillLinkedin className={s.iconoLinkedin}/>
+
                 </div>
                 </div>
                 <div>
@@ -33,7 +37,12 @@ export default function Footer(){
                     </ul>
                 </div>
             </div>
-            <div className={s.copyright}></div>
+            <div className={s.copyright}>
+                <p>Copyright © 2022 Grupo 2 Cohorte 22b de Henry</p>
+                <img/>   
+                <img/>
+                <img/>
+            </div>
 
             </div>
         </div>
