@@ -5,7 +5,8 @@
     flex-direction: column;
     margin: 20px;
     background: #FFFFFF;
-    border-radius: 18.9529px 18.9529px 0px 0px;
+    filter: drop-shadow(0px 18.9529px 47.3822px rgba(119, 115, 170, 0.1));
+    border-radius: 18.9529px;
 }
 
 .imgContainner {
