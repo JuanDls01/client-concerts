@@ -1,7 +1,9 @@
-import EventsCards from '../EventsCards/EventsCards';
 
 //Componentes
 import Hero from '../Hero/Hero';
+import EventDetail from '../EventDetail/EventDetail';
+
+import EventsCards from '../EventsCards/EventsCards';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../footer/footer'
 
@@ -13,6 +15,7 @@ export default function Home(){
         <div>
             <NavBar/>
             <Hero/>
+            <EventDetail/>
             <EventsCards/>
             <Footer/>
         </div>
