@@ -1,0 +1,75 @@
+.cardEvent {
+    width:280px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background: #FFFFFF;
+    filter: drop-shadow(0px 18.9529px 47.3822px rgba(119, 115, 170, 0.1));
+    border-radius: 18.9529px;
+}
+
+.imgContainner {
+    height: 140px;
+    width: 100%;
+    background-image: url('../../assets/images/cardImage.png');
+    background-size: 100%;
+}
+
+.infoContainner {
+    height: 120px;
+    display: flex;
+}
+
+.titleContainner {
+    height: 120px;
+    width: 224px;
+}
+
+.dateContainner {
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.monthName {
+    color: #3D37F1;
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.day {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.artist {
+    display: flex;
+    margin: 10px 7px;
+}
+
+.location {
+    display: flex;
+    margin: 10px 7px;
+    align-items: center;
+}
+
+p {
+    margin: 0px;
+}
+
+h3 {
+    display: flex;
+    margin: 10px 7px;
+    font-size: 22px;
+}
+
+img {
+    width: 11px;
+    height: 13px;
+    margin-right: 5px;
+}
