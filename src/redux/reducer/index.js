@@ -1,5 +1,4 @@
-import { actions } from '../actions/index';
-console.log(actions)
+import {actions} from '../actions/index';
 
 const { 
   GET_EVENTS,

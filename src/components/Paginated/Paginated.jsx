@@ -5,8 +5,8 @@ import ReactPaginate from 'react-paginate';
 
 const Paginated = ({ events, setCurrentPage, eventsPerPage }) => {
 
-    // const pageCount = Math.ceil(events/eventsPerPage)
-    const pageCount = 11;
+    const pageCount = Math.ceil(events/eventsPerPage)
+    // const pageCount = 11;
 
     // Cuando tenga todas la info de los eventos, acá calculo cuantas páginas debería haber en el pages:
     // for (let i = 0; i <= Math.ceil(events/6); i++){
@@ -30,7 +30,7 @@ const Paginated = ({ events, setCurrentPage, eventsPerPage }) => {
                 pageClassName={style.liBttns}
                 // disabledClassName={style.disabledPrevAndNext}
                 previousClassName={style.previousBttn}
-                nextLinkClassName={style.nextBttn}
+                nextClassName={style.nextBttn}
                 disabledClassName={style.paginationDisabled}
                 activeClassName={style.paginationActive}
             />
