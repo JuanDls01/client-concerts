@@ -8,6 +8,7 @@ import NavBar from '../NavBar/NavBar';
 import Footer from '../footer/footer';
 import CreateEvents from '../CreateEvents/CreateEvents';
 import Filter from '../Filters/Filter'
+import SearchBars from '../SearchBars/SearchBars';
 
 //CSS
 import s from "./Home.module.css"
@@ -18,6 +19,7 @@ export default function Home(){
             <Hero/>
             <NavBar/>
             <div name="UpcomingEvents" id="UpcomingEvents"/>
+            <SearchBars />
             <Filter />
             <EventsCards />
             <CreateEvents/>
