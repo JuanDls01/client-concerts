@@ -8,8 +8,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_EVENTS:
-            //const event2 = state.events
-            
             return {
                 ...state,
                 events: action.payload

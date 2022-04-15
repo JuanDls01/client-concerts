@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getEventDetail, cleanEventDetail } from "../redux/actions";
+import style from '../components/EventDetail.module.css';
 //const json = require('../events.json')
 
 const EventDetail = () => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
-  const id = 123456789 //useParams
+  const id = 1 //useParams
 
   useEffect(() => {
     dispatch(getEventDetail(id));
@@ -16,10 +17,12 @@ const EventDetail = () => {
     }
   }, [dispatch]);
 
+  //let event = []
   const event = useSelector(state => state.details);
-
-  const eventArray = []
-  eventArray[0] = event
+  console.log(typeof event.date)
+  
+  // const eventArray = []
+  // eventArray[0] = event
   
   const dec = () => {
     if (count > 0) {
@@ -34,21 +37,24 @@ const EventDetail = () => {
   return (
     <>
       {
-        eventArray.length > 0 ?
-        <div>
+        event ?
+        <div className={style.fondo}>
           <div>
-            <img src={eventArray[0].imgEvent} alt="img" style={{width: "400px"}}/> ;
-            <h1>{eventArray[0].name}</h1>
-            <h3>{eventArray[0].description}</h3>
-            <p>Date: {eventArray[0].date}</p>
-            {/* <p>Location: {eventArray[0].stage.location}</p> */}
-            {/* <p>Event Direction: {eventArray[0]['stage']['address']}</p> */}
+            <img src={event.img} alt="img" className={style.image}/>
+            <p className={style.titulo}>{event.name}</p>
+            <p className={style.description}>{event.description}</p>
+            <span className={style.date_circle}>
+              <p className={style.date_1}>{event.date && event.date.slice(8,10)}</p>
+              <p className={style.date_2}>{event.date && event.date.slice(5,7)}</p>
+            </span>
+            <p className={style.location}>Location: { event.Stage && event.Stage.name }</p>
+            <p className={`${style.location} ${style.direction}`}>Event Direction: { event.Stage && event.Stage.address}</p>
           </div>
           <div>
-              <Link to='/home'><button>Close</button></Link><br/><br/>
-              <label>Tickets</label><br/><br/>
-              <button onClick={() => dec()}>-</button>{count}<button onClick={() => inc()}>+</button><br/><br/>
-              <button>Shopping Cart</button><button>Buy Now</button>
+              <Link to='/home'><button className={style.button_close}>Close</button></Link><br/><br/>
+              <label className={style.ticket}>Tickets</label><br/><br/>
+              <button className={style.button_res} onClick={() => dec()}>-</button><p className={style.number}>{count}</p><button className={style.button_sum}onClick={() => inc()}>+</button><br/><br/>
+              <button className={style.button_add}>Shopping Cart</button><button className={style.button_buy}>Buy Now</button>
           </div>
         </div> : <p>loading...</p>
       } 
