@@ -6,6 +6,7 @@ import Hero from '../Hero/Hero';
 import EventsCards from '../EventsCards/EventsCards';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../footer/footer'
+import CreateEvents from '../CreateEvents/CreateEvents'
 
 //CSS
 import s from "./Home.module.css"
@@ -16,6 +17,7 @@ export default function Home(){
             <Hero/>
             <NavBar/>
             <EventsCards/>
+            <CreateEvents/>
             <Footer/>
         </div>
     )

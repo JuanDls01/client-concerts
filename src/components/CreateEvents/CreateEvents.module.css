@@ -1,0 +1,75 @@
+.externo {
+    position: absolute;
+    width: 100%;
+    height: 303px;
+    left: 0px;
+    top: 1911px;
+}
+
+.interno {
+    width: 100%;
+    height: 252px;
+    background: #EEE1FF;
+    margin-top: 50px
+}
+
+.img {
+    position: relative;
+    width: 544.67px;
+    height: 303px;
+    left: -500px;
+    top: -52px
+}
+
+.event {
+    position: relative;
+    width: 480px;
+    height: 101px;
+    left: 820px;
+    top: -200px;
+
+}
+
+.event h3{
+    font-family: 'DM Sans';
+    width: 417px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 44px;
+    color: #000000;
+}
+
+.event p{
+    font-family: 'DM Sans';
+    width: 349px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000000;
+    margin: 35px 0 0 86px;
+    text-align: left;
+}
+
+.btn{
+    position: absolute;
+    width: 302px;
+    height: 60px;
+    left: 900px;
+    top: 230px;
+    
+    background: #F5167E;
+    box-shadow: 0px 10px 50px rgba(61, 55, 241, 0.25);
+    border-radius: 50px;
+    color: white; 
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 55px;
+}
+
+.btn:hover {
+    border: 1.5px solid #000000;
+    box-sizing: border-box;
+}
