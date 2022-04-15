@@ -9,13 +9,13 @@ const NavBar = () => {
             <nav className={s.navegacion}>
                 <ul>
                     <li>
-                    <Link className={s.link} to="/">Events</Link>
+                    <a href="#UpcomingEvents" className={s.link} to="/">Events</a>
                     </li>
                     <li>
                     <Link className={s.link} to="/">Contact</Link>
                     </li>
                     <li>
-                    <Link className={s.link} to="/">Register</Link>
+                    <Link className={s.link} to="/register">Register</Link>
                     </li>
                 </ul>
 
