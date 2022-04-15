@@ -12,14 +12,14 @@ const NavBar = () => {
                     <a href="#UpcomingEvents" className={s.link} to="/">Events</a>
                     </li>
                     <li>
-                    <Link className={s.link} to="/">Contact</Link>
+                    <Link className={s.link} to="/contact">Contact</Link>
                     </li>
                     <li>
                     <Link className={s.link} to="/register">Register</Link>
                     </li>
                 </ul>
 
-                <button className={s.button}>Login</button>
+                    <li className={s.button}><Link className={s.link} to="/login">Login</Link></li>
 
             </nav>
             
