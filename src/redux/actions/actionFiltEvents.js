@@ -2,7 +2,7 @@ import moment from "moment";
 import axios from "axios";
 export const FILT_EVENTS = 'FILT_EVENTS';
 
-export function filtEvents (date){
+export default function filtEvents (date){
 
     const deta = {
         first:  moment(date.start).format('YYYY-MM-DD'),
