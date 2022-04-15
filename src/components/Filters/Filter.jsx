@@ -31,7 +31,7 @@ export default function Filter() {
   }
 
   return (
-    <div>
+    <div >
       {/* {COMPONENTE DE CALENDARIO} */}
       <DatePicker
         selected={startDate}
