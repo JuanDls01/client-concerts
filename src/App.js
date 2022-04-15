@@ -1,9 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-
 import Home from './components/Home/Home'
 import NoMatch from './components/NoMatch/NoMatch'
 import RegisterForm from './components/registerForm/RegisterForm'
-
 import './App.css';
 
 function App() {
