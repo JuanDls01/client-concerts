@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const GAME_ARTIST_EVENT = 'GAME_ARTIST_EVENT'
+export const GET_ARTIST_EVENT = 'GAME_ARTIST_EVENT'
 
 const getArtistEvent = (artist) => {
     return async (dispatch) => {

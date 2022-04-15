@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getNameEvent, getNameStage, getNameArtist} from '../../redux/actions'
-import style from '../components/SearchBars.module.css'
+import actionsCreator from '../../redux/actions'
+import style from './SearchBars.module.css'
 
+const {getNameEvent, getArtistEvent, getStageEvent} = actionsCreator;
 
 export default function SearchBars() {
     const dispatch = useDispatch();
@@ -33,13 +34,13 @@ export default function SearchBars() {
     
     const handleSubmitPlace = (e) => {
         e.preventDefault();
-        dispatch(getNameStage(nameStage));
+        dispatch(getArtistEvent(nameStage));
         setNameStage('');
     }
     
     const handleSubmitArtist = (e) => {
         e.preventDefault();
-        dispatch(getNameArtist(nameArtist));
+        dispatch(getStageEvent(nameArtist));
         setNameArtist('');
     }
 
