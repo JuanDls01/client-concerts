@@ -16,7 +16,8 @@ export default function Home(){
         <div>
             <Hero/>
             <NavBar/>
-            <EventsCards/>
+            <div name="UpcomingEvents" id="UpcomingEvents"/>
+            <EventsCards />
             <CreateEvents/>
             <Footer/>
         </div>
