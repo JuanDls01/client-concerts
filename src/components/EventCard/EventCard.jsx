@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import cardImg from '../../assets/images/cardImage.png';
 import locationImg from '../../assets/images/location.png'
 import style from './EventCard.module.css'
@@ -12,7 +13,7 @@ const getMonthName = (monthNumber) => {
     }
 }
 
-const EventCard = ({ name, imgEvent, date, artistName, stageName, location }) => {
+const EventCard = ({ id, name, date, artistName, stageName }) => {
     
     const day = Number(date.split('-')[2]);
     // Transformo el número del mes en el nombre: 
@@ -22,6 +23,7 @@ const EventCard = ({ name, imgEvent, date, artistName, stageName, location }) =>
     
     return (
         <div className={style.cardEvent}>
+            <Link to={`/eventDetail/${id}`}>
             <div className={style.imgContainner}>
                 {/* <img src={cardImg} alt='imgEvent' width={200} height={200}/> */}
             </div>
@@ -31,7 +33,7 @@ const EventCard = ({ name, imgEvent, date, artistName, stageName, location }) =>
                     <p className={style.day}>{day}</p>
                 </div>
                 <div className={style.titleContainner}>
-                    <h3>{name}</h3>
+                    <h3 className={style.titleEvent}>{name}</h3>
                     <div className={style.artist}>
                         <p>{artistName}</p>
                     </div>
@@ -43,6 +45,7 @@ const EventCard = ({ name, imgEvent, date, artistName, stageName, location }) =>
                     {/* <p>{location}</p> */}
                 </div>
             </div>
+            </Link>
         </div>
     )
 };
