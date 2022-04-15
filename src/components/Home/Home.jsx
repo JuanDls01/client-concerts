@@ -18,7 +18,7 @@ export default function Home(){
         <div>
             <Hero/>
             <NavBar/>
-            <div name="UpcomingEvents" id="UpcomingEvents"/>
+            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents"/>
             <SearchBars />
             <Filter />
             <EventsCards />
