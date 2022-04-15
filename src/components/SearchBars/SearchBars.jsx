@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import {getNameEvent, getNameStage, getNameArtist} from '../redux/actions'
+import {getNameEvent, getNameStage, getNameArtist} from '../../redux/actions'
 import style from '../components/SearchBars.module.css'
 
 
