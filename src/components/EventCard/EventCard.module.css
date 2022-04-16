@@ -1,6 +1,6 @@
 .cardEvent {
-    width:280px;
-    height: 260px;
+    width: 343px;
+    height: 360px;
     display: flex;
     flex-direction: column;
     margin: 20px;
@@ -9,57 +9,58 @@
     border-radius: 18.9529px;
 }
 
-.imgContainner {
-    height: 140px;
+.cardEvent a {
     width: 100%;
-    background-image: url('../../assets/images/cardImage.png');
+    height: 90%;
+    text-decoration: none;
+}
+
+.buybttn {
+    width: 100%;
+    height: 10%;
+}
+
+.imgContainner {
+    height: 50%;
+    width: 100%;
+    position: relative;
+    /* background-image: url('../../assets/images/cardImage.png'); */
     background-size: 100%;
 }
 
+.imgContainner img {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-top-left-radius: 18.9529px;
+    border-top-right-radius: 18.9529px;
+    /* border-top: 18.9529px;; */
+    object-fit: cover;
+}
+
 .infoContainner {
-    height: 120px;
-    display: flex;
-}
-
-.titleContainner {
-    height: 120px;
-    width: 224px;
-}
-
-.dateContainner {
-    width: 56px;
+    height: 45%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    margin: 5px 10px
 }
 
-.monthName {
-    color: #3D37F1;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.day {
-    font-size: 30px;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-
-.artist {
+.info {
     display: flex;
-    margin: 10px 7px;
-}
-
-.location {
-    display: flex;
-    margin: 10px 7px;
+    /* margin: 5px 5px; */
     align-items: center;
 }
+
+/* ------------------------------------- */
 
 .titleEvent {
-    margin: 10px 7px;
+    margin: 0px 0px;
+    width: auto;
+    /* width: 333px; */
+    height: 35px;
     font-size: 22px;
     color: black;
     position: static;
@@ -67,14 +68,67 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+.info p {
+    margin-left: 7px;
+    color: #6A6A6A
 }
 
 p {
     margin: 0px;
 }
 
-img {
-    width: 11px;
-    height: 13px;
-    margin-right: 5px;
+.buybttn {
+    border-bottom-left-radius: 18.9529px;
+    border-bottom-right-radius: 18.9529px;
+    border: none;
+    background-color: #242565;
+    font-size: large;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.buybttn:hover {
+    border-bottom-left-radius: 18.9529px;
+    border-bottom-right-radius: 18.9529px;
+    border: 3px solid #242565;
+    border-color: #242565;
+    background-color: #ffffff;
+    font-size: large;
+    font-weight: bold;
+    color: #242565;
+    cursor: pointer;
+}
+
+.bttnHeart {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    left: 305px;
+    background:none;
+    border: none;
+    cursor: pointer;
+}
+
+.heart {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+}
+
+.heartSelected {
+    width: 20px;
+    height: 20px;
+    color: #F5167E;
 }

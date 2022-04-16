@@ -42,10 +42,12 @@ const EventsCards = () => {
                         key={event.id}
                         id={event.id}
                         name={event.name}
-                        imgEvent={event.imgEvent}
-                        date={event.date}
+                        imgEvent={event.img}
+                        startdate={event.startdate}
+                        starttime={event.starttime}
                         artistName={event.Artist.name}
                         stageName={event.Stage.name}
+                        price={event.price}
                         // location={event.stage.location}
                     />
                 })}
