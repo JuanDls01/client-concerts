@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import './App.css';
-//import { Route, Routes } from 'react-router-dom';
-//import SearchBars from './components/SearchBars/SearchBars.jsx'
-
-function App() {
-  return (
-    <div>
-      
-    </div>
-=======
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home'
 import NoMatch from './components/NoMatch/NoMatch'
@@ -20,16 +9,14 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-    <Routes>
+      <Routes>
           <Route index  element={<Home/>}/>
           <Route path="/register"  element={<RegisterForm/>} />
           <Route path="/login"  element={<Login/>} />
           <Route path="/contact"  element={<Contact/>} />
           <Route path="*" element={<NoMatch/>} />
-    </Routes>
-    
-  </div>
->>>>>>> dev
+      </Routes>
+    </div>
   );
 }
 
