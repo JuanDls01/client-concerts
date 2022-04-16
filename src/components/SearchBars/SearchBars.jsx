@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actionsCreator from '../../redux/actions/index';
 import Swal from 'sweetalert2';
 import style from '../SearchBars/SearchBars.module.css';
+import { BsSearch } from 'react-icons/bs';
 
 const {getNameEvent, getEvents} = actionsCreator;
 
@@ -56,21 +57,21 @@ export default function SearchBars() {
     return (
         <div className={style.searchBox}>
              <div className={style.searches}>
-                <div className={style.searchEvent}>
+                <div className={style.search}>
                     <label className={style.label} >Search Event...</label>
                     <input id="nameEvent" className={style.input} type='search' placeholder="Enter the event..." onChange={handleInputNameChange} value={nameEvent}/>
                 </div>
-                <div className={style.searchStage}>
+                <div className={style.search}>
                     <label className={style.label} >Search Stage...</label>
                     <input className={style.input} type='search' placeholder="Enter the stage..." onChange={handleInputPlaceChange} value={nameStage}/>
                     
                 </div>
-                <div className={style.searchArtist}>
+                <div className={style.search}>
                     <label className={style.label} >Search Artist...</label>
                     <input className={style.input} type='search' placeholder="Enter the artist..." onChange={handleInputArtistChange} value={nameArtist}/>
                 </div>
                 <div className={style.searchButton}>
-                    <button className={style.button} type='submit' onClick={handleSubmitEvent}>Search</button>
+                    <button className={style.button} type='submit' onClick={handleSubmitEvent}><BsSearch className={style.icon}/></button>
                 </div>
             </div>
         </div>
