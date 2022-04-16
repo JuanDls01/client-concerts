@@ -2,14 +2,10 @@ import moment from "moment";
 import axios from "axios";
 export const FILT_EVENTS = 'FILT_EVENTS';
 
-
-
-
 export function filtEvents (date){
-
     const data = {
         first: moment(date.start).format('YYYY-MM-DD'),
-        second:moment(date.end).format('YYYY-MM-DD'),
+        second: moment(date.end).format('YYYY-MM-DD'),
         genre:date.genre
     }
     try{
@@ -21,7 +17,7 @@ export function filtEvents (date){
           })
   
       }
-  }catch(err){
+    }catch(err){
       console.log(err)
     }
 }

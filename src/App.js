@@ -1,11 +1,11 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home/Home'
+//import { Route, Routes } from 'react-router-dom';
+import SearchBars from './components/SearchBars/SearchBars.jsx'
 
 function App() {
   return (
     <div>
-      <Home />
+      <SearchBars />
     </div>
   );
 }

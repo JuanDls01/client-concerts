@@ -15,12 +15,43 @@
 .searches {
     display: inline-flex;
 }
+
 .searchEvent {
     display: grid;
     margin: 45px;
 }
 
+.searchStage {
+    display: grid;
+    margin: 45px;
+}
+
+.searchArtist {
+    display: grid;
+    margin: 45px;
+}
+
+.searchButton {
+    display: grid;
+    margin: 45px;
+}
+
 .button {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    text-align: left;
+    background-color: transparent;
+    color: #FFFFFF;
+}
+.button:hover {
+    background-color:  #FFFFFF;
+    color: #242565;
+}
+
+.label {
     background: transparent;
     border: none;
     font-family: 'DM Sans';
@@ -46,13 +77,5 @@
     color: #FFFFFF;
 }
 
-.searchStage {
-    display: grid;
-    margin: 45px;
-}
 
-.searchArtist {
-    display: grid;
-    margin: 45px;
-}
 

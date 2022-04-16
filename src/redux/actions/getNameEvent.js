@@ -2,19 +2,30 @@ import axios from 'axios';
 
 export const GET_NAME_EVENT = 'GET_NAME_EVENT';
 
-const getNameEvent = (name) => {
+const getNameEvent = (event, artist, stage) => {
+    console.log(event)
+    console.log(artist)
+    console.log(stage)
     return async (dispatch) => {
         try {
-            const event = await axios.get('http://localhost:3001/event?name=' + name);
+            const json = await axios.get(`http://localhost:3001/event/search?event=${event}&artist=${artist}&stage=${stage}`);
             return dispatch({
                 type: 'GET_NAME_EVENT',
-                payload: event.data
+                payload: json.data
             })
         }
         catch (error) {
-            alert('No existen eventos!!!')
+            console.log(error);
         }
     }
 }
+
+// const getNameEvent = (payload) => {
+//     console.log(payload)
+//     return {
+//         type: 'GET_NAME_EVENT',
+//         payload
+//     }
+// }
 
 export default getNameEvent;
