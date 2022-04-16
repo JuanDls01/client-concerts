@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
-import "./Filter.css";
 import filtEvents from "../../redux/actions/actionFiltEvents";
 import { connect } from "react-redux";
+import "./Filter.css"
 
 class FilterCalend extends Component {
   constructor(props) {
@@ -43,8 +43,9 @@ class FilterCalend extends Component {
         />
         </div>
 
-        <div>
+        <div className="select-contein">
           <select onChange={(e) => this.handleOnChange(e)}>
+            <option hidden value="Select">Genre</option>
             {this.props.genres && this.props.genres.map((el) => <option value={el}>{el}</option>)}
           </select>
         </div>
