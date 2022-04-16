@@ -18,6 +18,7 @@ class FilterCalend extends Component {
 
   handleOnChange (e) {
     this.setState({ genre: e.target.value });
+    this.props.filtEvents({start:this.state.startDate,end:this.state.endDate,genre:this.state.genre})
   }
 
   render() {
@@ -29,12 +30,11 @@ class FilterCalend extends Component {
           endDateId="endDate"
           startDate={this.state.startDate}
           endDate={this.state.endDate}
-          onDatesChange={({ startDate, endDate }) => {
-            const first = startDate._d;
-            const second = endDate === null ? null : endDate._d;
-            this.setState({ startDate: startDate, endDate: endDate });
+          onDatesChange={async({ startDate, endDate }) => {
 
-            this.props.filtEvents({ start: first, end: second });
+           await this.setState({ startDate, endDate})
+
+            this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre });
           }}
           focusedInput={this.state.focusedInput}
           onFocusChange={(focusedInput) => {
