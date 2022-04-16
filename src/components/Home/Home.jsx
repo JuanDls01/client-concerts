@@ -15,11 +15,15 @@ import s from "./Home.module.css"
 
 export default function Home(){
     return (
-        <div>
+        <div className={s.homeContainner}>
             <Hero/>
             <NavBar/>
             <SearchBars />
-            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents"/>
+            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents">
+                <div className={s.title}>
+                    <h2 className={s.upcomingEvents}>Próximos Eventos</h2>
+                </div>
+            </div>
             <Filter />
             <EventsCards />
             <CreateEvents/>

@@ -9,6 +9,11 @@
     border-radius: 18.9529px;
 }
 
+.cardEvent:hover {
+    transform: scale(1.05);
+    transition: 0.8s;
+}
+
 .cardEvent a {
     width: 100%;
     height: 90%;
