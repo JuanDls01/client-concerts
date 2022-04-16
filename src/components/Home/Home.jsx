@@ -18,8 +18,8 @@ export default function Home(){
         <div>
             <Hero/>
             <NavBar/>
-            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents"/>
             <SearchBars />
+            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents"/>
             <Filter />
             <EventsCards />
             <CreateEvents/>

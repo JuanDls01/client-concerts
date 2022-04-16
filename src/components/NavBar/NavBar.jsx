@@ -19,7 +19,7 @@ const NavBar = () => {
                     </li>
                 </ul>
 
-                    <li className={s.button}><Link className={s.link} to="/login">Login</Link></li>
+                    <Link className={s.button} to="/login">Login</Link>
 
             </nav>
             
