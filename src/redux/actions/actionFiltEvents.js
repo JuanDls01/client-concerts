@@ -7,8 +7,8 @@ export default function filtEvents (date){
     const deta = {
         first:  moment(date.start).format('YYYY-MM-DD'),
         second:moment(date.end).format('YYYY-MM-DD'),
-        genre:date.genre
     }
+
 
     try{
       return async function(dispatch){
@@ -24,7 +24,3 @@ export default function filtEvents (date){
       console.log(err)
     }
 }
-
-// {
-//     params: { order, filter },
-//   }
