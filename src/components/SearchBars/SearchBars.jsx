@@ -54,17 +54,6 @@ export default function SearchBars() {
     }
 
     return (
-        <>
-        {/* ****************CODIGO PARA PRUEBA**************** */}
-        {events && events.map(e => {
-            return (
-                <>
-                <p>{e.name} - {e.Artist.name} - {e.Stage.name}</p>
-                </>
-            )
-            })
-        }
-        {/* ************************************************ */}
         <div className={style.searchBox}>
              <div className={style.searches}>
                 <div className={style.searchEvent}>
@@ -85,6 +74,5 @@ export default function SearchBars() {
                 </div>
             </div>
         </div>
-        </>
     )
     }
