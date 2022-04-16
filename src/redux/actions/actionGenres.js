@@ -2,7 +2,7 @@ import axios from "axios";
 export const GET_GENRES = 'GET_GENRES';
 
 
-export function getGenres (){
+export default function getGenres (){
     try{
       return async function(dispatch){
           const json=await axios.get(`http://localhost:3000/genre`);

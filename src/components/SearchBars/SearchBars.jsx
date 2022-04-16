@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import getEvents from '../../redux/actions/getEvents';
-import getNameEvent from '../../redux/actions/getNameEvent';
+import actionsCreator from '../../redux/actions/index';
 import Swal from 'sweetalert2';
 import style from '../SearchBars/SearchBars.module.css';
+
+const {getNameEvent, getEvents} = actionsCreator;
 
 
 export default function SearchBars() {
@@ -22,21 +23,18 @@ export default function SearchBars() {
     //****************************//
 
     const handleInputNameChange = (e) => {
-        console.log(e.target.value)
         e.preventDefault();
         setNameEvent(e.target.value)
     }
     
     const handleInputArtistChange = (e) => {
-        console.log(e.target.value)
         e.preventDefault();
         setNameArtist(e.target.value)
     }
 
     const handleInputPlaceChange = (e) => {
-        console.log(e.target.value)
         e.preventDefault();
-        setNameStage(e.target.value)
+        setNameEvent(e.target.value)
     }
 
     const handleSubmitEvent = (e) => {

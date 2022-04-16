@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-<<<<<<< HEAD:src/components/EventDetail.jsx
-import { getEventDetail, cleanEventDetail } from "../redux/actions";
 import style from '../components/EventDetail.module.css';
-=======
 import actionsCreator from '../../redux/actions/index';
->>>>>>> dac1b62f22b9cc3dcd389eb6c5d49acceb2d8074:src/components/EventDetail/EventDetail.jsx
 //const json = require('../events.json')
 
 const EventDetail = () => {

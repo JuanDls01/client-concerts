@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
-import { filtEvents } from "../../redux/actions/actionFiltEvents";
+import actionsCreator from "../../redux/actions/actionFiltEvents";
+
+const { filtEvents } = actionsCreator;
 
 export default function Filter() {
 
@@ -31,7 +33,7 @@ export default function Filter() {
   }
 
   return (
-    <div>
+    <div >
       {/* {COMPONENTE DE CALENDARIO} */}
       <DatePicker
         selected={startDate}
@@ -39,7 +41,7 @@ export default function Filter() {
         startDate={startDate}
         endDate={endDate}
         selectsRange
-        inline
+        // inline
       />
       {/* {COMPONENTE DE SELECTOR DE GENERO} */}
 

@@ -28,13 +28,16 @@
 }
 
 .button {
-    position: absolute;
-    top: 14px;
-    left: 530px;
+    position: relative;
+    top: -45px;
+    left: -90px;
+    padding:8px 38px;
     width: 101px;
-    height: 40px;
+    height: 38px;
     border: 1.5px solid #FFFFFF;
     border-radius: 50px;
+    background-color: white;
+    text-decoration: none;
 }
 
 .button:hover{

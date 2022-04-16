@@ -30,12 +30,14 @@ const EventsCards = () => {
     const pagesVisited = currentPage*EVENTSPERPAGE;
     // Array de las cartas que renderizamos en la página actual:
     const currentEvents = events.slice(pagesVisited, pagesVisited + EVENTSPERPAGE);
-    if(currentEvents.length>0){console.log('currentEvents.artist.name', currentEvents[0].Artist.name)}
+    // if(currentEvents.length>0)
 
     return (
         <div className={style.EventsPaginatedContainner}>
             <div className={style.EventsCardsContainner}>
-                {currentEvents && currentEvents.map(event => {
+
+                {currentEvents.length && currentEvents.map(event => {
+
                     return <EventCard 
                         key={event.id}
                         id={event.id}
@@ -49,7 +51,7 @@ const EventsCards = () => {
                 })}
             </div>
             <div className={style.paginatedContainner}>
-                <Paginated currentPage={currentPage} setCurrentPage={setCurrentPage} eventsPerPage={EVENTSPERPAGE}/>
+                <Paginated events={events.length} setCurrentPage={setCurrentPage} eventsPerPage={EVENTSPERPAGE}/>
             </div>
         </div>
     )

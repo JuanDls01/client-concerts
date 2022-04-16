@@ -79,37 +79,3 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
-
-// case GET_NAME_EVENT: {
-    //   const allEvents = state.searchevents
-    //   console.log(allEvents)
-    //   const eventFiltered = allEvents.filter(e => e.name.toLowerCase().includes(action.payload.toLowerCase()))
-    //   console.log(eventFiltered)
-    //   return {
-    //     ...state,
-    //     events: eventFiltered.length > 0 ? eventFiltered : state.events
-    //   }
-    // }
-
-    // case GET_ARTIST_EVENT: {
-    //   const allEvents = state.searchevents
-    //   console.log(allEvents)
-    //   const eventFiltered = allEvents.filter(e => e['Artist.name'] && e['Artist.name'].toLowerCase().includes(action.payload.toLowerCase()))
-    //   console.log(eventFiltered)
-    //   return {
-    //     ...state,
-    //     events: eventFiltered.length > 0 ? eventFiltered : state.events
-    //   }
-    // }
-
-    // case GET_STAGE_EVENT: {
-    //   const allEvents = state.searchevents
-    //   console.log(allEvents)
-    //   const eventFiltered = allEvents.filter(e => e['Stage.name'] && e['Stage.name'].toLowerCase().includes(action.payload.toLowerCase()))
-    //   console.log(eventFiltered)
-    //   return {
-    //     ...state,
-    //     events: eventFiltered.length > 0 ? eventFiltered : state.events
-    //   }
-    // }
-
