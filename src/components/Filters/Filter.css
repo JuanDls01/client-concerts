@@ -22,8 +22,42 @@
 .CalendarDay__hovered_span {
   background: brown;
 } */
+/* .DateRangePicker{
+  border: none !important;
 
+} */
+div {
+  border-radius: 50px !important;
+  color: #000 !important;
+}
+.DateRangePickerInput__withBorder{
+  /* border: none; */
+  background-color: #F2F4FF;
+  border-style: none;
+}
 
+.DateInput_input{
+  text-align: center;
+  padding: 0px;
+  height: 42px;
+  border-radius: 50px !important;
+}
+.DateInput_input:active{
+  border-style: none !important;
+}
+
+ input {
+  background-color: #F2F4FF !important;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  color: #000 !important;
+  max-height: 46px;
+  
+
+}
 
 .Filter {
   display: flex;
@@ -35,7 +69,7 @@
 
 .select-contein select {
   text-align: center;
-  height: 46px;
+  height: 42px;
   width: 168px;
   background-color: #F2F4FF  ;
   border-radius: 50px;
