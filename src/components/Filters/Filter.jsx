@@ -42,7 +42,7 @@ class FilterCalend extends Component {
           }}
         />
         </div>
-
+            {console.log(this.props.genres,"genres")}
         <div className="select-contein">
           <select onChange={(e) => this.handleOnChange(e)}>
             <option hidden value="Select">Genre</option>
