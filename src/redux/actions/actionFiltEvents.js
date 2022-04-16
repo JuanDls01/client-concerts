@@ -2,20 +2,19 @@ import moment from "moment";
 import axios from "axios";
 export const FILT_EVENTS = 'FILT_EVENTS';
 
-<<<<<<< HEAD
-export function filtEvents (date){
-    const data = {
-        first: moment(date.start).format('YYYY-MM-DD'),
-        second: moment(date.end).format('YYYY-MM-DD'),
-=======
+
 export default function filtEvents (date){
+    // console.log(date)
+    const first = date.start ===null ? null:date.start._d
+    const second = date.end === null ? null : date.end._d;
 
     const deta = {
         first:  moment(date.start).format('YYYY-MM-DD'),
         second:moment(date.end).format('YYYY-MM-DD'),
->>>>>>> dev
         genre:date.genre
     }
+    console.log(deta)
+
 
     try{
       return async function(dispatch){
@@ -31,7 +30,3 @@ export default function filtEvents (date){
       console.log(err)
     }
 }
-
-// {
-//     params: { order, filter },
-//   }
