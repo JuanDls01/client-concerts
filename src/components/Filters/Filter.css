@@ -1,0 +1,48 @@
+/* 
+
+.CalendarDay__selected_span {
+  background: #82e0aa; 
+  color: white; 
+  border: 1px solid #560bad; 
+}
+
+
+.CalendarDay__selected {
+  background: #7209b7;
+  color: white;
+}
+
+
+.CalendarDay__selected:hover {
+  background: orange;
+  color: white;
+}
+
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+  background: brown;
+} */
+
+
+
+.Filter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  margin: 15px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.select-contein select {
+  text-align: center;
+  height: 46px;
+  width: 168px;
+  background-color: #F2F4FF  ;
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  font-style: normal;
+  border: none;
+}
