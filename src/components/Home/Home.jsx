@@ -19,11 +19,6 @@ export default function Home(){
             <Hero/>
             <NavBar/>
             <SearchBars />
-            <div className={s.scroll} name="UpcomingEvents" id="UpcomingEvents">
-                <div className={s.title}>
-                    <h2 className={s.upcomingEvents}>Próximos Eventos</h2>
-                </div>
-            </div>
             <Filter />
             <EventsCards />
             <CreateEvents/>
