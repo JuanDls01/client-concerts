@@ -23,11 +23,11 @@ export default function Footer(){
                         <AiFillGithub className={s.icon}/>
                         David
                     </a>
-                    <a href="https://github.com/Vegajor1112" className={s.github}>
+                    <a href="https://github.com/JuanDls01" className={s.github}>
                         <AiFillGithub className={s.icon}/>
                         Juan
                     </a>
-                    <a href="https://github.com/davidvazgon26" className={s.github}>
+                    <a href="https://github.com/Vegajor1112" className={s.github}>
                         <AiFillGithub className={s.icon}/>
                         Jorge
                     </a>
@@ -35,11 +35,11 @@ export default function Footer(){
                         <AiFillGithub className={s.icon}/>
                         Ernesto
                     </a>
-                    <a href="https://github.com/davidvazgon26" className={s.github}>
+                    <a href="https://github.com/raffagapro" className={s.github}>
                         <AiFillGithub className={s.icon}/>
                         Chris
                     </a>
-                    <a href="https://github.com/davidvazgon26" className={s.github}>
+                    <a href="https://github.com/nicopalomares" className={s.github}>
                         <AiFillGithub className={s.icon}/>
                         Nicolas
                     </a>
