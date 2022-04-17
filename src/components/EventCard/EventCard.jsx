@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import cardImg from '../../assets/images/cardImage.png';
-import locationImg from '../../assets/images/location.png'
-import style from './EventCard.module.css'
+import locationImg from '../../assets/images/location.png';
+import style from './EventCard.module.css';
+import { GoLocation } from 'react-icons/go';
+import { IoPricetag } from 'react-icons/io5';
+import { BiMicrophone } from 'react-icons/bi';
+import { BsCalendarCheck } from 'react-icons/bs';
+import { AiFillHeart } from 'react-icons/ai';
 
 const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
@@ -13,39 +18,55 @@ const getMonthName = (monthNumber) => {
     }
 }
 
-const EventCard = ({ id, name, date, artistName, stageName }) => {
-    
-    const day = Number(date.split('-')[2]);
+const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stageName, price }) => {
+    console.log(startdate)
+    const day = Number(startdate.split('-')[2]);
     // Transformo el número del mes en el nombre: 
-    const monthNumber = Number(date.split('-')[1]);
-    const monthName = getMonthName(monthNumber).toUpperCase().substring(0,3);
+    const monthNumber = Number(startdate.split('-')[1]);
+    const monthName = getMonthName(monthNumber);
+    const hours = starttime.split(':')[0];
+    const minutes = starttime.split(':')[1]
+    const time = `${hours}:${minutes}`
+    const date = `${day} de ${monthName} a las ${time}`
     console.log('monthName', monthName);
+
+    // const [favSelected, setFavSelected] = useState(false)
+
+    // const selectFav = () => {
+    //     setFavSelected(true)
+    // }
     
     return (
         <div className={style.cardEvent}>
             <Link to={`/eventDetail/${id}`}>
-            <div className={style.imgContainner}>
-                {/* <img src={cardImg} alt='imgEvent' width={200} height={200}/> */}
-            </div>
-            <div className={style.infoContainner}>
-                <div className={style.dateContainner}>
-                    <p className={style.monthName}>{monthName}</p>
-                    <p className={style.day}>{day}</p>
+                <div className={style.imgContainner} >
+                    <button className={style.bttnHeart}>
+                        <AiFillHeart className={style.heart} />
+                    </button>
+                    <img src={imgEvent} alt='imgEvent'/>
                 </div>
-                <div className={style.titleContainner}>
+                <div className={style.infoContainner}>
                     <h3 className={style.titleEvent}>{name}</h3>
-                    <div className={style.artist}>
-                        <p>{artistName}</p>
+                    <div className={style.info}>
+                        <BsCalendarCheck className={style.icon} />
+                        <p>{date}</p>
                     </div>
-                    <div className={style.location}>
-                        <img src={locationImg} alt='location'/>
+                    <div className={style.info}>
+                        <GoLocation className={style.icon} />
+                        {/* <img src={locationImg} alt='location'/> */}
                         <p>{stageName}</p>
                     </div>
-                    
-                    {/* <p>{location}</p> */}
+                    <div className={style.info}>
+                        <IoPricetag className={style.icon}/>
+                        <p>Desde: ${price}</p>
+                    </div>
+                    <div className={style.info}>
+                        <BiMicrophone className={style.icon} />
+                        <p>Banda: {artistName}</p>
+                    </div>
                 </div>
-            </div>
             </Link>
+            <button className={style.buybttn}>COMPRAR</button>
         </div>
     )
 };
