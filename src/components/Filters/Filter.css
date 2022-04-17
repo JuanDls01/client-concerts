@@ -30,9 +30,9 @@
 
 }
 
-.Filter {
+.FilterContainner {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 30px;
   margin: 15px;
   font-family: 'DM Sans', sans-serif;
@@ -50,4 +50,31 @@
   line-height: 18px;
   font-style: normal;
   border: none;
+}
+
+.FilterBox {
+  width: 1080px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.FilterTitle {
+  margin: 0px 0px;
+  position: static;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #000000;
+  font-family: Poppins;
+  /* width: 1080px;
+  height: 40px; */
+}
+
+#UpcomingEvents {
+  width: 50%;
+}
+
+.Filters{
+  display: flex;
+  align-items: center;
 }

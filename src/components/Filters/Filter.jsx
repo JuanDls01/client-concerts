@@ -23,31 +23,39 @@ class FilterCalend extends Component {
 
   render() {
     return (
-      <div className="Filter">
-        <div>
-        <DateRangePicker
-          startDateId="startDate"
-          endDateId="endDate"
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          onDatesChange={async({ startDate, endDate }) => {
+      <div className="FilterContainner">
+        <div className="FilterBox">
+          <div name="UpcomingEvents" id="UpcomingEvents">
+              <div className="FilterTitle">
+                  <h2>Próximos Eventos</h2>
+              </div>
+          </div>
+          <div className="Filters">
+          <DateRangePicker
+            startDateId="startDate"
+            endDateId="endDate"
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onDatesChange={async({ startDate, endDate }) => {
 
-           await this.setState({ startDate, endDate})
+            await this.setState({ startDate, endDate})
 
-            this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre });
-          }}
-          focusedInput={this.state.focusedInput}
-          onFocusChange={(focusedInput) => {
-            this.setState({ focusedInput });
-          }}
-        />
-        </div>
-            {console.log(this.props.genres,"genres")}
-        <div className="select-contein">
-          <select onChange={(e) => this.handleOnChange(e)}>
-            <option hidden value="Select">Genre</option>
-            {this.props.genres && this.props.genres.map((el) => <option value={el}>{el}</option>)}
-          </select>
+              this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre });
+            }}
+            focusedInput={this.state.focusedInput}
+            onFocusChange={(focusedInput) => {
+              this.setState({ focusedInput });
+            }}
+          />
+          
+              {console.log(this.props.genres,"genres")}
+          <div className="select-contein">
+            <select onChange={(e) => this.handleOnChange(e)}>
+              <option hidden value="Select">Genre</option>
+              {this.props.genres && this.props.genres.map((el) => <option value={el}>{el}</option>)}
+            </select>
+          </div>
+          </div>
         </div>
       </div>
     );
