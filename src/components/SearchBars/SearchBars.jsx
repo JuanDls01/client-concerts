@@ -7,7 +7,6 @@ import { BsSearch } from 'react-icons/bs';
 
 const {getNameEvent, getEvents} = actionsCreator;
 
-
 export default function SearchBars() {
     const dispatch = useDispatch();
     const [nameEvent, setNameEvent] = useState('');
@@ -35,7 +34,7 @@ export default function SearchBars() {
 
     const handleInputPlaceChange = (e) => {
         e.preventDefault();
-        setNameEvent(e.target.value)
+        setNameStage(e.target.value)
     }
 
     const handleSubmitEvent = (e) => {
