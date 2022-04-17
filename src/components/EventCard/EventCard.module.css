@@ -7,6 +7,7 @@
     background: #FFFFFF;
     filter: drop-shadow(0px 18.9529px 47.3822px rgba(119, 115, 170, 0.1));
     border-radius: 18.9529px;
+    font-family: Poppins;
 }
 
 .cardEvent:hover {

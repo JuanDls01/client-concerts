@@ -58,7 +58,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                     </div>
                     <div className={style.info}>
                         <IoPricetag className={style.icon}/>
-                        <p>Desde: {price}</p>
+                        <p>Desde: ${price}</p>
                     </div>
                     <div className={style.info}>
                         <BiMicrophone className={style.icon} />
@@ -66,7 +66,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                     </div>
                 </div>
             </Link>
-            <button className={style.buybttn}>COMPRAR</button>
+            <button className={style.buybttn}>COMPRAR TICKET</button>
         </div>
     )
 };
