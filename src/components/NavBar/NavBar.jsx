@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import s from './NavBar.module.css';
 
 const NavBar = () => {
+
     return (
         <div className={s.navbarExterno}>
             <nav className={s.navegacion}>
@@ -20,6 +21,8 @@ const NavBar = () => {
                 </ul>
 
                     <Link className={s.button} to="/login">Login</Link>
+
+                
 
             </nav>
             

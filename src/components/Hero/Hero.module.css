@@ -66,11 +66,11 @@
 }
 
 .btn1 {
-    position: absolute;
+    position: relative;
     width: 182px;
     height: 60px;
     left: 812px;
-    top: 441px;
+    top: -240px;
     color: white;
     background: #F5167E;
     /* box-shadow: 0px 10px 50px rgba(61, 55, 241, 0.25); */
@@ -88,11 +88,11 @@
 }
 
 .btn2 {
-    position: absolute;
+    position: relative;
     width: 182px;
     height: 60px;
     left: 1014px;
-    top: 441px;
+    top:  -300px;
     color: white;
     border: 1.5px solid #FFFFFF;
     box-sizing: border-box;

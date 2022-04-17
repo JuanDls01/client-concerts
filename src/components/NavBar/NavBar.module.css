@@ -1,12 +1,23 @@
 .navbarExterno {
-    position: absolute;
-    width: 70%;
-    left: 880px;
-    top: 10px;
+    position: relative;
+    /* width: 50%; */
+    /* right: -880px; */
+    bottom: 720px;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 30px;
+}
+
+
+.navegacion{
+    display: flex;
 }
 
 .navegacion ul {
     display: flex;
+    margin: 50px 20px ;
+   
 }
 
 .navegacion ul li {
@@ -28,16 +39,19 @@
 }
 
 .button {
-    position: relative;
-    top: -45px;
-    left: -90px;
-    padding:8px 38px;
-    width: 101px;
-    height: 38px;
+    padding: 8px 38px;
+    width: 30px;
+    height: 20px;
     border: 1.5px solid #FFFFFF;
     border-radius: 50px;
     background-color: white;
     text-decoration: none;
+    margin-top: 50px;
+    margin-right: 200px;
+    padding: 8px 40px;
+    text-align: end;
+    display: flex;
+    justify-content: center;
 }
 
 .button:hover{
