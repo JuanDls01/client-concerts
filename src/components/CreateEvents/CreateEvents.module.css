@@ -1,9 +1,9 @@
 .externo {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     height: 303px;
-    left: 0px;
-    top: 1911px;
+    /* left: 0px;
+    top: 1911px; */
 }
 
 .interno {
