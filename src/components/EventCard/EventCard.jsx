@@ -38,7 +38,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
     
     return (
         <div className={style.cardEvent}>
-            <Link to={`/eventDetail/${id}`}>
+            <Link to={`/${id}`}>
                 <div className={style.imgContainner} >
                     <button className={style.bttnHeart}>
                         <AiFillHeart className={style.heart} />
@@ -58,7 +58,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                     </div>
                     <div className={style.info}>
                         <IoPricetag className={style.icon}/>
-                        <p>Desde: ${price}</p>
+                        <p>Desde: {price}</p>
                     </div>
                     <div className={style.info}>
                         <BiMicrophone className={style.icon} />

@@ -4,6 +4,7 @@ import NoMatch from './components/NoMatch/NoMatch'
 import RegisterForm from './components/registerForm/RegisterForm'
 import Contact from './components/Contact/Contact'
 import Login from './components/Login/Login'
+import EventDetail from './components/EventDetail/EventDetail';
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/login"  element={<Login/>} />
           <Route path="/contact"  element={<Contact/>} />
           <Route path="*" element={<NoMatch/>} />
+          <Route path="/:id" element={<EventDetail/>} />
       </Routes>
     </div>
   );
