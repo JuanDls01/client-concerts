@@ -16,8 +16,8 @@ export default function Home(){
     return (
        
         <div className={s.homeContainner}>
-            <Hero/>
             <NavBar/>
+            <Hero/>
             <SearchBars />
             <Filter />
             <EventsCards />
