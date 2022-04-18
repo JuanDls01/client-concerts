@@ -10,11 +10,14 @@ export default function CreateEvents(){
             <div className={s.interno}>
                 <img src={img} className={s.img}/>
             </div>
-                <div className={s.event}>
-                    <h3>Make your own Event</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            <div className={s.event}>
+                <h3>Make your own Event</h3>
+                <p>On this page registering as a seller you can create events, gaining greater visibility, reach more customers and increase profits</p>
+                <div className={s.bttnContainner}>
+                    <button className={s.bttn}>Create Events</button>
                 </div>
-                <li className={s.btn}>Create Events</li>
+            </div>
+            
         </div>
     )
 }

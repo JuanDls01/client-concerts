@@ -16,8 +16,11 @@ export default function Home(){
     return (
        
         <div className={s.homeContainner}>
-            <Hero/>
-            <NavBar/>
+            <div className={s.imgBackground}></div>
+            <div className={s.landingPage}>
+                <NavBar/>
+                <Hero/>
+            </div>
             <SearchBars />
             <Filter />
             <EventsCards />

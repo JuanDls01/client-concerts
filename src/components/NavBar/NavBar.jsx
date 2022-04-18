@@ -10,25 +10,19 @@ const NavBar = () => {
             <nav className={s.navegacion}>
                 <ul>
                     <li>
-                    <a href="#UpcomingEvents" className={s.link} to="/">Events</a>
+                        <a href="#UpcomingEvents" className={s.link} to="/">Events</a>
                     </li>
                     <li>
-                    <Link className={s.link} to="/contact">Contact</Link>
+                        <Link className={s.link} to="/contact">Contact</Link>
                     </li>
                     <li>
-                    <Link className={s.link} to="/register">Register</Link>
+                        <Link className={s.link} to="/register">Register</Link>
+                    </li>
+                    <li>
+                        <Link className={s.button} to="/login">Login</Link>
                     </li>
                 </ul>
-
-                    <Link className={s.button} to="/login">Login</Link>
-
-                
-
             </nav>
-            
-                
-            
-        
         </div>
     )
 }
