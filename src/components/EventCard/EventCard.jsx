@@ -9,7 +9,7 @@ import { BiMicrophone } from 'react-icons/bi';
 import { BsCalendarCheck } from 'react-icons/bs';
 import { AiFillHeart } from 'react-icons/ai';
 
-const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const getMonthName = (monthNumber) => {
     // Recibe un número como parametro y devuelve el nombre del mes correspondiente
@@ -27,7 +27,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
     const hours = starttime.split(':')[0];
     const minutes = starttime.split(':')[1]
     const time = `${hours}:${minutes}`
-    const date = `${day} de ${monthName} a las ${time}`
+    const date = `${day}th of ${monthName} a las ${time}`
 
 
     // const [favSelected, setFavSelected] = useState(false)
@@ -58,15 +58,15 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                     </div>
                     <div className={style.info}>
                         <IoPricetag className={style.icon}/>
-                        <p>Desde: ${price}</p>
+                        <p>Since: ${price}</p>
                     </div>
                     <div className={style.info}>
                         <BiMicrophone className={style.icon} />
-                        <p>Banda: {artistName}</p>
+                        <p>Band: {artistName}</p>
                     </div>
                 </div>
             </Link>
-            <button className={style.buybttn}>COMPRAR TICKET</button>
+            <button className={style.buybttn}>BUY TICKET</button>
         </div>
     )
 };

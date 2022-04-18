@@ -38,7 +38,7 @@ class FilterCalend extends Component {
         <div className="FilterBox">
           <div name="UpcomingEvents" id="UpcomingEvents">
             <div className="FilterTitle">
-              <h2>Próximos Eventos</h2>
+              <h2>Upcoming Events!</h2>
             </div>
           </div>
           <div className="Filters">
