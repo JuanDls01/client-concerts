@@ -20,6 +20,8 @@ class FilterCalend extends Component {
     if (this.props.genres.length === 0 ){
       this.props.getGenres()
     }
+
+
   }
 
   handleOnChange (e) {
@@ -47,7 +49,6 @@ class FilterCalend extends Component {
               
             if (this.state.endDate){
               this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre }) 
-              // this.setState({ startDate:null,endDate:null})
               }
             }}
             focusedInput={this.state.focusedInput}
@@ -55,8 +56,7 @@ class FilterCalend extends Component {
               this.setState({ focusedInput });
             }}
           />
-          
-              {console.log(this.props.genres,"genres")}
+        
           <div className="select-contein">
             <select onChange={(e) => this.handleOnChange(e)}>
               <option hidden value="Select">Genre</option>
