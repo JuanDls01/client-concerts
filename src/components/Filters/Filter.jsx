@@ -13,7 +13,7 @@ class FilterCalend extends Component {
     this.state = {
       startDate: null,
       endDate: null,
-      genre:""
+      genre:null
     };
   }
   componentDidMount(){
@@ -22,8 +22,8 @@ class FilterCalend extends Component {
     }
   }
 
-  handleOnChange (e) {
-    this.setState({ genre: e.target.value });
+  async handleOnChange (e) {
+    await this.setState({ genre: e.target.value });
     this.props.filtEvents({start:this.state.startDate,end:this.state.endDate,genre:this.state.genre})
   }
 
@@ -47,7 +47,6 @@ class FilterCalend extends Component {
               
             if (this.state.endDate){
               this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre }) 
-              this.setState({ startDate:null,endDate:null})
               }
             }}
             focusedInput={this.state.focusedInput}
@@ -55,12 +54,11 @@ class FilterCalend extends Component {
               this.setState({ focusedInput });
             }}
           />
-          
-              {console.log(this.props.genres,"genres")}
+
           <div className="select-contein">
             <select onChange={(e) => this.handleOnChange(e)}>
               <option hidden value="Select">Genre</option>
-              {this.props.genres && this.props.genres.map((el) => <option value={el}>{el}</option>)}
+              {this.props.genres && this.props.genres.map((el) => <option value={el.genreName}>{el.genreName}</option>)}
             </select>
           </div>
           </div>
