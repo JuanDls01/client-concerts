@@ -12,9 +12,8 @@ export default function filtEvents (date){
         second:moment(second).format('YYYY-MM-DD'),
         genre:date.genre
     }
-    console.log(deta)
 
-
+    console.log(deta,"detaaaa")
     try{
       return async function(dispatch){
           const json=await axios.get("http://localhost:3001/event/filter",{params:deta});
