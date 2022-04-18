@@ -3,6 +3,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import filtEvents from "../../redux/actions/actionFiltEvents";
+import getGenres from "../../redux/actions/actionGenres";
 import { connect } from "react-redux";
 import "./Filter.css"
 
@@ -14,6 +15,11 @@ class FilterCalend extends Component {
       endDate: null,
       genre:""
     };
+  }
+  componentDidMount(){
+    if (this.props.genres.length === 0 ){
+      this.props.getGenres()
+    }
   }
 
   handleOnChange (e) {
@@ -37,10 +43,12 @@ class FilterCalend extends Component {
             startDate={this.state.startDate}
             endDate={this.state.endDate}
             onDatesChange={async({ startDate, endDate }) => {
-
             await this.setState({ startDate, endDate})
-
-              this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre });
+              
+            if (this.state.endDate){
+              this.props.filtEvents({ start: this.state.startDate, end: this.state.endDate,genre:this.state.genre }) 
+              this.setState({ startDate:null,endDate:null})
+              }
             }}
             focusedInput={this.state.focusedInput}
             onFocusChange={(focusedInput) => {
@@ -65,6 +73,7 @@ class FilterCalend extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     filtEvents: (dates) => dispatch(filtEvents(dates)),
+    getGenres : () => dispatch(getGenres())
   };
 }
 
