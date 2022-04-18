@@ -12,7 +12,7 @@ export default function getGenres (){
           })
   
       }
-  }catch(err){
+    }catch(err){
       console.log(err)
     }
 }
