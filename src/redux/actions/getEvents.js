@@ -11,7 +11,7 @@ export const getEvents = () => {
                 payload: event.data
             })
             
-        } catch (error) {
+        }catch (error) {
             console.log(error)
         }
     }
