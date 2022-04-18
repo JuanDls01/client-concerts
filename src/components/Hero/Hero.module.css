@@ -70,6 +70,7 @@
     font-weight: 500;
     font-size: 20px;
     cursor: pointer;
+    border-style: none;
 }
 
 .btn1:hover {
