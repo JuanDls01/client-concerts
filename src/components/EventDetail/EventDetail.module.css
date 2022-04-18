@@ -2,11 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 .fondo {
-    position: absolute;
+    position: relative;
     width: 1081px;
     height: 884px;
-    left: 0px;
-    top: 0px;
+    /* left: 0px;
+    top: 0px; */
+    /* position: absolute; */
+    display: inline-block;
+    vertical-align: middle;
     background: linear-gradient(54.44deg, #1D275F 31.45%, rgba(245, 22, 126, 0.25) 94.69%);
     mix-blend-mode: normal;
     opacity: 0.9;
