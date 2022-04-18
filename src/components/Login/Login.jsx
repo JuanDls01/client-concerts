@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import logo from '../../assets/images/logotipo.png';
+import { Link } from "react-router-dom";
 
 import style from './Login.module.css';
 
 const validator = (input) => {
     let errors = {};
-    let testEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    let testEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
     if(!input.email) errors.email = 'Enter your email';
-    else if(testEmail.test(input.email)) errors.email = 'Please enter an email'
+    else if(!testEmail.test(input.email)) errors.email = 'Please enter an email'
     if (!input.password) errors.password = 'Enter your password';
     // Errors: Email y contraseña no coinciden
     return errors
@@ -74,10 +75,11 @@ const Login = () => {
                         <button>Login with Gmail</button>
                     </div>
                     <div>
-                        <button>Log In</button>
+                        <button type='submit'>Log In</button>
                     </div>
                     <div>
-                        <button type='submit'>Register</button>
+                        <Link to="/register">Register</Link>
+                        {/* <button>Register</button> */}
                     </div>
 
                 </form>
