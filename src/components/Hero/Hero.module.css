@@ -7,20 +7,7 @@
     border-radius: 0px;
 }
 
-.body {
-    position: relative;
-    width: 100%;
-    height: 720px;
-    left: 0px;
-    top: 0px;
-    background-image: url("../../assets/images/Fondo\ Hero.png");
-    background-attachment: fixed;
-    background-size: cover;
-    opacity: 0.09;
-
-}
-
-.externo {
+/* .externo {
     position: relative;
     width: 100%;
     height: 720px;
@@ -29,7 +16,7 @@
     background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
     background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
     mix-blend-mode: normal;
-}
+} */
 
 .titulo {
     position: absolute;

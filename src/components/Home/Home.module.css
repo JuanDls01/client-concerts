@@ -20,3 +20,35 @@ html{
     width: 1080px;
     height: 40px;
 }
+
+.homeContainner {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgBackground {
+    /* position: relative; */
+    width: 100%;
+    height: 720px;
+    left: 0px;
+    top: 0px;
+    background-image: url("../../assets/images/Fondo\ Hero.png");
+    background-attachment: fixed;
+    background-size: cover;
+    /* opacity: 0.09; */
+
+}
+
+.landingPage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 720px;
+    display: flex;
+    flex-direction: column;
+    background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
+    background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
+    mix-blend-mode: normal;
+    opacity: 0.9;
+}
