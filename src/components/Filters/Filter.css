@@ -84,27 +84,3 @@
   gap: 15px;
   color: #000;
 }
-
-
-.CalendarDay__selected_span {
-  background: #82e0aa; 
-  color: white;
-  border: 1px solid 
-}
-
-
-.CalendarDay__selected {
-  background: rgb(121, 18, 186);
-  color: white;
-}
-
-
-.CalendarDay__selected:hover {
-  background: rgb(170, 53, 210);
-  color: white;
-}
-
-.CalendarDay__hovered_span:hover,
-.CalendarDay__hovered_span {
-  background: rgb(134, 55, 177);
-}
