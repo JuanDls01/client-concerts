@@ -14,7 +14,7 @@ const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 
 const getMonthName = (monthNumber) => {
     // Recibe un número como parametro y devuelve el nombre del mes correspondiente
     for(let i = 0; i < months.length; i++){
-        if(i === monthNumber) return months[i];
+        if(i === monthNumber-1) return months[i];
     }
 }
 
@@ -28,7 +28,7 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
     const minutes = starttime.split(':')[1]
     const time = `${hours}:${minutes}`
     const date = `${day} de ${monthName} a las ${time}`
-    console.log('monthName', monthName);
+
 
     // const [favSelected, setFavSelected] = useState(false)
 
