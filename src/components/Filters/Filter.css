@@ -1,33 +1,28 @@
-
 .DateRangePicker div {
   border-radius: 50px !important;
   color: #000 !important;
-} 
- .DateRangePickerInput__withBorder{
-  background-color: #F2F4FF !important;
+}
+.DateRangePickerInput__withBorder {
+  background-color: #f2f4ff !important;
   border-style: none;
-} 
- 
-.DateInput_input{
+}
+
+.DateInput_input {
   text-align: center;
-  
   padding: 0px;
   height: 42px;
   border-radius: 50px !important;
 }
 
-
- .DateRangePicker input {
-  background-color: #F2F4FF !important;
+.DateRangePicker input {
+  background-color: #f2f4ff !important;
   border-radius: 50px;
-  font-family: 'DM Sans', sans-serif !important;
+  font-family: "DM Sans", sans-serif !important;
   font-weight: 500 !important;
   font-size: 14px !important;
   line-height: 18px !important;
   color: #000 !important;
   max-height: 46px;
-  
-
 }
 
 .FilterContainner {
@@ -37,7 +32,7 @@
   justify-content: center;
   gap: 30px;
   margin: 15px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   background-color: #242565;
   border-radius: 15px;
 }
@@ -46,9 +41,9 @@
   text-align: center;
   height: 42px;
   width: 168px;
-  background-color: #F2F4FF  ;
+  background-color: #f2f4ff;
   border-radius: 50px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
@@ -78,9 +73,25 @@
   width: 50%;
 }
 
-.Filters{
+.Filters {
   display: flex;
   align-items: center;
   gap: 15px;
   color: #000;
+}
+
+.botonFilter {
+  height: 44px;
+  width: 150px;
+  font-family: Poppins;
+  background-color: #f2f4ff;
+  border-radius: 50px;
+  border-style: none;
+  color: #484848;
+  font-size: 15px;
+  cursor: pointer;
+}
+.botonFilter:hover {
+  transform: scale(1.03);
+  transition: 0.5s;
 }
