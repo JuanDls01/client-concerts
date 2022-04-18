@@ -37,9 +37,10 @@
 
 .titulo {
     position: relative;
+    display: flex;
     z-index: 66;
     height: 98px;
-    width: 500px;
+    width: 488px;
     right: -48%;
     top: -1180px;
     font-family: Poppins;
@@ -55,7 +56,8 @@
 
 .parrafo {
     position: relative;
-    width: 500px;
+    display: flex;
+    width: 420px;
     height: 69px;
     left: 50%;
     top: -1140px;

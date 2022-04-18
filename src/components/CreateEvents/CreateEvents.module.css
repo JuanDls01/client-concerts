@@ -25,8 +25,8 @@
     position: relative;
     width: 480px;
     height: 101px;
-    left: 720px;
-    top: -200px;
+    left: 38%;
+    top: -250px;
 
 }
 
@@ -41,6 +41,9 @@
 }
 
 .event p{
+    position: relative;
+    left: -22%;
+    top: -10px;
     font-family: 'DM Sans';
     width: 349px;
     font-style: normal;
@@ -55,8 +58,8 @@
     position: relative;
     width: 302px;
     height: 60px;
-    left: 950px;
-    top: -180px;
+    left: 50%;
+    top: -220px;
     z-index: 100;
     
     background: #F5167E;
