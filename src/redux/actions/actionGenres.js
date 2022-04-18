@@ -5,10 +5,10 @@ export const GET_GENRES = 'GET_GENRES';
 export default function getGenres (){
     try{
       return async function(dispatch){
-          const json=await axios.get(`http://localhost:3000/genre`);
+          const json=await axios.get(`http://localhost:3001/genre`);
           return dispatch({
               type:GET_GENRES,
-              payload:json
+              payload:json.data
           })
   
       }
