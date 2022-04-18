@@ -7,7 +7,8 @@ const {
   CLEAN_EVENT_DETAIL, 
   FILT_EVENTS,
   GET_GENRES,
-  GET_NAME_EVENT
+  GET_NAME_EVENT,
+  REGISTER_USER
 } = actions;
 
 const initialState = {
@@ -15,7 +16,10 @@ const initialState = {
   searchevents: [],
   details: [],
   genres: [],
-  messagge: ''
+  messagge: '',
+  user: {},
+  token: '',
+  authError: null
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -70,6 +74,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         events: eventfinds.length > 0 ? action.payload : state.events,
         messagge: eventfinds.length === 0 && notfound()
+      }
+    }
+
+    case REGISTER_USER: {
+      return {
+          ...state,
+          user: action.payload.user ? 'success' : 'error',
+          authError: action.payload.error
       }
     }
 
