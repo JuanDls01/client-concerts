@@ -32,7 +32,6 @@ const RegisterForm = () => {
 
     const [inputErros, setInputErros] = useState({});
 
-    console.log('erros', inputErros)
 
     const handleChangeInput = e => {
         const result = validator({...input, [e.target.name]: e.target.value});
@@ -68,11 +67,6 @@ const RegisterForm = () => {
         dispatch(registerUser(input));
         if(!autherr) navigate('/register/success');
     }
-
-    // // función habilitadora de bttn submit:
-    // const bttnDisabled = (inputErrors) => {
-    //     if (Object.keys(inputErros).length !== 0 || input.firstName === '') 
-    // }
 
     return(
         <div className={style.pageContainner}>
