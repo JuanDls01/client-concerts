@@ -6,14 +6,15 @@ import actionsCreator from '../../redux/actions';
 //CSS
 import s from './RegisterArtist.module.css'
 import logo from '../../assets/images/logotipo.png'
+// import {IoMdSend} from "react-icons/io"; 
 
 const ArtistForm = () => {
     const dispatch = useDispatch();
     const { postArtist } = actionsCreator;
     const navigate = useNavigate()
 
-    const user = useSelector((state) => state.user);
-    const toekn = useSelector((state) => state.token);
+    // const user = useSelector((state) => state.user);
+    // const token = useSelector((state) => state.token);
     const autherr = useSelector((state) => state.authError);
     const [input, setInput] = useState({
         name: '',
@@ -63,12 +64,12 @@ const ArtistForm = () => {
                             <input type="text" name="description" value={input.description} onChange={inputChange}/>
                             {/* {inputErrores.description?<div className="form-text text-danger text-end">{inputErrores.description}</div>:null} */}
                         </div>
-
+                         
                         {/* submit */}
                         <div className={s.bttns} >
                         {autherr ? <div>{autherr}</div> : null}
-                            <button type="submit" className={`${s.btn} ${Object.keys(inputErrores).length !== 0 || input.name === '' ? 'disabled' : null}`}>Enviar</button>
-                            <button className={s.btn2} onClick={()=>{navigate('/');}}>Cancelar</button>
+                            <button type="submit" className={`${s.btn} ${Object.keys(inputErrores).length !== 0 || input.name === '' ? 'disabled' : null}`}> Send </button>
+                            <button className={s.btn2} onClick={()=>{navigate('/');}}>Cancel</button>
                         </div>
                     </form>
                 </div>

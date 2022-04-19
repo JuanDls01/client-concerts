@@ -122,3 +122,10 @@ label{
     text-align: left;
     color: #242565;
 }
+
+.send{
+    z-index: 999;
+    color: black;
+    width:34px;
+    height:50px
+}
