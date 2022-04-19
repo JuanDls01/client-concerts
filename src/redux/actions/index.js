@@ -7,10 +7,12 @@ import cleanEventDetail, { CLEAN_EVENT_DETAIL } from './cleanEventDetail';
 import getEvents, { GET_EVENTS } from './getEvents';
 import getNameEvent, { GET_NAME_EVENT } from './getNameEvent';
 import registerUser, { REGISTER_USER } from './registerUser';
+import postArtist, {POST_ARTIST} from './postRegisterArtist';
 import loginUser, { LOGIN_USER } from './loginUser';
 import loginToken, { LOGIN_TOKEN } from './loginToken';
 import clearAuthError, { CLEAR_AUTH_ERR } from './clearAuthErr';
 import logout, { LOGOUT } from './logout';
+
 
 export const actions = {
     GET_EVENTS,
@@ -20,6 +22,7 @@ export const actions = {
     CLEAN_EVENT_DETAIL,
     GET_NAME_EVENT,
     REGISTER_USER,
+    POST_ARTIST,
     LOGIN_USER,
     LOGIN_TOKEN,
     CLEAR_AUTH_ERR,
@@ -34,6 +37,7 @@ const actionsCreator = {
     cleanEventDetail,
     getNameEvent,
     registerUser,
+    postArtist,
     loginUser,
     loginToken,
     clearAuthError,

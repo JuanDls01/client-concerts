@@ -70,7 +70,7 @@ const Login = () => {
     return(
     <div>
         <div className={style.logoContainner}>
-            <img src={logo} className={style.logo}/>
+            <img src={logo} className={style.logo} alt={logo}/>
         </div>
         <div className={style.formContainner}>
             <div className={style.formBox}>
