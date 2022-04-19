@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
+import FormBttn from "../Common/FormBttn/FormBttn";
 
 import logo from '../../assets/images/logotipo.png';
 import style from './Login.module.css';
@@ -68,17 +69,16 @@ const Login = () => {
     }
 
     return(
-    <div>
+    <div className={style.pageContainner}>
         <div className={style.logoContainner}>
             <img src={logo} className={style.logo} alt={logo}/>
         </div>
         <div className={style.formContainner}>
-            <div className={style.formBox}>
-                <h3>Hello! To continue, please enter your email and password, or Login via Facebook or Google. </h3>
-                <form onSubmit={handleSubmit}>
+            
+                <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
+                <form className={style.formContent} onSubmit={handleSubmit}>
                     {/* Email */}
-                    <div>
-                        <label>Email</label>
+                    <div className="mb-3">
                         <input
                             type="email"
                             name="email"
@@ -86,10 +86,9 @@ const Login = () => {
                             placeholder="Email"
                             value={input.email}
                             onChange={handleChange} />
-                        {errors.email ? <div>{errors.email}</div> : null}
+                        {errors.firstName ? <div className="form-text text-danger text-end">{errors.firstName}</div> : null}
                     </div>
-                    <div>
-                        <label>Password</label>
+                    <div className="mb-3">
                         <input 
                             type="password"
                             name="password"
@@ -97,22 +96,26 @@ const Login = () => {
                             placeholder="Password"
                             value={input.password}
                             onChange={handleChange} />
-                        {errors.password ? <div >{errors.password}</div> : null}
+                        {errors.password ? <div className="form-text text-danger text-end">{errors.password}</div> : null}
                     </div>
                     <div>
                         {/* <button className="disabled">Login with FB</button>
                         <button>Login with Gmail</button> */}
                     </div>
-                    <div>
+                    <div className="mb-3">
                         {autherr ? <div>{autherr}</div> : null}
-                        <button type='submit'>Log In</button>
+                        <FormBttn 
+                            firstValue={input.email}
+                            inputErros={errors}
+                            text={'Log In'}
+                        />
                     </div>
-                    <div>
+                    <div className="mb-3">
                         <Link to="/register">Register</Link>
                         {/* <button>Register</button> */}
                     </div>
                 </form>
-            </div>
+            
         </div>
     </div>
     )
