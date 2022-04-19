@@ -6,6 +6,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from './redux/store/index.js';
+import { CookiesProvider } from 'react-cookie';
 
 // We will use this for the deploy:
 import axios from 'axios'; 
@@ -17,7 +18,9 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <CookiesProvider>
+        <App />
+      </CookiesProvider>
     </Router>
   </Provider>,
   document.getElementById('root')
