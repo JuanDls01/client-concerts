@@ -1,4 +1,5 @@
 //Here we import all de actions creator:
+
 import getEventDetail, { GET_EVENT_DETAIL } from './getEventDetail';
 import filtEvents, { FILT_EVENTS } from './actionFiltEvents';
 import getGenres, { GET_GENRES } from './actionGenres';
@@ -23,7 +24,7 @@ export const actions = {
     LOGIN_TOKEN,
     CLEAR_AUTH_ERR,
     LOGOUT
-}
+};
 
 const actionsCreator = {
     getEvents,
@@ -37,6 +38,6 @@ const actionsCreator = {
     loginToken,
     clearAuthError,
     logout
-}
+};
 
 export default actionsCreator;
