@@ -6,6 +6,7 @@ import RegisterSuccess from './components/registerForm/RegisterSuccess/RegisterS
 import Contact from './components/Contact/Contact'
 import Login from './components/Login/Login'
 import EventDetail from './components/EventDetail/EventDetail';
+import ArtistForm from './components/registerArtist/RegisterArtist'
 import './App.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route index  element={<Home/>}/>
           <Route path="/register" exact  element={<RegisterForm/>} />
           <Route path="/register/success"  element={<RegisterSuccess/>} />
+          <Route path="/postartist"  element={<ArtistForm/>} />
           <Route path="/login"  element={<Login/>} />
           <Route path="/contact"  element={<Contact/>} />
           <Route path="*" element={<NoMatch/>} />

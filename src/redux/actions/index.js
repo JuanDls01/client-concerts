@@ -6,6 +6,7 @@ import cleanEventDetail, { CLEAN_EVENT_DETAIL } from './cleanEventDetail';
 import getEvents, { GET_EVENTS } from './getEvents';
 import getNameEvent, { GET_NAME_EVENT } from './getNameEvent';
 import registerUser, { REGISTER_USER } from './registerUser';
+import postArtist, {POST_ARTIST} from './postRegisterArtist';
 
 export const actions = {
     GET_EVENTS,
@@ -14,7 +15,8 @@ export const actions = {
     FILT_EVENTS,
     CLEAN_EVENT_DETAIL,
     GET_NAME_EVENT,
-    REGISTER_USER
+    REGISTER_USER,
+    POST_ARTIST,
 }
 
 const actionsCreator = {
@@ -24,7 +26,8 @@ const actionsCreator = {
     getGenres,
     cleanEventDetail,
     getNameEvent,
-    registerUser
+    registerUser,
+    postArtist,
 }
 
 export default actionsCreator;
