@@ -155,8 +155,9 @@ const RegisterForm = () => {
                         {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
                         
                         <FormBttn 
-                            input={input}
+                            firstValue={input.firstName}
                             inputErros={inputErros}
+                            text={'Submit'}
                         />
                     </form>
                 {/* </div> */}
