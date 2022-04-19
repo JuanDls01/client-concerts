@@ -8,7 +8,11 @@ const {
   FILT_EVENTS,
   GET_GENRES,
   GET_NAME_EVENT,
-  REGISTER_USER
+  REGISTER_USER,
+  LOGIN_USER,
+  LOGIN_TOKEN,
+  CLEAR_AUTH_ERR,
+  LOGOUT
 } = actions;
 
 const initialState = {
@@ -61,6 +65,22 @@ const rootReducer = (state = initialState, action) => {
       }
     }
 
+    case CLEAR_AUTH_ERR: {
+      return {
+          ...state,
+          authError: null
+      }
+    }
+
+    case LOGOUT: {
+      return {
+          ...state,
+          user: {},
+          token: '',
+          authError: null
+      }
+    }
+
     case GET_NAME_EVENT: {
       const eventfinds = action.payload;
       const notfound = () => {
@@ -81,6 +101,24 @@ const rootReducer = (state = initialState, action) => {
       return {
           ...state,
           user: action.payload.user ? 'success' : 'error',
+          authError: action.payload.error
+      }
+    }
+
+    case LOGIN_USER: {
+      return {
+          ...state,
+          user: action.payload.user ? action.payload.user : 'error',
+          token: action.payload.token,
+          authError: action.payload.error
+      }
+    }
+
+    case LOGIN_TOKEN: {
+      return {
+          ...state,
+          user: action.payload.user ? action.payload.user : 'error',
+          token: action.payload.token,
           authError: action.payload.error
       }
     }
