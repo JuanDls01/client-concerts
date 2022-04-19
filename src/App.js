@@ -15,14 +15,16 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        {/* Invitado: */}
         <Route index element={<Home />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />
-        <Route path="/postartist"  element={<ArtistForm/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
+        {/* Vendedor: */}
+        <Route path="/postartist"  element={<ArtistForm/>} />
         <Route path="/createEvent" element={<EventForm />} />
       </Routes>
     </div>

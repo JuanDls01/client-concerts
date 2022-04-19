@@ -32,7 +32,7 @@ const EventsCards = () => {
     pagesVisited,
     pagesVisited + EVENTSPERPAGE
   );
-  // if(currentEvents.length>0)
+  // if(currentEvents.length>0) console.log('currentEvents', currentEvents)
 
   return (
     <div className={style.EventsPaginatedContainner}>
@@ -47,8 +47,8 @@ const EventsCards = () => {
                 imgEvent={event.img}
                 startdate={event.date}
                 starttime={event.time}
-                artistName={event.Artist.name}
-                stageName={event.Stage.name}
+                artistName={event.Artist}
+                stageName={event.Stage}
                 price={event.price}
                 // location={event.stage.location}
               />
