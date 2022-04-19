@@ -25,7 +25,11 @@
     justify-content: center;
 }
 
-.navegacion ul li a {
+.navegacion ul li a .fakeLink {
+    cursor: pointer;
+}
+
+.fakeLink {
     cursor: pointer;
 }
 

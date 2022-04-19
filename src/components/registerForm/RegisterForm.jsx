@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
-    const { registerUser } = actionsCreator;
-    const navigate = useNavigate()
+    const { registerUser, clearAuthError } = actionsCreator;
+    const navigate = useNavigate();
+
+    //componentDidMount
+    useEffect(() => {
+        return () => {
+            dispatch(clearAuthError());
+        };
+    }, []);
 
     const user = useSelector((state) => state.user);
-    const toekn = useSelector((state) => state.token);
     const autherr = useSelector((state) => state.authError);
     const [input, setInput] = useState({
         firstName: '',
@@ -52,7 +58,7 @@ const RegisterForm = () => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        console.log(input);
+        // console.log(input);
         dispatch(registerUser(input));
         if(!autherr) navigate('/register/success');
     }
