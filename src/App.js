@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import EventDetail from './components/EventDetail/EventDetail';
 import ArtistForm from './components/registerArtist/RegisterArtist';
 import EventForm from "./components/EventForm/EventForm";
+import HomeRegUser from './components/HomeRegUser/HomeRegUser';
 import './App.css';
 
 
@@ -26,6 +27,9 @@ function App() {
         {/* Vendedor: */}
         <Route path="/postartist"  element={<ArtistForm/>} />
         <Route path="/createEvent" element={<EventForm />} />
+        {/* Cliente: */}
+        {/* Cambiarle al path que corresponda */}
+        <Route path="/HomeRegisteredUser" element={<HomeRegUser/>} /> 
       </Routes>
     </div>
   );

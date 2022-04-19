@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import actionsCreator from '../../redux/actions';
 import { useCookies } from "react-cookie";
+import { AiOutlineUser } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
+import { BsCart2 } from 'react-icons/bs';
 
 import s from './NavBar.module.css';
 
@@ -26,17 +29,38 @@ const NavBar = () => {
         <div className={s.navbarExterno}>
             <nav className={s.navegacion}>
                 <ul>
-                    <li>
-                        <a href="#UpcomingEvents" className={s.link} to="/">Events</a>
-                    </li>
-                    <li>
-                        <Link className={s.link} to="/contact">Contact</Link>
-                    </li>
-                    { token === '' ? <li><Link className={s.link} to="/register">Register</Link></li>: null }
+                    { 
+                        token === '' ? 
+                        <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>:
+                        <li>
+                            <a href=''><AiOutlineUser/>Username</a>
+                            <ul>
+                                <li><a href=''>My Profile</a></li>
+                                <li><span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span></li>
+                            </ul>
+                        </li>
+                    }
+                    { 
+                        token === '' ?
+                        <li><Link className={s.link} to="/contact">Contact</Link></li>:
+                        <li><Link className={s.link} to="/myshopping">My Shopping</Link></li>
+                    }
+                    { 
+                        token === '' ?
+                        <li><Link className={s.link} to="/register">Register</Link></li>: 
+                        <li>
+                            <a href=''><AiFillHeart/>Favorites</a>
+                            <ul>
+                                <li><a href=''>Favorite1</a></li>
+                                <li><a href=''>Favorite2</a></li>
+                            </ul>
+                        </li>
+                    }
+                    
                     { 
                         token === '' ?
                         <li><Link className={s.button} to="/login">Login</Link></li> :
-                        <li><span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span></li>
+                        <Link to='/cart'><BsCart2 /></Link>
                     }
                     
                 </ul>
