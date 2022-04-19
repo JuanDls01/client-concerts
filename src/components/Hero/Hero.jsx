@@ -5,6 +5,7 @@ import logo from '../../assets/images/logotipo.png'
 import { useState } from "react"
 import { CreateStage } from "../CreateStage/CreateStage"
 
+
 export default function Hero(){
     const [modal, setModal] = useState(false);
     
