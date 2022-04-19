@@ -7,7 +7,8 @@ const {
   CLEAN_EVENT_DETAIL, 
   FILT_EVENTS,
   GET_GENRES,
-  GET_NAME_EVENT
+  GET_NAME_EVENT,
+  POST_STAGE
 } = actions;
 
 const initialState = {
@@ -70,6 +71,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         events: eventfinds.length > 0 ? action.payload : state.events,
         messagge: eventfinds.length === 0 && notfound()
+      }
+    }
+
+    case POST_STAGE: {
+      return {
+        ...state
       }
     }
 

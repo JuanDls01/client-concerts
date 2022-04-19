@@ -1,9 +1,19 @@
 
 import s from "./Hero.module.css"
 import logo from '../../assets/images/logotipo.png'
+// import { Link } from "react-router-dom"
+import { useState } from "react"
+import { CreateStage } from "../CreateStage/CreateStage"
 
 export default function Hero(){
-
+    const [modal, setModal] = useState(false);
+    
+    const openModal = () => {
+        setModal(true);
+    }
+    const closeModal = () => {
+        setModal(false);
+    }
 
     return (
     <div className={s.externo}>
@@ -14,7 +24,11 @@ export default function Hero(){
             <h4 className={s.titulo}>My ticket is the site with the best fashion events and your favorite artists</h4>
             <p className={s.parrafo}>Find the best events, artists, concerts, plays and more. Plus everything from the comfort of your home. Search them by place, date, artist or genre </p>
             <div className={s.bttns}>
-                <button className={s.btn1}>Get Ticket</button>
+                <button 
+                    onClick={openModal} className={s.btn1}>
+                    Create Stage
+                </button>
+                {modal && <CreateStage onClose={closeModal}/>}
                 <button className={s.btn2}>Learn More</button>
             </div>
             {/* <ul>
