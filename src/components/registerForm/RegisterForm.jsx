@@ -32,6 +32,8 @@ const RegisterForm = () => {
 
     const [inputErros, setInputErros] = useState({});
 
+    console.log('erros', inputErros)
+
     const handleChangeInput = e => {
         const result = validator({...input, [e.target.name]: e.target.value});
         setInput({...input, [e.target.name]: e.target.value});
