@@ -14,7 +14,7 @@ const {
   LOGIN_USER,
   LOGIN_TOKEN,
   CLEAR_AUTH_ERR,
-  LOGOUT
+  LOGOUT,
   GET_ARTISTS,
 } = actions;
 
