@@ -18,7 +18,7 @@ export default function Hero(){
     return (
     <div className={s.externo}>
         <div className={s.imgContainner}>
-            <img src={logo} className={s.imagen}/>
+            <img src={logo} className={s.imagen} alt={logo}/>
         </div>
         <div className={s.infoContainner}>
             <h4 className={s.titulo}>My ticket is the site with the best fashion events and your favorite artists</h4>
@@ -31,10 +31,7 @@ export default function Hero(){
                 {modal && <CreateStage onClose={closeModal}/>}
                 <button className={s.btn2}>Learn More</button>
             </div>
-            {/* <ul>
-                <li className={s.btn1}>Get Ticket</li>
-                <li className={s.btn2}>Learn More</li>
-            </ul> */}
+           
         </div>
     </div>
     )

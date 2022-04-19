@@ -60,9 +60,9 @@ export const CreateStage = ({onClose}) => {
     description: ""
   });
 
-  // useEffect(() => {
-  //   document.getElementById('inputName').focus();
-  // })
+  useEffect(() => {
+    document.getElementById('inputName').focus();
+  }, [])
 
   const handleChange = (e) => {
     setInput({

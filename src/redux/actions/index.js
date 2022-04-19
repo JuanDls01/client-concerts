@@ -1,4 +1,5 @@
 //Here we import all de actions creator:
+
 import getEventDetail, { GET_EVENT_DETAIL } from './getEventDetail';
 import filtEvents, { FILT_EVENTS } from './actionFiltEvents';
 import getGenres, { GET_GENRES } from './actionGenres';

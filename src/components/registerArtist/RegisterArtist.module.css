@@ -1,0 +1,124 @@
+.btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 80%;
+    height: 46px;
+    color: white;
+    background: #242565;
+    border-radius: 8px;
+    margin-bottom: 20px
+}
+
+.btn:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.btn2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 80%;
+    height: 46px;
+    color: #242565;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid #242565;
+}
+
+.btn2:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+    border: 3px solid #242565;
+}
+
+.bttns {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 150%;
+    color: #242565;
+    /* background-color: #242565;
+    border-top-right-radius: 16px;
+    border-top-left-radius: 16px; */
+    padding: 15px;
+    margin: 35px 0 35px 0;
+}
+
+.containerForm {
+    position: relative;
+    top: -120px;
+    border: 1px solid white;
+    width: 552px;
+    height: 582px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 47.38px rgba(0, 0, 0, 0.25);
+    border-radius: 16px;
+    z-index: 50;
+}
+
+.header {
+    width: 100%;
+    height: 29vh;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(87.59deg, #5522CC 0%, #F5167E 100%);
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+.header img {
+    width: 30%;
+    height: auto;
+    left: 10px;
+    top: 0
+}
+
+.copyright {
+    position: absolute;
+    color: #242565;
+    bottom: 50px;
+}
+
+.label{
+    display:-ms-grid;
+    display: grid;
+    flex-direction: column;
+    width: 80%;
+    margin-inline: auto;
+    margin-bottom: 15px;
+}
+
+.label input {
+    border-radius: 7px;
+    border: 1px solid #242565
+}
+
+label{
+    display: inline-block;
+    text-align: left;
+    color: #242565;
+}
