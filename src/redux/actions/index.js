@@ -37,7 +37,13 @@ const actionsCreator = {
     getGenres,
     cleanEventDetail,
     getNameEvent,
-    postStage
+    postStage,
+    registerUser,
+    postArtist,
+    loginUser,
+    loginToken,
+    clearAuthError,
+    logout
 }
 
 export default actionsCreator;
