@@ -61,6 +61,8 @@
 .link {
     text-decoration: none;
     color: white;
+    background-color: transparent;
+    border: none;
 }
 
 .button {

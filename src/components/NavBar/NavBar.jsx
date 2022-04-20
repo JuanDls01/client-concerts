@@ -9,6 +9,7 @@ import { BsCart2 } from 'react-icons/bs';
 import logo from '../../assets/images/logotipo.png';
 
 import Login from '../Login/Login';
+import RegisterForm from '../registerForm/RegisterForm';
 
 import s from './NavBar.module.css';
 
@@ -21,13 +22,13 @@ const NavBar = () => {
 
     // Login show Modal:
     const [loginModal, setLoginModal] = useState(false);
-    const openLoginModal = () => {
-        setLoginModal(true);
-        console.log(loginModal);
-    };
-    const closeLoginModal = () => {
-        setLoginModal(false);
-    };
+    const openLoginModal = () => { setLoginModal(true) };
+    const closeLoginModal = () => { setLoginModal(false) };
+
+    // Register show Modal:
+    const [registerModal, setRegisterModal] = useState(false);
+    const openRegisterModal = () => { setRegisterModal(true) };
+    const closeRegisterModal = () => { setRegisterModal(false) };
 
     const logoutHandler = () => {
         removeCookie('token');
@@ -63,7 +64,7 @@ const NavBar = () => {
                         }
                         { 
                             token === ''?
-                            <li><Link className={s.link} to="/register">Register</Link></li>: 
+                            <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>: 
                             <li>
                                 <a href=''><AiFillHeart/>Favorites</a>
                                 <ul>
@@ -71,6 +72,10 @@ const NavBar = () => {
                                     <li><a href=''>Favorite2</a></li>
                                 </ul>
                             </li>
+                        }
+
+                        {
+                            registerModal && <RegisterForm onClose={closeRegisterModal} />
                         }
                         
                         { 
