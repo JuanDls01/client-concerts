@@ -62,7 +62,7 @@ export const CreateStage = ({ onClose }) => {
   });
 
   useEffect(() => {
-    document.getElementById('name').focus();
+    document.getElementById('inputName').focus();
   }, [])
 
   const handleChange = (e) => {
