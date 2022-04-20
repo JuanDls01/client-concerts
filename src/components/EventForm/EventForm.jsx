@@ -23,10 +23,10 @@ const EventForm = () => {
   const [form, setForm] = useState({
     name: "",
     artistId: null,
-    eventId: null,
+    stageId: null,
     description: "",
     date: "",
-    time: "",
+    time: "00:00",
     stock: {
       cat1name: "",
       cat1price: 0,
@@ -39,6 +39,20 @@ const EventForm = () => {
       cat3stock: 0,
     },
   });
+
+  const handleChange=(e)=>{
+    const property = e.target.name;
+    const value=e.target.value;
+    setForm({...form,[property]:value})
+  }
+
+  const handleStockChange=(e)=>{
+    const property = e.target.name;
+    const value=e.target.value;
+    setForm({...form,stock:{
+      ...form.stock,[property]:value
+    }})
+  }
 
   return (
     <div className={style.pageContainer}>
@@ -53,13 +67,14 @@ const EventForm = () => {
           {/*EVENT NAME */}
           <div className={style.name}>
             <label htmlFor="name">Event name:</label>
-            <input type="text" name="name" />
+            <input type="text" name="name" onChange={handleChange} value={form.name} />
           </div>
 
           {/*ARTIST SELECTION */}
           <div className={style.artist}>
             <label htmlFor="artistId">Artist:</label>
-            <select name="artistId">
+            <select name="artistId" onChange={handleChange}>
+                  <option></option>
               {artists.length &&
                 artists.map((artist) => (
                   <option value={artist.id} key={artist.id}>
@@ -72,7 +87,8 @@ const EventForm = () => {
           {/*STAGE SELECTION */}
           <div className={style.stage}>
             <label htmlFor="stageId">Stage:</label>
-            <select name="stageId">
+            <select name="stageId" onChange={handleChange}>
+            <option></option>
               {stages.length &&
                 stages.map((stage) => (
                   <option value={stage.id} key={stage.id}>
@@ -83,7 +99,7 @@ const EventForm = () => {
           </div>
 
           {/*EVENT DESCRIPTION */}
-          <div className={style.description}>
+          <div className={style.description} onChange={handleChange}>
             <label htmlFor="description">Event description:</label>
             <input type="text" name="description" />
           </div>
@@ -91,13 +107,13 @@ const EventForm = () => {
           {/*EVENT DATE */}
           <div className={style.date}>
             <label htmlFor="date">Event date:</label>
-            <input type="date" min={new Date().toISOString().split("T")[0]} />
+            <input type="date" name="date" min={new Date().toISOString().split("T")[0]} onChange={handleChange} value={form.date} />
           </div>
 
           {/*EVENT TIME */}
           <div className={style.time}>
-            <label htmlFor="date">Time:</label>
-            <input type="time" />
+            <label htmlFor="time">Time:</label>
+            <input type="time" name="time" onChange={handleChange} value={form.time}/>
           </div>
 
           {/*EVENT POSTER */}
@@ -109,31 +125,31 @@ const EventForm = () => {
           <div className={style.stocks}>
             <p>You can set up to three tickets categories</p>
             <div className={style.stockItem}>
-              <label htmlFor="cat1_name">
+              <label htmlFor="cat1name">
                 <BsFillStarFill /> Category name:
               </label>
-              <input type="text" name="cat1_name" />
-              <label htmlFor="cat1_price"> Price: (ARS)</label>
-              <input type="number" name="cat1_price" />
+              <input type="text" name="cat1name" onChange={handleStockChange}  />
+              <label htmlFor="cat1price"> Price: (ARS)</label>
+              <input type="number" name="cat1price" onChange={handleStockChange} />
             </div>
             <div className={style.stockItem}>
-              <label htmlFor="cat2_name">
+              <label htmlFor="cat2name">
                 <BsFillStarFill />
                 <BsFillStarFill /> Category name:
               </label>
-              <input type="text" name="cat2_name" />
-              <label htmlFor="cat2_price"> Price: (ARS)</label>
-              <input type="number" name="cat2_price" />
+              <input type="text" name="cat2name" onChange={handleStockChange} />
+              <label htmlFor="cat2price"> Price: (ARS)</label>
+              <input type="number" name="cat2price" onChange={handleStockChange} />
             </div>
             <div className={style.stockItem}>
-              <label htmlFor="cat3_name">
+              <label htmlFor="cat3name">
                 <BsFillStarFill />
                 <BsFillStarFill />
                 <BsFillStarFill /> Category name:
               </label>
-              <input type="text" name="cat3_name" />
-              <label htmlFor="cat3_price"> Price: (ARS)</label>
-              <input type="number" name="cat3_price" />
+              <input type="text" name="cat3name"  onChange={handleStockChange}/>
+              <label htmlFor="cat3price"> Price: (ARS)</label>
+              <input type="number" name="cat3price" onChange={handleStockChange} />
             </div>
           </div>
         </form>
