@@ -18,7 +18,7 @@ const loginToken = token => {
             });
         }
     }catch(err){
-        console.log(err)
+        console.log('logintoken', err);
     }
 }
 

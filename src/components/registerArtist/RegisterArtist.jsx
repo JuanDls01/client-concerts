@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
+import useRoleProtected from '../Hooks/useRoleProtected';
 
 //CSS
 import s from './RegisterArtist.module.css'
 import logo from '../../assets/images/logotipo.png'
 
 const ArtistForm = () => {
+    useRoleProtected('vendedor');
     const dispatch = useDispatch();
     const { postArtist } = actionsCreator;
     const navigate = useNavigate()
