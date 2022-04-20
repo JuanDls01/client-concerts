@@ -3,8 +3,8 @@ export const LOGIN_TOKEN = 'LOGIN_TOKEN';
 
 const loginToken = token => {
 
-    try{
-        return async dispatch => {
+    return async dispatch => {
+        try {
             const json = await axios.post("http://localhost:3001/auth/login/token", token, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -13,13 +13,13 @@ const loginToken = token => {
             });
             // console.log(json.data)
             return dispatch({
-                type:LOGIN_TOKEN,
-                payload:json.data
+                type: LOGIN_TOKEN,
+                payload: json.data
             });
-        }
-    }catch(err){
+        } catch(err){
         console.log('logintoken', err);
     }
+}
 }
 
 export default loginToken;

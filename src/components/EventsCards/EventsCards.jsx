@@ -15,9 +15,9 @@ const EventsCards = () => {
 
   const { getEvents } = actionsCreator;
   useEffect(() => {
-    console.log("hola");
+    // console.log("hola");
     dispatch(getEvents());
-  }, []);
+  }, [dispatch,getEvents]);
 
   // Eventos traídos del estado global:
   const events = useSelector((state) => state.events);

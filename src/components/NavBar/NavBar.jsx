@@ -37,9 +37,9 @@ const NavBar = () => {
                             token === ''? 
                             <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>:
                             <li>
-                                <a href=''><AiOutlineUser/>Username</a>
+                                <a href="/#"><AiOutlineUser/>Username</a>
                                 <ul>
-                                    <li><a href=''>My Profile</a></li>
+                                    <li><a href='/#'>My Profile</a></li>
                                     <li><span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span></li>
                                 </ul>
                             </li>
@@ -53,10 +53,10 @@ const NavBar = () => {
                             token === ''?
                             <li><Link className={s.link} to="/register">Register</Link></li>: 
                             <li>
-                                <a href=''><AiFillHeart/>Favorites</a>
+                                <a href='/#'><AiFillHeart/>Favorites</a>
                                 <ul>
-                                    <li><a href=''>Favorite1</a></li>
-                                    <li><a href=''>Favorite2</a></li>
+                                    <li><a href='/#'>Favorite1</a></li>
+                                    <li><a href='/#'>Favorite2</a></li>
                                 </ul>
                             </li>
                         }
