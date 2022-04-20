@@ -41,7 +41,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case "GET_ARTISTS": {
+    case GET_ARTISTS: {
       return {
         ...state,
         artists: action.payload,
@@ -56,6 +56,8 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_GENRES: {
+  console.log('ejecutando getGenres desde reducer')
+
       return {
         ...state,
         genres: action.payload,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react'
 import actionsCreator from '../../redux/actions';
 
 //CSS
@@ -10,18 +11,25 @@ import logo from '../../assets/images/logotipo.png'
 
 const ArtistForm = () => {
     const dispatch = useDispatch();
-    const { postArtist } = actionsCreator;
+    const { postArtist, getGenres} = actionsCreator;
     const navigate = useNavigate()
 
     // const user = useSelector((state) => state.user);
     // const token = useSelector((state) => state.token);
+    const genres = useSelector((state) => state.genres);
     const autherr = useSelector((state) => state.authError);
     const [input, setInput] = useState({
         name: '',
         description: '',
+        genreId:''
     });
 
     const [inputErrores, setInputErrores] = useState({});
+
+    useEffect(()=>{
+        dispatch(getGenres())
+
+    },[])
 
     const inputChange = (event) => {
         // console.log(event.target.name)
@@ -30,55 +38,106 @@ const ArtistForm = () => {
         setInput({...input, [event.target.name]: event.target.value});
         setInputErrores(result);
     }
+    
+    const onSelectChange = (event) => {
+        // console.log(event.target.value)
+        setInput({...input, genreId: event.target.value});
+    }
 
     const validar = input => {
         let errors = {};
-        if (!input.name) errors.name = 'You can not leave the name of the artist empty';
+        let variable = document.getElementById('name').value;
+        // variable?variable:errors.name = 'You can not leave the name of the artist empty'
+        if (input.name.length<=0) errors.name = 'You can not leave the name of the artist empty';
         if (input.name.length < 4) errors.name = 'Enter a valid name';
         return errors;
     }
 
     const onSubmit = (event) => {
-        // console.log('Se fue el input')
+        console.log('Se fue el input')
+        console.log(input)
         event.preventDefault();
         dispatch(postArtist(input));
     }
 
-    return(
-        <div className={s.container}>
-        <div className={s.header}><img src={logo} className={s.imagen} alt={logo}/></div>
-                <div className={s.containerForm}>
-                    <h2>Artist Registration Form</h2>
-                    <form onSubmit={onSubmit}>
-
-                        {/* Name*/}
-                        <div className={s.label}>
-                            <label name="name">Artist Name</label>
-                            <input type="text" name="name"  value={input.name} onChange={inputChange} />
-                            {inputErrores.name ? <div className="form-text text-danger text-end">{inputErrores.name}</div> : null}
-                        </div>
-
-                         {/* Description*/}
-                         <div className={s.label}>
-                            <label name="description">Artist description</label>
-                            <input type="text" name="description" value={input.description} onChange={inputChange}/>
-                            {/* {inputErrores.description?<div className="form-text text-danger text-end">{inputErrores.description}</div>:null} */}
-                        </div>
-                         
-                        {/* submit */}
-                        <div className={s.bttns} >
-                        {autherr ? <div>{autherr}</div> : null}
-                            <button type="submit" className={`${s.btn} ${Object.keys(inputErrores).length !== 0 || input.name === '' ? 'disabled' : null}`}> Send </button>
-                            <button className={s.btn2} onClick={()=>{navigate('/');}}>Cancel</button>
-                        </div>
-                    </form>
-                </div>
-                <div className={s.copyright}>
-                <p>Copyright © 2022 Grupo 2 Cohorte 22b de Henry</p>
-            </div>
-            
+    return (
+      <div className={s.container}>
+        <div className={s.header}>
+          <img src={logo} className={s.imagen} alt={logo} />
         </div>
-    )
+        <div className={s.containerForm}>
+          <h2>Artist Registration Form</h2>
+          <form onSubmit={onSubmit}>
+            {/* Name*/}
+            <div className={s.label}>
+              <label name="name">Artist Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={input.name}
+                onChange={inputChange}
+              />
+              {inputErrores.name ? (
+                <div className="form-text text-danger text-end">
+                  {inputErrores.name}
+                </div>
+              ) : null}
+            </div>
+
+            {/* Description*/}
+            <div className={s.label}>
+              <label name="description">Artist description</label>
+              <input
+                type="text"
+                name="description"
+                value={input.description}
+                onChange={inputChange}
+              />
+              {/* {inputErrores.description?<div className="form-text text-danger text-end">{inputErrores.description}</div>:null} */}
+            </div>
+
+            {/* Genero*/}
+            <div>
+              <label>Genre</label>
+              <select onChange={onSelectChange}>
+              {genres?.map((genre) => {
+                  console.log(genre)
+                  return (<option key={genre.id} value={genre.id}>{genre.genreName}</option>)
+              })}
+              </select>
+            </div>
+
+            {/* submit */}
+            <div className={s.bttns}>
+              {autherr ? <div>{autherr}</div> : null}
+              <button
+                type="submit"
+                className={`${s.btn} ${
+                  Object.keys(inputErrores).length !== 0 || input.name === ""
+                    ? "disabled"
+                    : null
+                }`}
+              >
+                {" "}
+                Send{" "}
+              </button>
+              <button
+                className={s.btn2}
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className={s.copyright}>
+          <p>Copyright © 2022 Grupo 2 Cohorte 22b de Henry</p>
+        </div>
+      </div>
+    );
 }
 
 export default ArtistForm;
