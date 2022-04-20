@@ -11,7 +11,7 @@ import Contact from './components/Contact/Contact';
 import Login from './components/Login/Login';
 import EventDetail from './components/EventDetail/EventDetail';
 import ArtistForm from './components/registerArtist/RegisterArtist';
-import EventForm from "./components/EventForm/EventForm";
+import EventForm from './components/EventForm/EventForm';
 import HomeRegUser from './components/HomeRegUser/HomeRegUser';
 import './App.css';
 

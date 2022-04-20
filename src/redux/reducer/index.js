@@ -10,6 +10,7 @@ const {
   FILT_EVENTS,
   GET_GENRES,
   GET_NAME_EVENT,
+  POST_STAGE,
   REGISTER_USER,
   LOGIN_USER,
   LOGIN_TOKEN,
@@ -41,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case GET_ARTISTS: {
+    case "GET_ARTISTS": {
       return {
         ...state,
         artists: action.payload,
@@ -85,18 +86,18 @@ const rootReducer = (state = initialState, action) => {
 
     case CLEAR_AUTH_ERR: {
       return {
-          ...state,
-          authError: null
-      }
+        ...state,
+        authError: null,
+      };
     }
 
     case LOGOUT: {
       return {
-          ...state,
-          user: {},
-          token: '',
-          authError: null
-      }
+        ...state,
+        user: {},
+        token: "",
+        authError: null,
+      };
     }
 
     case GET_NAME_EVENT: {
@@ -127,19 +128,25 @@ const rootReducer = (state = initialState, action) => {
 
     case LOGIN_USER: {
       return {
-          ...state,
-          user: action.payload.user ? action.payload.user : 'error',
-          token: action.payload.token,
-          authError: action.payload.error
-      }
+        ...state,
+        user: action.payload.user ? action.payload.user : "error",
+        token: action.payload.token,
+        authError: action.payload.error,
+      };
     }
 
     case LOGIN_TOKEN: {
       return {
-          ...state,
-          user: action.payload.user ? action.payload.user : 'error',
-          token: action.payload.token,
-          authError: action.payload.error
+        ...state,
+        user: action.payload.user ? action.payload.user : "error",
+        token: action.payload.token,
+        authError: action.payload.error,
+      };
+    }
+
+    case POST_STAGE: {
+      return {
+        ...state
       }
     }
 

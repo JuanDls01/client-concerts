@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
+import FormBttn from '../Common/FormBttn/FormBttn';
+
+import style from './RegisterForm.module.css';
+import logo from '../../assets/images/logotipo.png';
 
 const RegisterForm = () => {
     const dispatch = useDispatch();
@@ -27,6 +31,7 @@ const RegisterForm = () => {
     });
 
     const [inputErros, setInputErros] = useState({});
+
 
     const handleChangeInput = e => {
         const result = validator({...input, [e.target.name]: e.target.value});
@@ -64,12 +69,15 @@ const RegisterForm = () => {
     }
 
     return(
-        <div className="container">
-            <div className="row">
-                <div className="col-4"></div>
-                <div className="col-4">
-                    <h1>Formulario de registro</h1>
-                    <form className="row mt-2" onSubmit={onSubmitHandler}>
+        <div className={style.pageContainner}>
+            <div className={style.logoContainner}>
+                <img src={logo} className={style.logo} alt={logo}/>
+            </div>
+            <div className={style.formContainner}>
+                {/* <div className="col-4"></div>
+                <div className="col-4"> */}
+                    <h1 className={style.titleForm}>Complete the form to create an account...</h1>
+                    <form className={style.formContent} onSubmit={onSubmitHandler}>
 
                         {/* firstName */}
                         <div className="mb-3">
@@ -144,16 +152,16 @@ const RegisterForm = () => {
                         </div>
 
                         {/* submit */}
-                        <div className="d-grid gap-2">
                         {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
-                            <button
-                                type="submit"
-                                className={`btn btn-primary ${Object.keys(inputErros).length !== 0 || input.firstName === '' ? 'disabled' : null}`}
-                            >Submit</button>
-                        </div>
+                        
+                        <FormBttn 
+                            firstValue={input.firstName}
+                            inputErros={inputErros}
+                            text={'Submit'}
+                        />
                     </form>
-                </div>
-                <div className="col-4"></div>
+                {/* </div> */}
+                {/* <div className="col-4"></div> */}
             </div>
         </div>
     )
