@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import actionsCreator from '../../redux/actions';
@@ -12,14 +12,10 @@ import s from './NavBar.module.css';
 
 const NavBar = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
+    // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
-    const { logout, loginToken } = actionsCreator;
+    const { logout } = actionsCreator;
     const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
-
-    useEffect(() => {
-        if (cookies.token) dispatch(loginToken({ bodyToken: cookies.token }));
-    }, []);
 
     const logoutHandler = () => {
         removeCookie('token');

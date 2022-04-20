@@ -1,4 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Routes, Outlet } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
+
 import Home from './components/Home/Home';
 import NoMatch from './components/NoMatch/NoMatch';
 import RegisterForm from './components/registerForm/RegisterForm';
@@ -11,8 +15,26 @@ import EventForm from './components/EventForm/EventForm';
 import HomeRegUser from './components/HomeRegUser/HomeRegUser';
 import './App.css';
 
+import actionsCreator from './redux/actions';
 
 function App() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const authError = useSelector((state) => state.authError);
+  const { loginToken, logout } = actionsCreator;
+  const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
+
+  useEffect(() => {
+    if(authError){
+      if(authError.includes('logout')) {
+        removeCookie('token');
+        dispatch(logout);
+      }
+    }
+    else if (cookies.token) dispatch(loginToken({ bodyToken: cookies.token }));
+  }, []);
+  
   return (
     <div className="App">
       <Routes>
