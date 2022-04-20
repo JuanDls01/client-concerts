@@ -4,16 +4,25 @@ import logo from '../../assets/images/logotipo.png'
 // import { Link } from "react-router-dom"
 import { useState } from "react"
 import { CreateStage } from "../CreateStage/CreateStage"
+import ArtistForm from '../registerArtist/RegisterArtist'
 
 
 export default function Hero(){
     const [modal, setModal] = useState(false);
+    const [modal2, setModal2] = useState(false);
     
     const openModal = () => {
         setModal(true);
     }
     const closeModal = () => {
         setModal(false);
+    }
+    const openModal2 = () => {
+        console.log("llamo a open modal 2")
+        setModal2(true);
+    }
+    const closeModal2 = () => {
+        setModal2(false);
     }
 
     return (
@@ -30,7 +39,8 @@ export default function Hero(){
                     Create Stage
                 </button>
                 {modal && <CreateStage onClose={closeModal}/>}
-                <button className={s.btn2}>Learn More</button>
+                <button  onClick={openModal2} className={s.btn2}>Create Artist</button>
+                {modal2 && <ArtistForm onClose={closeModal2}/>}
             </div>
            
         </div>
