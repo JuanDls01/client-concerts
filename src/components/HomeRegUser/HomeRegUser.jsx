@@ -6,7 +6,7 @@ import Filter from '../Filters/Filter';
 import SearchBars from '../SearchBars/SearchBars';
 import useRoleProtected from '../Hooks/useRoleProtected';
 
-import style from './HomeRegUser.module.css';
+// import style from './HomeRegUser.module.css';
 
 const HomeRegUser = () => {
     useRoleProtected('user');

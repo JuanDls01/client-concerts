@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import actionsCreator from '../../redux/actions/index';
 import Swal from 'sweetalert2';
 import style from '../SearchBars/SearchBars.module.css';
@@ -14,8 +14,8 @@ export default function SearchBars() {
     const [nameStage, setNameStage] = useState('');
     
     //****CODIGO PARA PRUEBA******//
-    const events = useSelector(state => state.events)
-    console.log(events)
+    // const events = useSelector(state => state.events)
+    // console.log(events)
 
     useEffect(() => {
       dispatch(getEvents())

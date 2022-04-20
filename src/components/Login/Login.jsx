@@ -37,14 +37,14 @@ const Login = () => {
         return () => {
             dispatch(clearAuthError());
         };
-    }, []);
+    }, [dispatch,clearAuthError]);
 
     useEffect(() => {
         if(token !== '') {
             setCookie('token', token, { path: '/' });
             navigate('/');
         }
-    }, [token]);
+    }, [token,setCookie,navigate]);
 
     //Info del Usuario:
     const [input, setInput] = useState({

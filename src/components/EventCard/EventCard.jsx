@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import cardImg from '../../assets/images/cardImage.png';
-import locationImg from '../../assets/images/location.png';
+// import cardImg from '../../assets/images/cardImage.png';
+// import locationImg from '../../assets/images/location.png';
 import style from './EventCard.module.css';
 import { GoLocation } from 'react-icons/go';
 import { IoPricetag } from 'react-icons/io5';

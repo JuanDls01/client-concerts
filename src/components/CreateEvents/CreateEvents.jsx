@@ -8,7 +8,7 @@ export default function CreateEvents(){
     return(
         <div className={s.externo}>
             <div className={s.interno}>
-                <img src={img} className={s.img}/>
+                <img src={img} className={s.img} alt={img}/>
             </div>
             <div className={s.event}>
                 <h3>Make your own Event</h3>

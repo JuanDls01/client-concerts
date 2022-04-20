@@ -96,7 +96,7 @@ export const CreateStage = ({ onClose }) => {
 
   const nextFocus = (inputF, inputS) => {
     document.getElementById(inputF).addEventListener('keydown', (event) => {
-      if (event.key == "Enter") {
+      if (event.key === "Enter") {
         event.preventDefault();
         document.getElementById(inputS).focus();
         event.preventDefault();

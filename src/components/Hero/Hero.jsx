@@ -18,7 +18,7 @@ export default function Hero(){
         setModal(false);
     }
     const openModal2 = () => {
-        console.log("llamo a open modal 2")
+        // console.log("llamo a open modal 2")
         setModal2(true);
     }
     const closeModal2 = () => {
