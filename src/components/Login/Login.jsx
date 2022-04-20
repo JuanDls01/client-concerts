@@ -6,6 +6,7 @@ import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
 import FormBttn from "../Common/FormBttn/FormBttn";
 import InputText from '../Common/InputText/InputText';
+import ReactDOM from "react-dom";
 
 import logo from '../../assets/images/logotipo.png';
 import style from './Login.module.css';
@@ -69,11 +70,11 @@ const Login = () => {
         dispatch(loginUser(input));
     }
 
-    return(
-    <div className={style.pageContainner}>
-        <div className={style.logoContainner}>
-            <img src={logo} className={style.logo} alt={logo}/>
-        </div>
+    return ReactDOM.createPortal(
+    // <div className={style.pageContainner}>
+    //     <div className={style.logoContainner}>
+    //         <img src={logo} className={style.logo} alt={logo}/>
+    //     </div>
         <div className={style.formContainner}>
             
                 <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
@@ -115,8 +116,9 @@ const Login = () => {
                 </form>
             
         </div>
-    </div>
-    )
+    // </div>
+    ,
+    document.getElementById('portal'))
 }
 
 export default Login;
