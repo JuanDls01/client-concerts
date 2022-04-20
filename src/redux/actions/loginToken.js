@@ -16,10 +16,10 @@ const loginToken = token => {
                 type: LOGIN_TOKEN,
                 payload: json.data
             });
-        } catch (error) {
-            console.log(error);
-        }
+        } catch(err){
+        console.log('logintoken', err);
     }
+}
 }
 
 export default loginToken;
