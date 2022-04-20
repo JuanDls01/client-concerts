@@ -17,9 +17,9 @@ const RegisterForm = () => {
         return () => {
             dispatch(clearAuthError());
         };
-    }, []);
+    }, [dispatch,clearAuthError]);
 
-    const user = useSelector((state) => state.user);
+    // const user = useSelector((state) => state.user);
     const autherr = useSelector((state) => state.authError);
     const [input, setInput] = useState({
         firstName: '',

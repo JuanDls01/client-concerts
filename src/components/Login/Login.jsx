@@ -23,7 +23,7 @@ const validator = (input) => {
 
 const Login = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
+    // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const autherr = useSelector((state) => state.authError);
     const navigate = useNavigate();
@@ -36,14 +36,14 @@ const Login = () => {
         return () => {
             dispatch(clearAuthError());
         };
-    }, []);
+    }, [dispatch,clearAuthError]);
 
     useEffect(() => {
         if(token !== '') {
             setCookie('token', token, { path: '/' });
             navigate('/');
         }
-    }, [token]);
+    }, [token,setCookie,navigate]);
 
     //Info del Usuario:
     const [input, setInput] = useState({

@@ -5,7 +5,7 @@ import Footer from '../footer/footer';
 import Filter from '../Filters/Filter';
 import SearchBars from '../SearchBars/SearchBars';
 
-import style from './HomeRegUser.module.css';
+// import style from './HomeRegUser.module.css';
 
 const HomeRegUser = () => {
     return (
