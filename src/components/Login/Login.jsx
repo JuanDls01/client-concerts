@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
 import FormBttn from "../Common/FormBttn/FormBttn";
+import InputText from '../Common/InputText/InputText';
 
 import logo from '../../assets/images/logotipo.png';
 import style from './Login.module.css';
@@ -78,37 +79,34 @@ const Login = () => {
                 <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
                 <form className={style.formContent} onSubmit={handleSubmit}>
                     {/* Email */}
-                    <div className="mb-3">
-                        <input
-                            type="email"
-                            name="email"
-                            className="form-control"
-                            placeholder="Email"
-                            value={input.email}
-                            onChange={handleChange} />
-                        {errors.firstName ? <div className="form-text text-danger text-end">{errors.firstName}</div> : null}
-                    </div>
-                    <div className="mb-3">
-                        <input 
-                            type="password"
-                            name="password"
-                            className="form-control"
-                            placeholder="Password"
-                            value={input.password}
-                            onChange={handleChange} />
-                        {errors.password ? <div className="form-text text-danger text-end">{errors.password}</div> : null}
-                    </div>
-                    <div>
-                        {/* <button className="disabled">Login with FB</button>
-                        <button>Login with Gmail</button> */}
-                    </div>
+                    <InputText 
+                        name='email' 
+                        type='email' 
+                        placeholder='Email' 
+                        handleChange={handleChange} 
+                        errors={errors} 
+                        inputNext='password' 
+                        inputState={input} 
+                    />
+                    {/* Password */}
+                    <InputText 
+                        name='password' 
+                        type='password' 
+                        placeholder='Password' 
+                        handleChange={handleChange} 
+                        errors={errors} 
+                        inputNext='email' 
+                        inputState={input} 
+                    />
+                    {/* Submit */}
+                    <FormBttn 
+                        firstValue={input.email}
+                        inputErros={errors}
+                        text={'Log In'}
+                    />
                     <div className="mb-3">
                         {autherr ? <div>{autherr}</div> : null}
-                        <FormBttn 
-                            firstValue={input.email}
-                            inputErros={errors}
-                            text={'Log In'}
-                        />
+                        
                     </div>
                     <div className="mb-3">
                         <Link to="/register">Register</Link>

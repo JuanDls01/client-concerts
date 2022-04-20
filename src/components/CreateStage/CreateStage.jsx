@@ -6,6 +6,7 @@ import actionsCreator from '../../redux/actions';
 import style from './CreateStage.module.css';
 import Swal from 'sweetalert2';
 import FormBttn from '../Common/FormBttn/FormBttn';
+import InputText from '../Common/InputText/InputText';
 
 const { postStage } = actionsCreator;
 
@@ -61,7 +62,7 @@ export const CreateStage = ({ onClose }) => {
   });
 
   useEffect(() => {
-    document.getElementById('inputName').focus();
+    document.getElementById('name').focus();
   }, [])
 
   const handleChange = (e) => {
@@ -107,6 +108,8 @@ export const CreateStage = ({ onClose }) => {
     <div className={style.container}>
     <p className={style.title}>Add a new Stage</p>
     <form onSubmit={(e) => handleSubmit(e)}>
+      {/* <InputText name='name' type='text' placeholder='Name...' handleChange={handleChange} errors={errors} inputNext='number' inputState={input} />
+      <InputText name='capacity' type='number' placeholder='Capacity...' handleChange={handleChange} errors={errors} inputNext='address' inputState={input} /> */}
       <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
           {errors.name && <p className={style.error}>{errors.name}</p>}
       <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
