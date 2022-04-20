@@ -10,6 +10,7 @@ const {
   FILT_EVENTS,
   GET_GENRES,
   GET_NAME_EVENT,
+  POST_STAGE,
   REGISTER_USER,
   LOGIN_USER,
   LOGIN_TOKEN,
@@ -141,6 +142,12 @@ const rootReducer = (state = initialState, action) => {
         token: action.payload.token,
         authError: action.payload.error,
       };
+    }
+
+    case POST_STAGE: {
+      return {
+        ...state
+      }
     }
 
     default:
