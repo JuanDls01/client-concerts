@@ -36,12 +36,13 @@ const Login = ({closeLoginModal}) => {
     const { loginUser, clearAuthError } = actionsCreator;
     const [ cookies, setCookie ] = useCookies(['token']);
 
-    //componentDidMount
+    //componentWillUnmount:
     useEffect(() => {
+        dispatch(clearAuthError())
         return () => {
             dispatch(clearAuthError());
         };
-    }, [dispatch,clearAuthError]);
+    }, []);
 
     useEffect(() => {
         if(token !== '') {
@@ -71,6 +72,7 @@ const Login = ({closeLoginModal}) => {
         e.preventDefault();
         // console.log('inputHandleSubmit', input);
         dispatch(loginUser(input));
+        closeLoginModal()
     }
 
     return ReactDOM.createPortal(

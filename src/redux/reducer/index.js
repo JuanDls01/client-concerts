@@ -131,7 +131,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token,
+        token: action.payload.token ? action.payload.token: "",
         authError: action.payload.error,
       };
     }
