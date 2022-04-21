@@ -5,6 +5,13 @@ import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
 
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+
+const getShortMonthName = (date) => {
+    return monthNames[date.getMonth()].substring(0, 3);
+}
+
 const EventDetail = () => {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
@@ -20,6 +27,10 @@ const EventDetail = () => {
   }, [dispatch, id,cleanEventDetail,getEventDetail]);
 
   const event = useSelector((state) => state.details);
+  console.log(event)
+  // const monthNumber = Number(event.date.split('-')[1]);
+  // const monthName = getMonthName(monthNumber);
+
 
   const dec = () => {
     if (count > 0) {
@@ -62,10 +73,10 @@ const EventDetail = () => {
             <div className={style.descriptionBody}>
               <span className={style.date_circle}>
                 <p className={style.date_1}>
-                  {event.startdate && event.startdate.slice(8, 10)}
+                  {event.date && getShortMonthName(new Date(`${event.date}`))}
                 </p>
                 <p className={style.date_2}>
-                  {event.startdate && event.startdate.slice(5, 7)}
+                  {event.date && event.date.slice(8, 10)}
                 </p>
               </span>
               <p className={style.description}>

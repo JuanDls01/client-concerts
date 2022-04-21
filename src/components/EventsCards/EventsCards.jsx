@@ -50,9 +50,9 @@ const EventsCards = () => {
                 imgEvent={event.img}
                 startdate={event.date}
                 starttime={event.time}
-                artistName={event.Artist}
-                stageName={event.Stage}
-                price={event.price}
+                artistName={event.Artist.name}
+                stageName={event.Stage.name}
+                price={event.lowestPrice}
                 // location={event.stage.location}
               />
             );

@@ -7,6 +7,7 @@ const FormBttn = ({inputErros, firstValue, text}) => {
     // es un string vacio, sino permanece deshabilitado
 
     console.log('inputErros', inputErros)
+    console.log('firstvalue', firstValue)
 
     const [disable, setDisable] = useState(true);
 
@@ -14,13 +15,13 @@ const FormBttn = ({inputErros, firstValue, text}) => {
         // console.log('useEffect')
         if(Object.keys(inputErros).length === 0 && firstValue) setDisable(false);
         else setDisable(true);
-    },[])
+    },[firstValue, inputErros])
 
     return (
         <button
             type="submit"
             disabled = {disable}
-            className={disable? style.bttndisabled: style.bttnsubmit}
+            className={disable ? style.bttndisabled : style.bttnsubmit}
         >{text}</button>
     )
 }

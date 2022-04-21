@@ -62,7 +62,7 @@ export const CreateStage = ({ onClose }) => {
   });
 
   useEffect(() => {
-    document.getElementById('inputName').focus();
+    document.getElementById('name').focus();
   }, [])
 
   const handleChange = (e) => {
@@ -94,33 +94,76 @@ export const CreateStage = ({ onClose }) => {
     })
   }
 
-  const nextFocus = (inputF, inputS) => {
-    document.getElementById(inputF).addEventListener('keydown', (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById(inputS).focus();
-        event.preventDefault();
-      }
-    })
-  }
+  // const nextFocus = (inputF, inputS) => {
+  //   document.getElementById(inputF).addEventListener('keydown', (event) => {
+  //     if (event.key === "Enter") {
+  //       event.preventDefault();
+  //       document.getElementById(inputS).focus();
+  //       event.preventDefault();
+  //     }
+  //   })
+  // }
 
   return ReactDOM.createPortal (
     <div className={style.container}>
     <p className={style.title}>Add a new Stage</p>
     <form onSubmit={(e) => handleSubmit(e)}>
-      {/* <InputText name='name' type='text' placeholder='Name...' handleChange={handleChange} errors={errors} inputNext='number' inputState={input} />
-      <InputText name='capacity' type='number' placeholder='Capacity...' handleChange={handleChange} errors={errors} inputNext='address' inputState={input} /> */}
-      <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
-          {errors.name && <p className={style.error}>{errors.name}</p>}
-      <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
-          {errors.capacity && <p className={style.error}>{errors.capacity}</p>}
-      <p><input placeholder='Address...' className={style.input} type="text" value={input.address} name="address" onChange={handleChange} id="inputAddress" onKeyDown={() => nextFocus('inputAddress', 'inputLat')}/></p>
-          {errors.address && <p className={style.error}>{errors.address}</p>}
-      <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
-          {errors.lat && <p className={style.error}>{errors.lat}</p>}
-      <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
-          {errors.lon && <p className={style.error}>{errors.lon}</p>}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="inputDescription"/></p>
+      <InputText 
+        type='text'
+        name='name'
+        placeholder='Name...'
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='capacity' 
+      />
+      <InputText 
+        type='number'
+        name='capacity' 
+        placeholder='Capacity...'
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='address' 
+      />
+      <InputText 
+        type='text'
+        name='address' 
+        placeholder='Address...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='lat' 
+      />
+      <InputText 
+        type='text'
+        name='lat' 
+        placeholder='Latitud...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='lon' 
+      />
+      <InputText 
+        type='text'
+        name='lon' 
+        placeholder='Longitud...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='des' 
+      />
+      {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
+          {errors.name && <p className={style.error}>{errors.name}</p>} */}
+      {/* <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
+          {errors.capacity && <p className={style.error}>{errors.capacity}</p>} */}
+      {/* <p><input placeholder='Address...' className={style.input} type="text" value={input.address} name="address" onChange={handleChange} id="inputAddress" onKeyDown={() => nextFocus('inputAddress', 'inputLat')}/></p>
+          {errors.address && <p className={style.error}>{errors.address}</p>} */}
+      {/* <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
+          {errors.lat && <p className={style.error}>{errors.lat}</p>} */}
+      {/* <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
+          {errors.lon && <p className={style.error}>{errors.lon}</p>} */}
+      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
       {/* <button
         className={style.button}
         type="submit"
