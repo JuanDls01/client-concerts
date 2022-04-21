@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -223,53 +224,5 @@
   font-size: 20px;
   line-height: 150%;
   color: #ffffff;
-
   justify-content: space-around;
 }
-
-/*
-
-
-
-
-.location {
-  position: absolute;
-  width: 582px;
-  height: 137px;
-  left: 167px;
-  top: 730px;
-  text-align: left;
-  font-family: "DM Sans", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 150%;
-  color: #ffffff;
-}
-
-.direction {
-  top: 790px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/

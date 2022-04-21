@@ -17,7 +17,7 @@ const EventDetail = () => {
     return () => {
       dispatch(cleanEventDetail());
     };
-  }, [dispatch, id]);
+  }, [dispatch, id,cleanEventDetail,getEventDetail]);
 
   const event = useSelector((state) => state.details);
 

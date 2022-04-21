@@ -1,12 +1,7 @@
-.navbarExterno {
+.navegacion{
     height: 100px;
     display: flex;
     justify-content: flex-end;
-}
-
-
-.navegacion{
-    display: flex;
 }
 
 .navegacion ul {
@@ -15,7 +10,37 @@
     width: 600px;
     justify-content: space-around;
     margin-right: 30px;
+}
 
+.navegacionUser {
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+    background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
+    background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
+}
+
+.navegacionUser ul {
+    display: flex;
+    padding: 0;
+    width: 600px;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-right: 30px;
+}
+
+.logoContainner {
+    width: 300px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 200px;
+    height: 150px;
 }
 
 .navegacion ul li {
@@ -25,13 +50,19 @@
     justify-content: center;
 }
 
-.navegacion ul li a {
+.navegacion ul li a .fakeLink {
+    cursor: pointer;
+}
+
+.fakeLink {
     cursor: pointer;
 }
 
 .link {
     text-decoration: none;
     color: white;
+    background-color: transparent;
+    border: none;
 }
 
 .button {
@@ -44,6 +75,7 @@
     border-radius: 50px;
     color: #FFFFFF;
     text-decoration: none;
+    background-color: transparent;
 }
 
 
