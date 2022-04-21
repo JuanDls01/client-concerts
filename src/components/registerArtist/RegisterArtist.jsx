@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actionsCreator from '../../redux/actions';
 import ReactDOM from 'react-dom';
 import Swal from 'sweetalert2';
-import FormBttn from '../Common/FormBttn/FormBttn';
+// import FormBttn from '../Common/FormBttn/FormBttn';
 import useRoleProtected from '../Hooks/useRoleProtected';
 
 //CSS
@@ -12,7 +12,7 @@ import s from './RegisterArtist.module.css'
 
 
 const ArtistForm = ({onClose}) => {
-    useRoleProtected('vendedor');
+    // useRoleProtected('vendedor');
     const dispatch = useDispatch();
     const { postArtist, getGenres} = actionsCreator;
 

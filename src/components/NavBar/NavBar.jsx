@@ -84,10 +84,11 @@ const NavBar = () => {
                             // <li><Link className={s.button} to="/login">Login</Link></li> :
                             <Link to='/cart'><BsCart2 /></Link>
                         }
+                          
                         {
                             loginModal && <Login onClose={closeLoginModal} />
                         }
-                        
+
                     </ul>
             </nav>
         // </div>
