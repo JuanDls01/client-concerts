@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
 import ReactDOM from "react-dom";
+import sendEmailRegister from '../../redux/actions/sendEmailRegister';
 
 // Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
@@ -70,7 +71,13 @@ const RegisterForm = ({closeRegisterModal}) => {
         e.preventDefault();
         // console.log(input);
         dispatch(registerUser(input));
+        var dataMail={
+            name:input.firstName,
+            email:input.email
+        }
+        dispatch(sendEmailRegister(dataMail))
         if(!autherr) navigate('/register/success');
+        
     }
 
     return ReactDOM.createPortal(
