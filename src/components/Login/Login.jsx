@@ -36,12 +36,13 @@ const Login = ({closeLoginModal}) => {
     const { loginUser, clearAuthError } = actionsCreator;
     const [ cookies, setCookie ] = useCookies(['token']);
 
-    //componentDidMount
+    //componentWillUnmount:
     useEffect(() => {
+        dispatch(clearAuthError())
         return () => {
             dispatch(clearAuthError());
         };
-    }, [dispatch,clearAuthError]);
+    }, []);
 
     useEffect(() => {
         if(token !== '') {
@@ -71,6 +72,7 @@ const Login = ({closeLoginModal}) => {
         e.preventDefault();
         // console.log('inputHandleSubmit', input);
         dispatch(loginUser(input));
+        closeLoginModal()
     }
 
     return ReactDOM.createPortal(
@@ -98,17 +100,15 @@ const Login = ({closeLoginModal}) => {
                     inputNext='email' 
                     inputState={input} 
                 />
+                {autherr ? <div className={style.authError}>{autherr}</div> : null}
                 {/* Submit */}
                 <FormBttn 
                     firstValue={input.email}
                     inputErros={errors}
                     text={'Log In'}
                 />
-                <div className="mb-3">
-                    {autherr ? <div>{autherr}</div> : null}
-                    
-                </div>
-                <div className="mb-3">
+
+                <div className={style.register}>
                     <Link to="/register">Register</Link>
                     {/* <button>Register</button> */}
                 </div>

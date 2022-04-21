@@ -34,7 +34,7 @@ const NavBar = () => {
         removeCookie('token');
         dispatch(logout());
     }
-
+    
     return (
             <nav className={token === ''? s.navegacion: s.navegacionUser}>
                 {
