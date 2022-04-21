@@ -48,6 +48,7 @@ const Login = ({closeLoginModal}) => {
         if(token !== '') {
             setCookie('token', token, { path: '/' });
             navigate('/');
+            closeLoginModal()
         }
     }, [token,setCookie,navigate]);
 
@@ -65,6 +66,7 @@ const Login = ({closeLoginModal}) => {
         const result = validator({...input, [e.target.name]: e.target.value});
         setInput ({...input, [e.target.name]: e.target.value});
         setErrors(result);
+        dispatch(clearAuthError())
     }
 
     //Handle para que el usuario pueda ingresar:
@@ -72,7 +74,9 @@ const Login = ({closeLoginModal}) => {
         e.preventDefault();
         // console.log('inputHandleSubmit', input);
         dispatch(loginUser(input));
-        closeLoginModal()
+        // if(!autherr){
+        //     closeLoginModal()
+        // }
     }
 
     return ReactDOM.createPortal(
