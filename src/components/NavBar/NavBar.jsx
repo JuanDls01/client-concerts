@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import actionsCreator from '../../redux/actions';
@@ -8,6 +8,9 @@ import { AiFillHeart } from 'react-icons/ai';
 import { BsCart2 } from 'react-icons/bs';
 import logo from '../../assets/images/logotipo.png';
 
+import Login from '../Login/Login';
+import RegisterForm from '../registerForm/RegisterForm';
+
 import s from './NavBar.module.css';
 
 const NavBar = () => {
@@ -16,6 +19,16 @@ const NavBar = () => {
     const token = useSelector((state) => state.token);
     const { logout } = actionsCreator;
     const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
+
+    // Login show Modal:
+    const [loginModal, setLoginModal] = useState(false);
+    const openLoginModal = () => { setLoginModal(true) };
+    const closeLoginModal = () => { setLoginModal(false) };
+
+    // Register show Modal:
+    const [registerModal, setRegisterModal] = useState(false);
+    const openRegisterModal = () => { setRegisterModal(true) };
+    const closeRegisterModal = () => { setRegisterModal(false) };
 
     const logoutHandler = () => {
         removeCookie('token');
@@ -51,7 +64,7 @@ const NavBar = () => {
                         }
                         { 
                             token === ''?
-                            <li><Link className={s.link} to="/register">Register</Link></li>: 
+                            <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>: 
                             <li>
                                 <a href='/#'><AiFillHeart/>Favorites</a>
                                 <ul>
@@ -60,11 +73,19 @@ const NavBar = () => {
                                 </ul>
                             </li>
                         }
+
+                        {
+                            registerModal && <RegisterForm onClose={closeRegisterModal} />
+                        }
                         
                         { 
                             token === ''?
-                            <li><Link className={s.button} to="/login">Login</Link></li> :
+                            <li><button className={s.button} onClick={openLoginModal}>Login</button></li>:
+                            // <li><Link className={s.button} to="/login">Login</Link></li> :
                             <Link to='/cart'><BsCart2 /></Link>
+                        }
+                        {
+                            loginModal && <Login onClose={closeLoginModal} />
                         }
                         
                     </ul>

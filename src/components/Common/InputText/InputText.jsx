@@ -5,6 +5,10 @@ const InputText = ({name, type, placeholder, handleChange, errors, inputNext, in
     // la función nextFocus para que no marque todos los errores sino solo el siguiente input (inputNext)
     // al que se encuentra el usuario. Arroja un mensaje de error si hay errores.
 
+    if(!type){
+        type='text'
+    }
+
     const nextFocus = (inputF, inputS) => {
         document.getElementById(inputF).addEventListener('keydown', (event) => {
           if (event.key == "Enter") {
