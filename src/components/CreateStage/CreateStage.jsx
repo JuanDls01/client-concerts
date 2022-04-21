@@ -154,7 +154,7 @@ export const CreateStage = ({ closeStageModal }) => {
         errors={errors} 
         inputNext='des' 
       />
-      <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
+      {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
           {errors.name && <p className={style.error}>{errors.name}</p>}
       <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
           {errors.capacity && <p className={style.error}>{errors.capacity}</p>}
@@ -164,7 +164,7 @@ export const CreateStage = ({ closeStageModal }) => {
           {errors.lat && <p className={style.error}>{errors.lat}</p>}
       <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
           {errors.lon && <p className={style.error}>{errors.lon}</p>}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
+      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p> */}
       {/* <button
         className={style.button}
         type="submit"
