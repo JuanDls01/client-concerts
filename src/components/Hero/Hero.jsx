@@ -25,7 +25,6 @@ export default function Hero(){
         setModal2(false);
     }
 
-
     return (
     <div className={s.externo}>
         <div className={s.imgContainner}>

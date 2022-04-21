@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import actionsCreator from '../../redux/actions';
@@ -7,25 +7,15 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 import { BsCart2 } from 'react-icons/bs';
 import logo from '../../assets/images/logotipo.png';
-import Login from '../Login/Login'
 
 import s from './NavBar.module.css';
 
 const NavBar = () => {
-    const [modalLogin, setModalLogin] = useState(true);
-
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
     const { logout } = actionsCreator;
     const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
-
-    const openModalLogin = () => {
-        setModalLogin(true);
-    }
-    const closeModalLogin = () => {
-        setModalLogin(false);
-    }
 
     const logoutHandler = () => {
         removeCookie('token');
@@ -77,8 +67,6 @@ const NavBar = () => {
                             <Link to='/cart'><BsCart2 /></Link>
                         }
 
-                        <button  onClick={()=> console.log('mande el modal')}>Prueba</button>
-                        
                     </ul>
             </nav>
         // </div>

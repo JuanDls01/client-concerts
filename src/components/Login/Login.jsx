@@ -6,7 +6,6 @@ import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
 import FormBttn from "../Common/FormBttn/FormBttn";
 import InputText from '../Common/InputText/InputText';
-import ReactDOM from 'react-dom';
 
 import logo from '../../assets/images/logotipo.png';
 import style from './Login.module.css';
@@ -23,7 +22,7 @@ const validator = (input) => {
     return errors;
 }
 
-const Login = ({onClose}) => {
+const Login = () => {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
@@ -70,7 +69,7 @@ const Login = ({onClose}) => {
         dispatch(loginUser(input));
     }
 
-    return ReactDOM.createPortal(
+    return(
     <div className={style.pageContainner}>
         <div className={style.logoContainner}>
             <img src={logo} className={style.logo} alt={logo}/>
@@ -116,8 +115,8 @@ const Login = ({onClose}) => {
                 </form>
             
         </div>
-    </div>,
-    document.getElementById('portal'))
+    </div>
+    )
 }
 
 export default Login;

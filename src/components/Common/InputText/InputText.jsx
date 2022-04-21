@@ -1,6 +1,6 @@
 import style from './InputText.module.css';
 
-const InputText = ({name, type, placeholder, handleChange, errors, inputNext, inputState, rows}) => {
+const InputText = ({name, type, placeholder, handleChange, errors, inputNext, inputState}) => {
     // Este recibe parámetros básicos de un input (name, type, placeholder, handleChange) e incorpora 
     // la función nextFocus para que no marque todos los errores sino solo el siguiente input (inputNext)
     // al que se encuentra el usuario. Arroja un mensaje de error si hay errores.
