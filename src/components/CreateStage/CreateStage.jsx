@@ -6,6 +6,7 @@ import actionsCreator from '../../redux/actions';
 import style from './CreateStage.module.css';
 import Swal from 'sweetalert2';
 import FormBttn from '../Common/FormBttn/FormBttn';
+import ExitBttnForm from '../Common/FormBttn/FormBttn'
 import InputText from '../Common/InputText/InputText';
 
 const { postStage } = actionsCreator;
@@ -49,7 +50,7 @@ const validateInput = (input) => {
   return errors;
 }
 
-export const CreateStage = ({ onClose }) => {
+export const CreateStage = ({ closeStageModal }) => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -94,15 +95,15 @@ export const CreateStage = ({ onClose }) => {
     })
   }
 
-  // const nextFocus = (inputF, inputS) => {
-  //   document.getElementById(inputF).addEventListener('keydown', (event) => {
-  //     if (event.key === "Enter") {
-  //       event.preventDefault();
-  //       document.getElementById(inputS).focus();
-  //       event.preventDefault();
-  //     }
-  //   })
-  // }
+  const nextFocus = (inputF, inputS) => {
+    document.getElementById(inputF).addEventListener('keydown', (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById(inputS).focus();
+        event.preventDefault();
+      }
+    })
+  }
 
   return ReactDOM.createPortal (
     <div className={style.container}>
@@ -153,16 +154,16 @@ export const CreateStage = ({ onClose }) => {
         errors={errors} 
         inputNext='des' 
       />
-      {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
-          {errors.name && <p className={style.error}>{errors.name}</p>} */}
-      {/* <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
-          {errors.capacity && <p className={style.error}>{errors.capacity}</p>} */}
-      {/* <p><input placeholder='Address...' className={style.input} type="text" value={input.address} name="address" onChange={handleChange} id="inputAddress" onKeyDown={() => nextFocus('inputAddress', 'inputLat')}/></p>
-          {errors.address && <p className={style.error}>{errors.address}</p>} */}
-      {/* <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
-          {errors.lat && <p className={style.error}>{errors.lat}</p>} */}
-      {/* <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
-          {errors.lon && <p className={style.error}>{errors.lon}</p>} */}
+      <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
+          {errors.name && <p className={style.error}>{errors.name}</p>}
+      <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
+          {errors.capacity && <p className={style.error}>{errors.capacity}</p>}
+      <p><input placeholder='Address...' className={style.input} type="text" value={input.address} name="address" onChange={handleChange} id="inputAddress" onKeyDown={() => nextFocus('inputAddress', 'inputLat')}/></p>
+          {errors.address && <p className={style.error}>{errors.address}</p>}
+      <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
+          {errors.lat && <p className={style.error}>{errors.lat}</p>}
+      <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
+          {errors.lon && <p className={style.error}>{errors.lon}</p>}
       <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
       {/* <button
         className={style.button}
@@ -176,7 +177,8 @@ export const CreateStage = ({ onClose }) => {
         inputErros={errors}
         text={'Create!'}
       />
-      <button type="button" className={style.button} onClick={onClose}>Close</button>
+      {/* <ExitBttnForm onClose={closeStageModal} /> */}
+      <button type="button" className={style.button} onClick={closeStageModal}>Close</button>
     </form>
     </div>, 
     document.getElementById('portal'))

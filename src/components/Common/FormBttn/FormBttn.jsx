@@ -15,7 +15,7 @@ const FormBttn = ({inputErros, firstValue, text}) => {
         // console.log('useEffect')
         if(Object.keys(inputErros).length === 0 && firstValue) setDisable(false);
         else setDisable(true);
-    },[firstValue, inputErros])
+    })
 
     return (
         <button
