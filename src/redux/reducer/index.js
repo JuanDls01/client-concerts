@@ -17,6 +17,8 @@ const {
   CLEAR_AUTH_ERR,
   LOGOUT,
   GET_ARTISTS,
+  SEND_EMAIL_RECOVER,
+  SEND_EMAIL_REGISTER
 } = actions;
 
 const initialState = {
@@ -42,7 +44,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
-    case GET_ARTISTS: {
+    case "GET_ARTISTS": {
       return {
         ...state,
         artists: action.payload,
@@ -131,7 +133,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token,
+        token: action.payload.token ? action.payload.token: "",
         authError: action.payload.error,
       };
     }
@@ -150,6 +152,38 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     }
+    case SEND_EMAIL_RECOVER:{
+
+        const notfound = (action) => {
+          Swal.fire({
+            title: "Hey!",
+            text: action.payload,
+            icon: action.payload==="Email not found!" ? "error" : "success" ,
+            confirmButtonText: "Ok",
+          });
+        };
+        return {
+          ...state,
+          messagge: action.payload && notfound(),
+        };
+    
+    }
+    case SEND_EMAIL_REGISTER:{
+
+      const notfound = (action) => {
+        Swal.fire({
+          title: "Hey!",
+          text: action.payload,
+          icon: action.payload==="Email not found!" ? "error" : "success" ,
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
+      };
+  
+  }
 
     default:
       return state;
