@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
+import axios from "axios";
 
 import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
 
-
 const EventForm = () => {
-  useRoleProtected('vendedor');
+  //useRoleProtected('vendedor');
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
@@ -27,6 +27,7 @@ const EventForm = () => {
     description: "",
     date: "",
     time: "00:00",
+    img: "",
     stock: {
       cat1name: "",
       cat1price: 0,
@@ -40,23 +41,65 @@ const EventForm = () => {
     },
   });
 
-  const handleChange=(e)=>{
+  const handleChange = (e) => {
     const property = e.target.name;
-    const value=e.target.value;
-    setForm({...form,[property]:value})
-  }
+    const value = e.target.value;
+    setForm({ ...form, [property]: value });
+  };
 
-  const handleStockChange=(e)=>{
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview(undefined);
+      setForm({ ...form, img: "" });
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+    setForm({ ...form, img: objectUrl });
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    // I've kept this example simple by using the first image instead of multiple
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const uploadImage = async (e) => {
+    const files = selectedFile;
+    console.log(selectedFile);
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "images");
+    const res = await axios.post(
+      "https://api.cloudinary.com/p0wnqu9l/image/upload",
+      data
+    );
+    console.log(res);
+  };
+
+  const handleStockChange = (e) => {
     const property = e.target.name;
-    const value=e.target.value;
-    setForm({...form,stock:{
-      ...form.stock,[property]:value
-    }})
-  }
+    const value = e.target.value;
+    setForm({
+      ...form,
+      stock: {
+        ...form.stock,
+        [property]: value,
+      },
+    });
+  };
 
   return (
     <div className={style.pageContainer}>
-      {/*HEADER*/}
       <div className={style.logoContainner}>
         <img src={logo} className={style.logo} alt={logo} />
       </div>
@@ -65,16 +108,27 @@ const EventForm = () => {
         <h1 className={style.titleForm}>Create your own event</h1>
         <form autoComplete="off" className={style.formContent}>
           {/*EVENT NAME */}
-          <div className={style.name}>
-            <label htmlFor="name">Event name:</label>
-            <input type="text" name="name" onChange={handleChange} value={form.name} />
-          </div>
+          <div className={style.formHeader}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Event Name"
+              onLoad={handleChange}
+              value={form.name}
+            />
 
-          {/*ARTIST SELECTION */}
-          <div className={style.artist}>
-            <label htmlFor="artistId">Artist:</label>
+            {/*EVENT DESCRIPTION */}
+            <input
+              type="text"
+              name="description"
+              onChange={handleChange}
+              placeholder="Event description"
+            />
+
+            {/*ARTIST SELECTION */}
+
             <select name="artistId" onChange={handleChange}>
-                  <option></option>
+              <option>Select an artist...</option>
               {artists.length &&
                 artists.map((artist) => (
                   <option value={artist.id} key={artist.id}>
@@ -82,13 +136,17 @@ const EventForm = () => {
                   </option>
                 ))}
             </select>
-          </div>
 
-          {/*STAGE SELECTION */}
-          <div className={style.stage}>
-            <label htmlFor="stageId">Stage:</label>
+            {/*ARTIST CREATION*/}
+            <div>
+              <span>Not in the list?</span>
+              <button type="button">Create Artist</button>
+            </div>
+
+            {/*STAGE SELECTION */}
+
             <select name="stageId" onChange={handleChange}>
-            <option></option>
+              <option>Select a stage...</option>
               {stages.length &&
                 stages.map((stage) => (
                   <option value={stage.id} key={stage.id}>
@@ -96,31 +154,46 @@ const EventForm = () => {
                   </option>
                 ))}
             </select>
-          </div>
 
-          {/*EVENT DESCRIPTION */}
-          <div className={style.description} onChange={handleChange}>
-            <label htmlFor="description">Event description:</label>
-            <input type="text" name="description" />
-          </div>
+            {/*STAGE CREATION*/}
+            <div>
+              <span>Not in the list?</span>
+              <button type="button">Create Stage</button>
+            </div>
 
-          {/*EVENT DATE */}
-          <div className={style.date}>
-            <label htmlFor="date">Event date:</label>
-            <input type="date" name="date" min={new Date().toISOString().split("T")[0]} onChange={handleChange} value={form.date} />
-          </div>
+            {/*EVENT DATE */}
 
-          {/*EVENT TIME */}
-          <div className={style.time}>
-            <label htmlFor="time">Time:</label>
-            <input type="time" name="time" onChange={handleChange} value={form.time}/>
+            <input
+              type="date"
+              name="date"
+              min={new Date().toISOString().split("T")[0]}
+              onChange={handleChange}
+              value={form.date}
+            />
+
+            {/*EVENT TIME */}
+
+            <input
+              type="time"
+              name="time"
+              onChange={handleChange}
+              value={form.time}
+            />
           </div>
 
           {/*EVENT POSTER */}
-          <div className={style.img}>
-            <label htmlFor="img">Event poster:</label>
-            <input type="file" />
+          <div className={style.formBody}>
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={onSelectFile}
+              name="img"
+              placeholder="Upload event poster"
+            />
+            {selectedFile && <img src={preview} className={style.imgPreview} />}
+            <button type="button" onClick={uploadImage}></button>
           </div>
+
           {/*EVENT STOCK */}
           <div className={style.stocks}>
             <p>You can set up to three tickets categories</p>
@@ -128,9 +201,14 @@ const EventForm = () => {
               <label htmlFor="cat1name">
                 <BsFillStarFill /> Category name:
               </label>
-              <input type="text" name="cat1name" onChange={handleStockChange}  />
+              <input type="text" name="cat1name" onChange={handleStockChange} />
               <label htmlFor="cat1price"> Price: (ARS)</label>
-              <input type="number" name="cat1price" onChange={handleStockChange} />
+              <input
+                type="number"
+                name="cat1price"
+                onChange={handleStockChange}
+              />
+              <input type="text" name="cat1stock" onChange={handleChange} />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat2name">
@@ -139,7 +217,12 @@ const EventForm = () => {
               </label>
               <input type="text" name="cat2name" onChange={handleStockChange} />
               <label htmlFor="cat2price"> Price: (ARS)</label>
-              <input type="number" name="cat2price" onChange={handleStockChange} />
+              <input
+                type="number"
+                name="cat2price"
+                onChange={handleStockChange}
+              />
+              <input type="text" name="cat2stock" onChange={handleChange} />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat3name">
@@ -147,9 +230,14 @@ const EventForm = () => {
                 <BsFillStarFill />
                 <BsFillStarFill /> Category name:
               </label>
-              <input type="text" name="cat3name"  onChange={handleStockChange}/>
+              <input type="text" name="cat3name" onChange={handleStockChange} />
               <label htmlFor="cat3price"> Price: (ARS)</label>
-              <input type="number" name="cat3price" onChange={handleStockChange} />
+              <input
+                type="number"
+                name="cat3price"
+                onChange={handleStockChange}
+              />
+              <input type="text" name="cat3stock" onChange={handleChange} />
             </div>
           </div>
         </form>
