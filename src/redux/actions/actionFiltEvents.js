@@ -13,7 +13,7 @@ export default function filtEvents(date) {
         genre: date.genre
     }
 
-    console.log(deta, "detaaaa")
+
 
     return async function (dispatch) {
         try {
