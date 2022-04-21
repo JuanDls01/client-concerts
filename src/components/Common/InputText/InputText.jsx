@@ -21,7 +21,6 @@ const InputText = ({name, type, placeholder, handleChange, errors, inputNext, in
                 type={type}
                 name={name}
                 id={name}
-                rows={parseInt(rows)}
                 className={style.input}
                 placeholder={placeholder}
                 value={inputState[name]}
