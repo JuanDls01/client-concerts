@@ -35,6 +35,8 @@ const NavBar = () => {
         dispatch(logout());
     }
 
+    console.log(token)
+
     return (
             <nav className={token === ''? s.navegacion: s.navegacionUser}>
                 {
