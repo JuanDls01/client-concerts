@@ -75,7 +75,7 @@ const NavBar = () => {
                         }
 
                         {
-                            registerModal && <RegisterForm onClose={closeRegisterModal} />
+                            registerModal && <RegisterForm closeRegisterModal={closeRegisterModal} />
                         }
                         
                         { 
@@ -86,7 +86,7 @@ const NavBar = () => {
                         }
                           
                         {
-                            loginModal && <Login onClose={closeLoginModal} />
+                            loginModal && <Login closeLoginModal={closeLoginModal} />
                         }
 
                     </ul>
