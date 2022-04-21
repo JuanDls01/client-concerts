@@ -2,7 +2,7 @@ import FormBttn from "../Common/FormBttn/FormBttn";
 import InputText from "../Common/InputText/InputText";
 import React from "react";
 import { useState } from "react";
-import sendEmailRegister from "../../redux/actions/sendEmailRegister";
+import sendEmailRecover from "../../redux/actions/sendEmailRecover";
 import { useDispatch } from "react-redux"
 import style from "./ForgetPassword.module.css";
 
@@ -25,17 +25,18 @@ export default function ForgetPassword() {
   const [err, setErr] = useState({});
 
   function handleChange(e) {
-    e.preventDefault();
     setEmail({...input,email:e.target.value});
     setErr(validate(input.email));
+
   }
-  function handleSubmit() {
-    dispatch(sendEmailRegister(input.email));
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(sendEmailRecover(input.email));
   }
 
   return (
     <div className={style.contenedor}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e)=>handleSubmit(e)}>
         <InputText
           name="email"
           type="email"
