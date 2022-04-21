@@ -45,14 +45,6 @@ const RegisterForm = ({closeRegisterModal}) => {
     const { registerUser, clearAuthError } = actionsCreator;
     const navigate = useNavigate();
 
-    //componentWillUnmount
-    useEffect(() => {
-        dispatch(clearAuthError())
-        return () => {
-            dispatch(clearAuthError());
-        };
-    }, []);
-
     // const user = useSelector((state) => state.user);
     const autherr = useSelector((state) => state.authError);
 
@@ -108,6 +100,14 @@ const RegisterForm = ({closeRegisterModal}) => {
         dispatch(sendEmailRegister(dataMail))
         // if(!autherr) navigate('/register/success');
     }
+
+    //componentWillUnmount
+    useEffect(() => {
+        dispatch(clearAuthError())
+        return () => {
+            dispatch(clearAuthError());
+        };
+    }, []);
 
     return ReactDOM.createPortal(
         <div className={style.formContainner}>

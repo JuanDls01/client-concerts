@@ -86,7 +86,7 @@ const NavBar = () => {
                         }
                           
                         {
-                            loginModal && <Login closeLoginModal={closeLoginModal} />
+                            loginModal && <Login closeLoginModal={closeLoginModal} openRegisterModal={openRegisterModal} />
                         }
 
                     </ul>
