@@ -13,6 +13,8 @@ import loginUser, { LOGIN_USER } from './loginUser';
 import loginToken, { LOGIN_TOKEN } from './loginToken';
 import clearAuthError, { CLEAR_AUTH_ERR } from './clearAuthErr';
 import logout, { LOGOUT } from './logout';
+import sendEmailRecover,{SEND_EMAIL_RECOVER} from './sendEmailRecover'; 
+import sendEmailRegister,{SEND_EMAIL_REGISTER} from './sendEmailRegister';
 
 export const actions = {
     GET_EVENTS,
@@ -27,7 +29,9 @@ export const actions = {
     LOGIN_USER,
     LOGIN_TOKEN,
     CLEAR_AUTH_ERR,
-    LOGOUT
+    LOGOUT,
+    SEND_EMAIL_RECOVER,
+    SEND_EMAIL_REGISTER
 }
 
 const actionsCreator = {
@@ -43,7 +47,9 @@ const actionsCreator = {
     loginUser,
     loginToken,
     clearAuthError,
-    logout
+    logout,
+    sendEmailRecover,
+    sendEmailRegister
 }
 
 export default actionsCreator;
