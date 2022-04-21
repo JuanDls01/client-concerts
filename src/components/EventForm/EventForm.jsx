@@ -44,7 +44,12 @@ const EventForm = () => {
     },
   });
 
+  const submit=async()=>{
+    axios.post("http://localhost:3001/event",form)
+  }
+
   const handleChange = (e) => {
+    console.log("Change")
     const property = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [property]: value });
@@ -65,8 +70,10 @@ const EventForm = () => {
   let widget= window.cloudinary.createUploadWidget({
     cloudName:"dnn295qhb",
     uploadPreset:"p0wnqu9l"
-  },(error,result)=>{console.log(result);
+  },(error,result)=>{
   result.event==="success"&&setForm({...form,img:result.info.url})})
+
+
   return (
     
     
@@ -85,7 +92,7 @@ const EventForm = () => {
               type="text"
               name="name"
               placeholder="Event Name"
-              onLoad={handleChange}
+              onChange={handleChange}
               value={form.name}
             />
 
@@ -174,7 +181,7 @@ const EventForm = () => {
                 name="cat1price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat1stock" onChange={handleChange} />
+              <input type="text" name="cat1stock" onChange={handleStockChange} />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat2name">
@@ -188,7 +195,7 @@ const EventForm = () => {
                 name="cat2price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat2stock" onChange={handleChange} />
+              <input type="text" name="cat2stock" onChange={handleStockChange} />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat3name">
@@ -203,10 +210,10 @@ const EventForm = () => {
                 name="cat3price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat3stock" onChange={handleChange} />
+              <input type="text" name="cat3stock" onChange={handleStockChange} />
             </div>
           </div>
-          <button type="button">POST</button>
+          <button type="button" onClick={submit}>POST</button>
         </form>
       </div>
       <div className={style.formFooter}>FOOTER</div>
