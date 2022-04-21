@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
+import ReactDOM from "react-dom";
+
+// Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
+import InputText from '../Common/InputText/InputText';
+import ExitBttnForm from '../Common/ExitBttnForm/ExitBttnForm';
 
 import style from './RegisterForm.module.css';
 import logo from '../../assets/images/logotipo.png';
 
-const RegisterForm = () => {
+const RegisterForm = ({closeRegisterModal}) => {
     const dispatch = useDispatch();
     const { registerUser, clearAuthError } = actionsCreator;
     const navigate = useNavigate();
@@ -68,102 +73,94 @@ const RegisterForm = () => {
         if(!autherr) navigate('/register/success');
     }
 
-    return(
-        <div className={style.pageContainner}>
-            <div className={style.logoContainner}>
-                <img src={logo} className={style.logo} alt={logo}/>
-            </div>
-            <div className={style.formContainner}>
-                {/* <div className="col-4"></div>
-                <div className="col-4"> */}
-                    <h1 className={style.titleForm}>Complete the form to create an account...</h1>
-                    <form className={style.formContent} onSubmit={onSubmitHandler}>
+    return ReactDOM.createPortal(
+        <div className={style.formContainner}>
+            {/* <div className="col-4"></div>
+            <div className="col-4"> */}
+            <ExitBttnForm onClose={closeRegisterModal} />
+            <h1 className={style.titleForm}>Complete the form to create an account...</h1>
+            <form className={style.formContent} onSubmit={onSubmitHandler}>
 
-                        {/* firstName */}
-                        <div className="mb-3">
-                            <input
-                                type="text"
-                                name="firstName"
-                                className="form-control"
-                                placeholder="Nombre"
-                                value={input.firstName}
-                                onChange={handleChangeInput} />
-                            {inputErros.firstName ? <div className="form-text text-danger text-end">{inputErros.firstName}</div> : null}
-                        </div>
+                {/* firstName */}
+                <InputText 
+                    name='firstName' 
+                    // type='text' 
+                    placeholder='First Name' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='lastName' 
+                    inputState={input} 
+                />
 
-                        {/* lastName */}
-                        <div className="mb-3">
-                            <input
-                                type="text"
-                                name="lastName"
-                                className="form-control"
-                                placeholder="Apellidos"
-                                value={input.lastName}
-                                onChange={handleChangeInput} />
-                            {inputErros.lastName ? <div className="form-text text-danger text-end">{inputErros.lastName}</div> : null}
-                        </div>
+                {/* lastName */}
+                <InputText 
+                    name="lastName" 
+                    // type='text' 
+                    placeholder='Last Name' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='phone' 
+                    inputState={input} 
+                />
 
-                        {/* phone */}
-                        <div className="mb-3">
-                            <input 
-                                type="text"
-                                name="phone"
-                                className="form-control"
-                                placeholder="Telefono"
-                                value={input.phone}
-                                onChange={handleChangeInput} />
-                            {inputErros.phone ? <div className="form-text text-danger text-end">{inputErros.phone}</div> : null}
-                        </div>
+                {/* phone */}
+                <InputText 
+                    name="phone" 
+                    // type='text' 
+                    placeholder='Phone Number' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='email' 
+                    inputState={input} 
+                />
 
-                        {/* email */}
-                        <div className="mb-3">
-                            <input
-                                type="email"
-                                name="email"
-                                className="form-control"
-                                placeholder="Email"
-                                value={input.email}
-                                onChange={handleChangeInput} />
-                            {inputErros.email ? <div className="form-text text-danger text-end">{inputErros.email}</div> : null}
-                        </div>
+                {/* email */}
+                <InputText 
+                    name="email" 
+                    type='email' 
+                    placeholder='Email' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='password' 
+                    inputState={input} 
+                />
 
-                        {/* password */}
-                        <div className="mb-3">
-                            <input
-                                type="password"
-                                name="password"
-                                className="form-control"
-                                placeholder="Password"
-                                value={input.password}
-                                onChange={handleChangeInput} />
-                            {inputErros.password ? <div className="form-text text-danger text-end">{inputErros.password}</div> : null}
-                        </div>
+                {/* password */}
+                <InputText 
+                    name="password" 
+                    type='password' 
+                    placeholder='Password' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='confirmPassword' 
+                    inputState={input} 
+                />
 
-                        {/* confirmedPassword */}
-                        <div className="mb-3">
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                className="form-control"
-                                placeholder="Confirmar Password"
-                                value={input.confirmPassword}
-                                onChange={handleChangeInput} />
-                            {inputErros.confirmPassword ? <div className="form-text text-danger text-end">{inputErros.confirmPassword}</div> : null}
-                        </div>
+                {/* confirmedPassword */}
+                <InputText 
+                    name="confirmPassword" 
+                    type='password' 
+                    placeholder='Confirmar Password' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='firstName' 
+                    inputState={input} 
+                />
 
-                        {/* submit */}
-                        {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
-                        
-                        <FormBttn 
-                            firstValue={input.firstName}
-                            inputErros={inputErros}
-                            text={'Submit'}
-                        />
-                    </form>
-                {/* </div> */}
-                {/* <div className="col-4"></div> */}
-            </div>
+                {/* submit */}
+                {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
+                
+                <FormBttn 
+                    firstValue={input.firstName}
+                    inputErros={inputErros}
+                    text={'Submit'}
+                />
+            </form>
+            {/* </div> */}
+            {/* <div className="col-4"></div> */}
         </div>
+        ,
+        document.getElementById('portal')
     )
 }
 

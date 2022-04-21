@@ -48,50 +48,16 @@
 
 .formContent {
   width: 80%;
+}
+
+.formHeader {
   display: grid;
-  align-content: flex-start;
-  grid-template-columns: repeat(2, 1fr);
-  border: 1px solid red;
-
-  grid-template-areas:
-    "name name"
-    "description description"
-    "artist stage"
-    "date time"
-    "img img"
-    "stocks stocks";
-
-  row-gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2em;
+  row-gap: 2em;
+  margin-bottom: 1em;
 }
 
-.name {
-  grid-area: name;
-}
-
-.description {
-  grid-area: description;
-}
-
-.artist {
-  grid-area: artist;
-}
-
-.stage {
-  grid-area: stage;
-}
-
-.date {
-  grid-area: date;
-}
-
-.time {
-  grid-area: time;
-}
-
-.img {
-  grid-area: img;
-}
-
-.stocks {
-  grid-area: stocks;
+.imgPreview {
+  width: 30em;
 }
