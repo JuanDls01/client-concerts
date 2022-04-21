@@ -6,17 +6,18 @@ import Contact from './components/Contact/Contact'
 import Login from './components/Login/Login'
 import EventDetail from './components/EventDetail/EventDetail';
 import './App.css';
+import RecoverPassword from './components/RecoverPassword/RecoverPassword';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-          <Route index  element={<Home/>}/>
-          <Route path="/register"  element={<RegisterForm/>} />
+          <Route index  element={<RecoverPassword/>}/>
+          {/* <Route path="/register"  element={<RegisterForm/>} />
           <Route path="/login"  element={<Login/>} />
           <Route path="/contact"  element={<Contact/>} />
           <Route path="*" element={<NoMatch/>} />
-          <Route path="/:id" element={<EventDetail/>} />
+          <Route path="/:id" element={<EventDetail/>} /> */}
       </Routes>
     </div>
   );
