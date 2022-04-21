@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
+//import {AdvanceImage} from '@cloudinary/react';
+//import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
-
 import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
+
+
 
 const EventForm = () => {
   //useRoleProtected('vendedor');
@@ -45,46 +48,7 @@ const EventForm = () => {
     const property = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [property]: value });
-  };
-
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
-
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview(undefined);
-      setForm({ ...form, img: "" });
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
-    setForm({ ...form, img: objectUrl });
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedFile]);
-
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
-    }
-
-    // I've kept this example simple by using the first image instead of multiple
-    setSelectedFile(e.target.files[0]);
-  };
-
-  const uploadImage = async (e) => {
-    const files = selectedFile;
-    console.log(selectedFile);
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "images");
-    const res = await axios.post(
-      "https://api.cloudinary.com/p0wnqu9l/image/upload",
-      data
-    );
-    console.log(res);
-  };
+  }; 
 
   const handleStockChange = (e) => {
     const property = e.target.name;
@@ -97,9 +61,17 @@ const EventForm = () => {
       },
     });
   };
-
+  const showWidget=(widget)=>{widget.open()}
+  let widget= window.cloudinary.createUploadWidget({
+    cloudName:"dnn295qhb",
+    uploadPreset:"p0wnqu9l"
+  },(error,result)=>{console.log(result);
+  result.event==="success"&&setForm({...form,img:result.info.url})})
   return (
+    
+    
     <div className={style.pageContainer}>
+      
       <div className={style.logoContainner}>
         <img src={logo} className={style.logo} alt={logo} />
       </div>
@@ -183,15 +155,9 @@ const EventForm = () => {
 
           {/*EVENT POSTER */}
           <div className={style.formBody}>
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={onSelectFile}
-              name="img"
-              placeholder="Upload event poster"
-            />
-            {selectedFile && <img src={preview} className={style.imgPreview} />}
-            <button type="button" onClick={uploadImage}></button>
+            <div><button type="button" onClick={()=>showWidget(widget)}>Upload the event poster</button></div>
+            {form.img&&<img src={form.img} className={style.imgPreview} />}
+            
           </div>
 
           {/*EVENT STOCK */}
@@ -240,6 +206,7 @@ const EventForm = () => {
               <input type="text" name="cat3stock" onChange={handleChange} />
             </div>
           </div>
+          <button type="button">POST</button>
         </form>
       </div>
       <div className={style.formFooter}>FOOTER</div>
