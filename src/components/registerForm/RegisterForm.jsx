@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
 import ReactDOM from "react-dom";
 import sendEmailRegister from '../../redux/actions/sendEmailRegister';
+import Swal from 'sweetalert2';
 
 // Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
@@ -12,6 +13,32 @@ import ExitBttnForm from '../Common/ExitBttnForm/ExitBttnForm';
 
 import style from './RegisterForm.module.css';
 import logo from '../../assets/images/logotipo.png';
+
+const sweetAlert = () => {
+    let timerInterval
+    return (
+    Swal.fire({
+    title: 'Auto close alert!',
+    html: 'User created Successfully',
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading()
+        const b = Swal.getHtmlContainer().querySelector('b')
+        timerInterval = setInterval(() => {
+        b.textContent = Swal.getTimerLeft()
+        }, 100)
+    },
+    willClose: () => {
+        clearInterval(timerInterval)
+    }
+    }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+    }
+    }))
+}
 
 const RegisterForm = ({closeRegisterModal}) => {
     const dispatch = useDispatch();
@@ -28,6 +55,7 @@ const RegisterForm = ({closeRegisterModal}) => {
 
     // const user = useSelector((state) => state.user);
     const autherr = useSelector((state) => state.authError);
+
     const [input, setInput] = useState({
         firstName: '',
         lastName: '',
@@ -44,6 +72,7 @@ const RegisterForm = ({closeRegisterModal}) => {
         const result = validator({...input, [e.target.name]: e.target.value});
         setInput({...input, [e.target.name]: e.target.value});
         setInputErros(result);
+        dispatch(clearAuthError())
     }
 
     const validator = input => {
@@ -77,8 +106,7 @@ const RegisterForm = ({closeRegisterModal}) => {
             email:input.email
         }
         dispatch(sendEmailRegister(dataMail))
-        if(!autherr) navigate('/register/success');
-        
+        // if(!autherr) navigate('/register/success');
     }
 
     return ReactDOM.createPortal(
@@ -156,7 +184,7 @@ const RegisterForm = ({closeRegisterModal}) => {
                 />
 
                 {/* submit */}
-                {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
+                {autherr ? <div className={style.authError}>{autherr}</div> : null}
                 
                 <FormBttn 
                     firstValue={input.firstName}
