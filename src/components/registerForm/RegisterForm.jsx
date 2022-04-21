@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
+import ReactDOM from "react-dom";
+
+// Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
 import InputText from '../Common/InputText/InputText';
-import ReactDOM from "react-dom";
+import ExitBttnForm from '../Common/ExitBttnForm/ExitBttnForm';
 
 import style from './RegisterForm.module.css';
 import logo from '../../assets/images/logotipo.png';
 
-const RegisterForm = () => {
+const RegisterForm = ({closeRegisterModal}) => {
     const dispatch = useDispatch();
     const { registerUser, clearAuthError } = actionsCreator;
     const navigate = useNavigate();
@@ -74,84 +77,85 @@ const RegisterForm = () => {
         <div className={style.formContainner}>
             {/* <div className="col-4"></div>
             <div className="col-4"> */}
-                <h1 className={style.titleForm}>Complete the form to create an account...</h1>
-                <form className={style.formContent} onSubmit={onSubmitHandler}>
+            <ExitBttnForm onClose={closeRegisterModal} />
+            <h1 className={style.titleForm}>Complete the form to create an account...</h1>
+            <form className={style.formContent} onSubmit={onSubmitHandler}>
 
-                    {/* firstName */}
-                    <InputText 
-                        name='firstName' 
-                        // type='text' 
-                        placeholder='First Name' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='lastName' 
-                        inputState={input} 
-                    />
+                {/* firstName */}
+                <InputText 
+                    name='firstName' 
+                    // type='text' 
+                    placeholder='First Name' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='lastName' 
+                    inputState={input} 
+                />
 
-                    {/* lastName */}
-                    <InputText 
-                        name="lastName" 
-                        // type='text' 
-                        placeholder='Last Name' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='phone' 
-                        inputState={input} 
-                    />
+                {/* lastName */}
+                <InputText 
+                    name="lastName" 
+                    // type='text' 
+                    placeholder='Last Name' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='phone' 
+                    inputState={input} 
+                />
 
-                    {/* phone */}
-                    <InputText 
-                        name="phone" 
-                        // type='text' 
-                        placeholder='Phone Number' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='email' 
-                        inputState={input} 
-                    />
+                {/* phone */}
+                <InputText 
+                    name="phone" 
+                    // type='text' 
+                    placeholder='Phone Number' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='email' 
+                    inputState={input} 
+                />
 
-                    {/* email */}
-                    <InputText 
-                        name="email" 
-                        type='email' 
-                        placeholder='Email' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='password' 
-                        inputState={input} 
-                    />
+                {/* email */}
+                <InputText 
+                    name="email" 
+                    type='email' 
+                    placeholder='Email' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='password' 
+                    inputState={input} 
+                />
 
-                    {/* password */}
-                    <InputText 
-                        name="password" 
-                        type='password' 
-                        placeholder='Password' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='confirmPassword' 
-                        inputState={input} 
-                    />
+                {/* password */}
+                <InputText 
+                    name="password" 
+                    type='password' 
+                    placeholder='Password' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='confirmPassword' 
+                    inputState={input} 
+                />
 
-                    {/* confirmedPassword */}
-                    <InputText 
-                        name="confirmPassword" 
-                        type='password' 
-                        placeholder='Confirmar Password' 
-                        handleChange={handleChangeInput} 
-                        errors={inputErros} 
-                        inputNext='firstName' 
-                        inputState={input} 
-                    />
+                {/* confirmedPassword */}
+                <InputText 
+                    name="confirmPassword" 
+                    type='password' 
+                    placeholder='Confirmar Password' 
+                    handleChange={handleChangeInput} 
+                    errors={inputErros} 
+                    inputNext='firstName' 
+                    inputState={input} 
+                />
 
-                    {/* submit */}
-                    {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
-                    
-                    <FormBttn 
-                        firstValue={input.firstName}
-                        inputErros={inputErros}
-                        text={'Submit'}
-                    />
-                </form>
+                {/* submit */}
+                {autherr ? <div className="form-text text-danger text-end">{autherr}</div> : null}
+                
+                <FormBttn 
+                    firstValue={input.firstName}
+                    inputErros={inputErros}
+                    text={'Submit'}
+                />
+            </form>
             {/* </div> */}
             {/* <div className="col-4"></div> */}
         </div>

@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
+import ReactDOM from "react-dom";
+
+// Common Components:
 import FormBttn from "../Common/FormBttn/FormBttn";
 import InputText from '../Common/InputText/InputText';
-import ReactDOM from "react-dom";
+import ExitBttnForm from "../Common/ExitBttnForm/ExitBttnForm";
 
 import logo from '../../assets/images/logotipo.png';
 import style from './Login.module.css';
@@ -23,7 +26,7 @@ const validator = (input) => {
     return errors;
 }
 
-const Login = () => {
+const Login = ({closeLoginModal}) => {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
@@ -71,49 +74,45 @@ const Login = () => {
     }
 
     return ReactDOM.createPortal(
-    // <div className={style.pageContainner}>
-    //     <div className={style.logoContainner}>
-    //         <img src={logo} className={style.logo} alt={logo}/>
-    //     </div>
         <div className={style.formContainner}>
-            
-                <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
-                <form className={style.formContent} onSubmit={handleSubmit}>
-                    {/* Email */}
-                    <InputText 
-                        name='email' 
-                        type='email' 
-                        placeholder='Email' 
-                        handleChange={handleChange} 
-                        errors={errors} 
-                        inputNext='password' 
-                        inputState={input} 
-                    />
-                    {/* Password */}
-                    <InputText 
-                        name='password' 
-                        type='password' 
-                        placeholder='Password' 
-                        handleChange={handleChange} 
-                        errors={errors} 
-                        inputNext='email' 
-                        inputState={input} 
-                    />
-                    {/* Submit */}
-                    <FormBttn 
-                        firstValue={input.email}
-                        inputErros={errors}
-                        text={'Log In'}
-                    />
-                    <div className="mb-3">
-                        {autherr ? <div>{autherr}</div> : null}
-                        
-                    </div>
-                    <div className="mb-3">
-                        <Link to="/register">Register</Link>
-                        {/* <button>Register</button> */}
-                    </div>
-                </form>
+            <ExitBttnForm onClose={closeLoginModal} />
+            <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
+            <form className={style.formContent} onSubmit={handleSubmit}>
+                {/* Email */}
+                <InputText 
+                    name='email' 
+                    type='email' 
+                    placeholder='Email' 
+                    handleChange={handleChange} 
+                    errors={errors} 
+                    inputNext='password' 
+                    inputState={input} 
+                />
+                {/* Password */}
+                <InputText 
+                    name='password' 
+                    type='password' 
+                    placeholder='Password' 
+                    handleChange={handleChange} 
+                    errors={errors} 
+                    inputNext='email' 
+                    inputState={input} 
+                />
+                {/* Submit */}
+                <FormBttn 
+                    firstValue={input.email}
+                    inputErros={errors}
+                    text={'Log In'}
+                />
+                <div className="mb-3">
+                    {autherr ? <div>{autherr}</div> : null}
+                    
+                </div>
+                <div className="mb-3">
+                    <Link to="/register">Register</Link>
+                    {/* <button>Register</button> */}
+                </div>
+            </form>
             
         </div>
     // </div>
