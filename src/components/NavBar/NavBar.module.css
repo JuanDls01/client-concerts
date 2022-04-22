@@ -15,6 +15,7 @@
 .navegacionUser {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     height: 250px;
     background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
     background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
@@ -84,12 +85,51 @@
     color: white;
 }
 
-.menuUser {
-    z-index: 1000;
-    width: 100px;
+.navUser {
+    width: 100%;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.menuContainner {
+    width: 120px;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropdownMenu {
+    z-index: 1000;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     position: absolute;
     background-color: #FFFFFF;
     margin-top: 10px;
+    border-radius: 2px;
+}
+
+.dropdownMenu a {
+    text-decoration: none;
+    align-items: center;
+}
+
+.menuUser {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1.05rem;
+    font-family: Poppins;
+    cursor: pointer;
 }

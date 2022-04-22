@@ -24,7 +24,7 @@ export default function Home(){
                 <div>
                     <div className={s.imgBackground}></div>
                     <div className={s.landingPage}>
-                        
+                        <NavBar/>
                         <Hero/>
                     </div>
                 </div>:
@@ -33,7 +33,11 @@ export default function Home(){
             <SearchBars />
             <Filter />
             <EventsCards />
-            <CreateEvents/>
+            {
+                token === ''?
+                <CreateEvents/>:
+                null
+            }
             <Footer/>
         </div>
     )

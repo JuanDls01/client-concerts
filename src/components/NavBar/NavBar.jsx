@@ -47,56 +47,39 @@ const NavBar = () => {
             <nav className={token === ''? s.navegacion: s.navegacionUser}>
                 {
                     token === ''?
-                    null:
-                    <div className={s.logoContainner}>
-                        <img src={logo} className={s.logo} alt={logo}/>
-                    </div>
-                }
-                {/* <div className={s.ulContainner}> */}
+                    // Navbar invitado:
                     <ul>
-                        { 
-                            token === ''? 
-                            <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>:
-                            <li >
-                                <a href="/#" onClick={openMenuUser} className={s.link}><AiOutlineUser/>Username</a>
-                                {
-                                    menuUser? 
-                                    <div className={s.menuUser}>
-                                        <a href='/#'>My Profile</a>
-                                        <span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span>
-                                        <a href='/#'>Favorites</a>
-                                    </div>:
-                                    null
-                                }
-                            </li>
-                        }
-                        { 
-                            token === ''?
-                            <li><Link className={s.link} to="/contact">Contact</Link></li>:
-                            <li><Link className={s.link} to="/myshopping">My Shopping</Link></li>
-                        }
-                        { 
-                            token === ''?
-                            <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>: 
-                            null
-                        }
-
+                        <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>
+                        <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>
+                        <li><button className={s.button} onClick={openLoginModal}>Login</button></li>
                         {
                             registerModal && <RegisterForm closeRegisterModal={closeRegisterModal} />
                         }
-                        
-                        { 
-                            token === ''?
-                            <li><button className={s.button} onClick={openLoginModal}>Login</button></li>:
-                            // <li><Link className={s.button} to="/login">Login</Link></li> :
-                            <Link to='/cart'><BsCart2 /></Link>
-                        }
-                          
                         {
                             loginModal && <Login closeLoginModal={closeLoginModal} openRegisterModal={openRegisterModal} />
                         }
-
-                    </ul>
+                    </ul>:
+                    // Navbar cliente:
+                    <div className={s.navUser}>
+                        <div className={s.logoContainner}>
+                            <img src={logo} className={s.logo} alt={logo}/>
+                        </div>
+                        <div className={s.menuContainner}>
+                            <a onClick={openMenuUser} className={s.menuUser}><AiOutlineUser/>Username</a>
+                            {
+                                menuUser &&
+                                <div className={s.dropdownMenu}>
+                                    {/* <li className={s.menuItem}><Link to='/profile'>My Profile</Link></li>
+                                    <li className={s.menuItem}><Link to='/shopping'>My Shopping</Link></li> */}
+                                    <Link to='/profile' className={s.menuItem}>My Profile</Link>
+                                    <Link to='/shopping' className={s.menuItem}>My Shopping</Link>
+                                    <a className={s.menuItem} onClick={logoutHandler}>Logout</a>
+                                </div>
+                            }
+                        </div>
+                        
+                    </div>
+                }
             </nav>
         // </div>
     )
