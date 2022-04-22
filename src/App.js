@@ -14,7 +14,7 @@ import ArtistForm from './components/registerArtist/RegisterArtist';
 import EventForm from './components/EventForm/EventForm';
 import HomeRegUser from './components/HomeRegUser/HomeRegUser';
 import './App.css';
-import RecoverPassword from './components/RecoverPassword/RecoverPassword';
+
 
 import actionsCreator from './redux/actions';
 
