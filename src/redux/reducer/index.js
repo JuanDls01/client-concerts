@@ -153,12 +153,12 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case SEND_EMAIL_RECOVER:{
-
-        const notfound = (action) => {
+    
+        const notfound = (info=action.payload) => {
           Swal.fire({
-            title: "Hey!",
-            text: action.payload,
-            icon: action.payload==="Email not found!" ? "error" : "success" ,
+            title: "Hey!" ,
+            text: `${info}`,
+            icon: info==="This email is not registered!" ? "error" : "success" ,
             confirmButtonText: "Ok",
           });
         };
@@ -169,12 +169,12 @@ const rootReducer = (state = initialState, action) => {
     
     }
     case SEND_EMAIL_REGISTER:{
-
-      const notfound = (action) => {
+        
+      const notfound = (info=action.payload) => {
         Swal.fire({
           title: "Hey!",
-          text: action.payload,
-          icon: action.payload==="Email not found!" ? "error" : "success" ,
+          text:`${info}`,
+          icon: info==="user existent" ? "error" : "success" ,
           confirmButtonText: "Ok",
         });
       };

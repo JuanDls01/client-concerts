@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import sendEmailRegister from '../../redux/actions/sendEmailRegister';
 import Swal from 'sweetalert2';
 
+
 // Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
 import InputText from '../Common/InputText/InputText';
@@ -42,7 +43,7 @@ const sweetAlert = () => {
 
 const RegisterForm = ({closeRegisterModal}) => {
     const dispatch = useDispatch();
-    const { registerUser, clearAuthError } = actionsCreator;
+    const { registerUser, clearAuthError ,sendEmailRegister} = actionsCreator;
     const navigate = useNavigate();
 
     // const user = useSelector((state) => state.user);
@@ -91,14 +92,18 @@ const RegisterForm = ({closeRegisterModal}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        // console.log(input);
-        dispatch(registerUser(input));
+
         var dataMail={
             name:input.firstName,
             email:input.email
         }
+        // console.log(dataMail)
         dispatch(sendEmailRegister(dataMail))
-        // if(!autherr) navigate('/register/success');
+        // console.log(input);
+        dispatch(registerUser(input));
+        
+//         if(!autherr) navigate('/register/success');
+
     }
 
     //componentWillUnmount
