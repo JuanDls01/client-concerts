@@ -15,7 +15,8 @@ import s from './NavBar.module.css';
 
 const NavBar = () => {
     const dispatch = useDispatch();
-    // const user = useSelector((state) => state.user);
+    const user = useSelector((state) => state.user);
+    const userName = user.firstName
     const token = useSelector((state) => state.token);
     const { logout } = actionsCreator;
     const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
@@ -65,12 +66,10 @@ const NavBar = () => {
                             <img src={logo} className={s.logo} alt={logo}/>
                         </div>
                         <div className={s.menuContainner}>
-                            <a onClick={openMenuUser} className={s.menuUser}><AiOutlineUser/>Username</a>
+                            <a onClick={openMenuUser} className={s.menuUser}><AiOutlineUser/><p>{userName}</p></a>
                             {
                                 menuUser &&
                                 <div className={s.dropdownMenu}>
-                                    {/* <li className={s.menuItem}><Link to='/profile'>My Profile</Link></li>
-                                    <li className={s.menuItem}><Link to='/shopping'>My Shopping</Link></li> */}
                                     <Link to='/profile' className={s.menuItem}>My Profile</Link>
                                     <Link to='/shopping' className={s.menuItem}>My Shopping</Link>
                                     <a className={s.menuItem} onClick={logoutHandler}>Logout</a>
