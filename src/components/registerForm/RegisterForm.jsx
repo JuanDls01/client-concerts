@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import sendEmailRegister from '../../redux/actions/sendEmailRegister';
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
+import { BiArrowBack } from 'react-icons/bi';
 
 
 // Common Components:
@@ -114,11 +116,18 @@ const RegisterForm = ({closeRegisterModal}) => {
         };
     }, []);
 
-    return ReactDOM.createPortal(
+    return (
+        <div className={style.pageContainner}>
+            <nav className={style.navegacion}>
+                <div className={style.logoContainner}>
+                    <img src={logo} className={style.logo} alt={logo}/>
+                </div>
+            </nav>
         <div className={style.formContainner}>
-            {/* <div className="col-4"></div>
-            <div className="col-4"> */}
-            <ExitBttnForm onClose={closeRegisterModal} />
+            <div className={style.bttnContainner}>
+                <Link to='/' className={style.backBttn}><BiArrowBack /></Link>
+            </div>
+            {/* <ExitBttnForm onClose={closeRegisterModal} /> */}
             <h1 className={style.titleForm}>Complete the form to create an account...</h1>
             <form className={style.formContent} onSubmit={onSubmitHandler}>
 
@@ -196,12 +205,14 @@ const RegisterForm = ({closeRegisterModal}) => {
                     inputErros={inputErros}
                     text={'Submit'}
                 />
+                <Link to='/login' className={style.registerBttn}>Sign In</Link>
             </form>
             {/* </div> */}
             {/* <div className="col-4"></div> */}
         </div>
-        ,
-        document.getElementById('portal')
+        </div>
+        // ,
+        // document.getElementById('portal')
     )
 }
 
