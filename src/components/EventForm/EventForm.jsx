@@ -8,13 +8,14 @@ import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
 
-const user = useSelector((state) => state.user);
+
 
 const EventForm = () => {
   //useRoleProtected('vendedor');
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getStages());
