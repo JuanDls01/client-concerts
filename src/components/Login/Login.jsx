@@ -26,7 +26,7 @@ const validator = (input) => {
     return errors;
 }
 
-const Login = ({closeLoginModal}) => {
+const Login = ({closeLoginModal, openRegisterModal}) => {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
@@ -48,6 +48,7 @@ const Login = ({closeLoginModal}) => {
         if(token !== '') {
             setCookie('token', token, { path: '/' });
             navigate('/');
+            closeLoginModal()
         }
     }, [token,setCookie,navigate]);
 
@@ -65,6 +66,7 @@ const Login = ({closeLoginModal}) => {
         const result = validator({...input, [e.target.name]: e.target.value});
         setInput ({...input, [e.target.name]: e.target.value});
         setErrors(result);
+        dispatch(clearAuthError())
     }
 
     //Handle para que el usuario pueda ingresar:
@@ -72,7 +74,14 @@ const Login = ({closeLoginModal}) => {
         e.preventDefault();
         // console.log('inputHandleSubmit', input);
         dispatch(loginUser(input));
-        closeLoginModal()
+        // if(!autherr){
+        //     closeLoginModal()
+        // }
+    }
+
+    const onClickRegister = () => {
+        closeLoginModal();
+        openRegisterModal();
     }
 
     return ReactDOM.createPortal(
@@ -107,11 +116,11 @@ const Login = ({closeLoginModal}) => {
                     inputErros={errors}
                     text={'Log In'}
                 />
+                <button onClick={onClickRegister} className={style.registerBttn}>Register</button>
 
-                <div className={style.register}>
-                    <Link to="/register">Register</Link>
-                    {/* <button>Register</button> */}
-                </div>
+                {/* <div className={style.register}>
+                    
+                </div> */}
             </form>
             
         </div>

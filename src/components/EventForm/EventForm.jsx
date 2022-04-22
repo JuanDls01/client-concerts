@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
-//import {AdvanceImage} from '@cloudinary/react';
-//import { Cloudinary } from "@cloudinary/url-gen";
 import axios from "axios";
 import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
@@ -17,6 +15,7 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getStages());
@@ -31,6 +30,7 @@ const EventForm = () => {
     date: "",
     time: "00:00",
     img: "",
+    userId: user,
     stock: {
       cat1name: "",
       cat1price: 0,
@@ -44,16 +44,16 @@ const EventForm = () => {
     },
   });
 
-  const submit=async()=>{
-    axios.post("http://localhost:3001/event",form)
-  }
+  const submit = async () => {
+    axios.post("http://localhost:3001/event", form);
+  };
 
   const handleChange = (e) => {
-    console.log("Change")
+    console.log("Change");
     const property = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [property]: value });
-  }; 
+  };
 
   const handleStockChange = (e) => {
     const property = e.target.name;
@@ -66,19 +66,21 @@ const EventForm = () => {
       },
     });
   };
-  const showWidget=(widget)=>{widget.open()}
-  let widget= window.cloudinary.createUploadWidget({
-    cloudName:"dnn295qhb",
-    uploadPreset:"p0wnqu9l"
-  },(error,result)=>{
-  result.event==="success"&&setForm({...form,img:result.info.url})})
-
+  const showWidget = (widget) => {
+    widget.open();
+  };
+  let widget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: "dnn295qhb",
+      uploadPreset: "p0wnqu9l",
+    },
+    (error, result) => {
+      result.event === "success" && setForm({ ...form, img: result.info.url });
+    }
+  );
 
   return (
-    
-    
     <div className={style.pageContainer}>
-      
       <div className={style.logoContainner}>
         <img src={logo} className={style.logo} alt={logo} />
       </div>
@@ -162,9 +164,12 @@ const EventForm = () => {
 
           {/*EVENT POSTER */}
           <div className={style.formBody}>
-            <div><button type="button" onClick={()=>showWidget(widget)}>Upload the event poster</button></div>
-            {form.img&&<img src={form.img} className={style.imgPreview} />}
-            
+            <div>
+              <button type="button" onClick={() => showWidget(widget)}>
+                Upload the event poster
+              </button>
+            </div>
+            {form.img && <img src={form.img} className={style.imgPreview} />}
           </div>
 
           {/*EVENT STOCK */}
@@ -181,7 +186,11 @@ const EventForm = () => {
                 name="cat1price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat1stock" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat1stock"
+                onChange={handleStockChange}
+              />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat2name">
@@ -195,7 +204,11 @@ const EventForm = () => {
                 name="cat2price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat2stock" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat2stock"
+                onChange={handleStockChange}
+              />
             </div>
             <div className={style.stockItem}>
               <label htmlFor="cat3name">
@@ -210,10 +223,16 @@ const EventForm = () => {
                 name="cat3price"
                 onChange={handleStockChange}
               />
-              <input type="text" name="cat3stock" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat3stock"
+                onChange={handleStockChange}
+              />
             </div>
           </div>
-          <button type="button" onClick={submit}>POST</button>
+          <button type="button" onClick={submit}>
+            POST
+          </button>
         </form>
       </div>
       <div className={style.formFooter}>FOOTER</div>
