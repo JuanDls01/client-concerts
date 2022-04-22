@@ -15,8 +15,7 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
-import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
-// import "./App.css";
+import "./App.css";
 
 
 import actionsCreator from "./redux/actions";
@@ -43,19 +42,19 @@ function App() {
     <div className="App">
       <Routes>
         {/* Invitado: */}
-        <Route index element={<DashboardSeller/>} />
-        {/* <Route path="/register" exact element={<RegisterForm />} />
+        <Route index element={<Home />} />
+        <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
-        <Route path="/:id" element={<EventDetail />} /> */}
+        <Route path="/:id" element={<EventDetail />} />
         {/* Vendedor: */}
-        {/* <Route path="/postartist" element={<ArtistForm />} />
-        <Route path="/createEvent" element={<EventForm />} /> */}
+        <Route path="/postartist" element={<ArtistForm />} />
+        <Route path="/createEvent" element={<EventForm />} />
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
-        {/* <Route path="/HomeRegisteredUser" element={<HomeRegUser />} /> */}
+        <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
       </Routes>
     </div>
   );
