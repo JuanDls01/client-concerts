@@ -8,23 +8,27 @@ import Paginated from "../Paginated/Paginated";
 import style from "./EventsCards.module.css";
 
 const INITIALPAGE = 0;
-let EVENTSPERPAGE = 6;
+let EVENTSPERPAGE;
 
 const EventsCards = () => {
   const dispatch = useDispatch();
-
   const { getEvents } = actionsCreator;
-  useEffect(() => {
-    // console.log("hola");
-    dispatch(getEvents());
-  }, [dispatch, getEvents]);
 
   // Eventos traídos del estado global:
   const events = useSelector((state) => state.events);
   const token = useSelector((state) => state.token);
+  console.log(token)
 
   // Si inicie sesión muestro 9 cartas, sino 6:
-  if (!token === "") EVENTSPERPAGE = 9;
+  useEffect(() => {
+    // console.log("hola");
+    dispatch(getEvents());
+    if(token === ''){
+      EVENTSPERPAGE = 6;
+    } else EVENTSPERPAGE = 9;
+  }, [dispatch, getEvents, token]);
+  
+  console.log('EventsPerPga', EVENTSPERPAGE)
 
   // Estado que indica la página actual:
   const [currentPage, setCurrentPage] = useState(INITIALPAGE);
