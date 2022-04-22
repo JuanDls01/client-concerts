@@ -29,6 +29,7 @@ const initialState = {
   messagge: "",
   user: {},
   token: "",
+  tokenError: null,
   authError: null,
   artists: [],
   stages: [],
@@ -100,6 +101,7 @@ const rootReducer = (state = initialState, action) => {
         user: {},
         token: "",
         authError: null,
+        tokenError: null,
       };
     }
 
@@ -142,8 +144,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token,
-        authError: action.payload.error,
+        token: action.payload.token ? action.payload.token: "",
+        tokenError: action.payload.error,
       };
     }
 

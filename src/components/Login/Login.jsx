@@ -50,7 +50,7 @@ const Login = ({closeLoginModal, openRegisterModal}) => {
             navigate('/');
             closeLoginModal()
         }
-    }, [token,setCookie,navigate]);
+    }, [token]);
 
     //Info del Usuario:
     const [input, setInput] = useState({
