@@ -85,13 +85,13 @@
     width: 100%;
 }
 
-.error {
+/* .error {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 14px;
     color: #F5167E;
-}
+} */
 
 .overlay {
     position: absolute;

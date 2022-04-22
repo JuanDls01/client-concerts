@@ -27,6 +27,7 @@ const EventDetail = () => {
   }, [dispatch, id,cleanEventDetail,getEventDetail]);
 
   const event = useSelector((state) => state.details);
+  // console.log(event.stock.cat1name)
 
   // const dec = () => {
   //   if (count > 0) {
@@ -44,7 +45,7 @@ const EventDetail = () => {
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
-            <div className={style.buttonsContainer}>
+            <div >
             
               <table>
               <tr className={style.tr1}>
@@ -54,9 +55,9 @@ const EventDetail = () => {
                 <th>Cantidad</th>
               </tr>
               <tr>
-                <td>Ticket #1</td>
-                <td>$ {event.lowestPrice}</td>
-                <td>2.000</td>
+                <td>{event.stock && event.stock.cat1name}</td>
+                <td>$ {event.stock && event.stock.cat1price}</td>
+                <td>{event.stock && event.stock.cat1stock}</td>
                 <select>
                   <option value="value1">1</option>
                   <option value="value2">2</option>
@@ -64,9 +65,9 @@ const EventDetail = () => {
                 </select>
               </tr>
               <tr>
-                <td>Ticket #2</td>
-                <td>$ {event.lowestPrice}</td>
-                <td>1.500</td>
+                <td>{event.stock && event.stock.cat2name}</td>
+                <td>$ {event.stock && event.stock.cat2price}</td>
+                <td>{event.stock && event.stock.cat2stock}</td>
                 <select>
                   <option value="value1">1</option>
                   <option value="value2">2</option>
@@ -74,9 +75,9 @@ const EventDetail = () => {
                 </select>
               </tr>
                 <tr>
-                <td>Ticket #3</td>
-                <td>$ {event.lowestPrice}</td>
-                <td>500</td>
+                <td>{event.stock && event.stock.cat3name}</td>
+                <td>$ {event.stock && event.stock.cat3price}</td>
+                <td>{event.stock && event.stock.cat3stock}</td>
                 <select>
                   <option value="value1">1</option>
                   <option value="value2">2</option>

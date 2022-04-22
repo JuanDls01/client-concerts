@@ -8,8 +8,6 @@ import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
 
-
-
 const EventForm = () => {
   //useRoleProtected('vendedor');
   const dispatch = useDispatch();

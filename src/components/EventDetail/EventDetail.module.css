@@ -236,15 +236,23 @@ table{
   /* align-items: center; */
   text-align: left;
   color: #ffffff;
+  margin-bottom: 10%;
 }
 
-th, td {
+th {
+  padding: 15px;
+  width: auto;
+}
+
+td {
   padding: 10px;
+  
 }
 
 .tr1{
   text-align: left;
   border-bottom: 1px solid black;
+  
 }
 
 select {

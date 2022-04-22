@@ -182,10 +182,10 @@ export const CreateStage = ({ closeStageModal }) => {
       <FormBttn
         firstValue={input.name}
         inputErros={errors}
-        text={'Create!'}
+        text={'Send'}
       />
       {/* <ExitBttnForm onClose={closeStageModal} /> */}
-      <button type="button" className={style.button} onClick={closeStageModal}>Close</button>
+      <button type="button" className={style.button} onClick={closeStageModal}>Cancel</button>
     </form>
     </div>
     </div>, 
