@@ -107,17 +107,13 @@
     width: 120px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
     position: absolute;
     background-color: #FFFFFF;
     margin-top: 10px;
-    border-radius: 2px;
-}
-
-.dropdownMenu a {
-    text-decoration: none;
-    align-items: center;
+    border-radius: 4px;
+    padding: 8px;
 }
 
 .menuUser {
@@ -132,4 +128,19 @@
     font-size: 1.05rem;
     font-family: Poppins;
     cursor: pointer;
+}
+
+.menuUser p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.menuItem {
+    text-align: start;
+    text-decoration: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
 }
