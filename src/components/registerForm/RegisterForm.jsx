@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from '../../redux/actions';
 import ReactDOM from "react-dom";
-import sendEmailRegister from '../../redux/actions/sendEmailRegister';
+
 
 // Common Components:
 import FormBttn from '../Common/FormBttn/FormBttn';
@@ -15,7 +15,7 @@ import logo from '../../assets/images/logotipo.png';
 
 const RegisterForm = ({closeRegisterModal}) => {
     const dispatch = useDispatch();
-    const { registerUser, clearAuthError } = actionsCreator;
+    const { registerUser, clearAuthError ,sendEmailRegister} = actionsCreator;
     const navigate = useNavigate();
 
     //componentWillUnmount
@@ -70,13 +70,16 @@ const RegisterForm = ({closeRegisterModal}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        // console.log(input);
-        dispatch(registerUser(input));
+
         var dataMail={
             name:input.firstName,
             email:input.email
         }
+        // console.log(dataMail)
         dispatch(sendEmailRegister(dataMail))
+        // console.log(input);
+        dispatch(registerUser(input));
+        
         if(!autherr) navigate('/register/success');
         
     }
