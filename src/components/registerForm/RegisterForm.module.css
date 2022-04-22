@@ -23,6 +23,17 @@
     border-radius: 6px;
 }
 
+.authError {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* height: 35px; */
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #F5167E;
+    font-family: 'Roboto';
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
     .pageContainner {
