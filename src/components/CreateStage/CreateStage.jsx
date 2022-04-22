@@ -94,6 +94,12 @@ export const CreateStage = ({ closeStageModal }) => {
       description: "",
     })
   }
+  
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeStageModal()
+    }
+  })
 
   // const nextFocus = (inputF, inputS) => {
   //   document.getElementById(inputF).addEventListener('keydown', (event) => {
@@ -106,18 +112,18 @@ export const CreateStage = ({ closeStageModal }) => {
   // }
 
   return ReactDOM.createPortal (
+    <div className={style.overlay}>
     <div className={style.container}>
-    <ExitBttnForm onClose={closeStageModal} />
     <p className={style.title}>Add a new Stage</p>
-    {/* <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={handleSubmit}>
       <InputText 
-        type='text'
-        name='name'
-        placeholder='Name...'
-        inputState={input}
+        name='name' 
+        type='text' 
+        placeholder='Name...' 
         handleChange={handleChange} 
         errors={errors} 
         inputNext='capacity' 
+        inputState={input} 
       />
       <InputText 
         type='number'
@@ -154,25 +160,6 @@ export const CreateStage = ({ closeStageModal }) => {
         handleChange={handleChange} 
         errors={errors} 
         inputNext='des' 
-      /> */}
-    <form onSubmit={handleSubmit}>
-      <InputText 
-        name='name' 
-        type='text' 
-        placeholder='Name...' 
-        handleChange={handleChange} 
-        errors={errors} 
-        inputNext='capacity' 
-        inputState={input} 
-      />
-      <InputText 
-        name='capacity' 
-        type='number' 
-        placeholder='Capacity...' 
-        handleChange={handleChange} 
-        errors={errors} 
-        inputNext='address' 
-        inputState={input} 
       />
       {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
           {errors.name && <p className={style.error}>{errors.name}</p>}
@@ -183,9 +170,8 @@ export const CreateStage = ({ closeStageModal }) => {
       <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
           {errors.lat && <p className={style.error}>{errors.lat}</p>}
       <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
-          {errors.lon && <p className={style.error}>{errors.lon}</p>}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p> */}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="inputDescription"/></p> */}
+          {errors.lon && <p className={style.error}>{errors.lon}</p>} */}
+      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
       {/* <button
         className={style.button}
         type="submit"
@@ -200,9 +186,8 @@ export const CreateStage = ({ closeStageModal }) => {
       />
       {/* <ExitBttnForm onClose={closeStageModal} /> */}
       <button type="button" className={style.button} onClick={closeStageModal}>Close</button>
-      
-      {/* <button type="button" className={style.button} onClick={onClose}>Close</button> */}
     </form>
+    </div>
     </div>, 
     document.getElementById('portal'))
 }

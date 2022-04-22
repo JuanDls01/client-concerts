@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
 import axios from "axios";

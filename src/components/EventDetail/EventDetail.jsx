@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import style from "./EventDetail.module.css";
@@ -13,7 +13,7 @@ const getShortMonthName = (date) => {
 }
 
 const EventDetail = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -27,45 +27,73 @@ const EventDetail = () => {
   }, [dispatch, id,cleanEventDetail,getEventDetail]);
 
   const event = useSelector((state) => state.details);
-  console.log(event)
-  // const monthNumber = Number(event.date.split('-')[1]);
-  // const monthName = getMonthName(monthNumber);
 
+  // const dec = () => {
+  //   if (count > 0) {
+  //     setCount(count - 1);
+  //   }
+  // };
 
-  const dec = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
-  };
-
-  const inc = () => {
-    setCount(count + 1);
-  };
+  // const inc = () => {
+  //   setCount(count + 1);
+  // };
 
   return (
     <>
-      {event ? (
+      { event ? (
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
             <div className={style.buttonsContainer}>
-              <Link to="/">
-                <button className={style.button_close}>Close</button>
-              </Link>
-              <label className={style.ticket}>Tickets</label>
-              <div className={style.ticketsButtons}>
-                <button className={style.ticketButton} onClick={() => dec()}>
-                  -
-                </button>
-                <p className={style.ticketCount}>{count}</p>
-                <button className={style.ticketButton} onClick={() => inc()}>
-                  +
-                </button>
-              </div>
+            
+              <table>
+              <tr className={style.tr1}>
+                <th>Ticket</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Cantidad</th>
+              </tr>
+              <tr>
+                <td>Ticket #1</td>
+                <td>$ {event.lowestPrice}</td>
+                <td>2.000</td>
+                <select>
+                  <option value="value1">1</option>
+                  <option value="value2">2</option>
+                  <option value="value3">3</option>
+                </select>
+              </tr>
+              <tr>
+                <td>Ticket #2</td>
+                <td>$ {event.lowestPrice}</td>
+                <td>1.500</td>
+                <select>
+                  <option value="value1">1</option>
+                  <option value="value2">2</option>
+                  <option value="value3">3</option>
+                </select>
+              </tr>
+                <tr>
+                <td>Ticket #3</td>
+                <td>$ {event.lowestPrice}</td>
+                <td>500</td>
+                <select>
+                  <option value="value1">1</option>
+                  <option value="value2">2</option>
+                  <option value="value3">3</option>
+                </select>
+              </tr>
+            </table>
+           
               <div className={style.cartButtons}>
-                <button className={style.cartButton}>Shopping Cart</button>
-                <button className={style.cartButton}>Buy Now</button>
+                <Link to="/buy">
+                  <button className={style.cartButton}>Buy Now!</button>
+                </Link>
+                <Link to="/">
+                  <button className={style.button_close}>Close</button>
+                </Link>
               </div>
+
             </div>
           </div>
           <div className={style.eventBody}>
@@ -110,23 +138,16 @@ const EventDetail = () => {
 
 export default EventDetail;
 
-/*<div>
-            
-            
-            
-            
-            
-            <p className={`${style.location} ${style.direction}`}>
-              
-            </p>
-          </div>
-          <div>
-            
-         
-            
-            
-            
-            <br />
-            <br />
-            
-          </div>*/
+  //  {/* <Link to="/">
+  //               <button className={style.button_close}>Close</button>
+  //             </Link> */}
+  //             {/* <label className={style.ticket}>Tickets</label>
+  //             <div className={style.ticketsButtons}>
+  //               <button className={style.ticketButton} onClick={() => dec()}>
+  //                 -
+  //               </button>
+  //               <p className={style.ticketCount}>{count}</p>
+  //               <button className={style.ticketButton} onClick={() => inc()}>
+  //                 +
+  //               </button>
+  //             </div> */}
