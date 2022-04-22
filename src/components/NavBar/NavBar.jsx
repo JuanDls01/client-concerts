@@ -20,6 +20,14 @@ const NavBar = () => {
     const { logout } = actionsCreator;
     const [ cookies, setCookie, removeCookie ] = useCookies(['token']);
 
+    // Username Drowdown Menu:
+    const [menuUser, setMenuUser] = useState(false);
+    const openMenuUser = () => { setMenuUser(!menuUser) };
+
+    // Favorite Dropdown Menu:
+    const [menuFav, setMenuFav] = useState(false);
+    const openMenuFav = () => { setMenuFav(!menuFav) };
+
     // Login show Modal:
     const [loginModal, setLoginModal] = useState(false);
     const openLoginModal = () => { setLoginModal(true) };
@@ -49,12 +57,17 @@ const NavBar = () => {
                         { 
                             token === ''? 
                             <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>:
-                            <li>
-                                <a href="/#"><AiOutlineUser/>Username</a>
-                                <ul>
-                                    <li><a href='/#'>My Profile</a></li>
-                                    <li><span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span></li>
-                                </ul>
+                            <li >
+                                <a href="/#" onClick={openMenuUser} className={s.link}><AiOutlineUser/>Username</a>
+                                {
+                                    menuUser? 
+                                    <div className={s.menuUser}>
+                                        <a href='/#'>My Profile</a>
+                                        <span className={s.link + ' ' + s.fakeLink} onClick={logoutHandler}>Logout</span>
+                                        <a href='/#'>Favorites</a>
+                                    </div>:
+                                    null
+                                }
                             </li>
                         }
                         { 
@@ -65,13 +78,7 @@ const NavBar = () => {
                         { 
                             token === ''?
                             <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>: 
-                            <li>
-                                <a href='/#'><AiFillHeart/>Favorites</a>
-                                <ul>
-                                    <li><a href='/#'>Favorite1</a></li>
-                                    <li><a href='/#'>Favorite2</a></li>
-                                </ul>
-                            </li>
+                            null
                         }
 
                         {

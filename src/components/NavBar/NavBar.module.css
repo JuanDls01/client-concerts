@@ -15,7 +15,7 @@
 .navegacionUser {
     display: flex;
     justify-content: space-between;
-    height: 200px;
+    height: 250px;
     background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
     background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
 }
@@ -82,4 +82,14 @@
 .button:hover{
     background: #5522CC 63.58%;
     color: white;
+}
+
+.menuUser {
+    z-index: 1000;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #FFFFFF;
+    margin-top: 10px;
 }

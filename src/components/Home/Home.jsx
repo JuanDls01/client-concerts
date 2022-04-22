@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 
 //Componentes
 import Hero from '../Hero/Hero';
@@ -12,15 +14,22 @@ import SearchBars from '../SearchBars/SearchBars';
 import s from "./Home.module.css"
 
 export default function Home(){
+    const token = useSelector((state) => state.token);
 
     return (
        
         <div className={s.homeContainner}>
-            <div className={s.imgBackground}></div>
-            <div className={s.landingPage}>
+            {
+                token === ''?
+                <div>
+                    <div className={s.imgBackground}></div>
+                    <div className={s.landingPage}>
+                        
+                        <Hero/>
+                    </div>
+                </div>:
                 <NavBar/>
-                <Hero/>
-            </div>
+            }
             <SearchBars />
             <Filter />
             <EventsCards />
