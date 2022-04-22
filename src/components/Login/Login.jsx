@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { BiArrowBack } from 'react-icons/bi';
 
 // Common Components:
 import FormBttn from "../Common/FormBttn/FormBttn";
@@ -26,7 +27,7 @@ const validator = (input) => {
     return errors;
 }
 
-const Login = ({closeLoginModal, openRegisterModal}) => {
+const Login = () => {
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
@@ -48,7 +49,7 @@ const Login = ({closeLoginModal, openRegisterModal}) => {
         if(token !== '') {
             setCookie('token', token, { path: '/' });
             navigate('/');
-            closeLoginModal()
+            // closeLoginModal()
         }
     }, [token,setCookie,navigate]);
 
@@ -79,54 +80,65 @@ const Login = ({closeLoginModal, openRegisterModal}) => {
         // }
     }
 
-    const onClickRegister = () => {
-        closeLoginModal();
-        openRegisterModal();
-    }
+    // Para cuando ande Modal
+    // const onClickRegister = () => {
+    //     closeLoginModal();
+    //     openRegisterModal();
+    // }
 
-    return ReactDOM.createPortal(
-        <div className={style.formContainner}>
-            <ExitBttnForm onClose={closeLoginModal} />
-            <h1 className={style.titleForm}>Hello! Enter your email and password, or Login via Facebook or Google. </h1>
-            <form className={style.formContent} onSubmit={handleSubmit}>
-                {/* Email */}
-                <InputText 
-                    name='email' 
-                    type='email' 
-                    placeholder='Email' 
-                    handleChange={handleChange} 
-                    errors={errors} 
-                    inputNext='password' 
-                    inputState={input} 
-                />
-                {/* Password */}
-                <InputText 
-                    name='password' 
-                    type='password' 
-                    placeholder='Password' 
-                    handleChange={handleChange} 
-                    errors={errors} 
-                    inputNext='email' 
-                    inputState={input} 
-                />
-                {autherr ? <div className={style.authError}>{autherr}</div> : null}
-                {/* Submit */}
-                <FormBttn 
-                    firstValue={input.email}
-                    inputErros={errors}
-                    text={'Log In'}
-                />
-                <button onClick={onClickRegister} className={style.registerBttn}>Register</button>
+    return (
+        <div className={style.pageContainner}>
+            <nav className={style.navegacion}>
+                <div className={style.logoContainner}>
+                    <img src={logo} className={style.logo} alt={logo}/>
+                </div>
+            </nav>
+            <div className={style.formContainner}>
+                <div className={style.bttnContainner}>
+                    <Link to='/' className={style.backBttn}><BiArrowBack /></Link>
+                </div>
+                {/* <ExitBttnForm onClose={navigate} path={'/'} /> */}
+                <h1 className={style.titleForm}>Hello! Enter your email and password</h1>
+                <form className={style.formContent} onSubmit={handleSubmit}>
+                    {/* Email */}
+                    <InputText 
+                        name='email' 
+                        type='email' 
+                        placeholder='Email' 
+                        handleChange={handleChange} 
+                        errors={errors} 
+                        inputNext='password' 
+                        inputState={input} 
+                    />
+                    {/* Password */}
+                    <InputText 
+                        name='password' 
+                        type='password' 
+                        placeholder='Password' 
+                        handleChange={handleChange} 
+                        errors={errors} 
+                        inputNext='email' 
+                        inputState={input} 
+                    />
+                    {autherr ? <div className={style.authError}>{autherr}</div> : null}
+                    {/* Submit */}
+                    <FormBttn 
+                        firstValue={input.email}
+                        inputErros={errors}
+                        text={'Log In'}
+                    />
+                    <Link to='/register' className={style.registerBttn}>Register</Link>
+                    {/* Para cuando ande Modal: */}
+                    {/* <button onClick={onClickRegister} className={style.registerBttn}>Register</button> */}
 
-                {/* <div className={style.register}>
-                    
-                </div> */}
-            </form>
-            
+                    {/* <div className={style.register}>
+                        
+                    </div> */}
+                </form>
+            </div>
         </div>
-    // </div>
-    ,
-    document.getElementById('portal'))
+    // document.getElementById('portal')
+    )
 }
 
 export default Login;
