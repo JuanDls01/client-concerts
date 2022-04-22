@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { Route, Routes, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useCookies } from "react-cookie";
-
-
-
 import Home from "./components/Home/Home";
 import NoMatch from "./components/NoMatch/NoMatch";
 import RegisterForm from "./components/registerForm/RegisterForm";
@@ -15,8 +12,8 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
+import OrderForm from "./components/OrderForm/OrderForm";
 import "./App.css";
-
 
 import actionsCreator from "./redux/actions";
 
@@ -55,6 +52,7 @@ function App() {
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
+        <Route path="/order" element={<OrderForm />} />
       </Routes>
     </div>
   );
