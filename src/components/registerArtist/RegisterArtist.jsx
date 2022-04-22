@@ -82,11 +82,18 @@ const ArtistForm = ({onClose}) => {
         document.getElementById('seleccion').value=""
     }
 
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          onClose()
+        }
+      })
+
     return ReactDOM.createPortal(
     //   <div className={s.container}>
     //     <div className={s.header}>
     //       <img src={logo} className={s.imagen} alt={logo} />
     //     </div>
+        <div className={s.overlay} >
         <div className={s.container}>
           <p className={s.title}>Artist Registration Form</p>
           <form onSubmit={onSubmit}>
@@ -94,7 +101,7 @@ const ArtistForm = ({onClose}) => {
             {/* Name*/}
             <p>
               {/* <label name="name">Artist Name</label> */}
-              <input type="text" className={s.input} name="name" id="name" value={input.name} onChange={inputChange} placeholder="Artist Name"/>
+              <input type="text" className={s.input} name="name" id="name" value={input.name} onChange={inputChange} placeholder="Artist Name..."/>
               {inputErrores.name ? <div className={s.error}>
                   {inputErrores.name}</div> : null}
             </p>
@@ -102,7 +109,7 @@ const ArtistForm = ({onClose}) => {
             {/* Description*/}
             <p>
               {/* <label name="description">Artist description</label> */}
-              <input type="text" className={s.input} name="description" value={input.description} onChange={inputChange} placeholder="Artist Description"/>{inputErrores.description?<div className={s.error}>{inputErrores.description}</div>:null}
+              <input type="text" className={s.input} name="description" value={input.description} onChange={inputChange} placeholder="Artist Description..."/>{inputErrores.description?<div className={s.error}>{inputErrores.description}</div>:null}
             </p>
 
             {/* Genero*/}
@@ -124,7 +131,8 @@ const ArtistForm = ({onClose}) => {
               <button className={s.button2} onClick={onClose}>Cancel </button>
             
           </form>
-        </div>,       
+        </div>
+        </div>,   
     document.getElementById('portal'));
 }
 

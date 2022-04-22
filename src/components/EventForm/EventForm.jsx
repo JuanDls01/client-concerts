@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
 import axios from "axios";
@@ -7,8 +7,6 @@ import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
-
-
 
 const EventForm = () => {
   //useRoleProtected('vendedor');

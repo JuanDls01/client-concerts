@@ -6,6 +6,9 @@ const FormBttn = ({inputErros, firstValue, text}) => {
     // queremos mostrar dentro del bttn. Valida el bttn si no hay errores y si el primer valor no 
     // es un string vacio, sino permanece deshabilitado
 
+    console.log('inputErros', inputErros)
+    console.log('firstvalue', firstValue)
+
     const [disable, setDisable] = useState(true);
 
     useEffect(() => {
@@ -18,7 +21,7 @@ const FormBttn = ({inputErros, firstValue, text}) => {
         <button
             type="submit"
             disabled = {disable}
-            className={disable? style.bttndisabled: style.bttnsubmit}
+            className={disable ? style.bttndisabled : style.bttnsubmit}
         >{text}</button>
     )
 }

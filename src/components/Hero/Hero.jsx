@@ -11,10 +11,10 @@ export default function Hero(){
     const [modal, setModal] = useState(false);
     const [modal2, setModal2] = useState(false);
     
-    const openModal = () => {
+    const openStageModal = () => {
         setModal(true);
     }
-    const closeModal = () => {
+    const closeStageModal = () => {
         setModal(false);
     }
     const openModal2 = () => {
@@ -35,10 +35,10 @@ export default function Hero(){
             <p className={s.parrafo}>Find the best events, artists, concerts, plays and more. Plus everything from the comfort of your home. Search them by place, date, artist or genre </p>
             <div className={s.bttns}>
                 <button 
-                    onClick={openModal} className={s.btn1}>
+                    onClick={openStageModal} className={s.btn1}>
                     Create Stage
                 </button>
-                {modal && <CreateStage onClose={closeModal}/>}
+                {modal && <CreateStage closeStageModal={closeStageModal}/>}
                 <button  onClick={openModal2} className={s.btn2}>Create Artist</button>
                 {modal2 && <ArtistForm onClose={closeModal2}/>}
             </div>
