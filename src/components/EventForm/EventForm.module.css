@@ -1,0 +1,74 @@
+.logoContainner {
+  width: 100%;
+  height: 11.375rem;
+  background: -o-linear-gradient(331.02deg, #ed4690 -2.11%, #5522cc 63.58%);
+  background: linear-gradient(118.98deg, #ed4690 -2.11%, #5522cc 63.58%);
+  display: flex;
+}
+
+.logo {
+  width: 200px;
+  height: 150px;
+  margin-left: 20px;
+}
+
+.formContainer {
+  width: 60em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  background: #ffffff;
+  box-shadow: 0px 4px 47.38px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  position: relative;
+  top: -5em;
+}
+
+.pageContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleForm {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 150%;
+  /* or 36px */
+  color: #242565;
+  width: 75%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.formContent {
+  width: 80%;
+}
+
+.formHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2em;
+  row-gap: 2em;
+  margin-bottom: 1em;
+}
+
+.imgPreview {
+  width: 30em;
+}
+
+.stocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.stockItem {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}

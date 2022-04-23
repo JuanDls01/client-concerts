@@ -1,0 +1,155 @@
+.contenedor {
+    width: 100%;
+    height: 270px;
+    background: #0A075F;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.contenido {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px; */
+    border-bottom: 1px solid gray;
+}
+
+.title {
+    font-family: Poppins;
+    height: 29px;
+    color: white;
+    font-weight: 400;
+    font-size: 28.5px;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.parrafo {
+    font-family: Poppins;
+    text-align: start;
+    /* width: 409px; */
+    color: white;
+    font-size: 15px;
+    margin: 5px 20px;
+}
+
+.redes {
+    /* text-align: left; */
+    left: 78px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.githubs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    pointer-events: all;
+    width: 500px;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    pointer-events: all;
+    
+}
+
+.github {
+    display: flex;
+    margin: 15px;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white
+}
+
+.infoPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    align-items: center;
+}
+
+.infoContact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    align-items: center;
+}
+
+.titleInfo {
+    /* width: 187.6px;
+    height: 17.77px;
+    bottom: 210px; */
+    margin: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 23px;
+}
+
+.listaInfo {
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.listaInfo ul {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.iconoTwitter {
+    width: 50px;
+    height: 50px;
+    margin: 0 8px;
+    padding: 0;
+    color: #55ACEE;
+
+}
+
+.iconoLinkedin {
+    width: 50px;
+    height: 50px;
+    margin: 0 8px;
+    padding: 0px;
+    color: #007AB9;
+}
+
+.iconoFacebook {
+    width: 42px;
+    height: 42px;
+    margin: 5px 8px;
+    padding: 0;
+    color: #3B5998;
+    background-color: aliceblue;
+    border-radius: 100%;
+}
+
+li {
+    display: block;
+}
+
+.icon{
+    width:40px;
+    height:40px
+}

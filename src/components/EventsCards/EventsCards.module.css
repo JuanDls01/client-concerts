@@ -1,0 +1,22 @@
+.EventsPaginatedContainner {
+    width: 100%;
+    /* height: 950px; */
+    margin: 0px;
+    padding:0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EventsCardsContainner {
+    width: 1500px;
+    /* height: 700px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;    
+}
+
+.paginatedContainner {
+    width: 100%;
+}

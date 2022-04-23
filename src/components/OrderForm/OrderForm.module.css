@@ -1,0 +1,15 @@
+.infoHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    width: fit-content;
+    margin: auto;
+}
+
+.infoBody{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    width: fit-content;
+    margin: auto;
+}

@@ -1,0 +1,58 @@
+{
+    "events" : [
+    {
+        "id": 123456789,
+        "name": "Justin Bieber en el Luna Park",
+        "description": "Artista de pop muy popular en adolescentes",
+        "imgEvent": "https://elcomercio.pe/resizer/G93syvTejIPD9OQ_ssUkYpKpyyo=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/SB6BBMXOKVHQLK2HT6KMVRRAP4.jpg",
+        "date": "01/01/2022",
+        "time": "22:00",
+        "artist": {
+            "id": 1234,
+            "name": "Justin Bieber",
+            "genre": {
+                "id": 4321,
+                "name": "Pop"
+            },
+            "description": "Artista de pop muy popular en adolescentes"
+        },
+        "stage": {
+            "id": 9876,
+            "name": "Luna Park",
+            "capacity": 1000,
+            "location": "Buenos Aires",
+            "address": "A la vuelta de la esquina",
+            "lat": "fds",
+            "lon": "fds",
+            "description": "fjdsklfjsdlk"
+        }
+    },
+    {
+        "id": 123456790,
+        "name": "Metallica en Argentina 2022",
+        "description": "Banda legendaria de Heavy Metal",
+        "imgEvent": "https://www.lavoz.com.ar/resizer/S5MlI0DV1qYSJYEm_20k1FDCgUs=/1023x1023/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/36F2JHAQKNFFPA7VZKUPRFJTWI.jpg",
+        "date": "30/04/2022",
+        "time": "22:00",
+        "artist": {
+            "id": 12345,
+            "name": "Metallica",
+            "genre": {
+                "id": 43210,
+                "name": "Heavy Metal"
+            },
+            "description": "Banda legendaria de Heavy Metal"
+        },
+        "stage": {
+            "id": 98767,
+            "name": "Campo Argentino de Polo",
+            "capacity": 50000,
+            "location": "Buenos Aires",
+            "address": "A la vuelta de la esquina",
+            "lat": "fds",
+            "lon": "fds",
+            "description": "fjdsklfjsdlk"
+        }
+    }
+    ]
+}

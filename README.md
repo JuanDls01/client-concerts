@@ -1,14 +1,38 @@
 # CLIENT-CONCERTS
 
-## Comenzando
-
- 1. Forkear el repositorio para tener una copia del mismo en sus cuentas
- 2. Clonar el repositorio en sus computadoras para comenzar a trabajar
+## Comienzo rapido
  
  ```bash
  npm install
- npm install redux-thunk react-router-dom react-redux redux axios redux-devtools-extension
  npm start
  ```
 
-__OBSERVACIÓN:__ Antes de hacer el primer commit les va a pedir que se identifiquen, o capaz a mi nomás por estar desde otra compu. 
+ ## Protecion de Rutas
+ Para proteger las rutas, se debe implementar el custom hook 'useRoleProtected' en el componente usado como elemento de la ruta.
+
+  ```js
+    const App = () {
+        return (
+            <div className="App">
+            <Routes>
+                {/* RUTA PUBLICA */}
+                <Route index element={<Home />} />
+                {/* RUTA SOLO ADMIN */}
+                <Route path="/adminDashboard"  element={<MyProtectedComponent/>} />
+            </Routes>
+            </div>
+        );
+        }
+```
+ 
+ ```js
+    import { useRoleProtected } from '../../hooks/useRoleProtected';
+
+    const MyProtectedComponent = () => {
+        useRoleProtected('admin');
+        return <div>MyComponent</div>;
+    }
+```
+
+
+Para el correcto funcionamiento de esta página, se deberá utilizar la api del siguiente repositorio: https://github.com/Vegajor1112/api-concerts
