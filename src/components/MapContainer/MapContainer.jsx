@@ -6,9 +6,9 @@ const MapContainer = (props) => {
     <Map
       google={props.google}
       containerStyle={{
-        width: "50em",
-        height: "30em",
-        position: "relative",
+        marginLeft: "15%",
+        maxWidth: "30%",
+        maxHeight: "30%",
       }}
       initialCenter={{ lat: Number(props.lat), lng: Number(props.lon) }}
       zoom={10}
