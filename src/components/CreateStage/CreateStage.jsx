@@ -6,8 +6,8 @@ import actionsCreator from '../../redux/actions';
 import style from './CreateStage.module.css';
 import Swal from 'sweetalert2';
 import FormBttn from '../Common/FormBttn/FormBttn';
+import ExitBttnForm from '../Common/FormBttn/FormBttn'
 import InputText from '../Common/InputText/InputText';
-import ExitBttnForm from '../Common/ExitBttnForm/ExitBttnForm';
 
 const { postStage } = actionsCreator;
 
@@ -50,7 +50,7 @@ const validateInput = (input) => {
   return errors;
 }
 
-export const CreateStage = ({ onClose }) => {
+export const CreateStage = ({ closeStageModal }) => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -94,20 +94,26 @@ export const CreateStage = ({ onClose }) => {
       description: "",
     })
   }
+  
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeStageModal()
+    }
+  })
 
-  const nextFocus = (inputF, inputS) => {
-    document.getElementById(inputF).addEventListener('keydown', (event) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        document.getElementById(inputS).focus();
-        event.preventDefault();
-      }
-    })
-  }
+  // const nextFocus = (inputF, inputS) => {
+  //   document.getElementById(inputF).addEventListener('keydown', (event) => {
+  //     if (event.key === "Enter") {
+  //       event.preventDefault();
+  //       document.getElementById(inputS).focus();
+  //       event.preventDefault();
+  //     }
+  //   })
+  // }
 
   return ReactDOM.createPortal (
+    <div className={style.overlay}>
     <div className={style.container}>
-    <ExitBttnForm onClose={onClose} />
     <p className={style.title}>Add a new Stage</p>
     <form onSubmit={handleSubmit}>
       <InputText 
@@ -119,7 +125,42 @@ export const CreateStage = ({ onClose }) => {
         inputNext='capacity' 
         inputState={input} 
       />
-      <InputText name='capacity' type='number' placeholder='Capacity...' handleChange={handleChange} errors={errors} inputNext='address' inputState={input} />
+      <InputText 
+        type='number'
+        name='capacity' 
+        placeholder='Capacity...'
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='address' 
+      />
+      <InputText 
+        type='text'
+        name='address' 
+        placeholder='Address...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='lat' 
+      />
+      <InputText 
+        type='text'
+        name='lat' 
+        placeholder='Latitud...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='lon' 
+      />
+      <InputText 
+        type='text'
+        name='lon' 
+        placeholder='Longitud...' 
+        inputState={input}
+        handleChange={handleChange} 
+        errors={errors} 
+        inputNext='des' 
+      />
       {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
           {errors.name && <p className={style.error}>{errors.name}</p>}
       <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
@@ -129,8 +170,8 @@ export const CreateStage = ({ onClose }) => {
       <p><input placeholder='Coordinates(Lat)...' className={style.input}type="text" value={input.lat} name="lat" onChange={handleChange} id="inputLat" onKeyDown={() => nextFocus('inputLat', 'inputLon')}/></p>
           {errors.lat && <p className={style.error}>{errors.lat}</p>}
       <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
-          {errors.lon && <p className={style.error}>{errors.lon}</p>}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="inputDescription"/></p> */}
+          {errors.lon && <p className={style.error}>{errors.lon}</p>} */}
+      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
       {/* <button
         className={style.button}
         type="submit"
@@ -141,11 +182,12 @@ export const CreateStage = ({ onClose }) => {
       <FormBttn
         firstValue={input.name}
         inputErros={errors}
-        text={'Create!'}
+        text={'Send'}
       />
-      
-      {/* <button type="button" className={style.button} onClick={onClose}>Close</button> */}
+      {/* <ExitBttnForm onClose={closeStageModal} /> */}
+      <button type="button" className={style.button} onClick={closeStageModal}>Cancel</button>
     </form>
+    </div>
     </div>, 
     document.getElementById('portal'))
 }

@@ -16,7 +16,7 @@
 
 .container {
     padding: 3%;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -44,7 +44,7 @@
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 6px;
-    margin: 2%;
+    margin: 2% 0 ; 
     padding: 2%;
     font-family: 'Roboto';
     font-style: normal;
@@ -85,10 +85,20 @@
     width: 100%;
 }
 
-.error {
+/* .error {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 14px;
     color: #F5167E;
-}
+} */
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: 2; */
+    background-color: rgba(0, 0, 0, .6)
+  }
