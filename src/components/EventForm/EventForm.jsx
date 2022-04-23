@@ -8,6 +8,7 @@ import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
+import { CreateStage } from "../CreateStage/CreateStage";
 
 const EventForm = () => {
   //useRoleProtected('vendedor');
@@ -151,7 +152,10 @@ const EventForm = () => {
             {/*STAGE CREATION*/}
             <div>
               <span>Not in the list?</span>
-              <button type="button">Create Stage</button>
+              <button type="button" onClick={handleStageModal}>
+                Create Stage
+              </button>
+              {stageModal && <CreateStage closeStageModal={handleStageModal} />}
             </div>
 
             {/*EVENT DATE */}
