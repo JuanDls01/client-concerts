@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
 import axios from "axios";
+import RegisterArtist from "../registerArtist/RegisterArtist";
 import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
@@ -19,6 +20,16 @@ const EventForm = () => {
     dispatch(getStages());
     dispatch(getArtists());
   }, [dispatch]);
+
+  const [artistModal, setArtistModal] = useState(false);
+  const [stageModal, setStageModal] = useState(false);
+
+  const handleArtistModal = () => {
+    setArtistModal(!artistModal);
+  };
+  const handleStageModal = () => {
+    setStageModal(!stageModal);
+  };
 
   const [form, setForm] = useState({
     name: "",
@@ -119,7 +130,10 @@ const EventForm = () => {
             {/*ARTIST CREATION*/}
             <div>
               <span>Not in the list?</span>
-              <button type="button">Create Artist</button>
+              <button type="button" onClick={handleArtistModal}>
+                Create Artist
+              </button>
+              {artistModal && <RegisterArtist onClose={handleArtistModal} />}
             </div>
 
             {/*STAGE SELECTION */}
