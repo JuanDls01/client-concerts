@@ -14,12 +14,7 @@ const EventForm = () => {
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    dispatch(getStages());
-    dispatch(getArtists());
-  }, [dispatch]);
-
+  const [capacity, setCapacity] = useState(null);
   const [form, setForm] = useState({
     name: "",
     artistId: null,
@@ -42,6 +37,11 @@ const EventForm = () => {
     },
   });
 
+  useEffect(() => {
+    dispatch(getStages());
+    dispatch(getArtists());
+  }, [dispatch]);
+
   const submit = async () => {
     axios.post("http://localhost:3001/event", form);
   };
@@ -51,6 +51,12 @@ const EventForm = () => {
     const property = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [property]: value });
+    property === "stageId" &&
+      setCapacity(
+        stages.filter((stage) => {
+          return stage.id == value;
+        })[0].capacity
+      );
   };
 
   const handleStockChange = (e) => {
@@ -172,6 +178,7 @@ const EventForm = () => {
 
           {/*EVENT STOCK */}
           <p>You can set up to three tickets categories</p>
+          {capacity && <p>ATTENTION! The selected stage allows {capacity}!</p>}
           <div className={style.stocks}>
             <div className={style.stockItem}>
               <label htmlFor="cat1name">
