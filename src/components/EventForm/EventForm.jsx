@@ -171,13 +171,18 @@ const EventForm = () => {
           </div>
 
           {/*EVENT STOCK */}
+          <p>You can set up to three tickets categories</p>
           <div className={style.stocks}>
-            <p>You can set up to three tickets categories</p>
             <div className={style.stockItem}>
               <label htmlFor="cat1name">
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat1name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat1name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat1price"> Price: (ARS)</label>
               <input
                 type="number"
@@ -193,9 +198,14 @@ const EventForm = () => {
             <div className={style.stockItem}>
               <label htmlFor="cat2name">
                 <BsFillStarFill />
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat2name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat2name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat2price"> Price: (ARS)</label>
               <input
                 type="number"
@@ -212,9 +222,14 @@ const EventForm = () => {
               <label htmlFor="cat3name">
                 <BsFillStarFill />
                 <BsFillStarFill />
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat3name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat3name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat3price"> Price: (ARS)</label>
               <input
                 type="number"
