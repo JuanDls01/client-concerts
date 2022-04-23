@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import getArtists from "../../redux/actions/getArtists";
 import getStages from "../../redux/actions/getStages";
 import axios from "axios";
+import RegisterArtist from "../registerArtist/RegisterArtist";
 import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
+import { CreateStage } from "../CreateStage/CreateStage";
 
 const EventForm = () => {
   //useRoleProtected('vendedor');
@@ -14,7 +16,26 @@ const EventForm = () => {
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
+
+
+  useEffect(() => {
+    dispatch(getStages());
+    dispatch(getArtists());
+  }, [dispatch]);
+
+  const [artistModal, setArtistModal] = useState(false);
+  const [stageModal, setStageModal] = useState(false);
+
+  const handleArtistModal = () => {
+    setArtistModal(!artistModal);
+  };
+  const handleStageModal = () => {
+    setStageModal(!stageModal);
+  };
+
+
   const [capacity, setCapacity] = useState(null);
+
   const [form, setForm] = useState({
     name: "",
     artistId: null,
@@ -125,7 +146,10 @@ const EventForm = () => {
             {/*ARTIST CREATION*/}
             <div>
               <span>Not in the list?</span>
-              <button type="button">Create Artist</button>
+              <button type="button" onClick={handleArtistModal}>
+                Create Artist
+              </button>
+              {artistModal && <RegisterArtist onClose={handleArtistModal} />}
             </div>
 
             {/*STAGE SELECTION */}
@@ -143,7 +167,10 @@ const EventForm = () => {
             {/*STAGE CREATION*/}
             <div>
               <span>Not in the list?</span>
-              <button type="button">Create Stage</button>
+              <button type="button" onClick={handleStageModal}>
+                Create Stage
+              </button>
+              {stageModal && <CreateStage closeStageModal={handleStageModal} />}
             </div>
 
             {/*EVENT DATE */}
