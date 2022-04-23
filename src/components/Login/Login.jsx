@@ -117,6 +117,7 @@ const Login = ({closeLoginModal, openRegisterModal}) => {
                     text={'Log In'}
                 />
                 <button onClick={onClickRegister} className={style.registerBttn}>Register</button>
+                <Link to="recoverPassword"  className={style.forget}><p >Did you forget your password?</p></Link> 
 
                 {/* <div className={style.register}>
                     

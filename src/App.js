@@ -15,6 +15,7 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
+import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword"
 import "./App.css";
 
 
@@ -43,6 +44,7 @@ function App() {
       <Routes>
         {/* Invitado: */}
         <Route index element={<Home />} />
+        <Route path="/recoverPassword" exact element={<ForgetPassword />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />
         <Route path="/login" element={<Login />} />
