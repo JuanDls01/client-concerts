@@ -30,14 +30,14 @@ const NavBar = () => {
     const openMenuFav = () => { setMenuFav(!menuFav) };
 
     // Login show Modal:
-    const [loginModal, setLoginModal] = useState(false);
-    const openLoginModal = () => { setLoginModal(true) };
-    const closeLoginModal = () => { setLoginModal(false) };
+    // const [loginModal, setLoginModal] = useState(false);
+    // const openLoginModal = () => { setLoginModal(true) };
+    // const closeLoginModal = () => { setLoginModal(false) };
 
     // Register show Modal:
-    const [registerModal, setRegisterModal] = useState(false);
-    const openRegisterModal = () => { setRegisterModal(true) };
-    const closeRegisterModal = () => { setRegisterModal(false) };
+    // const [registerModal, setRegisterModal] = useState(false);
+    // const openRegisterModal = () => { setRegisterModal(true) };
+    // const closeRegisterModal = () => { setRegisterModal(false) };
 
     const logoutHandler = () => {
         removeCookie('token');
@@ -51,14 +51,17 @@ const NavBar = () => {
                     // Navbar invitado:
                     <ul>
                         <li><a href="#UpcomingEvents" className={s.link} to="/">Events</a></li>
-                        <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>
+                        <li><Link to='/register' className={s.link}>Register</Link></li>
+                        <li><Link to='/login' className={s.button}>Login</Link></li>
+                        {/* Esto es para cuando podamos hacerlo Modal: */}
+                        {/* <li><button className={s.link} onClick={openRegisterModal}>Register</button></li>
                         <li><button className={s.button} onClick={openLoginModal}>Login</button></li>
                         {
                             registerModal && <RegisterForm closeRegisterModal={closeRegisterModal} />
                         }
                         {
                             loginModal && <Login closeLoginModal={closeLoginModal} openRegisterModal={openRegisterModal} />
-                        }
+                        } */}
                     </ul>:
                     // Navbar cliente:
                     <div className={s.navUser}>
