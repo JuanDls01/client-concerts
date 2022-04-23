@@ -17,6 +17,7 @@ const EventForm = () => {
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
 
+
   useEffect(() => {
     dispatch(getStages());
     dispatch(getArtists());
@@ -31,6 +32,9 @@ const EventForm = () => {
   const handleStageModal = () => {
     setStageModal(!stageModal);
   };
+
+
+  const [capacity, setCapacity] = useState(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -54,6 +58,11 @@ const EventForm = () => {
     },
   });
 
+  useEffect(() => {
+    dispatch(getStages());
+    dispatch(getArtists());
+  }, [dispatch]);
+
   const submit = async () => {
     axios.post("http://localhost:3001/event", form);
   };
@@ -63,6 +72,12 @@ const EventForm = () => {
     const property = e.target.name;
     const value = e.target.value;
     setForm({ ...form, [property]: value });
+    property === "stageId" &&
+      setCapacity(
+        stages.filter((stage) => {
+          return stage.id == value;
+        })[0].capacity
+      );
   };
 
   const handleStockChange = (e) => {
@@ -189,13 +204,19 @@ const EventForm = () => {
           </div>
 
           {/*EVENT STOCK */}
+          <p>You can set up to three tickets categories</p>
+          {capacity && <p>ATTENTION! The selected stage allows {capacity}!</p>}
           <div className={style.stocks}>
-            <p>You can set up to three tickets categories</p>
             <div className={style.stockItem}>
               <label htmlFor="cat1name">
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat1name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat1name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat1price"> Price: (ARS)</label>
               <input
                 type="number"
@@ -211,9 +232,14 @@ const EventForm = () => {
             <div className={style.stockItem}>
               <label htmlFor="cat2name">
                 <BsFillStarFill />
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat2name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat2name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat2price"> Price: (ARS)</label>
               <input
                 type="number"
@@ -230,9 +256,14 @@ const EventForm = () => {
               <label htmlFor="cat3name">
                 <BsFillStarFill />
                 <BsFillStarFill />
-                <BsFillStarFill /> Category name:
+                <BsFillStarFill />
               </label>
-              <input type="text" name="cat3name" onChange={handleStockChange} />
+              <input
+                type="text"
+                name="cat3name"
+                onChange={handleStockChange}
+                placeholder="Category name"
+              />
               <label htmlFor="cat3price"> Price: (ARS)</label>
               <input
                 type="number"
