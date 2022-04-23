@@ -12,7 +12,12 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
+
+import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
+import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
+
 import OrderForm from "./components/OrderForm/OrderForm";
+
 import "./App.css";
 
 import actionsCreator from "./redux/actions";
@@ -22,18 +27,20 @@ function App() {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const authError = useSelector((state) => state.authError);
+  const tokenError = useSelector((state) => state.tokenError);
   const { loginToken, logout } = actionsCreator;
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   useEffect(() => {
-    if (authError) {
-      if (authError.includes("logout")) {
-        removeCookie("token");
-        dispatch(logout);
-      }
-    } else if (cookies.token)
-      dispatch(loginToken({ bodyToken: cookies.token }));
+    if (cookies.token) dispatch(loginToken({ bodyToken: cookies.token }));
   }, []);
+
+  useEffect(() => {
+    if (tokenError) {
+      removeCookie('token', { path: '/' });
+      dispatch(logout());
+    }
+  }, [tokenError]);
 
   return (
     <div className="App">
@@ -46,13 +53,19 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
+        {/* ADMIN */}
+        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         {/* Vendedor: */}
         <Route path="/postartist" element={<ArtistForm />} />
         <Route path="/createEvent" element={<EventForm />} />
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
+
+        <Route path="/user/dashboard" element={<DashboardSeller />} />
+
         <Route path="/order" element={<OrderForm />} />
+
       </Routes>
     </div>
   );

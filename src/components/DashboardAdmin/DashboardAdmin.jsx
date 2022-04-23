@@ -1,5 +1,5 @@
-import React from "react";
-import style from "./DashboardSeller.module.css";
+import React, { useState } from "react";
+import style from "./DashboardAdmin.module.css";
 import logo from "../../assets/images/logotipo.png";
 import CardAnalitics from "./CardAnalitics";
 import imgSubida from "../../assets/images/subida.png"
@@ -7,29 +7,40 @@ import calen from "../../assets/images/calen.png"
 import carrito from "../../assets/images/carrito.png"
 import { useSelector } from "react-redux";
 import useRoleProtected from "../Hooks/useRoleProtected";
+import Tab from "./Tab/Tab";
+import Users from "./Users/Users";
+import { Link } from "react-router-dom";
 
-export default function DashboardSeller() {
-  // useRoleProtected('vendedor');
+export default function DashboardAdmin() {
+  useRoleProtected('super admin');
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+
+  const [tab, setTab] = useState('users');
+
+  const onTabChange = tab => {
+    setTab(tab);
+  }
 
   return (
     <div className={style.conteiner}>
       <div className={style.header}>
-        <img className={style.imgHeader} src={logo} />
+        <Link to='/'>
+          <img className={style.imgHeader} src={logo} />
+        </Link>
         <div className={style.user}>
           {/* <img src={user}/> */}
           {/* ACA IRIA EL NOMBRE DE USUARIO */}
-          <h5><a href="">otro link</a></h5>
-          <h5><a href="">otro link</a></h5>
+          <h5><a href="#" onClick={()=> onTabChange('users')}>Users</a></h5>
+          <h5><a href="#" onClick={()=> onTabChange('roles')}>Roles</a></h5>
           <h5>{user.firstName ? user.firstName : "Usuario no logeado"}</h5> 
         </div>
       </div>
       <div className={style.ContentsubTitle}>
-        <h1 className={style.subtile}>Analytics</h1>
-        
+        <h1 className={style.subtile}>Analytics</h1>  
       </div>
-      {/* {PRIMER CARD} */}
+
+      {/* {ANALITICS} */}
       <div className={style.cardConteiner}>
           {/* ACA EN ANALITICS Y ESTADISTICAS PASARLE EL PARAMETRO */}
         <CardAnalitics
@@ -47,30 +58,9 @@ export default function DashboardSeller() {
         <CardAnalitics title="Tickets Sold" analitics="$1024" img={carrito} />
         <button className={style.btnPublish}>Publish Event</button>
       </div>
-      <div className={style.ContentsubTitle}>
-        <h1 className={style.subtile}>Recent Events</h1>
-      </div>
 
-      {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
-      <div className={style.tabla}>
-        <table>
-          <tr className={style.columns}>
-            <th>Event Name</th>
-            <th>Category</th>
-            <th>Stage</th>
-            <th>Ticket Sells</th>
-            <th>Total Sells</th>
-          </tr>
-          {/* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
-          <tr>
-            <td>Metalica</td>
-            <td>1</td>
-            <td>Luna Park</td>
-            <td>36</td>
-            <td>$3650</td>
-          </tr>
-        </table>
-      </div>
+      {tab === 'users' ? <Users /> : null}
+      {tab === 'roles' ? <Tab title={'Roles'} /> : null}
     </div>
   );
 }
