@@ -61,3 +61,14 @@
 .imgPreview {
   width: 30em;
 }
+
+.stocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.stockItem {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
