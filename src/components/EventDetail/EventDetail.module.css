@@ -2,11 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .mainContainer {
-  /* display: flex; */
-  /* flex-direction: column; */
+  /* display: flex;
+  flex-direction: column; */
   width: 60%;
-
-  padding-top: 1.5em;
+  padding-top: 3em;
+  padding-bottom: 2.5em;
   margin: auto;
   margin-top: 0%;
   background: linear-gradient(
@@ -22,7 +22,7 @@
 
 .aside {
   flex: auto;
-  width: 25%;
+  width: 40%;
   padding: 20px;
   margin-right: 5%;
   box-sizing: border-box;
@@ -41,7 +41,7 @@
   margin: auto;
   align-items: center;
   gap: 3em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
 .map {
@@ -237,7 +237,7 @@ table {
 
 th,
 td {
-  padding: 1em;
+  padding: 0.6em;
 }
 
 .tr1 {
