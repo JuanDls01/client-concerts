@@ -18,7 +18,12 @@ const {
   LOGOUT,
   GET_ARTISTS,
   SEND_EMAIL_RECOVER,
-  SEND_EMAIL_REGISTER
+  SEND_EMAIL_REGISTER,
+  GET_USER,
+  CLEAR_USER,
+  GET_USERS,
+  UPDATE_USER,
+  CLEAR_UPDATE_ERR
 } = actions;
 
 const initialState = {
@@ -31,8 +36,11 @@ const initialState = {
   token: "",
   tokenError: null,
   authError: null,
+  userUpdareErr: null,
   artists: [],
   stages: [],
+  usersList: {},
+  userDetail: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -49,6 +57,33 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         artists: action.payload,
+      };
+    }
+    case GET_USER: {
+      return {
+        ...state,
+        userDetail: action.payload,
+      };
+    }
+    case UPDATE_USER: {
+      return {
+        ...state,
+        userDetail: action.payload.error ? state.userDetail : action.payload,
+        userUpdareErr: action.payload.error ? action.payload.error : 'success',
+
+      };
+    }
+    case CLEAR_USER: {
+      return {
+        ...state,
+        userDetail: {},
+      };
+    }
+
+    case GET_USERS: {
+      return {
+        ...state,
+        usersList: action.payload,
       };
     }
 
@@ -92,6 +127,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         authError: null,
+      };
+    }
+
+    case CLEAR_UPDATE_ERR: {
+      return {
+        ...state,
+        userUpdareErr: null,
       };
     }
 
