@@ -17,6 +17,7 @@ import "./App.css";
 
 import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
 import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
+import ShoppyngHistory from './components/DashboarUsers/DashboardUser'
 
 import OrderForm from "./components/OrderForm/OrderForm";
 
@@ -65,6 +66,7 @@ function App() {
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
 
         <Route path="/user/dashboard" element={<DashboardSeller />} />
+        <Route path="/user/shoppinghistory" element={<ShoppyngHistory />} />
 
         <Route path="/order" element={<OrderForm />} />
 

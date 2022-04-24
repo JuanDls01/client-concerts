@@ -19,6 +19,7 @@
     "react": "^17.0.1",
     "react-cookie": "^4.1.1",
     "react-countdown": "^2.3.2",
+    "react-data-table-component": "^7.5.0",
     "react-datepicker": "^4.7.0",
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
