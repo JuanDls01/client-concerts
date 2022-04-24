@@ -1,15 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-
 .mainContainer {
-  display: flex;
-  flex-direction: column;
-  width: 55vw;
-
-  padding-top: 1.5em;
+  /* display: flex;
+  flex-direction: column; */
+  width: 60%;
+  padding-top: 3em;
+  padding-bottom: 2.5em;
   margin: auto;
-  margin-top: 1%;
+  margin-top: 0%;
   background: linear-gradient(
     54.44deg,
     #1d275f 31.45%,
@@ -21,12 +20,34 @@
   overflow: hidden;
 }
 
-.map {
+.aside {
+  flex: auto;
+  width: 40%;
+  padding: 20px;
+  margin-right: 5%;
+  box-sizing: border-box;
+}
+.image {
+  max-width: 35%;
+  margin-left: 10%;
+  border-radius: 18px;
+  mix-blend-mode: normal;
+  filter: drop-shadow(36px 40px 11px rgba(109, 53, 202, 0.5));
+}
 
-  margin-top: 1.2em;
-  margin-bottom: 1em;
-  flex-direction: row;
-  height: 18em;
+.select {
+  width: 410px;
+  height: 40px;
+  border: 1px solid #242565;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 2%;
+  padding: 2%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .topBody {
@@ -35,16 +56,16 @@
   margin: auto;
   align-items: center;
   gap: 3em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 
-.image {
-  max-width: 40%;
-  margin-left: 10%;
-  border-radius: 18px;
-  mix-blend-mode: normal;
-  filter: drop-shadow(36px 40px 11px rgba(109, 53, 202, 0.5));
+.map {
+  margin-top: 1.2em;
+  margin-bottom: 1em;
+  flex-direction: row;
+  height: 18em;
 }
+
 
 .buttonsContainer {
   display: flex;
@@ -60,8 +81,9 @@
 .cartButtons {
   display: flex;
   max-width: 100%;
-  flex-direction: row;
-  justify-content: space-around;
+  /* flex-direction: row; */
+  justify-content: space-evenly;
+
 }
 
 .button_close {
@@ -74,7 +96,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  font-size: calc(.65rem + .65vw);
+  font-size: calc(0.6rem + 0.6vw);
   align-items: center;
   text-align: center;
   color: #ffffff;
@@ -85,7 +107,7 @@
   box-sizing: border-box;
 }
 
-.ticket {
+/* .ticket {
   width: 66px;
   height: 30px;
 
@@ -108,9 +130,9 @@
   line-height: 100%;
   color: #ffffff;
   line-height: 0em;
-}
+} */
 
-.ticketButton:hover {
+/* .ticketButton:hover {
   border: 1.5px solid #ffffff;
   box-sizing: border-box;
 }
@@ -127,7 +149,7 @@
   font-size: 24px;
   line-height: 150%;
   color: #ffffff;
-}
+} */
 
 .cartButton {
   width: 7em;
@@ -139,7 +161,7 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  font-size: calc(.65rem + .65vw);
+  font-size: calc(0.6rem + 0.6vw);
   align-items: center;
   text-align: center;
   color: #ffffff;
@@ -151,21 +173,18 @@
 }
 
 .eventBody {
-  display: flex;
-  flex-direction: column;
-
+  /* display: flex;
+  flex-direction: column; */
   width: 80%;
   margin: auto;
   text-align: left;
 }
 
 .titulo {
-  height: 59px;
   font-family: "DM Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: calc(1rem + 1.5vw);
-  line-height: 48px;
+  font-size: calc(1rem + 1.4vw);
   color: rgba(255, 255, 255, 1);
 }
 
@@ -184,9 +203,9 @@
   /* flex-direction: column; */
   /* align-items: center; */
   background: #f5167e;
-  border: 13px dashed black;
-  border-radius: 10vmax;
-  /* box-sizing: border-box; */
+  border: 0.7em dashed black;
+  border-radius: 50%;
+  box-sizing: border-box;
 }
 
 .date_1 {
@@ -214,13 +233,13 @@
   font-style: normal;
   font-weight: 400;
   /* font-size: 20px; */
-  font-size: calc(0.60rem + 0.60vw);
+  font-size: calc(0.6rem + 0.6vw);
   line-height: 150%;
   color: #ffffff;
   justify-content: space-around;
 }
 
-table{
+table {
   width: 100%;
   font-family: "Roboto";
   font-style: normal;
@@ -231,18 +250,28 @@ table{
   margin-bottom: 10%;
 }
 
-th, td {
-  padding: 1em;
-  
+th,
+td {
+  padding: 0.6em;
 }
 
-.tr1{
+.tr1 {
   text-align: left;
   border-bottom: 1px solid black;
-  
 }
 
 select {
   width: 3rem;
   text-align: center;
 }
+
+/* @media screen and (max-width: 400px){
+  .mainContainer {
+    display: block;
+    height: 100%;
+  }
+  .aside {
+    width: 80%
+  }
+};
+   */

@@ -1,24 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
+import determinarPrecio from "../../utils/determinarPrecio";
+import savePreference from "../../redux/actions/savePreference";
+import savePreOrder from "../../redux/actions/savePreOrder";
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-const formatPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'USD' });
-const formatNumber = new Intl.NumberFormat('es-AR');
+const numbers = [0, 1, 2, 3, 4, 5];
+
+const formatPrice = new Intl.NumberFormat("es-AR", {
+  style: "currency",
+  currency: "USD",
+});
+const formatNumber = new Intl.NumberFormat("es-AR");
 
 const getShortMonthName = (date) => {
-    return monthNames[date.getMonth()].substring(0, 3);
-}
+  return monthNames[date.getMonth()].substring(0, 3);
+};
 
 const EventDetail = () => {
-  // const [count, setCount] = useState(0);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { getEventDetail, cleanEventDetail } = actionsCreator;
 
@@ -27,83 +48,109 @@ const EventDetail = () => {
     return () => {
       dispatch(cleanEventDetail());
     };
-  }, [dispatch, id,cleanEventDetail,getEventDetail]);
+  }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
   const event = useSelector((state) => state.details);
-  // console.log(event.stock.cat1name)
 
-  // const dec = () => {
-  //   if (count > 0) {
-  //     setCount(count - 1);
-  //   }
-  // };
+  const [purchase, setPurchase] = useState({
+    userId: user.id,
+    ticketCategory: null,
+    ticketName: null,
+    ticketQ: 0,
+    ticketPrice: null,
+  });
+  const handleChange = (e) => {
+    const price = determinarPrecio(e.target.value);
+    const property = e.target.name;
+    const value = e.target.value;
+    setPurchase({
+      ...purchase,
+      [property]: value,
+      ticketName: event.stock[value],
+      ticketPrice: event.stock[price],
+    });
+  };
 
-  // const inc = () => {
-  //   setCount(count + 1);
-  // };
+  const handleQChange = (e) => {
+    setPurchase({ ...purchase, ticketQ: e.target.value });
+  };
 
+  const handleBuy = async (e) => {
+    const preference = {
+      items: [
+        {
+          title: `${event.name} - ${purchase.ticketName}`,
+          quantity: parseInt(purchase.ticketQ),
+          currency_id: "ARS",
+          unit_price: parseInt(purchase.ticketPrice),
+          description: `${event.name} - ${purchase.ticketName}`,
+        },
+      ],
+    };
+    dispatch(savePreference(preference));
+    const preOrder = {
+      eventId: event.id,
+      userId: user.id,
+      eventName: event.name,
+      eventDate: event.date,
+      eventTime: event.time,
+      ticketName: purchase.ticketName,
+      ticketPrice: purchase.ticketPrice,
+      ticketQ: purchase.ticketQ,
+    };
+    dispatch(savePreOrder(preOrder));
+    navigate("/order");
+  };
   return (
     <>
-      { event ? (
+      {event ? (
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
-            <div >
-            
-              <table>
-              <tr className={style.tr1}>
-                <th>Ticket</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Cantidad</th>
-              </tr>
-              <tr>
-                <td>{event.stock && event.stock.cat1name}</td>
-                <td>$ {event.stock && formatNumber.format(event.stock.cat1price)}</td>
-                <td>{event.stock && formatNumber.format(event.stock.cat1stock)}</td>
-                <td>
-                <select>
-                  <option value="value1">1</option>
-                  <option value="value2">2</option>
-                  <option value="value3">3</option>
-                </select>
-                </td>
-              </tr>
-              <tr>
-                <td>{event.stock && event.stock.cat2name}</td>
-                <td>$ {event.stock && formatNumber.format(event.stock.cat2price)}</td>
-                <td>{event.stock && formatNumber.format(event.stock.cat2stock)}</td>
-                <td>
-                <select>
-                  <option value="value1">1</option>
-                  <option value="value2">2</option>
-                  <option value="value3">3</option>
-                </select>
-                </td>
-              </tr>
-                <tr>
-                <td>{event.stock && event.stock.cat3name}</td>
-                <td>$ {event.stock && formatNumber.format(event.stock.cat3price)}</td>
-                <td>{event.stock && formatNumber.format(event.stock.cat3stock)}</td>
-                <td>
-                <select>
-                  <option value="value1">1</option>
-                  <option value="value2">2</option>
-                  <option value="value3">3</option>
-                </select>
-                </td>
-              </tr>
-            </table>
-           
-              <div className={style.cartButtons}>
-                <Link to="/buy">
-                  <button className={style.cartButton}>Buy Now!</button>
-                </Link>
-                <Link to="/">
-                  <button className={style.button_close}>Close</button>
-                </Link>
-              </div>
 
+            <div>
+              <select
+                name="ticketCategory"
+                onChange={handleChange}
+                className={style.select}
+              >
+                <option value=""></option>
+                {event.stock && event.stock.cat1name && (
+                  <option value="cat1name">{event.stock.cat1name}</option>
+                )}
+                {event.stock && event.stock.cat2name && (
+                  <option value="cat2name">{event.stock.cat2name}</option>
+                )}
+                {event.stock && event.stock.cat3name && (
+                  <option value="cat3name">{event.stock.cat3name}</option>
+                )}
+              </select>
+
+              <select
+                name="ticketNumber"
+                onChange={handleQChange}
+                className={style.select}
+              >
+                {numbers.map((number) => {
+                  return <option value={number}>{number}</option>;
+                })}
+              </select>
+
+              <div className={style.cartButtons}>
+                {user.id ? (
+                  <>
+                    <button className={style.cartButton} onClick={handleBuy}>
+                      Buy Now!
+                    </button>
+
+                    <Link to="/">
+                      <button className={style.button_close}>Close</button>
+                    </Link>
+                  </>
+                ) : (
+                  "Login to buy your tickets!"
+                )}
+              </div>
             </div>
           </div>
           <div className={style.eventBody}>
@@ -147,17 +194,3 @@ const EventDetail = () => {
 };
 
 export default EventDetail;
-
-  //  {/* <Link to="/">
-  //               <button className={style.button_close}>Close</button>
-  //             </Link> */}
-  //             {/* <label className={style.ticket}>Tickets</label>
-  //             <div className={style.ticketsButtons}>
-  //               <button className={style.ticketButton} onClick={() => dec()}>
-  //                 -
-  //               </button>
-  //               <p className={style.ticketCount}>{count}</p>
-  //               <button className={style.ticketButton} onClick={() => inc()}>
-  //                 +
-  //               </button>
-  //             </div> */}

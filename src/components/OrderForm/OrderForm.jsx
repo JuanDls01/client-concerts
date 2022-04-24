@@ -1,61 +1,58 @@
 import style from "./OrderForm.module.css";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useMercadopago } from "react-sdk-mercadopago";
+import Mercado from "./Mercado";
+import LoadingOverlay from "react-loading-overlay";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
+  const event = useSelector((state) => state.details);
+  const preOrder = useSelector((state) => state.preOrder);
+  const preference = useSelector((state) => state.preference);
   const navigate = useNavigate();
 
   const handleTimeout = () => {
     alert("Timeout: try again");
     navigate("/");
   };
+  const [isActive, setIsActive] = useState(false);
 
-  const mercadopago = useMercadopago.v2(
-    "TEST-cefc5873-9a5f-4f12-a1fa-d564350b7466",
-    {
-      locale: "en-US",
-    }
-  );
-  console.log(mercadopago);
-
-  useEffect(() => {
-    if (mercadopago) {
-      const miMercado = mercadopago.checkout({
-        preference: {
-          id: "249975492-6d9e0050-9c9a-4f9e-a947-1bfb7c793137",
-        },
-        render: {
-          container: "#mercado",
-          label: "Pay",
-        },
-      });
-      console.log(miMercado);
-    }
-  }, [mercadopago]);
+  const simular = () => {
+    setIsActive(!isActive);
+  };
 
   return (
-    <>
-      <Countdown
-        date={Date.now() + 600000}
-        onComplete={handleTimeout}
-      ></Countdown>
+    <div className={style.mainContainer}>
+      <div className={style.body}>
+        <Countdown
+          date={Date.now() + 600000}
+          onComplete={handleTimeout}
+        ></Countdown>
 
-      <h1>Formulario de Compra</h1>
-      <div id="mercado"></div>
-      <div className={style.infoBody}>
-        <span>Recital de Metallica</span>
-        <span>2022/04/25</span>
-        <span>Entrada General</span>
-        <span>5</span>
-        <span>$10000</span>
+        <p>Some content or children or something.</p>
+
+        <h1>Formulario de Compra</h1>
+
+        <div className={style.infoBody}>
+          <span>Event Name: {preOrder.eventName && preOrder.eventName}</span>
+          <span>Date: {preOrder.eventDate}</span>
+          <span>Ticket category: {preOrder.ticketName}</span>
+          <span>Items: {preOrder.ticketQ} x</span>
+          <span>Price: ${preOrder.ticketPrice}</span>
+          <span>
+            Total: $
+            {parseInt(preOrder.ticketQ) * parseInt(preOrder.ticketPrice)}
+          </span>
+        </div>
+        {preference && <Mercado preference={preference}></Mercado>}
       </div>
-      <button type="button">Buy</button>
-    </>
+
+      <button type="button" onClick={simular}>
+        Buy
+      </button>
+    </div>
   );
 };
 

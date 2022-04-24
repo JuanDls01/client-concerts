@@ -1,13 +1,14 @@
 import s from "./Hero.module.css";
 import logo from "../../assets/images/logotipo.png";
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { useState } from "react";
 import { CreateStage } from "../CreateStage/CreateStage";
-import ArtistForm from "../registerArtist/RegisterArtist";
+// import Contact from "../Contact/Contact";
+// import ArtistForm from "../registerArtist/RegisterArtist";
 
 export default function Hero() {
   const [modal, setModal] = useState(false);
-  const [modal2, setModal2] = useState(false);
+  // const [modal2, setModal2] = useState(false);
 
   const openStageModal = () => {
     setModal(true);
@@ -15,12 +16,12 @@ export default function Hero() {
   const closeStageModal = () => {
     setModal(false);
   };
-  const openModal2 = () => {
-    setModal2(true);
-  };
-  const closeModal2 = () => {
-    setModal2(false);
-  };
+  // const openModal2 = () => {
+  //   setModal2(true);
+  // };
+  // const closeModal2 = () => {
+  //   setModal2(false);
+  // };
 
   return (
     <div className={s.externo}>
@@ -39,13 +40,15 @@ export default function Hero() {
         </p>
         <div className={s.bttns}>
           <button onClick={openStageModal} className={s.btn1}>
-            Create Stage
+            Get Ticket
           </button>
           {modal && <CreateStage closeStageModal={closeStageModal} />}
-          <button onClick={openModal2} className={s.btn2}>
-            Create Artist
-          </button>
-          {modal2 && <ArtistForm onClose={closeModal2} />}
+          {/* <Link to='/login'><button className={s.btn1}>
+            Get Ticket
+          </button></Link> */}
+          <Link to='/contact'><button className={s.btn2}>
+            Contact Us
+          </button></Link>
         </div>
       </div>
     </div>

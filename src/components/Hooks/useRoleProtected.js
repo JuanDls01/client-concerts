@@ -12,7 +12,15 @@ const useRoleProtected = (role, redirect = '/') => {
     useEffect(() => {
         if (token === '' && !cookies.token) navigate("/login");
         else if(user.Role) {
-            if (user.Role.name.toLowerCase() !== role.toLowerCase()) navigate(redirect);
+            if(typeof role === 'string'){
+                if (user.Role.name.toLowerCase() !== role.toLowerCase()) navigate(redirect);
+            }else{
+                let auth = false;
+                role.forEach(r => {
+                    if (user.Role.name.toLowerCase() === r.toLowerCase()) auth = true;
+                });
+                if(!auth) navigate(redirect);
+            }
         }
     }, [token, user]);
 };

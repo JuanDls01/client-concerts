@@ -9,6 +9,7 @@ import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
 import { CreateStage } from "../CreateStage/CreateStage";
+import Swal from "sweetalert2";
 
 const EventForm = () => {
   //useRoleProtected('vendedor');
@@ -17,14 +18,13 @@ const EventForm = () => {
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
 
+  const [artistModal, setArtistModal] = useState(false);
+  const [stageModal, setStageModal] = useState(false);
 
   useEffect(() => {
     dispatch(getStages());
     dispatch(getArtists());
-  }, [dispatch]);
-
-  const [artistModal, setArtistModal] = useState(false);
-  const [stageModal, setStageModal] = useState(false);
+  }, [dispatch, artistModal, stageModal]);
 
   const handleArtistModal = () => {
     setArtistModal(!artistModal);
@@ -32,7 +32,6 @@ const EventForm = () => {
   const handleStageModal = () => {
     setStageModal(!stageModal);
   };
-
 
   const [capacity, setCapacity] = useState(null);
 
@@ -65,7 +64,19 @@ const EventForm = () => {
 
   const submit = async () => {
     console.log(JSON.stringify(form))
-    axios.post("http://localhost:3001/event", form);
+    const toSell =
+      parseInt(form.stock.cat1stock) +
+      parseInt(form.stock.cat2stock) +
+      parseInt(form.stock.cat3stock);
+    toSell > capacity
+      ? Swal.fire({
+          title: "Wait a sec...",
+          text: `This stage has a capacity for ${capacity} people. 
+          You are trying to sell ${toSell} tickets`,
+          icon: "error",
+          confirmButtonText: "Fix it!",
+        })
+      : axios.post("http://localhost:3001/event", form);
   };
 
   const handleChange = (e) => {
