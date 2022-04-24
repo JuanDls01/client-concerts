@@ -1,15 +1,34 @@
-.infoHeader{
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-    width: fit-content;
-    margin: auto;
+.infoHeader {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  width: fit-content;
+  margin: auto;
 }
 
-.infoBody{
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-    width: fit-content;
-    margin: auto;
+.infoBody {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  width: fit-content;
+  margin: auto;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  width: 55vw;
+
+  padding-top: 1.5em;
+  margin: auto;
+  margin-top: 1%;
+  background: linear-gradient(
+    54.44deg,
+    #1d275f 31.45%,
+    rgba(245, 22, 126, 0.25) 94.69%
+  );
+  mix-blend-mode: normal;
+  opacity: 0.9;
+  border-radius: 18px;
+  overflow: hidden;
 }
