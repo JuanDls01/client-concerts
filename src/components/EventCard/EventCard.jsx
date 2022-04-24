@@ -19,7 +19,7 @@ const getMonthName = (monthNumber) => {
 }
 
 const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stageName, price }) => {
-    console.log(startdate)
+    // console.log(startdate)
     const day = Number(startdate.split('-')[2]);
     // Transformo el número del mes en el nombre: 
     const monthNumber = Number(startdate.split('-')[1]);

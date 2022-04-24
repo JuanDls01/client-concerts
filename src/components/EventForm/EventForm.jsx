@@ -64,6 +64,7 @@ const EventForm = () => {
   }, [dispatch]);
 
   const submit = async () => {
+    console.log(JSON.stringify(form))
     axios.post("http://localhost:3001/event", form);
   };
 
