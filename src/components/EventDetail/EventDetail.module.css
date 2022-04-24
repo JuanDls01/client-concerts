@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-
 .mainContainer {
   /* display: flex; */
   /* flex-direction: column; */
@@ -219,13 +218,13 @@
   font-style: normal;
   font-weight: 400;
   /* font-size: 20px; */
-  font-size: calc(0.60rem + 0.60vw);
+  font-size: calc(0.6rem + 0.6vw);
   line-height: 150%;
   color: #ffffff;
   justify-content: space-around;
 }
 
-table{
+table {
   width: 100%;
   font-family: "Roboto";
   font-style: normal;
@@ -236,15 +235,14 @@ table{
   margin-bottom: 10%;
 }
 
-th, td {
+th,
+td {
   padding: 1em;
-  
 }
 
-.tr1{
+.tr1 {
   text-align: left;
   border-bottom: 1px solid black;
-  
 }
 
 select {

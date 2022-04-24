@@ -5,18 +5,33 @@ import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-const formatPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'USD' });
-const formatNumber = new Intl.NumberFormat('es-AR');
+const formatPrice = new Intl.NumberFormat("es-AR", {
+  style: "currency",
+  currency: "USD",
+});
+const formatNumber = new Intl.NumberFormat("es-AR");
 
 const getShortMonthName = (date) => {
-    return monthNames[date.getMonth()].substring(0, 3);
-}
+  return monthNames[date.getMonth()].substring(0, 3);
+};
 
 const EventDetail = () => {
-  // const [count, setCount] = useState(0);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -27,13 +42,13 @@ const EventDetail = () => {
     return () => {
       dispatch(cleanEventDetail());
     };
-  }, [dispatch, id,cleanEventDetail,getEventDetail]);
+  }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
   const event = useSelector((state) => state.details);
 
   return (
     <>
-      { event ? (
+      {event ? (
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
@@ -137,16 +152,16 @@ const EventDetail = () => {
 
 export default EventDetail;
 
-  //  {/* <Link to="/">
-  //               <button className={style.button_close}>Close</button>
-  //             </Link> */}
-  //             {/* <label className={style.ticket}>Tickets</label>
-  //             <div className={style.ticketsButtons}>
-  //               <button className={style.ticketButton} onClick={() => dec()}>
-  //                 -
-  //               </button>
-  //               <p className={style.ticketCount}>{count}</p>
-  //               <button className={style.ticketButton} onClick={() => inc()}>
-  //                 +
-  //               </button>
-  //             </div> */}
+//  {/* <Link to="/">
+//               <button className={style.button_close}>Close</button>
+//             </Link> */}
+//             {/* <label className={style.ticket}>Tickets</label>
+//             <div className={style.ticketsButtons}>
+//               <button className={style.ticketButton} onClick={() => dec()}>
+//                 -
+//               </button>
+//               <p className={style.ticketCount}>{count}</p>
+//               <button className={style.ticketButton} onClick={() => inc()}>
+//                 +
+//               </button>
+//             </div> */}
