@@ -148,12 +148,10 @@ const EventDetail = () => {
                     </Link>
                   </>
                 ) : (
-                  "none"
+                  "Login to buy your tickets!"
                 )}
-
               </div>
             </div>
-
           </div>
           <div className={style.eventBody}>
             <h1 className={style.titulo}>{event.name}</h1>
