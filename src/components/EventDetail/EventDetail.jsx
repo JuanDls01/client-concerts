@@ -107,6 +107,7 @@ const EventDetail = () => {
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
+
             <div>
               <select
                 name="ticketCategory"
@@ -149,8 +150,10 @@ const EventDetail = () => {
                 ) : (
                   "none"
                 )}
+
               </div>
             </div>
+
           </div>
           <div className={style.eventBody}>
             <h1 className={style.titulo}>{event.name}</h1>

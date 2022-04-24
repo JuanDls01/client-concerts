@@ -29,6 +29,7 @@ const {
 
 const initialState = {
   events: [],
+  allevents: [],
   searchevents: [],
   details: [],
   genres: [],
@@ -53,6 +54,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.payload,
+        allevents: action.payload,
         searchevents: action.payload,
       };
     }
@@ -158,7 +160,10 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_NAME_EVENT: {
+      console.log(action.payload)
       const eventfinds = action.payload;
+      console.log(eventfinds)
+      console.log(eventfinds.length)
       const notfound = () => {
         document.getElementById("nameEvent").focus();
         Swal.fire({
@@ -170,7 +175,7 @@ const rootReducer = (state = initialState, action) => {
       };
       return {
         ...state,
-        events: eventfinds.length > 0 ? action.payload : state.events,
+        events: eventfinds.length !== 0 ? action.payload : state.allevents,
         messagge: eventfinds.length === 0 && notfound(),
       };
     }
