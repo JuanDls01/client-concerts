@@ -1,6 +1,7 @@
 import { actions } from "../actions/index";
 import Swal from "sweetalert2";
 import { GET_STAGES } from "../actions/getStages";
+import { act } from "@testing-library/react";
 //import { act } from "@testing-library/react";
 
 const {
@@ -23,7 +24,7 @@ const {
   CLEAR_USER,
   GET_USERS,
   UPDATE_USER,
-  CLEAR_UPDATE_ERR
+  CLEAR_UPDATE_ERR,
 } = actions;
 
 const initialState = {
@@ -41,6 +42,9 @@ const initialState = {
   stages: [],
   usersList: {},
   userDetail: {},
+  purchase: {},
+  preference: null,
+  preOrder: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -51,6 +55,13 @@ const rootReducer = (state = initialState, action) => {
         events: action.payload,
         searchevents: action.payload,
       };
+    }
+
+    case "SAVE_PREFERENCE": {
+      return { ...state, preference: action.payload };
+    }
+    case "SAVE_PREORDER": {
+      return { ...state, preOrder: action.payload };
     }
 
     case "GET_ARTISTS": {
@@ -69,8 +80,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userDetail: action.payload.error ? state.userDetail : action.payload,
-        userUpdareErr: action.payload.error ? action.payload.error : 'success',
-
+        userUpdareErr: action.payload.error ? action.payload.error : "success",
       };
     }
     case CLEAR_USER: {
@@ -177,7 +187,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token ? action.payload.token: "",
+        token: action.payload.token ? action.payload.token : "",
         authError: action.payload.error,
       };
     }
@@ -186,7 +196,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token ? action.payload.token: "",
+        token: action.payload.token ? action.payload.token : "",
         tokenError: action.payload.error,
       };
     }
@@ -196,29 +206,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     }
-    case SEND_EMAIL_RECOVER:{
-    
-        const notfound = (info=action.payload) => {
-          Swal.fire({
-            title: "Hey!" ,
-            text: `${info}`,
-            icon: info==="This email is not registered!" ? "error" : "success" ,
-            confirmButtonText: "Ok",
-          });
-        };
-        return {
-          ...state,
-          messagge: action.payload && notfound(),
-        };
-    
-    }
-    case SEND_EMAIL_REGISTER:{
-        
-      const notfound = (info=action.payload) => {
+    case SEND_EMAIL_RECOVER: {
+      const notfound = (info = action.payload) => {
         Swal.fire({
           title: "Hey!",
-          text:`${info}`,
-          icon: info==="user existent" ? "error" : "success" ,
+          text: `${info}`,
+          icon: info === "This email is not registered!" ? "error" : "success",
           confirmButtonText: "Ok",
         });
       };
@@ -226,8 +219,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         messagge: action.payload && notfound(),
       };
-  
-  }
+    }
+    case SEND_EMAIL_REGISTER: {
+      const notfound = (info = action.payload) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${info}`,
+          icon: info === "user existent" ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
+      };
+    }
 
     default:
       return state;
