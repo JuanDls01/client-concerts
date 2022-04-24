@@ -128,7 +128,7 @@ const Login = () => {
                         text={'Log In'}
                     />
                     <Link to='/register' className={style.registerBttn}>Register</Link>
-                    <Link to="recoverPassword"  className={style.forget}><p >Did you forget your password?</p></Link>
+                    <Link to="/recoverPassword"  className={style.forget}><p >Did you forget your password?</p></Link>
                     {/* Para cuando ande Modal: */}
                     {/* <button onClick={onClickRegister} className={style.registerBttn}>Register</button> */}
 
