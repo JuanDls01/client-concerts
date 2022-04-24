@@ -23,12 +23,10 @@ import OrderForm from "./components/OrderForm/OrderForm";
 import "./App.css";
 
 import actionsCreator from "./redux/actions";
+import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
-  const authError = useSelector((state) => state.authError);
   const tokenError = useSelector((state) => state.tokenError);
   const { loginToken, logout } = actionsCreator;
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -58,6 +56,7 @@ function App() {
         <Route path="/:id" element={<EventDetail />} />
         {/* ADMIN */}
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+        <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />
         {/* Vendedor: */}
         <Route path="/postartist" element={<ArtistForm />} />
         <Route path="/createEvent" element={<EventForm />} />

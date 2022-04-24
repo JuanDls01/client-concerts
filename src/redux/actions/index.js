@@ -15,6 +15,11 @@ import clearAuthError, { CLEAR_AUTH_ERR } from './clearAuthErr';
 import logout, { LOGOUT } from './logout';
 import sendEmailRecover,{SEND_EMAIL_RECOVER} from './sendEmailRecover'; 
 import sendEmailRegister,{SEND_EMAIL_REGISTER} from './sendEmailRegister';
+import getUser, { GET_USER } from './getUser';
+import getUsers, { GET_USERS } from './getUsers';
+import clearUser, { CLEAR_USER } from './clearUser';
+import updateUser, { UPDATE_USER } from './updateUser';
+import clearUpdateErr, { CLEAR_UPDATE_ERR } from './clearUpdateErr';
 
 export const actions = {
     GET_EVENTS,
@@ -31,7 +36,12 @@ export const actions = {
     CLEAR_AUTH_ERR,
     LOGOUT,
     SEND_EMAIL_RECOVER,
-    SEND_EMAIL_REGISTER
+    SEND_EMAIL_REGISTER,
+    GET_USER,
+    GET_USERS,
+    CLEAR_USER,
+    UPDATE_USER,
+    CLEAR_UPDATE_ERR
 }
 
 const actionsCreator = {
@@ -49,7 +59,12 @@ const actionsCreator = {
     clearAuthError,
     logout,
     sendEmailRecover,
-    sendEmailRegister
+    sendEmailRegister,
+    getUser,
+    getUsers,
+    clearUser,
+    updateUser,
+    clearUpdateErr
 }
 
 export default actionsCreator;

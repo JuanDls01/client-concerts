@@ -1,25 +1,6 @@
 .conteiner {
   font-family: Poppins;
 }
-.header {
-  width: 100%;
-  height: 90px;
-  background: linear-gradient(87.59deg, #5522cc 0%, #f5167e 100%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 70px;
-  padding-right: 70px;
-}
-.imgHeader {
-  width: 235px;
-}
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
 .user img {
     width: 20px;
     height: 20px;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+// import useLogOut from '../Hooks/useLogOut';
 import actionsCreator from '../../redux/actions';
 import { useCookies } from "react-cookie";
 import { AiOutlineUser } from 'react-icons/ai';
