@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./DashboardSeller.module.css";
 import logo from "../../assets/images/logotipo.png";
 import CardAnalitics from "./CardAnalitics";
@@ -7,11 +7,25 @@ import calen from "../../assets/images/calen.png"
 import carrito from "../../assets/images/carrito.png"
 import { useSelector } from "react-redux";
 import useRoleProtected from "../Hooks/useRoleProtected";
+import actionsCreator from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function DashboardSeller() {
-  // useRoleProtected('vendedor');
+  const { getUser} = actionsCreator;
+  useRoleProtected('vendedor');
+
   const user = useSelector((state) => state.user);
+
+  const id = user.id
+
   const token = useSelector((state) => state.token);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser(id, token));
+});
 
   return (
     <div className={style.conteiner}>
@@ -20,8 +34,6 @@ export default function DashboardSeller() {
         <div className={style.user}>
           {/* <img src={user}/> */}
           {/* ACA IRIA EL NOMBRE DE USUARIO */}
-          <h5><a href="">otro link</a></h5>
-          <h5><a href="">otro link</a></h5>
           <h5>{user.firstName ? user.firstName : "Usuario no logeado"}</h5> 
         </div>
       </div>
@@ -45,7 +57,7 @@ export default function DashboardSeller() {
           img={calen}
         />
         <CardAnalitics title="Tickets Sold" analitics="$1024" img={carrito} />
-        <button className={style.btnPublish}>Publish Event</button>
+        <Link to ="/createEvent"><button className={style.btnPublish}>Publish Event</button></Link>
       </div>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Recent Events</h1>
