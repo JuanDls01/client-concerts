@@ -52,7 +52,8 @@ const EventDetail = () => {
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <img src={event.img} alt="img" className={style.image} />
-            <div>
+            
+            <div className={style.aside}>
               <table>
                 <tr className={style.tr1}>
                   <th>Ticket</th>
@@ -62,75 +63,52 @@ const EventDetail = () => {
                 </tr>
                 <tr>
                   <td>{event.stock && event.stock.cat1name}</td>
+                  <td>$ {event.stock && formatNumber.format(event.stock.cat1price)}</td>
+                  <td>{event.stock && formatNumber.format(event.stock.cat1stock)}</td>
                   <td>
-                    ${" "}
-                    {event.stock && formatNumber.format(event.stock.cat1price)}
-                  </td>
-                  <td>
-                    {event.stock && formatNumber.format(event.stock.cat1stock)}
-                  </td>
-                  <td>
-                    <select>
-                      <option value="value1">0</option>
-                      <option value="value1">1</option>
-                      <option value="value2">2</option>
-                      <option value="value3">3</option>
-                    </select>
+                  <select>
+                    <option value="value1">1</option>
+                    <option value="value2">2</option>
+                    <option value="value3">3</option>
+                  </select>
                   </td>
                 </tr>
                 <tr>
                   <td>{event.stock && event.stock.cat2name}</td>
+                  <td>$ {event.stock && formatNumber.format(event.stock.cat2price)}</td>
+                  <td>{event.stock && formatNumber.format(event.stock.cat2stock)}</td>
                   <td>
-                    ${" "}
-                    {event.stock && formatNumber.format(event.stock.cat2price)}
-                  </td>
-                  <td>
-                    {event.stock && formatNumber.format(event.stock.cat2stock)}
-                  </td>
-                  <td>
-                    <select>
-                      <option value="value1">0</option>
-                      <option value="value1">1</option>
-                      <option value="value2">2</option>
-                      <option value="value3">3</option>
-                    </select>
+                  <select>
+                    <option value="value1">1</option>
+                    <option value="value2">2</option>
+                    <option value="value3">3</option>
+                  </select>
                   </td>
                 </tr>
-                <tr>
+                  <tr>
                   <td>{event.stock && event.stock.cat3name}</td>
+                  <td>$ {event.stock && formatNumber.format(event.stock.cat3price)}</td>
+                  <td>{event.stock && formatNumber.format(event.stock.cat3stock)}</td>
                   <td>
-                    ${" "}
-                    {event.stock && formatNumber.format(event.stock.cat3price)}
-                  </td>
-                  <td>
-                    {event.stock && formatNumber.format(event.stock.cat3stock)}
-                  </td>
-                  <td>
-                    <select>
-                      <option value="value1">0</option>
-                      <option value="value1">1</option>
-                      <option value="value2">2</option>
-                      <option value="value3">3</option>
-                    </select>
+                  <select>
+                    <option value="value1">1</option>
+                    <option value="value2">2</option>
+                    <option value="value3">3</option>
+                  </select>
                   </td>
                 </tr>
               </table>
-
+           
               <div className={style.cartButtons}>
-                {user.id ? (
-                  <>
-                    <Link to="/order">
-                      <button className={style.cartButton}>Buy Now!</button>
-                    </Link>
-                    <Link to="/">
-                      <button className={style.button_close}>Close</button>
-                    </Link>
-                  </>
-                ) : (
-                  "none"
-                )}
+                <Link to="/buy">
+                  <button className={style.cartButton}>Buy Now!</button>
+                </Link>
+                <Link to="/">
+                  <button className={style.button_close}>Close</button>
+                </Link>
               </div>
             </div>
+
           </div>
           <div className={style.eventBody}>
             <h1 className={style.titulo}>{event.name}</h1>
