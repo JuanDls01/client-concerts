@@ -17,7 +17,6 @@ const EventForm = () => {
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
-  console.log(user.id);
 
   const [artistModal, setArtistModal] = useState(false);
   const [stageModal, setStageModal] = useState(false);
@@ -26,10 +25,6 @@ const EventForm = () => {
     dispatch(getStages());
     dispatch(getArtists());
   }, [dispatch, artistModal, stageModal]);
-
-  useEffect(() => {
-    setForm({ ...form, userId: user.id });
-  }, [user]);
 
   const handleArtistModal = () => {
     setArtistModal(!artistModal);
@@ -67,11 +62,17 @@ const EventForm = () => {
     dispatch(getArtists());
   }, [dispatch]);
 
+  useEffect(() => {
+    setForm({ ...form, userId: user.id });
+  }, [user]);
+
   const submit = async () => {
+
 
     console.log(JSON.stringify(form))
 
     //await setForm({ ...form, userId: user.id });
+
 
     const toSell =
       parseInt(form.stock.cat1stock) +
@@ -298,11 +299,9 @@ const EventForm = () => {
               />
             </div>
           </div>
-          {user.id && (
-            <button type="button" onClick={submit}>
-              POST
-            </button>
-          )}
+          <button type="button" onClick={submit}>
+            POST
+          </button>
         </form>
       </div>
       <div className={style.formFooter}>FOOTER</div>
