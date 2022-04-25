@@ -16,16 +16,21 @@ export default function DashboardSeller() {
   useRoleProtected('vendedor');
 
   const user = useSelector((state) => state.user);
+  
+  
+  const userdetail = useSelector(state=> state.userDetail)
 
   const id = user.id
 
+
   const token = useSelector((state) => state.token);
+
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUser(id, token));
-});
+  useEffect(async () => {
+    await dispatch(getUser(id, token));
+},[token]);
 
   return (
     <div className={style.conteiner}>
@@ -66,21 +71,28 @@ export default function DashboardSeller() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
       <div className={style.tabla}>
         <table>
-          <tr className={style.columns}>
-            <th>Event Name</th>
-            <th>Category</th>
-            <th>Stage</th>
-            <th>Ticket Sells</th>
-            <th>Total Sells</th>
-          </tr>
-          {/* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
-          <tr>
-            <td>Metalica</td>
-            <td>1</td>
-            <td>Luna Park</td>
-            <td>36</td>
-            <td>$3650</td>
-          </tr>
+          <thead className={style.columns}>
+            <tr>
+              <th>Event Name</th>
+              <th>Category</th>
+              <th>Stage</th>
+              <th>Ticket Sells</th>
+              <th>Total Sells</th>
+            </tr> 
+          </thead>
+          {/* /* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
+          {console.log(userdetail.Events)}
+          <tbody>
+          {userdetail.Events && userdetail.Events.map(e=>{
+            <tr>
+              <td>{e.name && e.name}</td>
+              <td>1</td>
+              <td>Luna Park</td>
+              <td>36</td>
+              <td>$3650</td>
+            </tr>
+          })} 
+          </tbody>
         </table>
       </div>
     </div>

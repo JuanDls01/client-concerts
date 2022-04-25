@@ -1,7 +1,7 @@
 import { actions } from "../actions/index";
 import Swal from "sweetalert2";
 import { GET_STAGES } from "../actions/getStages";
-import { act } from "@testing-library/react";
+// import { act } from "@testing-library/react";
 //import { act } from "@testing-library/react";
 
 const {
@@ -66,7 +66,7 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, preOrder: action.payload };
     }
 
-    case "GET_ARTISTS": {
+    case GET_ARTISTS: {
       return {
         ...state,
         artists: action.payload,
