@@ -67,12 +67,9 @@ const EventForm = () => {
   }, [user]);
 
   const submit = async () => {
-
-
-    console.log(JSON.stringify(form))
+    console.log(JSON.stringify(form));
 
     //await setForm({ ...form, userId: user.id });
-
 
     const toSell =
       parseInt(form.stock.cat1stock) +
@@ -86,7 +83,7 @@ const EventForm = () => {
           icon: "error",
           confirmButtonText: "Fix it!",
         })
-      : axios.post("http://localhost:3001/event", form);
+      : axios.post("/event", form);
   };
 
   const handleChange = (e) => {

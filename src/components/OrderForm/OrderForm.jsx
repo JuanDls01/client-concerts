@@ -25,7 +25,7 @@ const OrderForm = (props) => {
   const simular = async (e) => {
     e.preventDefault();
     setIsActive(!isActive);
-    const response = await axios.post("http://localhost:3001/order", order);
+    const response = await axios.post("/order", order);
     setIsActive(false);
     console.log("ya deberia haber cerrado");
     Swal.fire(
