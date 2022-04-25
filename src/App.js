@@ -12,12 +12,12 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
-import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword"
+import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword";
 import "./App.css";
 
 import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
 import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
-import ShoppyngHistory from './components/DashboarUsers/DashboardUser'
+import ShoppyngHistory from "./components/DashboarUsers/DashboardUser";
 
 import OrderForm from "./components/OrderForm/OrderForm";
 
@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     if (tokenError) {
-      removeCookie('token', { path: '/' });
+      removeCookie("token", { path: "/" });
       dispatch(logout());
     }
   }, [tokenError]);
@@ -66,15 +66,10 @@ function App() {
         {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
 
-
         <Route path="/user/dashboard" element={<DashboardSeller />} />
-        <Route path="/user/shoppinghistory" element={<ShoppyngHistory />} />
-
-        
-
+        <Route path="/user/shoppinghistory/:id" element={<ShoppyngHistory />} />
 
         <Route path="/order" element={<OrderForm />} />
-
       </Routes>
     </div>
   );

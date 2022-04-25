@@ -6,6 +6,7 @@ import LoadingOverlay from "react-loading-overlay";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
@@ -23,8 +24,14 @@ const OrderForm = (props) => {
 
   const simular = async (e) => {
     e.preventDefault();
+    setIsActive(!isActive);
     const response = await axios.post("http://localhost:3001/order", order);
-    console.log(response);
+    setIsActive(false);
+    console.log("ya deberia haber cerrado");
+    Swal.fire(
+      "Purchased completed. Tickets have been sent to your e-mail. Check details in your shopping history"
+    );
+    navigate(`/user/shoppinghistory/${user.id}`);
   };
   let miArray = [];
   useEffect(() => {
@@ -60,66 +67,72 @@ const OrderForm = (props) => {
   };
 
   return (
-    <div className={style.mainContainer}>
-      <div className={style.body}>
-        <Countdown
-          date={Date.now() + 600000}
-          onComplete={handleTimeout}
-        ></Countdown>
+    <LoadingOverlay
+      active={isActive}
+      spinner
+      text="Processing your purchase..."
+    >
+      <div className={style.mainContainer}>
+        <div className={style.body}>
+          <Countdown
+            date={Date.now() + 600000}
+            onComplete={handleTimeout}
+          ></Countdown>
 
-        <p>Some content or children or something.</p>
+          <p>Some content or children or something.</p>
 
-        <h1>Formulario de Compra</h1>
+          <h1>Formulario de Compra</h1>
 
-        <div className={style.infoBody}>
-          <span>Event Name: {preOrder.eventName && preOrder.eventName}</span>
-          <span>Date: {preOrder.eventDate}</span>
-          <span>Ticket category: {preOrder.ticketName}</span>
-          <span>Items: {preOrder.ticketQ} x</span>
-          <span>Price: ${preOrder.ticketPrice}</span>
-          <span>
-            Total: $
-            {parseInt(preOrder.ticketQ) * parseInt(preOrder.ticketPrice)}
-          </span>
+          <div className={style.infoBody}>
+            <span>Event Name: {preOrder.eventName && preOrder.eventName}</span>
+            <span>Date: {preOrder.eventDate}</span>
+            <span>Ticket category: {preOrder.ticketName}</span>
+            <span>Items: {preOrder.ticketQ} x</span>
+            <span>Price: ${preOrder.ticketPrice}</span>
+            <span>
+              Total: $
+              {parseInt(preOrder.ticketQ) * parseInt(preOrder.ticketPrice)}
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className={style.ticketsInputs}>
-        {order.tickets &&
-          order.tickets.map((ticket) => {
-            return (
-              <div className={style.inputs} key={ticket.id}>
-                <p>{`${preOrder.ticketName}`}</p>
-                <input
-                  type="text"
-                  id={ticket.internalId}
-                  name="clientName"
-                  placeholder={`Client Name`}
-                  onChange={handleTicketsChange}
-                />
-                <input
-                  type="text"
-                  id={ticket.internalId}
-                  name="clientMail"
-                  placeholder={`Client E-Mail`}
-                  onChange={handleTicketsChange}
-                />
-                <input
-                  type="text"
-                  id={ticket.internalId}
-                  name="clientId"
-                  placeholder={`Client ID`}
-                  onChange={handleTicketsChange}
-                />
-              </div>
-            );
-          })}
+        <div className={style.ticketsInputs}>
+          {order.tickets &&
+            order.tickets.map((ticket) => {
+              return (
+                <div className={style.inputs} key={ticket.id}>
+                  <p>{`${preOrder.ticketName}`}</p>
+                  <input
+                    type="text"
+                    id={ticket.internalId}
+                    name="clientName"
+                    placeholder={`Client Name`}
+                    onChange={handleTicketsChange}
+                  />
+                  <input
+                    type="text"
+                    id={ticket.internalId}
+                    name="clientMail"
+                    placeholder={`Client E-Mail`}
+                    onChange={handleTicketsChange}
+                  />
+                  <input
+                    type="text"
+                    id={ticket.internalId}
+                    name="clientId"
+                    placeholder={`Client ID`}
+                    onChange={handleTicketsChange}
+                  />
+                </div>
+              );
+            })}
+        </div>
+        {preference && <Mercado preference={preference}></Mercado>}
+        <button type="button" onClick={simular}>
+          Buy
+        </button>
       </div>
-      {preference && <Mercado preference={preference}></Mercado>}
-      <button type="button" onClick={simular}>
-        Buy
-      </button>
-    </div>
+    </LoadingOverlay>
   );
 };
 
