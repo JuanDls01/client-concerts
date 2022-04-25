@@ -1,8 +1,33 @@
+.contendedorTabla{
+  /* text-align: center;
+  display: flex; */
+  width: 70%;
+  margin-left:15%;
+  text-align: center;
+}
+
+.tabla{
+  
+    display: flex;
+    flex-direction: column;
+
+}
+
+.icons{
+  font-size:22px;
+  text-decoration: none;
+  color: #242565
+}
+
+.icons:hover{
+  color:#f5167e
+}
+
 .conteiner {
     font-family: Poppins;
   }
   .header {
-    width: 100%;
+    
     height: 90px;
     background: linear-gradient(87.59deg, #5522cc 0%, #f5167e 100%);
     display: flex;
@@ -69,7 +94,7 @@
       font-size: 32px;
       border-style: none;
   }
-  .tabla{
+  /* .tabla{
       width: 100%;
       display: flex;
       justify-content: center;
@@ -85,4 +110,4 @@
       width: 80%;
       border: #000;
   }
-  
+   */
