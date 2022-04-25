@@ -71,25 +71,28 @@ export default function DashboardSeller() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
       <div className={style.tabla}>
         <table>
-          <tr className={style.columns}>
-            <th>Event Name</th>
-            <th>Category</th>
-            <th>Stage</th>
-            <th>Ticket Sells</th>
-            <th>Total Sells</th>
-          </tr> 
+          <thead className={style.columns}>
+            <tr>
+              <th>Event Name</th>
+              <th>Category</th>
+              <th>Stage</th>
+              <th>Ticket Sells</th>
+              <th>Total Sells</th>
+            </tr> 
+          </thead>
           {/* /* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
           {console.log(userdetail.Events)}
-         
+          <tbody>
           {userdetail.Events && userdetail.Events.map(e=>{
-            <tbody>
-            <td>{e.name && e.name}</td>
-            <td>1</td>
-            <td>Luna Park</td>
-            <td>36</td>
-            <td>$3650</td>
-            </tbody>
+            <tr>
+              <td>{e.name && e.name}</td>
+              <td>1</td>
+              <td>Luna Park</td>
+              <td>36</td>
+              <td>$3650</td>
+            </tr>
           })} 
+          </tbody>
         </table>
       </div>
     </div>
