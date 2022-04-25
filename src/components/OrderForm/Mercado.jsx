@@ -9,7 +9,6 @@ const Mercado = ({ preference }) => {
       locale: "en-US",
     }
   );
-  console.log(preference);
 
   useEffect(() => {
     if (mercadopago && preference) {
@@ -22,7 +21,6 @@ const Mercado = ({ preference }) => {
           label: "Pay",
         },
       });
-      console.log("render botón");
     }
   }, [mercadopago, preference]);
 
