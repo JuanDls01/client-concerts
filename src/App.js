@@ -61,12 +61,17 @@ function App() {
         {/* Vendedor: */}
         <Route path="/postartist" element={<ArtistForm />} />
         <Route path="/createEvent" element={<EventForm />} />
+        <Route path="/vendedor/dashboard" element={<DashboardSeller />} />
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
 
+
         <Route path="/user/dashboard" element={<DashboardSeller />} />
         <Route path="/user/shoppinghistory" element={<ShoppyngHistory />} />
+
+        
+
 
         <Route path="/order" element={<OrderForm />} />
 

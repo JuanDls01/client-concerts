@@ -12,11 +12,12 @@ import { CreateStage } from "../CreateStage/CreateStage";
 import Swal from "sweetalert2";
 
 const EventForm = () => {
-  //useRoleProtected('vendedor');
+  useRoleProtected("vendedor");
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
   const user = useSelector((state) => state.user);
+  console.log(user.id);
 
   const [artistModal, setArtistModal] = useState(false);
   const [stageModal, setStageModal] = useState(false);
@@ -25,6 +26,10 @@ const EventForm = () => {
     dispatch(getStages());
     dispatch(getArtists());
   }, [dispatch, artistModal, stageModal]);
+
+  useEffect(() => {
+    setForm({ ...form, userId: user.id });
+  }, [user]);
 
   const handleArtistModal = () => {
     setArtistModal(!artistModal);
@@ -43,7 +48,7 @@ const EventForm = () => {
     date: "",
     time: "00:00",
     img: "",
-    userId: user,
+    userId: user.id,
     stock: {
       cat1name: "",
       cat1price: 0,
@@ -63,7 +68,11 @@ const EventForm = () => {
   }, [dispatch]);
 
   const submit = async () => {
+
     console.log(JSON.stringify(form))
+
+    //await setForm({ ...form, userId: user.id });
+
     const toSell =
       parseInt(form.stock.cat1stock) +
       parseInt(form.stock.cat2stock) +
@@ -289,9 +298,11 @@ const EventForm = () => {
               />
             </div>
           </div>
-          <button type="button" onClick={submit}>
-            POST
-          </button>
+          {user.id && (
+            <button type="button" onClick={submit}>
+              POST
+            </button>
+          )}
         </form>
       </div>
       <div className={style.formFooter}>FOOTER</div>
