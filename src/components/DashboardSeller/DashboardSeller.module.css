@@ -81,7 +81,11 @@
     padding-left: 10px;
     border-radius: 10px;
 }
-table {
-    width: 80%;
-    border: #000;
+.tableCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.tabla {
+  width: 70%;
 }
