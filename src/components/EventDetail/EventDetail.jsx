@@ -116,13 +116,19 @@ const EventDetail = () => {
               >
                 <option value=""></option>
                 {event.stock && event.stock.cat1name && (
-                  <option value="cat1name">{event.stock.cat1name}</option>
+                  <option value="cat1name">
+                    {event.stock.cat1name} - Stock: {event.stock.cat1stock}
+                  </option>
                 )}
                 {event.stock && event.stock.cat2name && (
-                  <option value="cat2name">{event.stock.cat2name}</option>
+                  <option value="cat2name">
+                    {event.stock.cat2name} - Stock: {event.stock.cat2stock}
+                  </option>
                 )}
                 {event.stock && event.stock.cat3name && (
-                  <option value="cat3name">{event.stock.cat3name}</option>
+                  <option value="cat3name">
+                    {event.stock.cat3name} - Stock: {event.stock.cat3stock}
+                  </option>
                 )}
               </select>
 
@@ -142,14 +148,13 @@ const EventDetail = () => {
                     <button className={style.cartButton} onClick={handleBuy}>
                       Buy Now!
                     </button>
-
-                    <Link to="/">
-                      <button className={style.button_close}>Close</button>
-                    </Link>
                   </>
                 ) : (
                   "Login to buy your tickets!"
                 )}
+                <Link to="/">
+                  <button className={style.button_close}>Close</button>
+                </Link>
               </div>
             </div>
           </div>
