@@ -77,7 +77,7 @@ const NavBar = () => {
                                     {user.Role.name.toLowerCase() === 'admin' || user.Role.name.toLowerCase() === 'super admin' ? <Link to='/admin/dashboard' className={s.menuItem}>Dashboard</Link> : null}
                                     {user.Role.name.toLowerCase() === 'vendedor' ? <Link to='/vendedor/dashboard' className={s.menuItem}>Seller</Link> : null}
                                     <Link to='/profile' className={s.menuItem}>My Profile</Link>
-                                    <Link to='/shopping' className={s.menuItem}>My Shopping</Link>
+                                    <Link to='/user/shoppinghistory' className={s.menuItem}>My Shopping</Link>
                                     <a className={s.menuItem+ ' ' +s.fakeLink} onClick={logoutHandler}>Logout</a>
                                 </div>
                             }

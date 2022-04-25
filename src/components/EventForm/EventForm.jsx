@@ -68,7 +68,11 @@ const EventForm = () => {
   }, [dispatch]);
 
   const submit = async () => {
+
+    console.log(JSON.stringify(form))
+
     //await setForm({ ...form, userId: user.id });
+
     const toSell =
       parseInt(form.stock.cat1stock) +
       parseInt(form.stock.cat2stock) +
