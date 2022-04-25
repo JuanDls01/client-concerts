@@ -39,13 +39,13 @@ export default function Hero() {
           artist or genre{" "}
         </p>
         <div className={s.bttns}>
-          <button onClick={openStageModal} className={s.btn1}>
+          {/* <button onClick={openStageModal} className={s.btn1}>
             Get Ticket
           </button>
-          {modal && <CreateStage closeStageModal={closeStageModal} />}
-          {/* <Link to='/login'><button className={s.btn1}>
+          {modal && <CreateStage closeStageModal={closeStageModal} />} */}
+          <Link to='/login'><button className={s.btn1}>
             Get Ticket
-          </button></Link> */}
+          </button></Link>
           <Link to='/contact'><button className={s.btn2}>
             Contact Us
           </button></Link>
