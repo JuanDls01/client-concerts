@@ -41,3 +41,22 @@
   border-radius: 18px;
   overflow: hidden;
 }
+
+.ticketsInputs {
+  background-color: aliceblue;
+  width: fit-content;
+  margin: auto;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border-radius: 10px;
+}
+
+.inputs {
+  width: fit-content;
+  display: flex;
+  margin: auto;
+  gap: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

@@ -55,8 +55,8 @@ const EventsCards = () => {
                 imgEvent={event.img}
                 startdate={event.date}
                 starttime={event.time}
-                artistName={event.Artist.name}
-                stageName={event.Stage.name}
+                artistName={event.Artist && event.Artist.name}
+                stageName={event.Stage && event.Stage.name}
                 price={event.lowestPrice}
                 // location={event.stage.location}
               />

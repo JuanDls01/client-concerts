@@ -6,18 +6,18 @@
     font-style: normal;
     font-weight: 700;
     /* font-size: 24px; */
-    font-size: calc(1.3rem + 1.3vw);
-    line-height: 150%;
+    font-size: calc(0.8rem + 0.8vw);
+    /* line-height: 150%; */
     /* or 36px */
     color: #242565;
-    width: 75%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 80%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .container {
-    padding: 3%;
-    position: fixed;
+    padding: 2%;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@
 }
 
 .textarea {
-    width: 25em;
+    width: 28.5rem;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 6px;
@@ -51,7 +51,7 @@
     font-style: normal;
     font-weight: 400;
     /* font-size: 16px; */
-    font-size: calc(0.8rem + 0.8vw);
+    font-size: calc(0.45rem + 0.45vw);
 }
 
 .button {
