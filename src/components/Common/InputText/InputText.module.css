@@ -4,7 +4,7 @@
 }
 
 .input {
-    width: 100%;
+    width: 28.5rem;
     height: 2.5em;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
@@ -14,7 +14,7 @@
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: calc(0.8rem + 0.8vw);
+    font-size: calc(0.45rem + 0.45vw);
 }
 
 .error {
