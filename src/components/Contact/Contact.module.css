@@ -16,8 +16,12 @@
 
 .logo {
     width: 24%;
-    height: 150px;
+    height: auto;
     margin-left: 20px;
+}
+
+.linkhome{
+    text-align: left;
 }
 
 .titleForm {
