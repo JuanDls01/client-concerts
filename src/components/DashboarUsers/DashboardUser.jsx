@@ -3,16 +3,11 @@ import Kpis from "./Kpis";
 import { useSelector, useDispatch } from "react-redux";
 
 import useRoleProtected from "../Hooks/useRoleProtected";
-<<<<<<< HEAD
 import DataTable, {createTheme} from 'react-data-table-component';
-import { Link } from "react-router-dom";
 import Footer from '../footer/footer';
-=======
-import DataTable, { createTheme } from "react-data-table-component";
 import { Link, useParams } from "react-router-dom";
 import getUser from "../../redux/actions/getUser";
 import clearUser from "../../redux/actions/clearUser";
->>>>>>> dev
 
 //css
 import style from "./DashboardUser.module.css";
@@ -27,62 +22,24 @@ import { ImEye } from "react-icons/im";
 
 //Datos mokeados
 
-const data = [
-<<<<<<< HEAD
-    {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
-    {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
-    {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
-    {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
-    {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
-    {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
-    {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
-    {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
-    {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
-    {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
-    {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
-    {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
-    {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
-    {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
-    {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
-]
-=======
-  {
-    orderId: 1,
-    idEvent: 1,
-    eventName: "Roko fest",
-    tickets: 2,
-    datePurchase: "24-04-2022",
-  },
-  {
-    orderId: 2,
-    idEvent: 2,
-    eventName: "Otro evento",
-    tickets: 2,
-    datePurchase: "18-04-2022",
-  },
-  {
-    orderId: 3,
-    idEvent: 3,
-    eventName: "Recital",
-    tickets: 2,
-    datePurchase: "05-04-2022",
-  },
-  {
-    orderId: 4,
-    idEvent: 4,
-    eventName: "Gran concierto",
-    tickets: 2,
-    datePurchase: "24-02-2022",
-  },
-  {
-    orderId: 5,
-    idEvent: 5,
-    eventName: "Uno mas para estar bien seguros",
-    tickets: 2,
-    datePurchase: "16-02-2022",
-  },
-];
->>>>>>> dev
+// const data = [
+//     {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
+//     {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
+//     {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
+//     {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
+//     {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
+//     {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
+//     {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
+//     {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
+//     {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
+//     {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
+//     {orderId:1, idEvent:1, eventName:"Roko fest", tickets: 2, datePurchase:"24-04-2022" },
+//     {orderId:2, idEvent:2, eventName:"Otro evento", tickets: 2, datePurchase:"18-04-2022" },
+//     {orderId:3, idEvent:3, eventName:"Recital", tickets: 2, datePurchase:"05-04-2022" },
+//     {orderId:4, idEvent:4, eventName:"Gran concierto", tickets: 2, datePurchase:"24-02-2022" },
+//     {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
+// ]
+  
 
 const columns = [
   { name: "Folio", selector: (row) => row.id, center: true },
@@ -172,11 +129,7 @@ export default function ShoppyngHistory() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
       <div className={style.contendedorTabla}>
         <div className={style.tabla}>
-<<<<<<< HEAD
           <DataTable  pagination columns={columns} data={data} theme="custom"  />
-=======
-          <DataTable columns={columns} data={data} theme="custom" pagination />
->>>>>>> dev
         </div>
       </div>
       <Footer/>
