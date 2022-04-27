@@ -25,6 +25,7 @@ const {
   GET_USERS,
   UPDATE_USER,
   CLEAR_UPDATE_ERR,
+  UPDATE_PASSWORD,
 } = actions;
 
 const initialState = {
@@ -79,10 +80,32 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case UPDATE_USER: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The user has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         userDetail: action.payload.error ? state.userDetail : action.payload,
-        userUpdareErr: action.payload.error ? action.payload.error : "success",
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case UPDATE_PASSWORD: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The password has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
       };
     }
     case CLEAR_USER: {
