@@ -12,9 +12,10 @@ import { CreateStage } from "../CreateStage/CreateStage";
 import Swal from "sweetalert2";
 import LoadingOverlay from "react-loading-overlay";
 import { Navigate, useNavigate } from "react-router-dom";
+import checkInput from "../../utils/checkInput";
 
 const EventForm = () => {
-  useRoleProtected("vendedor");
+  //useRoleProtected("vendedor");
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
@@ -45,7 +46,7 @@ const EventForm = () => {
     stageId: null,
     description: "",
     date: "",
-    time: "00:00",
+    time: "",
     img: "",
     userId: user.id,
     stock: {
@@ -58,6 +59,28 @@ const EventForm = () => {
       cat3name: "",
       cat3price: 0,
       cat3stock: 0,
+    },
+  });
+
+  const [check, setCheck] = useState({
+    name: false,
+    artistId: false,
+    stageId: false,
+    description: false,
+    date: false,
+    time: false,
+    img: false,
+    userId: false,
+    stock: {
+      cat1name: false,
+      cat1price: false,
+      cat1stock: false,
+      cat2name: false,
+      cat2price: true,
+      cat2stock: true,
+      cat3name: false,
+      cat3price: true,
+      cat3stock: true,
     },
   });
 
@@ -106,21 +129,32 @@ const EventForm = () => {
   };
 
   const handleChange = (e) => {
-    console.log("Change");
     const property = e.target.name;
     const value = e.target.value;
+    setCheck({ ...check, [property]: checkInput(property, value) });
     setForm({ ...form, [property]: value });
-    property === "stageId" &&
-      setCapacity(
-        stages.filter((stage) => {
-          return stage.id == value;
-        })[0].capacity
-      );
+    if (property === "stageId") {
+      if (value !== "") {
+        setCapacity(
+          stages.filter((stage) => {
+            return stage.id == value;
+          })[0].capacity
+        );
+      } else {
+        setCapacity(0);
+      }
+    }
   };
 
   const handleStockChange = (e) => {
     const property = e.target.name;
     const value = e.target.value;
+
+    setCheck({
+      ...check,
+      stock: { ...check.stock, [property]: checkInput(property, value) },
+    });
+
     setForm({
       ...form,
       stock: {
@@ -139,6 +173,8 @@ const EventForm = () => {
     },
     (error, result) => {
       result.event === "success" && setForm({ ...form, img: result.info.url });
+      result.event === "success" &&
+        setCheck({ ...check, img: checkInput("img", result.info.url) });
     }
   );
 
@@ -153,39 +189,56 @@ const EventForm = () => {
         <form autoComplete="off" className={style.formContent}>
           {/*EVENT NAME */}
           <div className={style.formHeader}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Event Name"
-              onChange={handleChange}
-              value={form.name}
-              className={style.input}
-            />
+            <div className={style.check}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Event Name"
+                onChange={handleChange}
+                value={form.name}
+                className={style.input}
+              />
+              {!check.name && (
+                <span className={style.error}>
+                  required - 5 characters min*
+                </span>
+              )}
+            </div>
 
             {/*EVENT DESCRIPTION */}
-            <input
-              type="text"
-              name="description"
-              onChange={handleChange}
-              placeholder="Event description"
-              className={style.input}
-            />
-
+            <div className={style.check}>
+              <input
+                type="text"
+                name="description"
+                onChange={handleChange}
+                placeholder="Event description"
+                className={style.input}
+              />
+              {!check.description && (
+                <span className={style.error}>
+                  required - 20 characters min*
+                </span>
+              )}
+            </div>
             {/*ARTIST SELECTION */}
-
-            <select
-              name="artistId"
-              onChange={handleChange}
-              className={style.input}
-            >
-              <option>Select an artist...</option>
-              {artists.length &&
-                artists.map((artist) => (
-                  <option value={artist.id} key={artist.id}>
-                    {artist.name}
-                  </option>
-                ))}
-            </select>
+            <div className={style.check}>
+              <select
+                name="artistId"
+                onChange={handleChange}
+                className={style.input}
+              >
+                <option value="">Select an artist...</option>
+                {artists.length &&
+                  artists.map((artist) => (
+                    <option value={artist.id} key={artist.id}>
+                      {artist.name}
+                    </option>
+                  ))}
+              </select>
+              {!check.artistId && (
+                <span className={style.error}>required*</span>
+              )}
+            </div>
 
             {/*ARTIST CREATION*/}
             <div>
@@ -201,21 +254,22 @@ const EventForm = () => {
             </div>
 
             {/*STAGE SELECTION */}
-
-            <select
-              name="stageId"
-              onChange={handleChange}
-              className={style.input}
-            >
-              <option>Select a stage...</option>
-              {stages.length &&
-                stages.map((stage) => (
-                  <option value={stage.id} key={stage.id}>
-                    {stage.name}
-                  </option>
-                ))}
-            </select>
-
+            <div className={style.check}>
+              <select
+                name="stageId"
+                onChange={handleChange}
+                className={style.input}
+              >
+                <option value="">Select a stage...</option>
+                {stages.length &&
+                  stages.map((stage) => (
+                    <option value={stage.id} key={stage.id}>
+                      {stage.name}
+                    </option>
+                  ))}
+              </select>
+              {!check.stageId && <span className={style.error}>required*</span>}
+            </div>
             {/*STAGE CREATION*/}
             <div>
               <span>Not in the list?</span>
@@ -230,25 +284,28 @@ const EventForm = () => {
             </div>
 
             {/*EVENT DATE */}
-
-            <input
-              type="date"
-              name="date"
-              min={new Date().toISOString().split("T")[0]}
-              onChange={handleChange}
-              value={form.date}
-              className={style.input}
-            />
-
+            <div className={style.check}>
+              <input
+                type="date"
+                name="date"
+                min={new Date().toISOString().split("T")[0]}
+                onChange={handleChange}
+                value={form.date}
+                className={style.input}
+              />
+              {!check.date && <span className={style.error}>required*</span>}
+            </div>
             {/*EVENT TIME */}
-
-            <input
-              type="time"
-              name="time"
-              onChange={handleChange}
-              value={form.time}
-              className={style.input}
-            />
+            <div className={style.check}>
+              <input
+                type="time"
+                name="time"
+                onChange={handleChange}
+                value={form.time}
+                className={style.input}
+              />
+              {!check.time && <span className={style.error}>required*</span>}
+            </div>
           </div>
 
           {/*EVENT POSTER */}
@@ -263,48 +320,68 @@ const EventForm = () => {
               </button>
             </div>
             {form.img && <img src={form.img} className={style.imgPreview} />}
+            {!check.img && <span className={style.error}>required*</span>}
           </div>
 
           {/*EVENT STOCK */}
           <p>You can set up to three tickets categories</p>
-          {capacity && (
+          {capacity ? (
             <p className={style.warning}>
-              ATTENTION! The selected stage allows {capacity}!
+              ATTENTION! The selected stage has capacity for {capacity} people!
+            </p>
+          ) : (
+            <p className={style.warning}>
+              Select a stage to set the capacity of the place
             </p>
           )}
           <div className={style.stocks}>
             <div className={style.stockItem}>
-              <label htmlFor="cat1name">
+              <div className={style.stars}>
                 <BsFillStarFill />
-              </label>
-              <input
-                type="text"
-                name="cat1name"
-                onChange={handleStockChange}
-                placeholder="Category name"
-                className={style.input}
-              />
-              <label htmlFor="cat1price"> Price: (ARS)</label>
-              <input
-                type="number"
-                name="cat1price"
-                onChange={handleStockChange}
-                className={style.input}
-                placeholder="Category Price"
-              />
-              <input
-                type="text"
-                name="cat1stock"
-                onChange={handleStockChange}
-                className={style.input}
-                placeholder="Category Stock"
-              />
+              </div>
+              <div className={style.check}>
+                <input
+                  type="text"
+                  name="cat1name"
+                  onChange={handleStockChange}
+                  placeholder="Category name"
+                  className={style.input}
+                />
+                {!check.stock.cat1name && (
+                  <span className={style.error}>required*</span>
+                )}
+              </div>
+              <div className={style.check}>
+                <input
+                  type="number"
+                  name="cat1price"
+                  onChange={handleStockChange}
+                  className={style.input}
+                  placeholder="Category Price (ARS)"
+                />
+                {!check.stock.cat1price && (
+                  <span className={style.error}>required*</span>
+                )}
+              </div>
+              <div className={style.check}>
+                <input
+                  type="number"
+                  name="cat1stock"
+                  onChange={handleStockChange}
+                  className={style.input}
+                  placeholder="Category Stock"
+                />
+                {!check.stock.cat1stock && (
+                  <span className={style.error}>required*</span>
+                )}
+              </div>
             </div>
             <div className={style.stockItem}>
-              <label htmlFor="cat2name">
+              <div className={style.stars}>
                 <BsFillStarFill />
                 <BsFillStarFill />
-              </label>
+              </div>
+
               <input
                 type="text"
                 name="cat2name"
@@ -312,26 +389,28 @@ const EventForm = () => {
                 placeholder="Category name"
                 className={style.input}
               />
-              <label htmlFor="cat2price"> Price: (ARS)</label>
+              <label htmlFor="cat2price"></label>
               <input
                 type="number"
                 name="cat2price"
                 onChange={handleStockChange}
                 className={style.input}
+                disabled={check.stock.cat2price}
               />
               <input
                 type="text"
                 name="cat2stock"
                 onChange={handleStockChange}
                 className={style.input}
+                disabled={check.stock.cat2stock}
               />
             </div>
             <div className={style.stockItem}>
-              <label htmlFor="cat3name">
+              <div className={style.stars}>
                 <BsFillStarFill />
                 <BsFillStarFill />
                 <BsFillStarFill />
-              </label>
+              </div>
               <input
                 type="text"
                 name="cat3name"
@@ -339,18 +418,20 @@ const EventForm = () => {
                 placeholder="Category name"
                 className={style.input}
               />
-              <label htmlFor="cat3price"> Price: (ARS)</label>
+              <label htmlFor="cat3price"></label>
               <input
                 type="number"
                 name="cat3price"
                 onChange={handleStockChange}
                 className={style.input}
+                disabled={!check.stock.cat3name}
               />
               <input
                 type="text"
                 name="cat3stock"
                 onChange={handleStockChange}
                 className={style.input}
+                disabled={!check.stock.cat3name}
               />
             </div>
           </div>
