@@ -21,6 +21,7 @@ import clearUser, { CLEAR_USER } from "./clearUser";
 import updateUser, { UPDATE_USER } from "./updateUser";
 import clearUpdateErr, { CLEAR_UPDATE_ERR } from "./clearUpdateErr";
 import getArtists, { GET_ARTISTS } from "./getArtists";
+import updatePassword, { UPDATE_PASSWORD } from "./updatePassword";
 
 export const actions = {
   GET_EVENTS,
@@ -44,6 +45,7 @@ export const actions = {
   UPDATE_USER,
   CLEAR_UPDATE_ERR,
   GET_ARTISTS,
+  UPDATE_PASSWORD,
 };
 
 const actionsCreator = {
@@ -67,6 +69,7 @@ const actionsCreator = {
   clearUser,
   updateUser,
   clearUpdateErr,
+  updatePassword
 };
 
 export default actionsCreator;
