@@ -139,7 +139,8 @@ const RegisterForm = ({closeRegisterModal}) => {
                     handleChange={handleChangeInput} 
                     errors={inputErros} 
                     inputNext='lastName' 
-                    inputState={input} 
+                    inputState={input}
+                    autoFocus
                 />
 
                 {/* lastName */}

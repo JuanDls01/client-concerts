@@ -6,8 +6,8 @@ const FormBttn = ({inputErros, firstValue, text}) => {
     // queremos mostrar dentro del bttn. Valida el bttn si no hay errores y si el primer valor no 
     // es un string vacio, sino permanece deshabilitado
 
-    console.log('inputErros', inputErros)
-    console.log('firstvalue', firstValue)
+    // console.log('inputErros', inputErros)
+    // console.log('firstvalue', firstValue)
 
     const [disable, setDisable] = useState(true);
 
