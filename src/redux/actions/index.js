@@ -46,7 +46,7 @@ export const actions = {
   UPDATE_USER,
   CLEAR_UPDATE_ERR,
   GET_ARTISTS,
-  GET_TICKETS
+  GET_TICKETS,
   UPDATE_PASSWORD,
 };
 
