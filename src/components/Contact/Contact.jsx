@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
+
 // import FormBttn from "../Common/FormBttn/FormBttn";
 // import InputText from '../Common/InputText/InputText';
 
@@ -81,7 +83,7 @@ export default function Contact(){
     return(
     <div className={style.pageContainner}>
         <div className={style.logoContainner}>
-            <img src={logo} className={style.logo} alt={logo}/>
+            <Link className={style.linkhome} to="/"><img src={logo} className={style.logo} alt={logo}/></Link>
         </div>
         <div className={style.formContainner}>
             
