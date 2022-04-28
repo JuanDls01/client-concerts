@@ -94,7 +94,8 @@ export default function Contact(){
                         name='name' 
                         type='text' 
                         placeholder='Name' 
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        autoFocus
                     />
                     {errors.name?<div className={style.error}>{errors.name}</div>:null}
 

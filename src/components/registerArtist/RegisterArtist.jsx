@@ -79,7 +79,8 @@ const ArtistForm = ({onClose}) => {
         name: '',
         description: '',
     });
-        document.getElementById('seleccion').value=""
+        document.getElementById('seleccion').value="";
+        onClose();
     }
 
     document.addEventListener('keydown', (event) => {
@@ -128,7 +129,7 @@ const ArtistForm = ({onClose}) => {
             
               <button type="submit" className={(input.name ==="" || input.description ==="" || input.genreId ==="") ?s.buttonDisabled:s.button} disabled={(input.name ==="" || input.description ==="" || input.genreId ==="") ? true:false}> Send </button>
 
-              <button className={s.button2} onClick={onClose}>Cancel </button>
+              <button className={s.button2} onClick={onClose}>Close</button>
             
           </form>
         </div>

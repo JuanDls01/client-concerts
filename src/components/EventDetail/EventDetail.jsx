@@ -188,6 +188,9 @@ const EventDetail = () => {
               <MapContainer
                 lat={event.Stage && event.Stage.lat}
                 lon={event.Stage && event.Stage.lon}
+                marginLeft="15%"
+                maxWidth="30%"
+                maxHeight="30%"
               />
             ) : (
               <p>Loading map..</p>

@@ -8,7 +8,7 @@ import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
-import { CreateStage } from "../CreateStage/CreateStage";
+import CreateStage from "../CreateStage/CreateStage";
 import Swal from "sweetalert2";
 import LoadingOverlay from "react-loading-overlay";
 import { Navigate, useNavigate } from "react-router-dom";
