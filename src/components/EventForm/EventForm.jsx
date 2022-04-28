@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import LoadingOverlay from "react-loading-overlay";
 import { Navigate, useNavigate } from "react-router-dom";
 import checkInput from "../../utils/checkInput";
+import finalCheck from "../../utils/finalCheck";
 
 const EventForm = () => {
   //useRoleProtected("vendedor");
@@ -94,38 +95,8 @@ const EventForm = () => {
   }, [user]);
 
   const submit = async () => {
-    try {
-      const toSell =
-        parseInt(form.stock.cat1stock) +
-        parseInt(form.stock.cat2stock) +
-        parseInt(form.stock.cat3stock);
-      toSell > capacity
-        ? Swal.fire({
-            title: "Wait a sec...",
-            text: `This stage has a capacity for ${capacity} people. 
-          You are trying to sell ${toSell} tickets`,
-            icon: "error",
-            confirmButtonText: "Fix it!",
-          })
-        : setIsActive(true);
-      const response = await axios.post("/event", form);
-
-      Swal.fire({
-        title: "Success",
-        text: `Your events has been created. You can check it in our events section`,
-        icon: "success",
-        confirmButtonText: "Fix it!",
-      });
-      navigate("/");
-    } catch (error) {
-      setIsActive(false);
-      Swal.fire({
-        title: "Todo mal",
-        text: `${error}`,
-        icon: "error",
-        confirmButtonText: "Fix it!",
-      });
-    }
+    const error = finalCheck(form, checkbox, capacity);
+    error.length && alert(error);
   };
 
   const handleChange = (e) => {
@@ -177,6 +148,27 @@ const EventForm = () => {
         setCheck({ ...check, img: checkInput("img", result.info.url) });
     }
   );
+
+  const [checkbox, setCheckbox] = useState({
+    category2: false,
+    category3: false,
+  });
+
+  const handleCheckbox = (e) => {
+    const property = e.target.name;
+
+    setCheckbox({ ...checkbox, [property]: !checkbox[property] });
+    if (checkbox.category2 === true)
+      setForm({
+        ...form,
+        stock: { ...form.stock, cat2name: "", cat2price: 0, cat2stock: 0 },
+      });
+    if (checkbox.category3 === true)
+      setForm({
+        ...form,
+        stock: { ...form.stock, cat3name: "", cat3price: 0, cat3stock: 0 },
+      });
+  };
 
   return (
     <div className={style.pageContainer}>
@@ -346,6 +338,7 @@ const EventForm = () => {
                   onChange={handleStockChange}
                   placeholder="Category name"
                   className={style.input}
+                  value={form.stock.cat1name}
                 />
                 {!check.stock.cat1name && (
                   <span className={style.error}>required*</span>
@@ -358,6 +351,7 @@ const EventForm = () => {
                   onChange={handleStockChange}
                   className={style.input}
                   placeholder="Category Price (ARS)"
+                  value={form.stock.cat1price}
                 />
                 {!check.stock.cat1price && (
                   <span className={style.error}>required*</span>
@@ -377,9 +371,17 @@ const EventForm = () => {
               </div>
             </div>
             <div className={style.stockItem}>
-              <div className={style.stars}>
-                <BsFillStarFill />
-                <BsFillStarFill />
+              <div className={style.label}>
+                <input
+                  type="checkbox"
+                  name="category2"
+                  checked={checkbox.category2}
+                  onChange={handleCheckbox}
+                />
+                <div className={style.stars}>
+                  <BsFillStarFill />
+                  <BsFillStarFill />
+                </div>
               </div>
 
               <input
@@ -388,6 +390,8 @@ const EventForm = () => {
                 onChange={handleStockChange}
                 placeholder="Category name"
                 className={style.input}
+                disabled={!checkbox.category2}
+                value={form.stock.cat2name}
               />
               <label htmlFor="cat2price"></label>
               <input
@@ -395,21 +399,32 @@ const EventForm = () => {
                 name="cat2price"
                 onChange={handleStockChange}
                 className={style.input}
-                disabled={check.stock.cat2price}
+                disabled={!checkbox.category2}
+                value={form.stock.cat2price}
               />
               <input
                 type="text"
                 name="cat2stock"
                 onChange={handleStockChange}
                 className={style.input}
-                disabled={check.stock.cat2stock}
+                disabled={!checkbox.category2}
+                value={form.stock.cat2stock}
               />
             </div>
             <div className={style.stockItem}>
-              <div className={style.stars}>
-                <BsFillStarFill />
-                <BsFillStarFill />
-                <BsFillStarFill />
+              <div className={style.label}>
+                <input
+                  type="checkbox"
+                  name="category3"
+                  id=""
+                  checked={checkbox.category3}
+                  onChange={handleCheckbox}
+                />
+                <div className={style.stars}>
+                  <BsFillStarFill />
+                  <BsFillStarFill />
+                  <BsFillStarFill />
+                </div>
               </div>
               <input
                 type="text"
@@ -417,6 +432,8 @@ const EventForm = () => {
                 onChange={handleStockChange}
                 placeholder="Category name"
                 className={style.input}
+                disabled={!checkbox.category3}
+                value={form.stock.cat3name}
               />
               <label htmlFor="cat3price"></label>
               <input
@@ -424,14 +441,16 @@ const EventForm = () => {
                 name="cat3price"
                 onChange={handleStockChange}
                 className={style.input}
-                disabled={!check.stock.cat3name}
+                disabled={!checkbox.category3}
+                value={form.stock.cat3price}
               />
               <input
                 type="text"
                 name="cat3stock"
                 onChange={handleStockChange}
                 className={style.input}
-                disabled={!check.stock.cat3name}
+                disabled={!checkbox.category3}
+                value={form.stock.cat3stock}
               />
             </div>
           </div>
