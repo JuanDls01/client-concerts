@@ -4,7 +4,9 @@ import QRCode from 'react-qr-code'
 import s from './Ticket.module.css'
 
 export default function Ticket({props}){
-    console.log(props)
+
+    const result = props.adress.filter(item=>item.id==props.stage)
+    
     return(<div className={s.container}>
         <div className={s.ticket}>
             <div className={s.pparte}>
@@ -34,8 +36,8 @@ export default function Ticket({props}){
                 <p>{props.nameT}</p>
                 <p>{props.email}</p>
                 <p><strong>DATE:</strong> {props.date}</p>
-                <p><strong>STAGE:</strong> pendiente</p>
-                <p><strong>ADRESS:</strong> pendiente</p>
+                <p><strong>STAGE:</strong> {result[0].name}</p>
+                <p><strong>ADRESS:</strong> {result[0].address}</p>
                
                 {/* <p>adress{props.adress}</p>
                 <p>Stage{props.stage}</p> */}

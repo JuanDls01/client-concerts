@@ -62,8 +62,17 @@ export default function ShoppyngHistory() {
 
   const data = user.Orders;
 
+  const res = []
+  user.Orders?.forEach((order) =>{res.push(order.Tickets)})
+  
+  let prices = user.Orders?.map((order) =>order.Tickets)
+  let amount = 0
+ prices?.forEach((price) =>{
+        price.forEach(item=>{amount = amount + item.price})
+ })
+  // console.log(amount)
 
-
+  
   const columns = [
     { name: "Folio", selector: (row) => row.id, center: true },
     { name: "Evento", selector: (row) => row.Tickets[0].Event.name, left: true },
@@ -81,9 +90,7 @@ export default function ShoppyngHistory() {
 
   //Seleccion de renglon
   function handleRowClicked(e){
-    // console.log(user);
-    // console.log(user.Events[0].Stage.name );
-    // console.log(user.Events[0].Stage.address );
+   
       setMostrarPanel(!mostrarPanel)
       dispatch(getTickets(e));
   
@@ -123,17 +130,17 @@ export default function ShoppyngHistory() {
       <div className={style.cardConteiner}>
         <Kpis
           title="Total Events Acquired"
-          analitics="event"
+          analitics={user.Events?.length}
           //   estadistics="+3.4"
           img={imgSubida}
         />
         <Kpis
           title="Total Tickets Purchased"
-          analitics="12"
+          analitics={res.flat().length}
           //   estadistics="-5,5%"
           img={calen}
         />
-        <Kpis title="Amount of Purchases" analitics="$10,524" img={carrito} />
+        <Kpis title="Amount of Purchases" analitics={new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'USD' }).format(amount)} img={carrito} />
       </div>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Recent Purchases</h1>
@@ -144,7 +151,7 @@ export default function ShoppyngHistory() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL USUARIO */}
       <div className={style.contendedorTabla}>
         <div className={style.tabla}>
-          <DataTable  pagination columns={columns} data={data} theme="custom" onRowClicked={(e)=>{ handleRowClicked(e) }} />
+          <DataTable  pagination columns={columns} data={data}  theme="custom" onRowClicked={(e)=>{ handleRowClicked(e) }} />
         </div>
       </div>
       <Footer/>
