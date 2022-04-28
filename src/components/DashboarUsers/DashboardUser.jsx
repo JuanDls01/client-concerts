@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Kpis from "./Kpis";
 import { useSelector, useDispatch } from "react-redux";
+import getTickets from '../../redux/actions/getTickets'
+// import ReactDom from 'react-dom';
 
 import useRoleProtected from "../Hooks/useRoleProtected";
 import DataTable, {createTheme} from 'react-data-table-component';
@@ -8,17 +10,19 @@ import Footer from '../footer/footer';
 import { Link, useParams } from "react-router-dom";
 import getUser from "../../redux/actions/getUser";
 import clearUser from "../../redux/actions/clearUser";
+import Modal from '../Modal/Modal';
+import {Tickets} from './Tickets/Tickets'
 
 //css
 import style from "./DashboardUser.module.css";
 import "style-components";
 
 //assets
+// import { ImEye } from "react-icons/im";
 import logo from "../../assets/images/logotipo.png";
 import imgSubida from "../../assets/images/subida.png";
 import calen from "../../assets/images/calen.png";
 import carrito from "../../assets/images/carrito.png";
-import { ImEye } from "react-icons/im";
 
 //Datos mokeados
 
@@ -40,45 +44,13 @@ import { ImEye } from "react-icons/im";
 //     {orderId:5, idEvent:5, eventName:"Uno mas para estar bien seguros", tickets: 2, datePurchase:"16-02-2022" },
 // ]
   
-
-const columns = [
-  { name: "Folio", selector: (row) => row.id, center: true },
-  { name: "Evento", selector: (row) => row.Tickets[0].Event.name, left: true },
-  { name: "Tickets", selector: (row) => row.Tickets.length, center: true },
-  {
-    name: "Date of purchase",
-    selector: (row) => row.date,
-    sortable: true,
-    reorder: true,
-  },
-  {
-    name: "See Tickets",
-    grow: 0,
-    cell: (row) => (
-      <Link to="/">
-        <ImEye className={style.icons} />
-      </Link>
-    ),
-    center: true,
-  },
-];
-
-createTheme("custom", {
-  text: {
-    primary: "#242565",
-    secondary: "#F5167E",
-  },
-  background: {
-    default: "#fff",
-  },
-});
-
 export default function ShoppyngHistory() {
   useRoleProtected(["user", "vendedor"]);
-
+  
   const { id } = useParams();
   const user = useSelector((state) => state.userDetail);
   const token = useSelector((state) => state.token);
+  const [mostrarPanel, setMostrarPanel] = useState(false)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -89,10 +61,51 @@ export default function ShoppyngHistory() {
   }, [token]);
 
   const data = user.Orders;
-  console.log(data);
+
+
+
+  const columns = [
+    { name: "Folio", selector: (row) => row.id, center: true },
+    { name: "Evento", selector: (row) => row.Tickets[0].Event.name, left: true },
+    { name: "Tickets", selector: (row) => row.Tickets.length, center: true },
+    { name: "Date of purchase", selector: (row) => row.date, sortable: true, reorder: true,  },
+    { name: "See Tickets", grow: 0, cell: (row) => "View 👁︎ ", center: true,   },
+    // { name: "See Tickets", grow: 0, cell: (row) => ( <button className={style.btnEyes} onClick={(e)=>{
+    //   setMostrarPanel(!mostrarPanel);
+    //   console.log(e);
+    //   handleRowClicked();
+    //   }}> <ImEye className={style.icons} /> </button> ), center: true,   },
+  ];
+
+  // console.log(mostrarPanel)
+
+  //Seleccion de renglon
+  function handleRowClicked(e){
+    // console.log(user);
+    // console.log(user.Events[0].Stage.name );
+    // console.log(user.Events[0].Stage.address );
+      setMostrarPanel(!mostrarPanel)
+      dispatch(getTickets(e));
+  
+  };
+
+  //Estilos fondo tabla
+  createTheme("custom", {
+    text: {
+      primary: "#242565",
+      secondary: "#F5167E",
+    },
+    background: {
+      default: "#fff",
+    },
+  });
+
+
 
   return (
+    
     <div className={style.conteiner}>
+    
       <div className={style.header}>
         <Link to='/'><img className={style.imgHeader} src={logo} /></Link>
         <div className={style.user}>
@@ -104,12 +117,13 @@ export default function ShoppyngHistory() {
       </div>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Shoppyng History</h1>
+        
       </div>
       {/* Kpis */}
       <div className={style.cardConteiner}>
         <Kpis
           title="Total Events Acquired"
-          analitics="4"
+          analitics="event"
           //   estadistics="+3.4"
           img={imgSubida}
         />
@@ -120,16 +134,17 @@ export default function ShoppyngHistory() {
           img={calen}
         />
         <Kpis title="Amount of Purchases" analitics="$10,524" img={carrito} />
-        {/* <button className={style.btnPublish}>Publish Event</button> */}
       </div>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Recent Purchases</h1>
       </div>
+      {mostrarPanel && <Modal><div className={style.divIn}><Tickets onClose={handleRowClicked}/></div></Modal>}
+      {/* {mostrarPanel && ReactDom.createPortal(<div  className={style.divIn} >Esto es lo que necesito</div>, document.getElementById('portal') )} */}
 
-      {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
+      {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL USUARIO */}
       <div className={style.contendedorTabla}>
         <div className={style.tabla}>
-          <DataTable  pagination columns={columns} data={data} theme="custom"  />
+          <DataTable  pagination columns={columns} data={data} theme="custom" onRowClicked={(e)=>{ handleRowClicked(e) }} />
         </div>
       </div>
       <Footer/>
@@ -137,23 +152,5 @@ export default function ShoppyngHistory() {
   );
 }
 
-{
-  /* <div className={style.tabla}>
-<table>
-  <tr className={style.columns}>
-    <th>Event Name</th>
-    <th>Category</th>
-    <th>Stage</th>
-    <th>Ticket Sells</th>
-    <th>Total Sells</th>
-  </tr>
-  <tr>
-    <td>Metalica</td>
-    <td>1</td>
-    <td>Luna Park</td>
-    <td>36</td>
-    <td>$3650</td>
-  </tr>
-</table>
-</div> */
-}
+
+

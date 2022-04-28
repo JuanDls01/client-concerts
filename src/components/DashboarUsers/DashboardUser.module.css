@@ -14,11 +14,28 @@
 .icons{
   font-size:22px;
   text-decoration: none;
-  color: #242565
+  color: #242565;
 }
 
 .icons:hover{
-  color:#f5167e
+  color:#f5167e;
+}
+
+.btnEyes{
+  border: 0;
+  background-color:transparent;
+}
+
+.divIn{
+  color:red;
+  /* z-index: 888; */
+  /* position: absolute;
+  top: 60px;
+  margin: 25%; */
+  /* width: 50%;
+  height: 180px; */
+  /* background-color:#000;
+  color: white; */
 }
 
 .conteiner {
