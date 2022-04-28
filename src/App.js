@@ -14,7 +14,7 @@ import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
 import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword"
 import "./App.css";
-import SeatPlace from "./components/Seat Place/SeatPlace";
+import SeatPlace from "./components/SeatPlace/SeatPlace";
 
 import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
 import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
@@ -69,12 +69,12 @@ function App() {
 
 
         <Route path="/user/dashboard" element={<DashboardSeller />} />
-        <Route path="/user/shoppinghistory" element={<ShoppyngHistory />} /> */}
+        <Route path="/user/shoppinghistory" element={<ShoppyngHistory />} />
 
         
 
 
-        <Route path="/order" element={<OrderForm />} />
+        <Route path="/order" element={<OrderForm />} /> */}
 
       </Routes>
     </div>
