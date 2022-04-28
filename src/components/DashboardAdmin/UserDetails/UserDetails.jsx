@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import NavBarDash from "../NavBarDash/NavBarDash";
 import actionsCreator from "../../../redux/actions";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -27,7 +28,7 @@ const UserDetails = () => {
   const userUpdareErr = useSelector((state) => state.userUpdareErr);
   const userLoaded = useSelector((state) => state.userDetail);
   const token = useSelector((state) => state.token);
-  const { getUser, clearUser, updateUser, clearUpdateErr } = actionsCreator;
+  const { getUser, clearUser, updateUser, clearUpdateErr, updatePassword } = actionsCreator;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,6 +42,12 @@ const UserDetails = () => {
     role: "",
   });
   const [inputErros, setInputErros] = useState({});
+  const [inputPW, setInputPW] = useState({
+    currentPassword: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [inputPWErros, setInputPWErros] = useState({});
 
   useEffect(() => {
     dispatch(getUser(id, token));
@@ -70,11 +77,27 @@ const UserDetails = () => {
     dispatch(updateUser(input, id, token));
   };
 
+  const submitPWHandler = (e) => {
+    e.preventDefault();
+    console.log(inputPW);
+    dispatch(updatePassword(inputPW, id, token));
+    setInputPW({
+      currentPassword: "",
+      password: "",
+      confirmPassword: "",
+    });
+  };
+
   const handleChangeInput = (e) => {
     const result = validator({ ...input, [e.target.name]: e.target.value });
     setInput({ ...input, [e.target.name]: e.target.value });
     setInputErros(result);
-    // dispatch(clearAuthError());
+  };
+
+  const handleChangeInputPW = (e) => {
+    const result = validatorPW({ ...inputPW, [e.target.name]: e.target.value });
+    setInputPW({ ...inputPW, [e.target.name]: e.target.value });
+    setInputPWErros(result);
   };
 
   const validator = (input) => {
@@ -98,16 +121,22 @@ const UserDetails = () => {
       errors.phone = "El telefono debe contener 8 digitos minimo";
     else if (input.phone.length > 15)
       errors.phone = "El telefono debe contener 15 digitos maximo";
-    if (!input.password) errors.password = "La contraseña es requerido";
-    else if (input.password.length < 8)
-      errors.password = "La contraseña debe contener 8 digitos minimo";
-    else if (input.password.length > 20)
-      errors.password = "La contraseña debe contener 20 digitos maximo";
-    if (!input.confirmPassword)
-      errors.confirmPassword = "La contraseña debe ser confirmada";
-    else if (input.password !== input.confirmPassword)
-      errors.confirmPassword = "Las contraseñas no coinciden";
     if (!input.email) errors.email = "El correo es requerido";
+    return errors;
+  };
+
+  const validatorPW = (input) => {
+    let errors = {};
+    if(!input.currentPassword) errors.currentPassword = "The current password is required";
+    if (!input.password) errors.password = "The Password is required";
+    else if (input.password.length < 8)
+      errors.password = "The password must contain at least 8 characters";
+    else if (input.password.length > 20)
+      errors.password = "The password must contain at most 20 characters";
+    if (!input.confirmPassword)
+      errors.confirmPassword = "The password must be confirmed";
+    else if (input.password !== input.confirmPassword)
+      errors.confirmPassword = "The passwords do not match";
     return errors;
   };
 
@@ -124,15 +153,84 @@ const UserDetails = () => {
       {/* DETAILS */}
       <div className="container">
         <div className={detailCont}>
-          <div className="row no-gutters">
+          <div className="row no-gutters align-items-center">
             {/* LEFT */}
             <div className="col-lg-4 card-body p-4">
-              <p>
-                <strong className={headingsColor}>Account</strong>
-              </p>
-              <p className="text-muted mb-0">
-                Set your account type &amp; details.
-              </p>
+              {/* <p>
+                <strong className={headingsColor}>Password</strong>
+              </p> */}
+              <form
+              className="text-start"
+                onSubmit={submitPWHandler}
+              >
+                {/* CURRENT PASSWORD */}
+                <div className="form-group">
+                  <label htmlFor="fname" className={headingsColor}>
+                    Current Password
+                  </label>
+                  <input
+                    name="currentPassword"
+                    type="password"
+                    className={`form-control ${inputProf}`}
+                    placeholder="Current Password"
+                    value={inputPW.currentPassword}
+                    onChange={handleChangeInputPW}
+                  />
+                  {inputPWErros.currentPassword ? (
+                    <div className="text-end">
+                      <small className="text-danger">{inputPWErros.currentPassword}</small>
+                    </div>
+                  ) : null}
+                </div>
+                {/* NEW PASSWORD */}
+                <div className="form-group">
+                  <label htmlFor="fname" className={headingsColor}>
+                    New Password
+                  </label>
+                  <input
+                    name="password"
+                    type="password"
+                    className={`form-control ${inputProf}`}
+                    placeholder="New Password"
+                    value={inputPW.password}
+                    onChange={handleChangeInputPW}
+                  />
+                  {inputPWErros.password ? (
+                    <div className="text-end">
+                      <small className="text-danger">{inputPWErros.password}</small>
+                    </div>
+                  ) : null}
+                </div>
+                {/* OLD PASSWORD */}
+                <div className="form-group">
+                  <label htmlFor="fname" className={headingsColor}>
+                    Confirmed Password
+                  </label>
+                  <input
+                    name="confirmPassword"
+                    type="password"
+                    className={`form-control ${inputProf}`}
+                    placeholder="Confirmed Password"
+                    value={inputPW.confirmPassword}
+                    onChange={handleChangeInputPW}
+                  />
+                  {inputPWErros.confirmPassword ? (
+                    <div className="text-end">
+                      <small className="text-danger">{inputPWErros.confirmPassword}</small>
+                    </div>
+                  ) : null}
+                </div>
+                <div className="form-group mt-3 text-end">
+                  <a href="#" className="btn btn-warning me-2">Reset Password</a>
+                  <button
+                    className="btn btn-primary"
+                    disabled={
+                      Object.keys(inputPWErros).length > 0 || (inputPW.password === '' && inputPW.confirmPassword === '') ?
+                      true: false
+                    }
+                  >Update</button>
+                </div>
+              </form>
             </div>
 
             {/* RIGHT */}
@@ -251,21 +349,8 @@ const UserDetails = () => {
                   </div>
                 ) : null}
               </div>
-              {false ? (
-                <div className="text-end">
-                  <small className="text-danger">{false}</small>
-                </div>
-              ) : null}
-              {userUpdareErr === "success" ? (
-                <div className="text-end">
-                  <small className="text-success">User updated!!</small>
-                </div>
-              ) : null}
               <div className="form-group mt-3 text-end">
-                <a href="#" className="btn btn-warning me-2">
-                  Reset Password
-                </a>
-                <button className="btn btn-primary">Update</button>
+                <button className="btn btn-primary" disabled={Object.keys(inputErros).length > 0 ? true : false}>Update</button>
               </div>
             </form>
           </div>
