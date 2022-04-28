@@ -87,15 +87,17 @@ const Login = () => {
     //     openRegisterModal();
     // }
 
-    const signWGoogleHandle = () => {
-        dispatch(signWGoogle())
-    }
+    // const signWGoogleHandle = () => {
+    //     dispatch(signWGoogle())
+    // }
 
     const responseGoogle = (response) => {
-        
+        console.log(response)
         const input = {
             googleId: response.profileObj.googleId,
-            email: response.profileObj.email
+            email: response.profileObj.email,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName
         }
         console.log(input)
         dispatch(loginUser(input))
@@ -144,7 +146,7 @@ const Login = () => {
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                    
+
                     {/* <button onClick={signWGoogleHandle}>SignIn with Google</button> */}
                     
                     {/* Submit */}
