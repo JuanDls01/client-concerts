@@ -139,14 +139,15 @@ const Login = () => {
                     />
                     {autherr ? <div className={style.authError}>{autherr}</div> : null}
                     {/* INICIAR SESIÓN CON GOOGLE */}
-                    <GoogleLogin
-                        clientId="777303769241-ektle3v1dbo31jaj1pfeoaqdfa789o7r.apps.googleusercontent.com"
-                        buttonText="Login"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy={'single_host_origin'}
-                    />
-
+                    <div className={style.googleLogin}>
+                        <GoogleLogin
+                            clientId="777303769241-ektle3v1dbo31jaj1pfeoaqdfa789o7r.apps.googleusercontent.com"
+                            buttonText="Sign In with Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </div>
                     {/* <button onClick={signWGoogleHandle}>SignIn with Google</button> */}
                     
                     {/* Submit */}
