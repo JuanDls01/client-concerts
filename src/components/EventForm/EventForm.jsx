@@ -20,6 +20,7 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
+  console.log(stages);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -37,6 +38,7 @@ const EventForm = () => {
   const handleStageModal = () => {
     setStageModal(!stageModal);
   };
+
   const [isActive, setIsActive] = useState(false);
 
   const [capacity, setCapacity] = useState(null);
@@ -122,7 +124,6 @@ const EventForm = () => {
       <p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>,
       <p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`,
     }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         setIsActive(!isActive);
         const post = await axios.post("/event", form);
@@ -152,6 +153,18 @@ const EventForm = () => {
             return stage.id == value;
           })[0].capacity
         );
+        const currentStage = stages.filter((stage) => {
+          return stage.id == value;
+        })[0];
+        if (currentStage.hasTemplate == true) {
+          Swal.fire({
+            title: "This stage has a plan template!",
+            text: "Remember that in order to access to this feature in your event detail, you must provide info about the 3 ticket categories",
+
+            imageUrl:
+              "https://res.cloudinary.com/dnn295qhb/image/upload/v1651197145/samples/ejemploPlano_seyrm4.jpg",
+          });
+        }
       } else {
         setCapacity(0);
       }
@@ -175,6 +188,7 @@ const EventForm = () => {
       },
     });
   };
+
   const showWidget = (widget) => {
     widget.open();
   };
