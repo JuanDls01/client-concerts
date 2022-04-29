@@ -14,7 +14,6 @@ import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
 import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword"
 import "./App.css";
-import SeatPlace from "./components/SeatPlace/SeatPlace";
 
 import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
 import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
@@ -48,24 +47,24 @@ function App() {
     <div className="App">
       <Routes>
         {/* Invitado: */}
-        <Route index element={<SeatPlace />} />
-        {/* <Route path="/recoverPassword" exact element={<ForgetPassword />} />
+        <Route index element={<Home />} />
+        <Route path="/recoverPassword" exact element={<ForgetPassword />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
-        <Route path="/:id" element={<EventDetail />} /> */}
+        <Route path="/:id" element={<EventDetail />} />
         {/* ADMIN */}
-        {/* <Route path="/admin/dashboard" element={<DashboardAdmin />} />
-        <Route path="/admin/dashboard/user/:id" element={<UserDetails />} /> */}
+        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+        <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />
         {/* Vendedor: */}
-        {/* <Route path="/postartist" element={<ArtistForm />} />
+        <Route path="/postartist" element={<ArtistForm />} />
         <Route path="/createEvent" element={<EventForm />} />
-        <Route path="/vendedor/dashboard" element={<DashboardSeller />} /> */}
+        <Route path="/vendedor/dashboard" element={<DashboardSeller />} />
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
-        {/* <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
+        <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
 
 
         <Route path="/user/dashboard" element={<DashboardSeller />} />
@@ -74,7 +73,7 @@ function App() {
         
 
 
-        <Route path="/order" element={<OrderForm />} /> */}
+        <Route path="/order" element={<OrderForm />} />
 
       </Routes>
     </div>
