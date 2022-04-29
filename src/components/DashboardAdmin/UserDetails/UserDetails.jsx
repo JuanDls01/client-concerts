@@ -45,7 +45,7 @@ const UserDetails = () => {
   const [inputPW, setInputPW] = useState({
     currentPassword: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
   });
   const [inputPWErros, setInputPWErros] = useState({});
 
@@ -79,7 +79,7 @@ const UserDetails = () => {
 
   const submitPWHandler = (e) => {
     e.preventDefault();
-    console.log(inputPW);
+    // console.log(inputPW);
     dispatch(updatePassword(inputPW, id, token));
     setInputPW({
       currentPassword: "",
@@ -127,7 +127,7 @@ const UserDetails = () => {
 
   const validatorPW = (input) => {
     let errors = {};
-    if(!input.currentPassword) errors.currentPassword = "The current password is required";
+    if(!input.currentPassword && user.id === id) errors.currentPassword = "The current password is required";
     if (!input.password) errors.password = "The Password is required";
     else if (input.password.length < 8)
       errors.password = "The password must contain at least 8 characters";
@@ -164,24 +164,26 @@ const UserDetails = () => {
                 onSubmit={submitPWHandler}
               >
                 {/* CURRENT PASSWORD */}
-                <div className="form-group">
-                  <label htmlFor="fname" className={headingsColor}>
-                    Current Password
-                  </label>
-                  <input
-                    name="currentPassword"
-                    type="password"
-                    className={`form-control ${inputProf}`}
-                    placeholder="Current Password"
-                    value={inputPW.currentPassword}
-                    onChange={handleChangeInputPW}
-                  />
-                  {inputPWErros.currentPassword ? (
-                    <div className="text-end">
-                      <small className="text-danger">{inputPWErros.currentPassword}</small>
-                    </div>
-                  ) : null}
-                </div>
+                { user.id === id && 
+                  <div className="form-group">
+                    <label htmlFor="fname" className={headingsColor}>
+                      Current Password
+                    </label>
+                    <input
+                      name="currentPassword"
+                      type="password"
+                      className={`form-control ${inputProf}`}
+                      placeholder="Current Password"
+                      value={inputPW.currentPassword}
+                      onChange={handleChangeInputPW}
+                    />
+                    {inputPWErros.currentPassword ? (
+                      <div className="text-end">
+                        <small className="text-danger">{inputPWErros.currentPassword}</small>
+                      </div>
+                    ) : null}
+                  </div>
+                }
                 {/* NEW PASSWORD */}
                 <div className="form-group">
                   <label htmlFor="fname" className={headingsColor}>
@@ -201,7 +203,7 @@ const UserDetails = () => {
                     </div>
                   ) : null}
                 </div>
-                {/* OLD PASSWORD */}
+                {/* CONFIRMED PASSWORD */}
                 <div className="form-group">
                   <label htmlFor="fname" className={headingsColor}>
                     Confirmed Password

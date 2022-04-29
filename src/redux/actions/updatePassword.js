@@ -3,7 +3,6 @@ export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 const updatePassword = (input, id, token) => {
   // console.log(input);
-
   return async (dispatch) => {
     try {
       const json = await axios.post(`/users/password/update/${id}`, input, {
