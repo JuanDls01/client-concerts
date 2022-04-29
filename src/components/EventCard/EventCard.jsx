@@ -9,7 +9,7 @@ import { BiMicrophone } from 'react-icons/bi';
 import { BsCalendarCheck } from 'react-icons/bs';
 import { AiFillHeart } from 'react-icons/ai';
 
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const getMonthName = (monthNumber) => {
     // Recibe un número como parametro y devuelve el nombre del mes correspondiente
@@ -18,31 +18,32 @@ const getMonthName = (monthNumber) => {
     }
 }
 
-const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stageName, price }) => {
+const today = Date();
+
+const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stageName, price, stock }) => {
     // console.log(startdate)
     const day = Number(startdate.split('-')[2]);
     // Transformo el número del mes en el nombre: 
     const monthNumber = Number(startdate.split('-')[1]);
     const monthName = getMonthName(monthNumber);
+    const year = Number(startdate.split('-')[0])
     const hours = starttime.split(':')[0];
     const minutes = starttime.split(':')[1]
     const time = `${hours}:${minutes}`
     const date = `${day}th of ${monthName} a las ${time}`
-
-
-    // const [favSelected, setFavSelected] = useState(false)
-
-    // const selectFav = () => {
-    //     setFavSelected(true)
-    // }
+    const stockTotal = stock.cat1stock + stock.cat2stock + stock.cat3stock;
+    
+    // Cuantos días faltan para el evento: 
+    const todayDate = Number(today.split(' ')[2]);
+    const todayMonth = today.split(' ')[1];
+    const todayYear = Number(today.split(' ')[3]);
+    console.log(year);
+    console.log(todayYear);
     
     return (
         <div className={style.cardEvent}>
             <Link to={`/${id}`}>
                 <div className={style.imgContainner} >
-                    <button className={style.bttnHeart}>
-                        <AiFillHeart className={style.heart} />
-                    </button>
                     <img src={imgEvent} alt='imgEvent'/>
                 </div>
                 <div className={style.infoContainner}>
@@ -65,8 +66,14 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                         <p>Band: {artistName}</p>
                     </div>
                 </div>
+                {stockTotal === 0?
+                <div className={style.soldOut}>SOLD OUT</div>:
+                <>{
+                    (day - todayDate < 5) && (todayMonth === monthName) && (year === todayYear)?
+                    <div className={style.buybttn}>IS VERY CLOSE</div>:
+                    <button className={style.buybttn}>BUY TICKET</button>
+                }</>}
             </Link>
-            <button className={style.buybttn}>BUY TICKET</button>
         </div>
     )
 };

@@ -58,7 +58,7 @@ const EventsCards = () => {
                 artistName={event.Artist && event.Artist.name}
                 stageName={event.Stage && event.Stage.name}
                 price={event.lowestPrice}
-                // location={event.stage.location}
+                stock={event.stock}
               />
             );
           })}
