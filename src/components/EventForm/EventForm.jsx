@@ -8,17 +8,19 @@ import useRoleProtected from "../Hooks/useRoleProtected";
 import style from "./EventForm.module.css";
 import { BsFillStarFill } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
-import { CreateStage } from "../CreateStage/CreateStage";
+import CreateStage from "../CreateStage/CreateStage";
 import Swal from "sweetalert2";
 import LoadingOverlay from "react-loading-overlay";
 import { Navigate, useNavigate } from "react-router-dom";
 import checkInput from "../../utils/checkInput";
+import finalCheck from "../../utils/finalCheck";
 
 const EventForm = () => {
   //useRoleProtected("vendedor");
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
+  console.log(stages);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -36,6 +38,7 @@ const EventForm = () => {
   const handleStageModal = () => {
     setStageModal(!stageModal);
   };
+
   const [isActive, setIsActive] = useState(false);
 
   const [capacity, setCapacity] = useState(null);
@@ -94,38 +97,48 @@ const EventForm = () => {
   }, [user]);
 
   const submit = async () => {
-    try {
-      const toSell =
-        parseInt(form.stock.cat1stock) +
-        parseInt(form.stock.cat2stock) +
-        parseInt(form.stock.cat3stock);
-      toSell > capacity
-        ? Swal.fire({
-            title: "Wait a sec...",
-            text: `This stage has a capacity for ${capacity} people. 
-          You are trying to sell ${toSell} tickets`,
-            icon: "error",
-            confirmButtonText: "Fix it!",
-          })
-        : setIsActive(true);
-      const response = await axios.post("/event", form);
-
+    const error = finalCheck(form, checkbox, capacity);
+    if (error.length) {
       Swal.fire({
-        title: "Success",
-        text: `Your events has been created. You can check it in our events section`,
-        icon: "success",
-        confirmButtonText: "Fix it!",
+        title: "Missing info",
+        icon: "warning",
+        html: error.map((error) => `<span>${error}</span><hr />`),
       });
-      navigate("/");
-    } catch (error) {
-      setIsActive(false);
-      Swal.fire({
-        title: "Todo mal",
-        text: `${error}`,
-        icon: "error",
-        confirmButtonText: "Fix it!",
-      });
+      return;
     }
+    const conArtist = artists.filter((artist) => artist.id == form.artistId);
+    const conStage = stages.filter((stage) => stage.id == form.stageId);
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+      html: `<p>Event: ${form.name}</p>
+      <p>Description: ${form.description}</p>
+      <p>Artist: ${conArtist[0].name}</p>
+      <p>Stage: ${conStage[0].name}</p>
+      <p>Date: ${form.date}</p>
+      <p>Time: ${form.time}</p>
+      <p>${form.stock.cat1name}: (Stock - ${form.stock.cat1stock}) (Price - ${form.stock.cat1price})</p>,
+      <p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>,
+      <p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setIsActive(!isActive);
+        const post = await axios.post("/event", form);
+        if (post.status == 200) {
+          Swal.fire("Changes saved", "", "success");
+          navigate(-1);
+        } else {
+          Swal.fire("Error", "", "error");
+        }
+
+        setIsActive(!isActive);
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
 
   const handleChange = (e) => {
@@ -140,6 +153,18 @@ const EventForm = () => {
             return stage.id == value;
           })[0].capacity
         );
+        const currentStage = stages.filter((stage) => {
+          return stage.id == value;
+        })[0];
+        if (currentStage.hasTemplate == true) {
+          Swal.fire({
+            title: "This stage has a plan template!",
+            text: "Remember that in order to access to this feature in your event detail, you must provide info about the 3 ticket categories",
+
+            imageUrl:
+              "https://res.cloudinary.com/dnn295qhb/image/upload/v1651197145/samples/ejemploPlano_seyrm4.jpg",
+          });
+        }
       } else {
         setCapacity(0);
       }
@@ -163,6 +188,7 @@ const EventForm = () => {
       },
     });
   };
+
   const showWidget = (widget) => {
     widget.open();
   };
@@ -178,269 +204,324 @@ const EventForm = () => {
     }
   );
 
+  const [checkbox, setCheckbox] = useState({
+    category2: false,
+    category3: false,
+  });
+
+  const handleCheckbox = (e) => {
+    const property = e.target.name;
+
+    setCheckbox({ ...checkbox, [property]: !checkbox[property] });
+    if (checkbox.category2 === true)
+      setForm({
+        ...form,
+        stock: { ...form.stock, cat2name: "", cat2price: 0, cat2stock: 0 },
+      });
+    if (checkbox.category3 === true)
+      setForm({
+        ...form,
+        stock: { ...form.stock, cat3name: "", cat3price: 0, cat3stock: 0 },
+      });
+  };
+
   return (
-    <div className={style.pageContainer}>
-      <div className={style.logoContainner}>
-        <img src={logo} className={style.logo} alt={logo} />
-      </div>
+    <LoadingOverlay>
+      <div className={style.pageContainer}>
+        <div className={style.logoContainner}>
+          <img src={logo} className={style.logo} alt={logo} />
+        </div>
 
-      <div className={style.formContainer}>
-        <h1 className={style.titleForm}>Create your own event</h1>
-        <form autoComplete="off" className={style.formContent}>
-          {/*EVENT NAME */}
-          <div className={style.formHeader}>
-            <div className={style.check}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Event Name"
-                onChange={handleChange}
-                value={form.name}
-                className={style.input}
-              />
-              {!check.name && (
-                <span className={style.error}>
-                  required - 5 characters min*
-                </span>
-              )}
-            </div>
-
-            {/*EVENT DESCRIPTION */}
-            <div className={style.check}>
-              <input
-                type="text"
-                name="description"
-                onChange={handleChange}
-                placeholder="Event description"
-                className={style.input}
-              />
-              {!check.description && (
-                <span className={style.error}>
-                  required - 20 characters min*
-                </span>
-              )}
-            </div>
-            {/*ARTIST SELECTION */}
-            <div className={style.check}>
-              <select
-                name="artistId"
-                onChange={handleChange}
-                className={style.input}
-              >
-                <option value="">Select an artist...</option>
-                {artists.length &&
-                  artists.map((artist) => (
-                    <option value={artist.id} key={artist.id}>
-                      {artist.name}
-                    </option>
-                  ))}
-              </select>
-              {!check.artistId && (
-                <span className={style.error}>required*</span>
-              )}
-            </div>
-
-            {/*ARTIST CREATION*/}
-            <div>
-              <span>Not in the list?</span>
-              <button
-                type="button"
-                onClick={handleArtistModal}
-                className={style.bttnsubmit}
-              >
-                Create Artist
-              </button>
-              {artistModal && <RegisterArtist onClose={handleArtistModal} />}
-            </div>
-
-            {/*STAGE SELECTION */}
-            <div className={style.check}>
-              <select
-                name="stageId"
-                onChange={handleChange}
-                className={style.input}
-              >
-                <option value="">Select a stage...</option>
-                {stages.length &&
-                  stages.map((stage) => (
-                    <option value={stage.id} key={stage.id}>
-                      {stage.name}
-                    </option>
-                  ))}
-              </select>
-              {!check.stageId && <span className={style.error}>required*</span>}
-            </div>
-            {/*STAGE CREATION*/}
-            <div>
-              <span>Not in the list?</span>
-              <button
-                type="button"
-                onClick={handleStageModal}
-                className={style.bttnsubmit}
-              >
-                Create Stage
-              </button>
-              {stageModal && <CreateStage closeStageModal={handleStageModal} />}
-            </div>
-
-            {/*EVENT DATE */}
-            <div className={style.check}>
-              <input
-                type="date"
-                name="date"
-                min={new Date().toISOString().split("T")[0]}
-                onChange={handleChange}
-                value={form.date}
-                className={style.input}
-              />
-              {!check.date && <span className={style.error}>required*</span>}
-            </div>
-            {/*EVENT TIME */}
-            <div className={style.check}>
-              <input
-                type="time"
-                name="time"
-                onChange={handleChange}
-                value={form.time}
-                className={style.input}
-              />
-              {!check.time && <span className={style.error}>required*</span>}
-            </div>
-          </div>
-
-          {/*EVENT POSTER */}
-          <div className={style.formBody}>
-            <div>
-              <button
-                type="button"
-                onClick={() => showWidget(widget)}
-                className={style.bttnsubmit}
-              >
-                Upload the event poster
-              </button>
-            </div>
-            {form.img && <img src={form.img} className={style.imgPreview} />}
-            {!check.img && <span className={style.error}>required*</span>}
-          </div>
-
-          {/*EVENT STOCK */}
-          <p>You can set up to three tickets categories</p>
-          {capacity ? (
-            <p className={style.warning}>
-              ATTENTION! The selected stage has capacity for {capacity} people!
-            </p>
-          ) : (
-            <p className={style.warning}>
-              Select a stage to set the capacity of the place
-            </p>
-          )}
-          <div className={style.stocks}>
-            <div className={style.stockItem}>
-              <div className={style.stars}>
-                <BsFillStarFill />
-              </div>
+        <div className={style.formContainer}>
+          <h1 className={style.titleForm}>Create your own event</h1>
+          <form autoComplete="off" className={style.formContent}>
+            {/*EVENT NAME */}
+            <div className={style.formHeader}>
               <div className={style.check}>
                 <input
                   type="text"
-                  name="cat1name"
+                  name="name"
+                  placeholder="Event Name"
+                  onChange={handleChange}
+                  value={form.name}
+                  className={style.input}
+                />
+                {!check.name && (
+                  <span className={style.error}>
+                    required - 5 characters min*
+                  </span>
+                )}
+              </div>
+
+              {/*EVENT DESCRIPTION */}
+              <div className={style.check}>
+                <input
+                  type="text"
+                  name="description"
+                  onChange={handleChange}
+                  placeholder="Event description"
+                  className={style.input}
+                />
+                {!check.description && (
+                  <span className={style.error}>
+                    required - 20 characters min*
+                  </span>
+                )}
+              </div>
+              {/*ARTIST SELECTION */}
+              <div className={style.check}>
+                <select
+                  name="artistId"
+                  onChange={handleChange}
+                  className={style.input}
+                >
+                  <option value="">Select an artist...</option>
+                  {artists.length &&
+                    artists.map((artist) => (
+                      <option value={artist.id} key={artist.id}>
+                        {artist.name}
+                      </option>
+                    ))}
+                </select>
+                {!check.artistId && (
+                  <span className={style.error}>required*</span>
+                )}
+              </div>
+
+              {/*ARTIST CREATION*/}
+              <div>
+                <span>Not in the list?</span>
+                <button
+                  type="button"
+                  onClick={handleArtistModal}
+                  className={style.bttnsubmit}
+                >
+                  Create Artist
+                </button>
+                {artistModal && <RegisterArtist onClose={handleArtistModal} />}
+              </div>
+
+              {/*STAGE SELECTION */}
+              <div className={style.check}>
+                <select
+                  name="stageId"
+                  onChange={handleChange}
+                  className={style.input}
+                >
+                  <option value="">Select a stage...</option>
+                  {stages.length &&
+                    stages.map((stage) => (
+                      <option value={stage.id} key={stage.id}>
+                        {stage.name}
+                      </option>
+                    ))}
+                </select>
+                {!check.stageId && (
+                  <span className={style.error}>required*</span>
+                )}
+              </div>
+              {/*STAGE CREATION*/}
+              <div>
+                <span>Not in the list?</span>
+                <button
+                  type="button"
+                  onClick={handleStageModal}
+                  className={style.bttnsubmit}
+                >
+                  Create Stage
+                </button>
+                {stageModal && (
+                  <CreateStage closeStageModal={handleStageModal} />
+                )}
+              </div>
+
+              {/*EVENT DATE */}
+              <div className={style.check}>
+                <input
+                  type="date"
+                  name="date"
+                  min={new Date().toISOString().split("T")[0]}
+                  onChange={handleChange}
+                  value={form.date}
+                  className={style.input}
+                />
+                {!check.date && <span className={style.error}>required*</span>}
+              </div>
+              {/*EVENT TIME */}
+              <div className={style.check}>
+                <input
+                  type="time"
+                  name="time"
+                  onChange={handleChange}
+                  value={form.time}
+                  className={style.input}
+                />
+                {!check.time && <span className={style.error}>required*</span>}
+              </div>
+            </div>
+
+            {/*EVENT POSTER */}
+            <div className={style.formBody}>
+              <div>
+                <button
+                  type="button"
+                  onClick={() => showWidget(widget)}
+                  className={style.bttnsubmit}
+                >
+                  Upload the event poster
+                </button>
+              </div>
+              {form.img && <img src={form.img} className={style.imgPreview} />}
+              {!check.img && <span className={style.error}>required*</span>}
+            </div>
+
+            {/*EVENT STOCK */}
+            <p>You can set up to three tickets categories</p>
+            {capacity ? (
+              <p className={style.warning}>
+                ATTENTION! The selected stage has capacity for {capacity}{" "}
+                people!
+              </p>
+            ) : (
+              <p className={style.warning}>
+                Select a stage to set the capacity of the place
+              </p>
+            )}
+            <div className={style.stocks}>
+              <div className={style.stockItem}>
+                <div className={style.stars}>
+                  <BsFillStarFill />
+                </div>
+                <div className={style.check}>
+                  <input
+                    type="text"
+                    name="cat1name"
+                    onChange={handleStockChange}
+                    placeholder="Category name"
+                    className={style.input}
+                    value={form.stock.cat1name}
+                  />
+                  {!check.stock.cat1name && (
+                    <span className={style.error}>required*</span>
+                  )}
+                </div>
+                <div className={style.check}>
+                  <input
+                    type="number"
+                    name="cat1price"
+                    onChange={handleStockChange}
+                    className={style.input}
+                    placeholder="Category Price (ARS)"
+                    value={form.stock.cat1price}
+                  />
+                  {!check.stock.cat1price && (
+                    <span className={style.error}>required*</span>
+                  )}
+                </div>
+                <div className={style.check}>
+                  <input
+                    type="number"
+                    name="cat1stock"
+                    onChange={handleStockChange}
+                    className={style.input}
+                    placeholder="Category Stock"
+                  />
+                  {!check.stock.cat1stock && (
+                    <span className={style.error}>required*</span>
+                  )}
+                </div>
+              </div>
+              <div className={style.stockItem}>
+                <div className={style.label}>
+                  <input
+                    type="checkbox"
+                    name="category2"
+                    checked={checkbox.category2}
+                    onChange={handleCheckbox}
+                  />
+                  <div className={style.stars}>
+                    <BsFillStarFill />
+                    <BsFillStarFill />
+                  </div>
+                </div>
+
+                <input
+                  type="text"
+                  name="cat2name"
                   onChange={handleStockChange}
                   placeholder="Category name"
                   className={style.input}
+                  disabled={!checkbox.category2}
+                  value={form.stock.cat2name}
                 />
-                {!check.stock.cat1name && (
-                  <span className={style.error}>required*</span>
-                )}
-              </div>
-              <div className={style.check}>
+                <label htmlFor="cat2price"></label>
                 <input
                   type="number"
-                  name="cat1price"
+                  name="cat2price"
                   onChange={handleStockChange}
                   className={style.input}
-                  placeholder="Category Price (ARS)"
+                  disabled={!checkbox.category2}
+                  value={form.stock.cat2price}
                 />
-                {!check.stock.cat1price && (
-                  <span className={style.error}>required*</span>
-                )}
+                <input
+                  type="text"
+                  name="cat2stock"
+                  onChange={handleStockChange}
+                  className={style.input}
+                  disabled={!checkbox.category2}
+                  value={form.stock.cat2stock}
+                />
               </div>
-              <div className={style.check}>
+              <div className={style.stockItem}>
+                <div className={style.label}>
+                  <input
+                    type="checkbox"
+                    name="category3"
+                    id=""
+                    checked={checkbox.category3}
+                    onChange={handleCheckbox}
+                  />
+                  <div className={style.stars}>
+                    <BsFillStarFill />
+                    <BsFillStarFill />
+                    <BsFillStarFill />
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  name="cat3name"
+                  onChange={handleStockChange}
+                  placeholder="Category name"
+                  className={style.input}
+                  disabled={!checkbox.category3}
+                  value={form.stock.cat3name}
+                />
+                <label htmlFor="cat3price"></label>
                 <input
                   type="number"
-                  name="cat1stock"
+                  name="cat3price"
                   onChange={handleStockChange}
                   className={style.input}
-                  placeholder="Category Stock"
+                  disabled={!checkbox.category3}
+                  value={form.stock.cat3price}
                 />
-                {!check.stock.cat1stock && (
-                  <span className={style.error}>required*</span>
-                )}
+                <input
+                  type="text"
+                  name="cat3stock"
+                  onChange={handleStockChange}
+                  className={style.input}
+                  disabled={!checkbox.category3}
+                  value={form.stock.cat3stock}
+                />
               </div>
             </div>
-            <div className={style.stockItem}>
-              <div className={style.stars}>
-                <BsFillStarFill />
-                <BsFillStarFill />
-              </div>
-
-              <input
-                type="text"
-                name="cat2name"
-                onChange={handleStockChange}
-                placeholder="Category name"
-                className={style.input}
-              />
-              <label htmlFor="cat2price"></label>
-              <input
-                type="number"
-                name="cat2price"
-                onChange={handleStockChange}
-                className={style.input}
-                disabled={check.stock.cat2price}
-              />
-              <input
-                type="text"
-                name="cat2stock"
-                onChange={handleStockChange}
-                className={style.input}
-                disabled={check.stock.cat2stock}
-              />
-            </div>
-            <div className={style.stockItem}>
-              <div className={style.stars}>
-                <BsFillStarFill />
-                <BsFillStarFill />
-                <BsFillStarFill />
-              </div>
-              <input
-                type="text"
-                name="cat3name"
-                onChange={handleStockChange}
-                placeholder="Category name"
-                className={style.input}
-              />
-              <label htmlFor="cat3price"></label>
-              <input
-                type="number"
-                name="cat3price"
-                onChange={handleStockChange}
-                className={style.input}
-                disabled={!check.stock.cat3name}
-              />
-              <input
-                type="text"
-                name="cat3stock"
-                onChange={handleStockChange}
-                className={style.input}
-                disabled={!check.stock.cat3name}
-              />
-            </div>
-          </div>
-          <button type="button" onClick={submit} className={style.bttnsubmit}>
-            POST
-          </button>
-        </form>
+            <button type="button" onClick={submit} className={style.bttnsubmit}>
+              POST
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </LoadingOverlay>
   );
 };
 

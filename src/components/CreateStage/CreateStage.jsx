@@ -1,13 +1,15 @@
 /* eslint-disable no-restricted-globals */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 import actionsCreator from '../../redux/actions';
 import style from './CreateStage.module.css';
 import Swal from 'sweetalert2';
 import FormBttn from '../Common/FormBttn/FormBttn';
-import ExitBttnForm from '../Common/FormBttn/FormBttn'
 import InputText from '../Common/InputText/InputText';
+import MapContainer from "../MapContainer/MapContainer";
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import scriptLoader from 'react-async-script-loader';
 
 const { postStage } = actionsCreator;
 
@@ -30,10 +32,7 @@ const validateInput = (input) => {
   if (!input.address) {
       errors.address = 'Address is require!'
   }
-  else if (input.address.length > 50){
-    errors.address = 'Up to 50 characters!'
-  }
-  
+
   if (!/^[-]?\d+[.]?\d*?|(^$)$/.test(input.lat)){
     errors.lat = 'Only numbers!'
   }
@@ -50,8 +49,9 @@ const validateInput = (input) => {
   return errors;
 }
 
-export const CreateStage = ({ closeStageModal }) => {
+const CreateStage = ({ closeStageModal, isScriptLoaded, isScriptLoadSucceed }) => {
   const dispatch = useDispatch();
+  const [address, setAddress] = useState("");
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
@@ -62,19 +62,45 @@ export const CreateStage = ({ closeStageModal }) => {
     description: ""
   });
 
-  useEffect(() => {
-    document.getElementById('name').focus();
-  }, [])
-
-  const handleChange = (e) => {
+  const handleSelect = async (place) => {
+    let results = await geocodeByAddress(place);
+    let latLng = await getLatLng(results[0]);
+    setAddress(place);
+    console.log(results[0].formatted_address)
+    console.log(latLng.lat, latLng.lng)
     setInput({
-        ...input,
-        [e.target.name] : e.target.value
+      ...input,
+      address: results[0].formatted_address,
+      lat: latLng.lat,
+      lon: latLng.lng
     })
     setErrors(validateInput({
       ...input,
-      [e.target.name]: e.target.value
+      address: results[0].formatted_address
     }))
+  }
+
+  const handleAddressChange = (place) => {
+    setAddress(place)
+    
+    setErrors(validateInput(
+      {
+        ...input,
+      address: input.address   
+      }
+    ))
+    
+  }
+
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name] : e.target.value
+  })
+  setErrors(validateInput({
+      ...input,
+      [e.target.name]: e.target.value
+  }))
   }
 
   const handleSubmit = (e) => {
@@ -93,6 +119,7 @@ export const CreateStage = ({ closeStageModal }) => {
       lon: "",
       description: "",
     })
+    closeStageModal();
   }
   
   document.addEventListener('keydown', (event) => {
@@ -110,7 +137,7 @@ export const CreateStage = ({ closeStageModal }) => {
   //     }
   //   })
   // }
-
+  if (isScriptLoaded && isScriptLoadSucceed) {
   return ReactDOM.createPortal (
     <div className={style.overlay}>
     <div className={style.container}>
@@ -124,6 +151,7 @@ export const CreateStage = ({ closeStageModal }) => {
         errors={errors} 
         inputNext='capacity' 
         inputState={input} 
+        autoFocus
       />
       <InputText 
         type='number'
@@ -132,35 +160,58 @@ export const CreateStage = ({ closeStageModal }) => {
         inputState={input}
         handleChange={handleChange} 
         errors={errors} 
-        inputNext='address' 
+        inputNext='address'
       />
-      <InputText 
-        type='text'
-        name='address' 
-        placeholder='Address...' 
-        inputState={input}
-        handleChange={handleChange} 
-        errors={errors} 
-        inputNext='lat' 
-      />
-      <InputText 
-        type='text'
-        name='lat' 
-        placeholder='Latitud...' 
-        inputState={input}
-        handleChange={handleChange} 
-        errors={errors} 
-        inputNext='lon' 
-      />
-      <InputText 
-        type='text'
-        name='lon' 
-        placeholder='Longitud...' 
-        inputState={input}
-        handleChange={handleChange} 
-        errors={errors} 
-        inputNext='des' 
-      />
+      <p><PlacesAutocomplete 
+          value={address} 
+          onChange={handleAddressChange} 
+          onSelect={handleSelect}
+        >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <input 
+              {...getInputProps({
+                id: 'address',
+                name: 'address',
+                placeholder: 'Search Places...',
+                type: 'text',
+                className: style.input,
+              })}
+            />
+            <div>
+              {loading && <div>Loading...</div>}
+              {suggestions.map(suggestion => {
+                const style = suggestion.active ? 
+                { backgroundColor: "#a83225", cursor: "pointer" } :
+                { backgroundColor: "#ffffff", cursor: "pointer" }
+                return (
+                  <div {...getSuggestionItemProps(suggestion, {style})}>
+                    {suggestion.description}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete></p>
+      {errors.address && <p className={style.error}>{errors.address}</p>}
+      <p><input type="text" hidden value={input.lat} name="lat" onChange={handleChange} id="lat" /></p>
+          {errors.lat && <p className={style.error}>{errors.lat}</p>}
+      <p><input type="text" hidden value={input.lon} name="lon" onChange={handleChange} id="lon" /></p>
+          {errors.lon && <p className={style.error}>{errors.lon}</p>}
+      <div className={style.map}>
+            {input.lat && input.lon ? (
+              <MapContainer
+                lat={input.lat}
+                lon={input.lon}
+                marginLeft="0%"
+                maxWidth="88%"
+                maxHeight="28%"
+              />
+            ) : (
+              <p>Loading map..</p>
+            )}
+      </div>
       {/* <p><input placeholder='Name...' className={style.input} type="text" value={input.name} name="name" onChange={handleChange} id="inputName" onKeyDown={() => nextFocus('inputName', 'inputCapacity')}/></p>
           {errors.name && <p className={style.error}>{errors.name}</p>}
       <p><input placeholder='Capacity...' className={style.input} type="number" value={input.capacity} name="capacity" onChange={handleChange} id="inputCapacity" onKeyDown={() => nextFocus('inputCapacity', 'inputAddress')}/></p>
@@ -171,7 +222,7 @@ export const CreateStage = ({ closeStageModal }) => {
           {errors.lat && <p className={style.error}>{errors.lat}</p>}
       <p><input placeholder='Coordinates(Lon)...' className={style.input} type="text" value={input.lon} name="lon" onChange={handleChange} id="inputLon" onKeyDown={() => nextFocus('inputLon', 'inputDescription')}/></p>
           {errors.lon && <p className={style.error}>{errors.lon}</p>} */}
-      <p><textarea placeholder='Description...' rows="5" className={style.textarea} value={input.description} name="description" onChange={handleChange} id="des"/></p>
+      <p><textarea name='description' placeholder='Description...' value={input.description} onChange={handleChange} rows="5" className={style.textarea} id="des"/></p>
       {/* <button
         className={style.button}
         type="submit"
@@ -184,10 +235,16 @@ export const CreateStage = ({ closeStageModal }) => {
         inputErros={errors}
         text={'Send'}
       />
-      {/* <ExitBttnForm onClose={closeStageModal} /> */}
-      <button type="button" className={style.button} onClick={closeStageModal}>Cancel</button>
+    <button type="button" className={style.button} onClick={closeStageModal}>Close</button>
     </form>
     </div>
     </div>, 
     document.getElementById('portal'))
+  } else {
+    return <div></div>;
+  }
 }
+
+export default scriptLoader([
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API}&libraries=places`,
+])(CreateStage)

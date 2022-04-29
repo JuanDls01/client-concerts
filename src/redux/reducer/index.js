@@ -18,6 +18,7 @@ const {
   CLEAR_AUTH_ERR,
   LOGOUT,
   GET_ARTISTS,
+  GET_TICKETS,
   SEND_EMAIL_RECOVER,
   SEND_EMAIL_REGISTER,
   GET_USER,
@@ -47,6 +48,7 @@ const initialState = {
   purchase: {},
   preference: null,
   preOrder: {},
+  getTickets:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -65,6 +67,9 @@ const rootReducer = (state = initialState, action) => {
     }
     case "SAVE_PREORDER": {
       return { ...state, preOrder: action.payload };
+    }
+    case GET_TICKETS: {
+      return { ...state, getTickets: action.payload };
     }
 
     case GET_ARTISTS: {
