@@ -16,7 +16,8 @@
 }
 
 .container {
-    padding: 2%;
+    padding: 1.5%;
+    width: 32rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -24,28 +25,40 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 47.38px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
+    /* word-wrap: break-word;
+    overflow: hidden */
 }
 
 .input {
-    width: 410px;
-    height: 40px;
+    width: 28.5rem;
+    height: 2.5em;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 6px;
-    margin: 2%;
+    /* margin: 2%; */
     padding: 2%;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: calc(0.45rem + 0.45vw);
 }
+
+.map {
+    margin: 2% 0;
+    border-radius: 6px;
+    /* flex-direction: row; */
+    height: 13.5rem;
+    width: 28.5rem;
+    border: 1px solid #C4C4C4;
+  }
+  
 
 .textarea {
     width: 28.5rem;
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 6px;
-    margin: 2% 0 ; 
+    /* margin: 0% 0 ;  */
     padding: 2%;
     font-family: 'Roboto';
     font-style: normal;
@@ -85,13 +98,15 @@
     width: 100%;
 }
 
-/* .error {
+.error {
     font-family: 'Roboto';
     font-style: normal;
-    font-weight: 700;
-    font-size: 14px;
+    /* font-weight: 700; */
+    font-size: 0.9rem;
     color: #F5167E;
-} */
+    padding-left: 2%;
+    text-align: start;
+}
 
 .overlay {
     position: absolute;

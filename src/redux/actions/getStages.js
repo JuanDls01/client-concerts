@@ -5,7 +5,7 @@ export const GET_STAGES = "GET_STAGES";
 const getStages = () => {
   return async (dispatch) => {
     try {
-      const stage = await axios.get("http://localhost:3001/stage");
+      const stage = await axios.get("/stage");
       return dispatch({
         type: GET_STAGES,
         payload: stage.data,
