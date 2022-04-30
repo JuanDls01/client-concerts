@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 29px;
+    line-height: 150%;
+    color: #242565;
+    width: 100%;
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
+    /* background-color: #242565; */
+    /* margin-top: 10px; */
+}
+
+.container {
+    margin-top: 40px;
+    padding: 3%;
+    position: absolute;
+    width: 70%;
+    height: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 47.38px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    z-index: 777;
+    border-radius: 18px;
+    overflow: hidden;
+    overflow: scroll;
+}
+
+.divbtn{
+    text-align: right;
+    margin: 5px 15px;
+}
+.button{
+    background-color:#F5167E ;
+    border-radius:18px;
+    color: #fff;
+    border:none;
+    padding: 5px 25px;
+    
+}
+
+.button:hover{
+    background-color:#242565 ;
+
+}
+
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.containerTicket{
+    
+}
+

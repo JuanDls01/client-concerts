@@ -19,9 +19,12 @@ import getUser, { GET_USER } from "./getUser";
 import getUsers, { GET_USERS } from "./getUsers";
 import clearUser, { CLEAR_USER } from "./clearUser";
 import updateUser, { UPDATE_USER } from "./updateUser";
+import updateProfile, { UPDATE_PROFILE } from "./updateProfile";
 import clearUpdateErr, { CLEAR_UPDATE_ERR } from "./clearUpdateErr";
 import getArtists, { GET_ARTISTS } from "./getArtists";
 import loginGoogle from './loginGoogle'
+import getTickets, { GET_TICKETS } from "./getTickets";
+import updatePassword, { UPDATE_PASSWORD } from "./updatePassword";
 
 export const actions = {
   GET_EVENTS,
@@ -45,6 +48,9 @@ export const actions = {
   UPDATE_USER,
   CLEAR_UPDATE_ERR,
   GET_ARTISTS,
+  GET_TICKETS,
+  UPDATE_PASSWORD,
+  UPDATE_PROFILE
 };
 
 const actionsCreator = {
@@ -69,6 +75,10 @@ const actionsCreator = {
   updateUser,
   clearUpdateErr,
   loginGoogle,
+  getArtists,
+  getTickets,
+  updatePassword,
+  updateProfile,
 };
 
 export default actionsCreator;

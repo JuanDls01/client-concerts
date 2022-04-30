@@ -29,7 +29,7 @@
 .imgContainner {
     height: 50%;
     width: 100%;
-    position: relative;
+    /* position: relative; */
     /* background-image: url('../../assets/images/cardImage.png'); */
     background-size: 100%;
 }
@@ -116,7 +116,7 @@ p {
     color: #242565;
     cursor: pointer;
 }
-
+/* 
 .bttnHeart {
     display: flex;
     position: absolute;
@@ -137,4 +137,14 @@ p {
     width: 20px;
     height: 20px;
     color: #F5167E;
+} */
+
+.soldOut {
+    border-bottom-left-radius: 18.9529px;
+    border-bottom-right-radius: 18.9529px;
+    border: none;
+    background-color: #FF5050;
+    font-size: large;
+    font-weight: bold;
+    color: #FFFFFF;
 }

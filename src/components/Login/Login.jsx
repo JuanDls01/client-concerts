@@ -119,7 +119,8 @@ const Login = () => {
                         handleChange={handleChange} 
                         errors={errors} 
                         inputNext='password' 
-                        inputState={input} 
+                        inputState={input}
+                        autoFocus
                     />
                     {/* Password */}
                     <InputText 

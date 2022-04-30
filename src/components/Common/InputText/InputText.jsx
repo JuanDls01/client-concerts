@@ -1,6 +1,6 @@
 import style from './InputText.module.css';
 
-const InputText = ({name, type, placeholder, handleChange, errors, inputNext, inputState}) => {
+const InputText = ({name, type, placeholder, handleChange, errors, inputNext, inputState, autoFocus}) => {
     // Este recibe parámetros básicos de un input (name, type, placeholder, handleChange) e incorpora 
     // la función nextFocus para que no marque todos los errores sino solo el siguiente input (inputNext)
     // al que se encuentra el usuario. Arroja un mensaje de error si hay errores.
@@ -28,6 +28,7 @@ const InputText = ({name, type, placeholder, handleChange, errors, inputNext, in
                 className={style.input}
                 placeholder={placeholder}
                 value={inputState[name]}
+                autoFocus={autoFocus}
                 onChange={handleChange}
                 onKeyDown={() => nextFocus(name, inputNext)} />
             {errors[name] ? <div className={style.error}>{errors[name]}</div> : null}

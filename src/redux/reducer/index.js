@@ -18,6 +18,7 @@ const {
   CLEAR_AUTH_ERR,
   LOGOUT,
   GET_ARTISTS,
+  GET_TICKETS,
   SEND_EMAIL_RECOVER,
   SEND_EMAIL_REGISTER,
   GET_USER,
@@ -25,6 +26,8 @@ const {
   GET_USERS,
   UPDATE_USER,
   CLEAR_UPDATE_ERR,
+  UPDATE_PASSWORD,
+  UPDATE_PROFILE,
 } = actions;
 
 const initialState = {
@@ -46,6 +49,7 @@ const initialState = {
   purchase: {},
   preference: null,
   preOrder: {},
+  getTickets:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -65,6 +69,9 @@ const rootReducer = (state = initialState, action) => {
     case "SAVE_PREORDER": {
       return { ...state, preOrder: action.payload };
     }
+    case GET_TICKETS: {
+      return { ...state, getTickets: action.payload };
+    }
 
     case GET_ARTISTS: {
       return {
@@ -79,10 +86,47 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case UPDATE_USER: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The user has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         userDetail: action.payload.error ? state.userDetail : action.payload,
-        userUpdareErr: action.payload.error ? action.payload.error : "success",
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case UPDATE_PROFILE: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "Your info has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        user: action.payload.error ? state.userDetail : action.payload,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case UPDATE_PASSWORD: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The password has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
       };
     }
     case CLEAR_USER: {

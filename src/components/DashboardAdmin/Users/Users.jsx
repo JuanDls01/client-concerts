@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import DataTable from "react-data-table-component";
 import actionsCreator from "../../../redux/actions";
 import {
     ContentsubTitleUsers,
     subtileUsers,
     tablaUsers,
-    columnsUsers,
-    fakeLinkUsers,
-    rowsUsers,
+    detailCont,
     headingsColor
 } from './Users.module.css';
 
@@ -23,6 +22,47 @@ const Users = () => {
         dispatch(getUsers(token));
     }, [token]);
 
+    const columns = [
+        {
+          name: "Name",
+          selector: (row) => row.name,
+          sortable: true,
+          grow: 2,
+        },
+        {
+          name: "Email",
+          selector: (row) => row.email,
+          sortable: true,
+          grow: 2
+        },
+        {
+          name: "Role",
+          selector: (row) => row.role,
+          sortable: true,
+        },
+        {
+          name: "Status",
+          selector: (row) => row.status,
+          sortable: true,
+        },
+        {
+          name: "Actions",
+          selector: (row) => row.actions,
+          sortable: true,
+        }
+    ];
+    
+    let data = !users.hasOwnProperty('error') && Object.keys(users).length > 0 && users.map(u => {
+        return {
+            name: <Link to={`/admin/dashboard/user/${u.id}`} className={headingsColor}><strong>{`${u.firstName} ${u.lastName}`}</strong></Link>,
+            email: u.email,
+            role: u.Role.name,
+            status: 'Active',
+            actions: 'btns'
+        };
+    });
+    if(data) data = data.filter(d => d.role !== 'Super admin');
+
 
     return (
         <>
@@ -31,37 +71,15 @@ const Users = () => {
             </div>
 
             {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
-            <div className={tablaUsers}>
-                <table>
-                    <thead className={columnsUsers}>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                            <th>Control</th>
-                        </tr>
-                    </thead>
-                    {/* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
-                    <tbody>
-                        {!users.hasOwnProperty('error') && Object.keys(users).length > 0 && users.map(u => {
-                            if(u.Role.name !== 'Super admin'){
-                                return (
-                                    <tr key={u.id} className={rowsUsers}>
-                                        <td>
-                                            <Link to={`/admin/dashboard/user/${u.id}`} className={headingsColor}><strong>{`${u.firstName} ${u.lastName}`}</strong></Link>
-                                        </td>
-                                        <td>{u.email}</td>
-                                        <td>{u.Role.name}</td>
-                                        <td className='text-success'>Active</td>
-                                        <td>btns</td>
-                                    </tr>
-                                );
-                        }
-                        })}
-                    </tbody>
-                </table>
-            </div>
+            {
+                data && data.length > 0 ?
+                <div className={`container ${tablaUsers}`}>
+                    <DataTable columns={columns} data={data} />
+                </div>:
+                <div className={`container text-start mb-5 alert alert-danger ${detailCont}`} role="alert">
+                    There aren't any users...
+                </div>
+            }
         </>
     );
 };
