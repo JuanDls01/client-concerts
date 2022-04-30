@@ -46,10 +46,11 @@
     height: 90px;
     background: linear-gradient(87.59deg, #5522cc 0%, #f5167e 100%);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding-left: 70px;
     padding-right: 70px;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .imgHeader {
@@ -58,10 +59,17 @@
 
   .user {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    grid-gap: 5px;
     gap: 5px;
+    width: 50%;
+    align-items: center;
+    flex-wrap: nowrap;
   }
+
+  
+  
 
   .user img {
       width: 20px;
@@ -74,6 +82,9 @@
     color: white;
     text-align: center;
   }
+
+  .user h5:hover
+  {color:#242565}
 
   .ContentsubTitle {
     height: 100px;
@@ -116,6 +127,16 @@
       font-size: 32px;
       border-style: none;
   }
+
+  .iconoUser{
+    width: 8%;
+    height: auto;
+    color: #fff;
+    margin-right: 8px;
+}
+
+.iconoUser:hover
+{color:#242565}
 
 
 

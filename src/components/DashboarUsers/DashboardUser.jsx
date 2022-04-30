@@ -15,6 +15,7 @@ import {Tickets} from './Tickets/Tickets'
 
 //css
 import style from "./DashboardUser.module.css";
+import { FaUserCircle } from "react-icons/fa";
 import "style-components";
 
 //assets
@@ -73,6 +74,7 @@ export default function ShoppyngHistory() {
     });
   });
   // console.log(amount)
+  // console.log(user.Orders?.length)
   
   const columns = [
     { name: "Folio", selector: (row) => row.id, center: true },
@@ -109,8 +111,9 @@ export default function ShoppyngHistory() {
       <div className={style.header}>
         <Link to='/'><img className={style.imgHeader} src={logo} /></Link>
         <div className={style.user}>
+        <FaUserCircle  className={style.iconoUser}/>
           <h5>
-            Current User:{" "}
+          {" "}
             {user.firstName ? user.firstName : "Usuario no logeado"}
           </h5>
         </div>
@@ -122,8 +125,8 @@ export default function ShoppyngHistory() {
       {/* Kpis */}
       <div className={style.cardConteiner}>
         <Kpis
-          title="Total Events Acquired"
-          analitics={user.Events?.length}
+          title="Total Orders Acquired"
+          analitics={user.Orders?.length}
           //   estadistics="+3.4"
           img={imgSubida}
         />

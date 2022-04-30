@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
 import { AiOutlineUser } from "react-icons/ai";
+import { FaUserCircle } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
 import { BsCart2 } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
@@ -83,12 +84,12 @@ const NavBar = () => {
         // Navbar cliente:
         <div className={s.navUser}>
           <div className={s.logoContainner}>
-            <img src={logo} className={s.logo} alt={logo} />
+          <Link to='/'><img src={logo} className={s.logo} alt={logo} /></Link>
           </div>
           <div className={s.menuContainner}>
             <a onClick={openMenuUser} className={s.menuUser}>
-              <AiOutlineUser />
-              <p>{userName}</p>
+              <FaUserCircle  className={s.iconoUser}/>
+              <p className={s.linkUser}>{userName}</p>
             </a>
             {menuUser && (
               <div className={s.dropdownMenu}>

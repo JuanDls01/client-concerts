@@ -1,9 +1,10 @@
 import { MdOutlineQrCode2 } from "react-icons/md";
 import QRCode from 'react-qr-code'
-import s from './TicketPDF.module.css';
+// import s from './TicketPDF.module.css';
 import {PDFViewer, Document, Page, View, Text, Image} from '@react-pdf/renderer';
 import logo from "../../../assets/images/logotipo.png";
 import logo2 from "../../../assets/images/codigoQr.png";
+import fondo from '../../../assets/images/FondoHero.png'
 
 export default function TicketPDF({props}){
 
@@ -30,13 +31,70 @@ export default function TicketPDF({props}){
     //                     contexto.stroke();
     
     return (
-      <Document >
-        <Page size="A4">
-            {/* Container */}
+      <Document
+      style={{
+        backgroundColor:"#24256580",
+      }}
+      >
+      <Image src={fondo}
+                  style={{
+                    width: "100%",
+                    height:"98vh",
+                    opacity: "0.05",
+                    position:'absolute',
+                    top: "0"
+                  }}
+                />
+        {/* <Page size="A4"> */}
+        {/* Container */}
         <View
           style={{
-            width: "94%",
-            // transform: 'rotate(90deg)'
+            width: "100%",
+            height: "10vh",
+            backgroundColor:'#242565',
+            borderBottom: "3px solid #F5167E"
+          }}
+        >
+          <Image
+                  src={logo}
+                  style={{
+                    position:'absolute',
+                    zIndex: "10",
+                    width: "260px",
+                    height: "220px",
+                    top: "-58px"
+                    // margin: "7px",
+                    // padding:"0 8px"
+                  }}
+                />
+                <Text
+                  style={{
+                    position:'absolute',
+                    // zIndex: "10",
+                    color: "white",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    // fontFamily:" bold",
+                    top:"34px",
+                    left:"240px",
+                    // width: "220px",
+                    // height: "170px",
+                    // margin: "7px",
+                    // padding:"0 8px"
+                    zIndex:"33",
+                  }}
+                >
+                Thank you, enjoy your event!!!
+                </Text>
+                
+        </View>
+        <View
+          style={{
+            width: "99%",
+            height: "90vh",
+            // transform: 'rotate(90deg)',
+            display: "flex",
+            // backgroundColor: "grey",
           }}
         >
           {/* <Text>Desde Ticket para Tickets</Text> */}
@@ -44,11 +102,12 @@ export default function TicketPDF({props}){
           <View
             style={{
               backgroundColor: "rgba(36, 37, 101, 1)",
-              margin: "20px 5%",
+              margin: "46% 10px",
               color: "#fff",
-              width: "100%",
+              width: "96%",
+              // height: "1850px",
               borderRadius: "18px",
-              border: "5px solid #242565",
+              // border: "5px solid #242565",
               display: "flex",
               flexDirection: "row",
             }}
@@ -57,64 +116,76 @@ export default function TicketPDF({props}){
             <View
               style={{
                 textAlign: "center",
-                borderRight: "2px dashed #fff",
-                width: "30%",
+                borderRight: "4px dashed #fff",
+                width: "131.4px",
                 display: "flex",
-              }}>
-
+                flexDirection: "column",
+              }}
+            >
               {/* Div folio e Imagen */}
               <View
                 style={{
-                  width: "100%",
+                  width: "98%",
                   textAlign: "center",
-                  marginTop: "20%",
-                }}>
-                    <Text
-                    style={{
-                        // fontSize: "140%",
-                        margin: "8% 2%",
-                    }}>Folio {props.Folio}</Text>
+                  // marginTop: "20%",
+                }}
+              >
+                <Text
+                  style={{
+                    // fontSize: "1.5rem",
+                    margin: "20px 5px",
+                    // padding: "5px",
+                  }}
+                >
+                  Folio {props.Folio}
+                </Text>
 
-                    <Image
-                    src={logo2}
-                    style={{
-                        width: "50px",
-                        margin: "0 20%",
-                    }}/>
+                <Image
+                  src={logo2}
+                  style={{
+                    width: "100px",
+                    height: "150px",
+                    margin: "7px",
+                    padding:"0 8px"
+                  }}
+                />
               </View>
               {/* Div punteado */}
               <View
                 style={{
                   width: "3px",
-                }}>
-                    {/* Esfera 1 */}
-                    <View
-                    style={{
-                        width: "32px",
-                        height: "32px",
-                        // borderBottom: "5px solid #fff",
-                        // borderLeft: "5px solid #fff",
-                        // borderRight: "5px solid #fff",
-                        backgroundColor: "#fff",
-                        borderRadius: "100%",
-                        position: "relative",
-                        left: "90px",
-                        bottom: "9%",
-                    }}/>
-                    {/* Esfera 2 */}
-                    <View
-                    style={{
-                        width: "32px",
-                        height: "32px",
-                        // borderBottom: "5px solid #fff",
-                        // borderLeft: "5px solid #fff",
-                        // borderRight: "5px solid #fff",
-                        background: "#000",
-                        borderRadius: "100%",
-                        position: "relative",
-                        left: "90px",
-                        bottom: "9%",
-                    }}/>
+                }}
+              >
+                {/* Esfera 1 */}
+                <View
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    // borderBottom: "5px solid #fff",
+                    // borderLeft: "5px solid #fff",
+                    // borderRight: "5px solid #fff",
+                    backgroundColor: "#9191b1",
+                    borderRadius: "100%",
+                    position: "relative",
+                    left: "112px",
+                    bottom: "180px",
+                  }}
+                />
+                {/* Esfera 2 */}
+                <View
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    // borderBottom: "5px solid #fff",
+                    // borderLeft: "5px solid #fff",
+                    // borderRight: "5px solid #fff",
+                    backgroundColor: "#9191b1",
+                    borderRadius: "100%",
+                    position: "relative",
+                    left: "112px",
+                    top: "10px",
+                  }}
+                />
               </View>
             </View>
             {/* Segunda parte boleto */}
@@ -122,64 +193,124 @@ export default function TicketPDF({props}){
               style={{
                 display: "flex",
                 flexDirection: "column",
-                width: "60%",
-                flexWrap: "wrap",
+                width: "240px",
+                // flexWrap: "wrap",
                 alignItems: "left",
-                margin: "3%",
-                padding: "8px",
+                margin: "8px 0 0 20px",
+                // padding: "8px",
                 background: 'url("../../../assets/images/logotipo.png")',
                 opacity: "1",
-              }}>
-                    <Text>{props.Event}</Text>
-                    <Text>{props.nameT}</Text>
-                    <Text>{props.email}</Text>
-                    <Text>DATE: {props.date}</Text>
-                    <Text>STAGE: {result[0].name}</Text>
-                    <Text>ADRESS: {result[0].address}</Text>
+              }}
+            >
+              <Text
+                style={{
+                  color:'#F5167E',
+                  fontSize: '24px',
+                  marginTop:"8px",
+                  marginBottom:"8px",
+                }}
+              >{props.Event}</Text>
+              <Text
+                style={{
+                  fontSize:"12px",
+                  marginLeft:'20px'
+                }}
+              >{props.nameT}</Text>
+              <Text
+                style={{
+                  fontSize:"12px",
+                  marginLeft:'20px',
+                  marginBottom:'10px',
+                }}
+              >{props.email}</Text>
+              <Text
+                 style={{
+                  fontSize:"14px",
+                  marginBottom:'5px',
+                }}
+              >Date: {props.date}</Text>
+              <Text
+                 style={{
+                  fontSize:"14px",
+                  marginBottom:'5px',
+                }}
+              >Stage: {result[0].name}</Text>
+              <Text
+                 style={{
+                  fontSize:"16px",
+                  marginBottom:'5px',
+                }}
+              >Address: {result[0].address}</Text>
             </View>
-              {/* Tercera parte del boleto */}
-              {/* logo my ticket */}
+            {/* Tercera parte del boleto */}
+            {/* logo my ticket */}
             <View
               style={{
-                float: "right",
-                width: "65%",
+                float: "left",
+                width: "150px",
+                // backgroundColor:"red",
                 background: 'url("../../../assets/images/logotipo.png")',
                 opacity: "1",
-              }}>
+                zIndex:"15"
+              }}
+            >
               <View
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   width: "100%",
-                  flexWrap: "wrap",
-                  alignItems: "left",
-                  margin: "30px",
+                  // flexWrap: "wrap",
+                  alignItems: "center",
+                  margin: "10px",
                   textAlign: "center",
-                }}>
+                }}
+              >
                 <View
                   style={{
-                    width: "28%",
-                    margin: "2% auto",
+                    width: "80%",
+                    height: "auto",
+                    margin: "8px auto",
                     borderRadius: "100%",
                     overflow: "hidden",
-                  }}>
+                  }}
+                >
                   <Image
                     src={props.img}
                     style={{
                       width: "100%",
                       borderRadius: "100%",
-                    }}/>
+                    }}
+                  />
                 </View>
-                <Text>
-                  Category:       
+                <Text
+                  style={{
+                  fontSize:"14px",
+                  marginBottom:'5px',
+                }}
+                >
+                  Category:
+                  
+                </Text>
+                <Text
+                  style={{
+                  fontSize:"14px",
+                  marginBottom:'5px',
+                }}
+                >
+                  
                   {props.category}
                 </Text>
-                <Text>Price: {props.price}</Text>
+                <Text
+                  style={{
+                  fontSize:"14px",
+                  marginBottom:'5px',
+                }}
+                >Price: {props.price}</Text>
               </View>
             </View>
           </View>
         </View>
-        </Page>
+        {/* </Page> */}
       </Document>
     );
 }

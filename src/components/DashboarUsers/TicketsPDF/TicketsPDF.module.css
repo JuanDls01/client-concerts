@@ -16,6 +16,7 @@
 }
 
 .container {
+    margin-top: 30px;
     padding: 3%;
     position: absolute;
     width: 70%;
@@ -23,17 +24,22 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.9);
+    /* background: rgba(253, 252, 252, 0.8); */
+    background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
     box-shadow: 0px 4px 47.38px rgba(0, 0, 0, 0.5);
     border-radius: 6px;
     z-index: 777;
     border-radius: 18px;
     overflow: hidden;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .divbtn{
     text-align: right;
+    margin-bottom: 10px;
 }
 .button{
     background-color:#F5167E ;
@@ -53,4 +59,12 @@
 
 .containerTicket{
     
+}
+
+.divIn{
+    width: 100%;
+    height: 98vh;
+    padding: 20px;
+    background-color: #24256590;
+    border-radius: 18px;
 }

@@ -16,6 +16,7 @@
 }
 
 .container {
+    margin-top: 40px;
     padding: 3%;
     position: absolute;
     width: 70%;
@@ -59,3 +60,4 @@
 .containerTicket{
     
 }
+
