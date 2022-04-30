@@ -104,7 +104,7 @@ const NavBar = () => {
                     Seller
                   </Link>
                 ) : null}
-                <Link to="/profile" className={s.menuItem}>
+                <Link to='/profile' className={s.menuItem}>
                   My Profile
                 </Link>
                 <Link
