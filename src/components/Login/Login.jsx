@@ -6,6 +6,7 @@ import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
 // import ReactDOM from "react-dom";
 import { BiArrowBack } from 'react-icons/bi';
+import { GoogleLogin } from 'react-google-login';
 
 // Common Components:
 import FormBttn from "../Common/FormBttn/FormBttn";
@@ -34,7 +35,7 @@ const Login = () => {
     const autherr = useSelector((state) => state.authError);
     const navigate = useNavigate();
 
-    const { loginUser, clearAuthError } = actionsCreator;
+    const { loginUser, clearAuthError, loginGoogle } = actionsCreator;
     const [ cookies, setCookie ] = useCookies(['token']);
 
     //componentWillUnmount:
@@ -86,6 +87,16 @@ const Login = () => {
     //     openRegisterModal();
     // }
 
+    const responseGoogle = (response) => {
+        const input = {
+            googleId: response.profileObj.googleId,
+            email: response.profileObj.email,
+            firstName: response.profileObj.givenName,
+            lastName: response.profileObj.familyName
+        }
+        dispatch(loginGoogle(input))
+    }
+
     return (
         <div className={style.pageContainner}>
             <nav className={style.navegacion}>
@@ -122,6 +133,18 @@ const Login = () => {
                         inputState={input} 
                     />
                     {autherr ? <div className={style.authError}>{autherr}</div> : null}
+                    {/* INICIAR SESIÓN CON GOOGLE */}
+                    <div className={style.googleLogin}>
+                        <GoogleLogin
+                            clientId="777303769241-ektle3v1dbo31jaj1pfeoaqdfa789o7r.apps.googleusercontent.com"
+                            buttonText="Sign In with Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </div>
+                    {/* <button onClick={signWGoogleHandle}>SignIn with Google</button> */}
+                    
                     {/* Submit */}
                     <FormBttn 
                         firstValue={input.email}

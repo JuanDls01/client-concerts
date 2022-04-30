@@ -22,6 +22,7 @@ import updateUser, { UPDATE_USER } from "./updateUser";
 import updateProfile, { UPDATE_PROFILE } from "./updateProfile";
 import clearUpdateErr, { CLEAR_UPDATE_ERR } from "./clearUpdateErr";
 import getArtists, { GET_ARTISTS } from "./getArtists";
+import loginGoogle from './loginGoogle'
 import getTickets, { GET_TICKETS } from "./getTickets";
 import updatePassword, { UPDATE_PASSWORD } from "./updatePassword";
 
@@ -73,10 +74,11 @@ const actionsCreator = {
   clearUser,
   updateUser,
   clearUpdateErr,
+  loginGoogle,
   getArtists,
   getTickets,
   updatePassword,
-  updateProfile
+  updateProfile,
 };
 
 export default actionsCreator;

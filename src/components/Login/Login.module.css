@@ -135,6 +135,20 @@
     margin-top: 15px;
 }
 
+.googleLogin{
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.googleLogin button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
     .pageContainner {
