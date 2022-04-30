@@ -21,7 +21,7 @@ import clearUser, { CLEAR_USER } from "./clearUser";
 import updateUser, { UPDATE_USER } from "./updateUser";
 import clearUpdateErr, { CLEAR_UPDATE_ERR } from "./clearUpdateErr";
 import getArtists, { GET_ARTISTS } from "./getArtists";
-import signWGoogle from './signWGoogle'
+import loginGoogle from './loginGoogle'
 
 export const actions = {
   GET_EVENTS,
@@ -68,7 +68,7 @@ const actionsCreator = {
   clearUser,
   updateUser,
   clearUpdateErr,
-  signWGoogle
+  loginGoogle,
 };
 
 export default actionsCreator;

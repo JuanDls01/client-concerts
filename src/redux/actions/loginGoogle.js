@@ -3,10 +3,10 @@ import { LOGIN_USER } from './loginUser';
 
 // const LOGIN_USER = 'LOGIN_USER';
 
-const signWGoogle = () => {
+const loginGoogle = (input) => {
     return async (dispatch) => {
         try {
-            const json = await axios.get("/auth/login/google");
+            const json = await axios.post("/auth/login/google", input);
             return dispatch ({
                 type: LOGIN_USER,
                 payload: json.data
@@ -17,4 +17,4 @@ const signWGoogle = () => {
     };
 }
 
-export default signWGoogle;
+export default loginGoogle;

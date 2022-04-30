@@ -35,7 +35,7 @@ const Login = () => {
     const autherr = useSelector((state) => state.authError);
     const navigate = useNavigate();
 
-    const { loginUser, clearAuthError, signWGoogle } = actionsCreator;
+    const { loginUser, clearAuthError, loginGoogle } = actionsCreator;
     const [ cookies, setCookie ] = useCookies(['token']);
 
     //componentWillUnmount:
@@ -87,20 +87,14 @@ const Login = () => {
     //     openRegisterModal();
     // }
 
-    // const signWGoogleHandle = () => {
-    //     dispatch(signWGoogle())
-    // }
-
     const responseGoogle = (response) => {
-        console.log(response)
         const input = {
             googleId: response.profileObj.googleId,
             email: response.profileObj.email,
             firstName: response.profileObj.givenName,
             lastName: response.profileObj.familyName
         }
-        console.log(input)
-        dispatch(loginUser(input))
+        dispatch(loginGoogle(input))
     }
 
     return (
