@@ -49,8 +49,8 @@ const NavBarDash = ({ user }) => {
               <Link to="/admin/dashboard" className={menuItem}>
                 Users
               </Link>
-              <Link to="/admin/dashboard/roles" className={menuItem}>
-                Roles
+              <Link to="/admin/dashboard/events" className={menuItem}>
+                Events
               </Link>
               <hr className="text-danger" />
               <Link to="/profile" className={menuItem}>
