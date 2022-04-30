@@ -80,13 +80,15 @@ const EventDetail = () => {
 
   const handleBuy = async (e) => {
     const preference = {
+      customer: user.id,
+      total: parseInt(purchase.ticketPrice) * parseInt(purchase.ticketQ),
       items: [
         {
-          title: `${event.name} - ${purchase.ticketName}`,
+          sku: 123,
+          name: `${event.name} - ${purchase.ticketName}`,
+          price: parseInt(purchase.ticketPrice),
           quantity: parseInt(purchase.ticketQ),
-          currency_id: "ARS",
-          unit_price: parseInt(purchase.ticketPrice),
-          description: `${event.name} - ${purchase.ticketName}`,
+          currency: "USD",
         },
       ],
     };
