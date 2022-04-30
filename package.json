@@ -19,6 +19,7 @@
     "handlebars": "^4.7.7",
     "mercadopago": "^1.5.12",
     "moment": "^2.29.2",
+    "paypal-checkout": "^4.0.336",
     "react": "^17.0.1",
     "react-async-script-loader": "^0.3.0",
     "react-cookie": "^4.1.1",
