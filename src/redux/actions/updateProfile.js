@@ -1,11 +1,12 @@
 import axios from "axios";
-export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
 
-const updatePassword = (input, id, token) => {
+const updateProfile = (input, id, token) => {
   // console.log(input);
+
   return async (dispatch) => {
     try {
-      const json = await axios.post(`/users/password/update/${id}`, input, {
+      const json = await axios.post(`/users/user/update/${id}`, input, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -15,7 +16,7 @@ const updatePassword = (input, id, token) => {
       delete json.data.password;
       delete json.data.RoleId;
       return dispatch({
-        type: UPDATE_PASSWORD,
+        type: UPDATE_PROFILE,
         payload: json.data,
       });
     } catch (error) {
@@ -24,4 +25,4 @@ const updatePassword = (input, id, token) => {
   };
 };
 
-export default updatePassword;
+export default updateProfile;

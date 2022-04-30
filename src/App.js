@@ -25,7 +25,11 @@ import "./App.css";
 
 import actionsCreator from "./redux/actions";
 import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
+<<<<<<< HEAD
 import TicketsPDF from './components/DashboarUsers/TicketsPDF/TicketsPDF'
+=======
+import Profile from "./components/Profile/Profile";
+>>>>>>> d188e270d5c1ab846a6c8aebe36258b54f7811b6
 
 function App() {
   const dispatch = useDispatch();
@@ -56,6 +60,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
+        <Route path="/profile" element={<Profile />} />
         {/* ADMIN */}
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />

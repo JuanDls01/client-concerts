@@ -1,7 +1,7 @@
 import style from "./OrderForm.module.css";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
-import Mercado from "./Mercado";
+import Paypal from "./Paypal";
 import LoadingOverlay from "react-loading-overlay";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ const OrderForm = (props) => {
   console.log(preOrder);
   const preference = useSelector((state) => state.preference);
   const navigate = useNavigate();
+  console.log(preference);
 
   const handleTimeout = () => {
     alert("Timeout: try again");
@@ -22,17 +23,6 @@ const OrderForm = (props) => {
   };
   const [isActive, setIsActive] = useState(false);
 
-  const simular = async (e) => {
-    e.preventDefault();
-    setIsActive(!isActive);
-    const response = await axios.post("/order", order);
-    setIsActive(false);
-    console.log("ya deberia haber cerrado");
-    Swal.fire(
-      "Purchased completed. Tickets have been sent to your e-mail. Check details in your shopping history"
-    );
-    navigate(`/user/shoppinghistory/${user.id}`);
-  };
   let miArray = [];
   useEffect(() => {
     for (let i = 0; i < preOrder.ticketQ; i++) {
@@ -46,7 +36,6 @@ const OrderForm = (props) => {
       });
     }
   }, [preOrder]);
-  console.log(miArray, "array inicial");
 
   const [order, setOrder] = useState({
     userId: preOrder.userId,
@@ -74,11 +63,6 @@ const OrderForm = (props) => {
     >
       <div className={style.mainContainer}>
         <div className={style.body}>
-          <Countdown
-            date={Date.now() + 600000}
-            onComplete={handleTimeout}
-          ></Countdown>
-
           <p>Some content or children or something.</p>
 
           <h1>Formulario de Compra</h1>
@@ -127,10 +111,8 @@ const OrderForm = (props) => {
               );
             })}
         </div>
-        {preference && <Mercado preference={preference}></Mercado>}
-        <button type="button" onClick={simular}>
-          Buy
-        </button>
+
+        {preference && <Paypal order={preference}></Paypal>}
       </div>
     </LoadingOverlay>
   );

@@ -51,7 +51,7 @@
     border-style: none;
 }
 .tabla{
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: center;
 }
