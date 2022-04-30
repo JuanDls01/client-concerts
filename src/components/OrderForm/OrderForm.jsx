@@ -12,10 +12,9 @@ const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
   const event = useSelector((state) => state.details);
   const preOrder = useSelector((state) => state.preOrder);
-  console.log(preOrder);
+
   const preference = useSelector((state) => state.preference);
   const navigate = useNavigate();
-  console.log(preference);
 
   const handleTimeout = () => {
     alert("Timeout: try again");
@@ -112,7 +111,9 @@ const OrderForm = (props) => {
             })}
         </div>
 
-        {preference && <Paypal order={preference}></Paypal>}
+        {preference && (
+          <Paypal order={preference} userId={preOrder.userId}></Paypal>
+        )}
       </div>
     </LoadingOverlay>
   );

@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const Paypal = ({ order }) => {
+const Paypal = ({ order, userId }) => {
+  const navigate = useNavigate();
   const paypalCon = {
     currency: "USD",
     env: "sandbox",
@@ -41,8 +44,12 @@ const Paypal = ({ order }) => {
     return actions.payment
       .execute()
       .then((response) => {
-        console.log(response);
-        alert("El pago fue procesado correctamente ", response.id);
+        Swal.fire({
+          title: "Success!",
+          text: "Purchase completed! The clients will recieve an e-mail with their tickets! You can also check your purchases in the 'My Shopping' section.",
+          icon: "success",
+        });
+        navigate(`/user/shoppinghistory/${userId}`);
       })
       .catch((error) => console.log(error));
   };
