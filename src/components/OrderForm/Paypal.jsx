@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import paypal from "paypal-checkout";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Paypal = ({ order, userId }) => {
+const Paypal = ({ order, userId, internalOrder }) => {
   const navigate = useNavigate();
   const paypalCon = {
     currency: "USD",
@@ -40,10 +41,11 @@ const Paypal = ({ order, userId }) => {
     };
     return actions.payment.create({ payment });
   };
-  const onAuthorize = (data, actions) => {
+  const onAuthorize = async (data, actions) => {
     return actions.payment
       .execute()
-      .then((response) => {
+      .then(async (response) => {
+        await axios.post("/order", internalOrder);
         Swal.fire({
           title: "Success!",
           text: "Purchase completed! The clients will recieve an e-mail with their tickets! You can also check your purchases in the 'My Shopping' section.",
