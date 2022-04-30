@@ -1,5 +1,7 @@
 import {useSelector} from 'react-redux';
-import Ticket from '../Ticket/Ticket'
+import Ticket from '../Ticket/Ticket';
+import { useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 import React, {useRef} from 'react'
@@ -10,13 +12,17 @@ import s from './Tickets.module.css'
 
 export function Tickets({onClose}){
     let tik = useSelector((state) => state.getTickets)
+    let navigate = useNavigate();
 
     return (
       <div>
         <div className={s.container}>
           <p className={s.title}>These are your tickets</p>
+          <div className={s.botones}>
           <div className={s.divbtn}><button className={s.button} onClick={onClose}> Close </button></div>
-          <div className={s.divbtn}><button className={s.button} onClick={()=>{console.log("hice click")}}> View PDF </button></div>
+          <div className={s.divbtn}><Link className={s.button} to='/pdf' target='_blank'> Download PDF </Link></div>
+          <div className={s.divbtn}><button className={s.button} onClick={()=>navigate('/pdf', { replace: true })}> Download PDF </button></div>
+          </div>
             <div className={s.containerTicket}>
                 {tik.Tickets?.map((t) => {
                 let obj = {
