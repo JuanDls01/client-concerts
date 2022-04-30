@@ -17,12 +17,12 @@
 .divlogo{
     width: 28%;
     margin:2% auto ;
+    border-radius: 100%;
+    overflow: hidden;
     /* position: relative; */
     /* left: 8%; */
     /* padding-top: 4.3%; */
-    border-radius: 100%;
     /* border: 1px solid #fff; */
-    overflow: hidden;
     /* box-shadow: 10px -10px 27.38px #fff; */
     /* margin:5% -15%; */
 
