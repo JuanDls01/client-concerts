@@ -16,6 +16,7 @@
 }
 
 .container {
+    margin-top: 40px;
     padding: 3%;
     position: absolute;
     width: 70%;
@@ -34,6 +35,7 @@
 
 .divbtn{
     text-align: right;
+    margin: 5px 15px;
 }
 .button{
     background-color:#F5167E ;
@@ -49,8 +51,13 @@
 
 }
 
-
+.botones{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
 
 .containerTicket{
     
 }
+

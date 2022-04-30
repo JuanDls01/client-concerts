@@ -89,3 +89,16 @@
 .tabla {
   width: 70%;
 }
+
+.iconoUser{
+  width: 30%;
+  height: auto;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.iconoUser:hover
+{color:#242565}
+
+h5:hover
+{color:#242565}

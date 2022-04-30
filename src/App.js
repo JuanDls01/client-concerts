@@ -25,7 +25,12 @@ import "./App.css";
 
 import actionsCreator from "./redux/actions";
 import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
+
+import {TicketsPDF} from './components/DashboarUsers/TicketsPDF/TicketsPDF'
+
+
 import Profile from "./components/Profile/Profile";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +72,7 @@ function App() {
         {/* Cliente: */}
         {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
+        <Route path="/pdf" element={<TicketsPDF/>} />
 
         <Route path="/user/dashboard" element={<DashboardSeller />} />
         <Route path="/user/shoppinghistory/:id" element={<ShoppyngHistory />} />

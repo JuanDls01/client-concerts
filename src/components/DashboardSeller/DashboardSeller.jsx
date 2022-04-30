@@ -11,6 +11,7 @@ import actionsCreator from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
+import { FaUserCircle } from "react-icons/fa";
 
 export default function DashboardSeller() {
   const { getUser } = actionsCreator;
@@ -67,10 +68,11 @@ export default function DashboardSeller() {
   return (
     <div className={style.conteiner}>
       <div className={style.header}>
-        <img className={style.imgHeader} src={logo} />
+      <Link to='/'><img className={style.imgHeader} src={logo} /></Link>
         <div className={style.user}>
           {/* <img src={user}/> */}
           {/* ACA IRIA EL NOMBRE DE USUARIO */}
+          <FaUserCircle  className={style.iconoUser}/>
           <h5>{user.firstName ? user.firstName : "Usuario no logeado"}</h5>
         </div>
       </div>

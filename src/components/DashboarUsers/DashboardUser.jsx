@@ -15,6 +15,7 @@ import {Tickets} from './Tickets/Tickets'
 
 //css
 import style from "./DashboardUser.module.css";
+import { FaUserCircle } from "react-icons/fa";
 import "style-components";
 
 //assets
@@ -65,13 +66,15 @@ export default function ShoppyngHistory() {
   const res = []
   user.Orders?.forEach((order) =>{res.push(order.Tickets)})
   
-  let prices = user.Orders?.map((order) =>order.Tickets)
-  let amount = 0
- prices?.forEach((price) =>{
-        price.forEach(item=>{amount = amount + item.price})
- })
+  let prices = user.Orders?.map((order) => order.Tickets);
+  let amount = 0;
+  prices?.forEach((price) => {
+    price.forEach((item) => {
+      amount = amount + item.price;
+    });
+  });
   // console.log(amount)
-
+  // console.log(user.Orders?.length)
   
   const columns = [
     { name: "Folio", selector: (row) => row.id, center: true },
@@ -79,21 +82,14 @@ export default function ShoppyngHistory() {
     { name: "Tickets", selector: (row) => row.Tickets.length, center: true },
     { name: "Date of purchase", selector: (row) => row.date, sortable: true, reorder: true,  },
     { name: "See Tickets", grow: 0, cell: (row) => "View 👁︎ ", center: true,   },
-    // { name: "See Tickets", grow: 0, cell: (row) => ( <button className={style.btnEyes} onClick={(e)=>{
-    //   setMostrarPanel(!mostrarPanel);
-    //   console.log(e);
-    //   handleRowClicked();
-    //   }}> <ImEye className={style.icons} /> </button> ), center: true,   },
   ];
 
   // console.log(mostrarPanel)
 
   //Seleccion de renglon
   function handleRowClicked(e){
-   
       setMostrarPanel(!mostrarPanel)
       dispatch(getTickets(e));
-  
   };
 
   //Estilos fondo tabla
@@ -108,7 +104,6 @@ export default function ShoppyngHistory() {
   });
 
 
-
   return (
     
     <div className={style.conteiner}>
@@ -116,8 +111,9 @@ export default function ShoppyngHistory() {
       <div className={style.header}>
         <Link to='/'><img className={style.imgHeader} src={logo} /></Link>
         <div className={style.user}>
+        <FaUserCircle  className={style.iconoUser}/>
           <h5>
-            Current User:{" "}
+          {" "}
             {user.firstName ? user.firstName : "Usuario no logeado"}
           </h5>
         </div>
@@ -129,8 +125,8 @@ export default function ShoppyngHistory() {
       {/* Kpis */}
       <div className={style.cardConteiner}>
         <Kpis
-          title="Total Events Acquired"
-          analitics={user.Events?.length}
+          title="Total Orders Acquired"
+          analitics={user.Orders?.length}
           //   estadistics="+3.4"
           img={imgSubida}
         />
@@ -146,7 +142,6 @@ export default function ShoppyngHistory() {
         <h1 className={style.subtile}>Recent Purchases</h1>
       </div>
       {mostrarPanel && <Modal><div className={style.divIn}><Tickets onClose={handleRowClicked}/></div></Modal>}
-      {/* {mostrarPanel && ReactDom.createPortal(<div  className={style.divIn} >Esto es lo que necesito</div>, document.getElementById('portal') )} */}
 
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL USUARIO */}
       <div className={style.contendedorTabla}>
@@ -158,6 +153,17 @@ export default function ShoppyngHistory() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+     {/* {mostrarPanel && ReactDom.createPortal(<div  className={style.divIn} >Esto es lo que necesito</div>, document.getElementById('portal') )} */}
 
 
 
