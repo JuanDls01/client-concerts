@@ -25,6 +25,7 @@ import "./App.css";
 
 import actionsCreator from "./redux/actions";
 import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
+        <Route path="/profile" element={<Profile />} />
         {/* ADMIN */}
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />
