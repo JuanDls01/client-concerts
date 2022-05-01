@@ -12,33 +12,44 @@
     width: 235px;
 }
 
+.iconoUser{
+    width: 5%;
+    height: auto;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.iconoUser:hover
+{color:#242565}
 .userTitle {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+    width: 100%;
 }
 
 .menuContainner {
-    width: 120px;
-    /* display: flex; */
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    width: 100%;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: flex-end;
 }
 .menuUserStyle {
     border: none;
     background-color: transparent;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 120px;
+    justify-content: flex-end;
+    width: 100%;
     text-decoration: none;
     color: #FFFFFF;
     font-size: 1.05rem;
     font-family: Poppins;
     cursor: pointer;
 }
+
+.menuUserStyle:hover { color:#242565}
 
 .menuUserStyle p {
     overflow: hidden;

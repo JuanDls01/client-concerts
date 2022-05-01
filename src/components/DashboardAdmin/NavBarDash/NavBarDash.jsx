@@ -5,6 +5,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useCookies } from "react-cookie";
 import logo from "../../../assets/images/logotipo.png";
 import actionsCreator from "../../../redux/actions";
+import { FaUserCircle } from "react-icons/fa";
 import {
   header,
   imgHeader,
@@ -14,6 +15,7 @@ import {
   dropdownMenu,
   menuItem,
   fakeLink,
+  iconoUser
 } from "./NavbarDash.module.css";
 
 const NavBarDash = ({ user }) => {
@@ -41,7 +43,8 @@ const NavBarDash = ({ user }) => {
         {/* ACA IRIA EL NOMBRE DE USUARIO */}
         <div className={menuContainner}>
           <a onClick={openMenuUser} className={menuUserStyle}>
-            <AiOutlineUser />
+            {/* <AiOutlineUser /> */}
+            <FaUserCircle  className={iconoUser}/>
             <p>{user.firstName ? user.firstName : "Usuario no logeado"}</p>
           </a>
           {menuUser && (
@@ -56,7 +59,7 @@ const NavBarDash = ({ user }) => {
               <Link to="/profile" className={menuItem}>
                 My Profile
               </Link>
-              <Link to="/shopping" className={menuItem}>
+              <Link to={`/user/shoppinghistory/${user.id}`} className={menuItem}>
                 My Shopping
               </Link>
               <a className={menuItem + " " + fakeLink} onClick={logoutHandler}>
