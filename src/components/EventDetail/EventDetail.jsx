@@ -9,6 +9,7 @@ import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
 import logo from "../../assets/images/logotipo.png"
 import styled from "styled-components";
+import { animateScroll as scroll} from 'react-scroll';
 
 const monthNames = [
   "January",
@@ -47,8 +48,10 @@ const EventDetail = () => {
 
   useEffect(() => {
     dispatch(getEventDetail(id));
+    scroll.scrollToTop();
     return () => {
       dispatch(cleanEventDetail());
+      
     };
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
