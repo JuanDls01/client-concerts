@@ -12,6 +12,7 @@ import getUser from "../../redux/actions/getUser";
 import clearUser from "../../redux/actions/clearUser";
 import Modal from '../Modal/Modal';
 import {Tickets} from './Tickets/Tickets'
+import NavBar from '../NavBar/NavBar';
 
 //css
 import style from "./DashboardUser.module.css";
@@ -108,7 +109,7 @@ export default function ShoppyngHistory() {
     
     <div className={style.conteiner}>
     
-      <div className={style.header}>
+      {/* <div className={style.header}>
         <Link to='/'><img className={style.imgHeader} src={logo} /></Link>
         <div className={style.user}>
         <FaUserCircle  className={style.iconoUser}/>
@@ -117,7 +118,8 @@ export default function ShoppyngHistory() {
             {user.firstName ? user.firstName : "Usuario no logeado"}
           </h5>
         </div>
-      </div>
+      </div> */}
+      <NavBar/>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Shoppyng History</h1>
         

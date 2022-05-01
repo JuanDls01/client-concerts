@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 // import useLogOut from '../Hooks/useLogOut';
 import actionsCreator from "../../redux/actions";
 import { useCookies } from "react-cookie";
-import { AiOutlineUser } from "react-icons/ai";
+// import { AiOutlineUser } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
-import { BsCart2 } from "react-icons/bs";
+// import { AiFillHeart } from "react-icons/ai";
+// import { BsCart2 } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
 
 import Login from "../Login/Login";
@@ -88,11 +88,16 @@ const NavBar = () => {
           </div>
           <div className={s.menuContainner}>
             <a onClick={openMenuUser} className={s.menuUser}>
+              <div className={s.containerlink}>
               <FaUserCircle  className={s.iconoUser}/>
               <p className={s.linkUser}>{userName}</p>
+              </div>
             </a>
             {menuUser && (
               <div className={s.dropdownMenu}>
+              <Link to="/" className={s.menuItem}>
+                    Home
+                  </Link>
                 {user.Role.name.toLowerCase() === "admin" ||
                 user.Role.name.toLowerCase() === "super admin" ? (
                   <Link to="/admin/dashboard" className={s.menuItem}>

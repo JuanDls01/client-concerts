@@ -33,33 +33,37 @@
 }
 
 .logoContainner {
-    width: 50%;
-    /* height: 100%; */
+    /* width: 24%; */
+    height: 90px;
     display: flex;
-    /* justify-content: left; */
     flex-direction: column;
-
 }
 
 .logo {
-    width: 30%;
-    height: 15%;
+    width: 50%;
+    /* height: 15%; */
     display: flex;
+    position: relative;
+    top: -21%;
+    margin: 0;
+    padding: 0;
     
 }
 
 .iconoUser{
-    width: 50%;
+    width: 7%;
     height: auto;
     margin-right: 8px;
     color: #fff;
 }
-.menuUser:hover 
-{color:#ED4690}
-.iconoUser:hover
-{color:#ED4690}
-.linkUser:hover
-{color:#ED4690}
+.containerlink :hover{color:#ED4690}
+/* .menuUser:hover 
+{color:#ED4690} */
+/* .iconoUser:hover
+{color:#ED4690} */
+/* .linkUser:hover
+{color:#ED4690} */
+
 
 .navegacion ul li {
     width: 20%;
@@ -109,19 +113,28 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-right: 3%;
+    /* margin-right: 3%; */
 }
 
 .menuContainner {
-    width: 15%;
+    width: 100%;
     /* display: flex; */
     /* align-items: left; */
     /* justify-content: left; */
     /* flex-direction: column; */
 }
 
+.containerlink{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 4%;
+}
+
 .dropdownMenu {
-    z-index: 1000;
+    z-index: 100;
     width: 12%;
     display: flex;
     align-items: center;
@@ -129,29 +142,35 @@
     flex-direction: column;
     position: absolute;
     background-color: #FFFFFF;
-    margin-top: 10px;
+    margin-top: 2px;
+    right: 4%;
     border-radius: 4px;
     padding: 8px;
+    color:#5522CC
+    /* box-sizing: border-box; */
 }
 
 .menuUser {
     border: none;
-    background-color: transparent;
     display: flex;
     align-items: center;
-    width: 130px;
-    text-decoration: none;
+    width: 100%;
     color: #FFFFFF;
-    font-size: 1.05rem;
     font-family: Poppins;
     cursor: pointer;
-    flex-wrap: nowrap;
+    text-decoration: none;
+    /* background-color: transparent; */
+    /* text-decoration: none; */
+    /* font-size: 1.05rem; */
 }
+
+.menuUser:hover {color:#ED4690}
 
 .menuUser p {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #FFFFFF;
 }
 
 .menuItem {
@@ -161,4 +180,11 @@
     justify-content: start;
     align-items: center;
     width: 100%;
+    color:#242565
+    /* color:#ED4690 */
+}
+
+.menuItem:hover {
+    color:#fff;
+    background-color:#242565
 }
