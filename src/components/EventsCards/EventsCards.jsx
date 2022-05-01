@@ -23,11 +23,11 @@ const EventsCards = () => {
   useEffect(() => {
     // console.log("hola");
     dispatch(getEvents());
-    if(token === ''){
+    if (token === "") {
       EVENTSPERPAGE = 6;
     } else EVENTSPERPAGE = 9;
   }, [dispatch, getEvents, token]);
-  
+
   // console.log('EventsPerPga', EVENTSPERPAGE)
 
   // Estado que indica la página actual:
@@ -46,7 +46,6 @@ const EventsCards = () => {
       <div className={style.EventsCardsContainner}>
         {currentEvents.length &&
           currentEvents?.map((event) => {
-        
             return (
               <EventCard
                 key={event.id}
