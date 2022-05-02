@@ -14,6 +14,7 @@ import LoadingOverlay from "react-loading-overlay";
 import { Navigate, useNavigate } from "react-router-dom";
 import checkInput from "../../utils/checkInput";
 import finalCheck from "../../utils/finalCheck";
+import { Link } from "react-router-dom";
 
 const EventForm = () => {
   //useRoleProtected("vendedor");
@@ -229,7 +230,9 @@ const EventForm = () => {
     <LoadingOverlay>
       <div className={style.pageContainer}>
         <div className={style.logoContainner}>
+        <Link to="/">
           <img src={logo} className={style.logo} alt={logo} />
+              </Link>
         </div>
 
         <div className={style.formContainer}>

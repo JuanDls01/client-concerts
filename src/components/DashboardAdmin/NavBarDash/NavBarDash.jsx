@@ -49,19 +49,23 @@ const NavBarDash = ({ user }) => {
           </a>
           {menuUser && (
             <div className={dropdownMenu}>
-              <Link to="/admin/dashboard" className={menuItem}>
-                Users
+              <Link to="/" className={menuItem}>
+                Home
               </Link>
-              <Link to="/admin/dashboard/events" className={menuItem}>
+              {/* <Link to="/admin/dashboard" className={menuItem}>
+                Users
+              </Link> */}
+              <Link to="/vendedor/dashboard" className={menuItem}>
+              {/* <Link to="/admin/dashboard/events" className={menuItem}> */}
                 Events
               </Link>
-              <hr className="text-danger" />
+              {/* <hr className="text-danger" /> */}
               <Link to="/profile" className={menuItem}>
                 My Profile
               </Link>
-              <Link to={`/user/shoppinghistory/${user.id}`} className={menuItem}>
+              {/* <Link to={`/user/shoppinghistory/${user.id}`} className={menuItem}>
                 My Shopping
-              </Link>
+              </Link> */}
               <a className={menuItem + " " + fakeLink} onClick={logoutHandler}>
                 Logout
               </a>

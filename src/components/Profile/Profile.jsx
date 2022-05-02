@@ -16,10 +16,12 @@ const Profile = () => {
     const token = useSelector((state) => state.token);
     const navigate = useNavigate();
     useRoleProtected();
+    // console.log(user.Role?.name)
+    let usuario = user.Role?.name
 
     return (
         <div className={conteiner}>
-            <NavBarDash user={user}/>
+           {usuario === 'User'?<NavBar user={user}/>:<NavBarDash user={user}/>}
 
             <div className={ContentsubTitleUsers}>
                 <h1 className={subtileUsers}>My Profile</h1>
