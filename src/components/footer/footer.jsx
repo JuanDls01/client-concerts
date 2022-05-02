@@ -1,5 +1,6 @@
 import {BsFacebook} from "react-icons/bs";
 import {AiFillTwitterCircle, AiFillLinkedin, AiFillGithub} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 
 import s from './footer.module.css'
@@ -13,9 +14,9 @@ export default function Footer(){
                     <h3 className={s.title}>What do we do?</h3>
                     <p className={s.parrafo}>My ticket is a global self-service ticketing platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives.</p>
                     <div className={s.redes}>
-                        <BsFacebook className={s.iconoFacebook}/>
+                        {/* <BsFacebook className={s.iconoFacebook}/>
                         <AiFillTwitterCircle className={s.iconoTwitter}/>
-                        <AiFillLinkedin className={s.iconoLinkedin}/>
+                        <AiFillLinkedin className={s.iconoLinkedin}/> */}
                     </div>
                 </div>
                 <div className={s.githubs}>
@@ -49,10 +50,14 @@ export default function Footer(){
                     <div className={s.listaInfo}>
                         <ul >
                             <li className={s.medioli}>About us</li>
-                            <li className={s.medioli}>Press</li>
-                            <li className={s.medioli}>Contact us</li>
-                            <li className={s.medioli}>Privacy</li>
+                            {/* <li className={s.medioli}>Press</li> */}
+                            {/* <li className={s.medioli}>Privacy</li> */}
+                            <a href="https://docs.google.com/document/d/e/2PACX-1vRYxyYleXgPa5ZhepQIMXfAuvE3OLJhRxhtiEHcqaunlnEzRVFv3vi-3ytEFcbLjbi27pnhQjkh1sam/pub" target="_blank" rel="noop"className={s.contact}>
                             <li className={s.medioli}>Terms</li>
+                            </a>
+                            <Link to="/contact" className={s.contact}>
+                            <li className={s.medioli}>Contact us</li>
+                            </Link>
                         </ul>
                     </div>
                 </div>
