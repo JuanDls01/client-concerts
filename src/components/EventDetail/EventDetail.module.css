@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans&family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-html, body {
-  height:100%;
+html,
+body {
+  height: 100%;
 }
 
 .mainContainer {
@@ -33,25 +34,29 @@ html, body {
 
 .image {
   max-width: 60%;
-  /* margin-left: 10%; */
+
+  width: 60em;
+  height: 30em;
+
   margin-top: 4%;
   margin-bottom: 1%;
   border-radius: 10px;
   mix-blend-mode: normal;
   filter: drop-shadow(36px 40px 11px rgba(109, 53, 202, 0.5));
+  object-fit: cover;
 }
 
 .logo {
   position: absolute;
   width: auto;
-  height:10rem;
-  top:-3%;
+  height: 10rem;
+  top: -3%;
   left: 15%;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .logo:hover {
-  transform:scale(1.1);
+  transform: scale(1.1);
 }
 .button_login {
   min-width: 4em;
@@ -61,16 +66,16 @@ html, body {
   top: 3%;
   right: 20%;
   align-items: center;
-  border: 0.15rem solid #FFFFFF;
+  border: 0.15rem solid #ffffff;
   border-radius: 15rem;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   background-color: transparent;
-  transition: transform .2s;
+  transition: transform 0.2s;
 }
 
 .button_login:hover {
-  transform:scale(1.1);
+  transform: scale(1.1);
 }
 
 .logoContainner {
@@ -127,7 +132,6 @@ html, body {
   align-items: center;
   /* justify-items: center; */
   /* justify-content: space-around; */
-  
 }
 .info {
   display: flex;
@@ -150,14 +154,12 @@ html, body {
 /* .cartButtons {
   border: 1px solid black;
   /* display: flex; */
-  /* float: inline-start; */
-  /* max-width: 100%; */
-  /* flex-direction: row; */
-  /* justify-content: space-evenly; 
+/* float: inline-start; */
+/* max-width: 100%; */
+/* flex-direction: row; */
+/* justify-content: space-evenly; 
 }
   */
-
-
 
 /* .button_close {
   width: 7em;
@@ -245,7 +247,7 @@ html, body {
   color: #ffffff;
 }
 .address {
-  font-size: calc(0.40rem + 0.40vw);
+  font-size: calc(0.4rem + 0.4vw);
 }
 
 .date {
@@ -265,7 +267,6 @@ html, body {
   border: 3px outset lightgray;
   padding: 1.5%;
 }
-
 
 /* @media screen and (max-width: 400px){
   .mainContainer {
