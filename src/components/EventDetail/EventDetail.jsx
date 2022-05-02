@@ -10,6 +10,7 @@ import savePreOrder from "../../redux/actions/savePreOrder";
 import logo from "../../assets/images/logotipo.png"
 import styled from "styled-components";
 import { animateScroll as scroll} from 'react-scroll';
+import NavBar from "../NavBar/NavBar";
 
 const monthNames = [
   "January",
@@ -26,7 +27,7 @@ const monthNames = [
   "December",
 ];
 
-const numbers = [0, 1, 2, 3, 4, 5];
+// let numbers = [0,1,2,3,4,5];
 
 // const formatPrice = new Intl.NumberFormat("es-AR", {
 //   style: "currency",
@@ -56,6 +57,21 @@ const EventDetail = () => {
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
   const event = useSelector((state) => state.details);
+  const [numbers, setNumbers] = useState(['']);
+  
+  const arrayNumbers = (cat) => {
+    let number = [];
+    let stock = event.stock && event.stock[`${cat}`];
+    console.log(stock)
+    if (stock >= 5) {
+      number = [0,1,2,3,4,5]
+    } else {
+      for (let i = 0; i <= stock; i++) {
+        number.push(i);
+      }
+    }
+    return number;
+  }
 
   const [purchase, setPurchase] = useState({
     userId: user.id,
@@ -66,6 +82,7 @@ const EventDetail = () => {
   });
 
   const handleChange = (e) => {
+    setNumbers(arrayNumbers((e.target.value).replace('name', 'stock')))
     const price = determinarPrecio(e.target.value);
     const property = e.target.name;
     const value = e.target.value;
@@ -76,6 +93,8 @@ const EventDetail = () => {
       ticketPrice: event.stock[price],
     });
   };
+
+  
 
   const handleQChange = (e) => {
     setPurchase({ ...purchase, ticketQ: e.target.value });
@@ -115,12 +134,13 @@ const EventDetail = () => {
       {event ? (
         <div className={style.mainContainer}>
           <div className={style.topBody}>
-            <nav className={style.logoContainner}>
+            <NavBar />
+            {/* <nav className={style.logoContainner}>
               <Link to='/'><img src={logo} alt="img" className={style.logo}/></Link>
               <div>
                 <Link to='/login'><button className={style.button_login}>MI CUENTA</button></Link>
               </div>
-            </nav>
+            </nav> */}
             
             <img src={event.img} alt="img" className={style.image} />
             
@@ -128,7 +148,7 @@ const EventDetail = () => {
             <p className={style.date}>{event.date && getShortMonthName(new Date(`${event.date}`))} {event.date && event.date.slice(8, 10)} - {event.time && event.time.slice(0, 5)} hs</p>
               <div className={style.ticket}>
                 <p className={style.stage}>Tickets</p>
-                <span className={`${style.stage} ${style.address}`}>Prices from $ {event.stock && event.stock.cat1price}</span>
+                <span className={`${style.stage} ${style.address}`}>Prices since $ {event.stock && event.stock.cat1price}</span>
               </div>
               <span className={style.stage}>
                 {event.Stage && event.Stage.name}
@@ -153,22 +173,8 @@ const EventDetail = () => {
             <div className={style.eventBody}>
               <div className={style.descriptionBody}>
               <h1 className={style.titulo}>{event.name}</h1>
-                {/* <span className={style.date_circle}>
-                  <p className={style.date_1}>
-                    {event.date && getShortMonthName(new Date(`${event.date}`))}
-                  </p>
-                  <p className={style.date_2}>
-                    {event.date && event.date.slice(8, 10)}
-                  </p>
-                </span> */}
                 <p className={style.description}>
                   <span>{event.description}</span>
-                  {/* <span>
-                    <u>Stage:</u> {event.Stage && event.Stage.name}
-                  </span>
-                  <span>
-                    <u>Address:</u> {event.Stage && event.Stage.address}
-                  </span> */}
                 </p>
               </div>
             </div>
@@ -176,7 +182,7 @@ const EventDetail = () => {
             <div className={style.container_select_button}>
               <div className={style.container_select}>
                 <p className={style.select_title}>Ticket</p>
-                <select name="ticketCategory" onChange={handleChange}className={style.select}>
+                <select name="ticketCategory" onChange={handleChange} className={style.select}>
                   <option value=""></option>
                   {event.stock && event.stock.cat1name && (
                     <option value="cat1name">
@@ -198,6 +204,7 @@ const EventDetail = () => {
                   )}
                 </select>
                 <p className={style.select_title}>Number</p>
+                
                 <select name="ticketNumber" onChange={handleQChange} className={style.select}>
                   {numbers.map((number) => {
                     return <option value={number}>{number}</option>;
@@ -221,11 +228,6 @@ const EventDetail = () => {
             </div>
 
           </div>
-
-          
-
-          
-          
         </div>
       ) : (
         <p>loading...</p>

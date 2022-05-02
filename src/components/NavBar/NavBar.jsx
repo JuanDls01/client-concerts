@@ -9,6 +9,7 @@ import { FaUserCircle } from "react-icons/fa";
 // import { AiFillHeart } from "react-icons/ai";
 // import { BsCart2 } from "react-icons/bs";
 import logo from "../../assets/images/logotipo.png";
+import { HashLink } from 'react-router-hash-link';
 
 import Login from "../Login/Login";
 import RegisterForm from "../registerForm/RegisterForm";
@@ -56,9 +57,10 @@ const NavBar = () => {
         // Navbar invitado:
         <ul>
           <li>
-            <a href="#UpcomingEvents" className={s.link} to="/">
+            <HashLink to="/#UpcomingEvents" className={s.link}>Events</HashLink>
+            {/* <a to="/" href="#UpcomingEvents" className={s.link} >
               Events
-            </a>
+            </a> */}
           </li>
           <li>
             <Link to="/register" className={s.link}>
