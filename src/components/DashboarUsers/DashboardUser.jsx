@@ -148,7 +148,7 @@ export default function ShoppyngHistory() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL USUARIO */}
       <div className={style.contendedorTabla}>
         <div className={style.tabla}>
-          <DataTable  pagination columns={columns} data={data}  theme="custom" onRowClicked={(e)=>{ handleRowClicked(e) }} />
+          <DataTable  pagination columns={columns} data={data}  theme="custom" onRowClicked={(e)=>{ handleRowClicked(e) }} highlightOnHover={true} />
         </div>
       </div>
       <Footer/>
