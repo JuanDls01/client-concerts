@@ -1,7 +1,7 @@
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 const MapContainer = (props) => {
-  console.log({ lat: props.lat, lng: props.lon, marginLeft: props.marginLeft, maxWidth: props.maxWidth, maxHeight: props.maxHeight });
+  // console.log({ lat: props.lat, lng: props.lon, marginLeft: props.marginLeft, maxWidth: props.maxWidth, maxHeight: props.maxHeight });
   return (
     <Map
       google={props.google}
