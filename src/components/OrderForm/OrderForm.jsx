@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { BiArrowBack } from 'react-icons/bi';
+import { Link } from "react-router-dom";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
@@ -54,6 +56,9 @@ const OrderForm = (props) => {
 
   return (
     <div className={style.mainContainer}>
+      <div className={style.bttnContainner}>
+        <Link to='/' className={style.backBttn}><BiArrowBack /></Link>
+      </div>
       <div className={style.body}>
         <p>Some content or children or something.</p>
 
