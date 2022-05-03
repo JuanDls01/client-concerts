@@ -22,6 +22,78 @@ export default function DashboardSeller() {
 
   const userdetail = useSelector((state) => state.userDetail);
 
+  // para alimentar las cards
+
+      //Total Revenue
+
+      let revenues = userdetail.Events?.map((event) => {
+        let total = event.Tickets.map((ticket) => ticket.price);
+        return total;
+      });
+      revenues= revenues?.flat();
+      
+      const tot = 0;
+      const totalRevenues = revenues?.reduce(
+        (previousValue, currentValue) => previousValue + currentValue,
+        tot
+      );
+ 
+  //Today revenue
+
+        //necesito el array de Eventos del vendedor 
+        let arrEvents = userdetail.Events?.map((event) => event.id)  // [5,4]
+        //Filtro los que no le corresponden de Orders
+
+        //para obtener la fecha de hoy "fecha"  2022-05-02
+        let date = new Date();
+        let day = `${date.getDate()}`.padStart(2, "0");
+        let month = `${date.getMonth() + 1}`.padStart(2, "0");
+        let year = date.getFullYear();
+        let fecha = `${year}-${month}-${day}`
+        // console.log(fecha)
+
+        //console.log(userdetail.Orders) // aqui esta la fecha de compra 
+        //console.log(userdetail.Events) // de aca saco los montos
+        let arrOrders = userdetail.Orders?.filter((order) =>order.date == fecha) //filtro por fecha de compra de hoy
+
+        // console.log(arrOrders)
+        let obtenerTicketsDia = arrOrders?.map((order) =>{
+          return order.Tickets.map((ticket) =>ticket.id)
+        })
+        obtenerTicketsDia = obtenerTicketsDia?.flat()
+        // console.log(obtenerTicketsDia)
+        // console.log(userdetail.Events)
+
+        let revenueDay = userdetail.Events?.map((event) => {
+          let total = event.Tickets.map((ticket) => {
+            if(obtenerTicketsDia.indexOf(ticket.id)>=0){
+              return ticket.price
+            }
+          });
+          return total;
+        });
+        revenueDay = revenueDay?.flat()
+        // console.log(revenueDay)
+        
+        const tota = 0;
+        let totalRevenuesToday = revenueDay?.reduce(
+          (previousValue, currentValue) => parseInt(previousValue) + parseInt(currentValue),
+          tota
+        );
+         if(isNaN(totalRevenuesToday)) totalRevenuesToday=0;
+        // console.log(totalRevenuesToday)
+
+
+    //Tickets Sold
+        let tickets = userdetail.Events?.map((event) => event.Tickets.length);
+        const totTickets = 0;
+        const totalTickets = tickets?.reduce(
+          (previousValue, currentValue) => previousValue + currentValue,
+          totTickets
+        );
+  
+// fin
+  
   const id = user.id;
 
   const token = useSelector((state) => state.token);
@@ -86,17 +158,23 @@ export default function DashboardSeller() {
         {/* ACA EN ANALITICS Y ESTADISTICAS PASARLE EL PARAMETRO */}
         <CardAnalitics
           title="Total Revenue"
-          analitics="$52.63k"
+          // analitics="$52.63k"
           estadistics="+3.4"
+          analitics={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalRevenues)}
           img={imgSubida}
         />
         <CardAnalitics
+        //totalRevenuesToday
           title="Today Revenue"
-          analitics="$1024"
+          analitics={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalRevenuesToday)}
           estadistics="-5,5%"
           img={calen}
         />
-        <CardAnalitics title="Tickets Sold" analitics="$1024" img={carrito} />
+        <CardAnalitics 
+        title="Tickets Sold" 
+        analitics={totalTickets}
+        estadistics=" "
+        img={carrito} />
         <Link to="/createEvent">
           <button className={style.btnPublish}>Publish Event</button>
         </Link>

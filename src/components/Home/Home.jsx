@@ -7,6 +7,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { Link } from "react-router-dom";
 
 //Componentes
 import Hero from "../Hero/Hero";
@@ -19,11 +20,11 @@ import SearchBars from "../SearchBars/SearchBars";
 
 //CSS
 import s from "./Home.module.css";
+import { IoCaretBackCircleSharp, IoCaretForwardCircleSharp } from "react-icons/io5";
 
 export default function Home() {
   const token = useSelector((state) => state.token);
   const events = useSelector((state) => state.events);
-  console.log(events);
 
   return (
     <div className={s.homeContainner}>
@@ -40,24 +41,38 @@ export default function Home() {
       )}
       <SearchBars />
       <Filter />
-      <CarouselProvider
+        <div className={s.contenedorCarrusel}>
+        <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={20}
-        totalSlides={3}
+        totalSlides={events.length}
         isPlaying="true"
         interval="3000"
+        className={s.carrusel}
       >
+        <ButtonBack className={s.CtbtnBack}> <IoCaretBackCircleSharp className={s.btnBack}/></ButtonBack>
+
         <Slider>
           {events.length &&
             events.map((event) => {
+              console.log(event.id);
+
               return (
                 <Slide>
-                  <img src={event.img}></img>
+                <Link to={`/${event.id}`} >
+                  <img 
+                  src={event.img} 
+                  alt="imagenes del carrusel"
+                  className={s.imgCarrusel}
+                  ></img></Link>
+                  
                 </Slide>
               );
             })}
         </Slider>
+        <ButtonNext className={s.CtbtnNext}><IoCaretForwardCircleSharp className={s.btnNext}/></ButtonNext>
       </CarouselProvider>
+        </div>
       <EventsCards />
       {token === "" ? <CreateEvents /> : null}
       <Footer />

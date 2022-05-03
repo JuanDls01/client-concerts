@@ -138,7 +138,7 @@ export default function ShoppyngHistory() {
           //   estadistics="-5,5%"
           img={calen}
         />
-        <Kpis title="Amount of Purchases" analitics={new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'USD' }).format(amount)} img={carrito} />
+        <Kpis title="Amount of Purchases" analitics={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)} img={carrito} />
       </div>
       <div className={style.ContentsubTitle}>
         <h1 className={style.subtile}>Recent Purchases</h1>
