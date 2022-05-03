@@ -7,9 +7,10 @@ import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-import logo from "../../assets/images/logotipo.png"
-import styled from "styled-components";
+// import logo from "../../assets/images/logotipo.png"
 import { animateScroll as scroll} from 'react-scroll';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
 
 const monthNames = [
@@ -52,19 +53,19 @@ const EventDetail = () => {
     scroll.scrollToTop();
     return () => {
       dispatch(cleanEventDetail());
-      
-    };
+     };
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
+  const token = useSelector((state) => state.token);
   const event = useSelector((state) => state.details);
   const [numbers, setNumbers] = useState(['']);
-  
+  const stockTotal = event.stock && event.stock.cat1stock + event.stock.cat2stock + event.stock.cat3stock;
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
     console.log(stock)
     if (stock >= 5) {
-      number = [0,1,2,3,4,5]
+      number = [0,1,2,3,4,5];
     } else {
       for (let i = 0; i <= stock; i++) {
         number.push(i);
@@ -94,8 +95,6 @@ const EventDetail = () => {
     });
   };
 
-  
-
   const handleQChange = (e) => {
     setPurchase({ ...purchase, ticketQ: e.target.value });
   };
@@ -114,19 +113,37 @@ const EventDetail = () => {
         },
       ],
     };
-    dispatch(savePreference(preference));
-    const preOrder = {
-      eventId: event.id,
-      userId: user.id,
-      eventName: event.name,
-      eventDate: event.date,
-      eventTime: event.time,
-      ticketName: purchase.ticketName,
-      ticketPrice: purchase.ticketPrice,
-      ticketQ: purchase.ticketQ,
-    };
-    dispatch(savePreOrder(preOrder));
-    navigate("/order");
+    if (token !== '') {
+      if ( purchase.ticketCategory !== null && purchase.ticketCategory !== "" && purchase.ticketQ !== "" && purchase.ticketQ !== 0) {
+        dispatch(savePreference(preference));
+        const preOrder = {
+          eventId: event.id,
+          userId: user.id,
+          eventName: event.name,
+          eventDate: event.date,
+          eventTime: event.time,
+          ticketName: purchase.ticketName,
+          ticketPrice: purchase.ticketPrice,
+          ticketQ: purchase.ticketQ,
+        };
+        dispatch(savePreOrder(preOrder));
+        navigate("/order");
+      } else {
+        Swal.fire({
+          title: "Information",
+          text: "You must be select a ticket and valid number!",
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Information",
+        text: "You must be logged for to buy!",
+        icon: "info",
+        confirmButtonText: "Ok",
+      });
+    }
   };
 
   return (
@@ -175,14 +192,15 @@ const EventDetail = () => {
               <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
                   <span>{event.description}</span>
+                  {stockTotal === 0 && <span className={style.soldOut}>SOLD OUT!</span>}
                 </p>
               </div>
             </div>
 
             <div className={style.container_select_button}>
               <div className={style.container_select}>
-                <p className={style.select_title}>Ticket</p>
-                <select name="ticketCategory" onChange={handleChange} className={style.select}>
+                <p className={style.select_title} hidden={stockTotal === 0 ? true : false}>Ticket</p>
+                <select name="ticketCategory" onChange={handleChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
                   <option value=""></option>
                   {event.stock && event.stock.cat1name && (
                     <option value="cat1name">
@@ -203,9 +221,9 @@ const EventDetail = () => {
                     </option>
                   )}
                 </select>
-                <p className={style.select_title}>Number</p>
+                <p className={style.select_title} hidden={stockTotal === 0 ? true : false}>Number</p>
                 
-                <select name="ticketNumber" onChange={handleQChange} className={style.select}>
+                <select name="ticketNumber" onChange={handleQChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
                   {numbers.map((number) => {
                     return <option value={number}>{number}</option>;
                   })}
@@ -214,7 +232,8 @@ const EventDetail = () => {
               <div className={style.buttonsContainer}>
                   {/* {user.id ? ( */}
                     <>
-                      <button className={style.cartButton} onClick={handleBuy}>
+                      {/* disabled={token === '' ? true : false} */}
+                      <button className={style.cartButton} onClick={handleBuy} hidden={stockTotal === 0 ? true : false} > 
                         Buy Now!
                       </button>
                     </>

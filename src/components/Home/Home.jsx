@@ -7,6 +7,7 @@ import {
   ButtonNext,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { Link } from "react-router-dom";
 
 //Componentes
 import Hero from "../Hero/Hero";
@@ -24,7 +25,6 @@ import { IoCaretBackCircleSharp, IoCaretForwardCircleSharp } from "react-icons/i
 export default function Home() {
   const token = useSelector((state) => state.token);
   const events = useSelector((state) => state.events);
-  console.log(events);
 
   return (
     <div className={s.homeContainner}>
@@ -55,14 +55,16 @@ export default function Home() {
         <Slider>
           {events.length &&
             events.map((event) => {
-              {/* console.log(events.length) */}
+              console.log(event.id);
+
               return (
                 <Slide>
+                <Link to={`/${event.id}`} >
                   <img 
                   src={event.img} 
                   alt="imagenes del carrusel"
                   className={s.imgCarrusel}
-                  ></img>
+                  ></img></Link>
                   
                 </Slide>
               );

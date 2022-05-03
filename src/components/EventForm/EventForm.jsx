@@ -15,6 +15,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import checkInput from "../../utils/checkInput";
 import finalCheck from "../../utils/finalCheck";
 import { Link } from "react-router-dom";
+import { BiArrowBack } from 'react-icons/bi';
 
 const EventForm = () => {
   //useRoleProtected("vendedor");
@@ -236,6 +237,9 @@ const EventForm = () => {
         </div>
 
         <div className={style.formContainer}>
+          <div className={style.bttnContainner}>
+            <Link to='/vendedor/dashboard' className={style.backBttn}><BiArrowBack /></Link>
+          </div>
           <h1 className={style.titleForm}>Create your own event</h1>
           <form autoComplete="off" className={style.formContent}>
             {/*EVENT NAME */}
