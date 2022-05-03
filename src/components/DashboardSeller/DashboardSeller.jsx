@@ -186,7 +186,7 @@ export default function DashboardSeller() {
       {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
       <div className={style.tableCont}>
         <div className={style.tabla}>
-          <DataTable columns={columns} data={data} />
+          <DataTable columns={columns} data={data} highlightOnHover={true} />
         </div>
       </div>
     </div>

@@ -42,3 +42,23 @@ table {
     color: #242565;
     text-decoration: none;
 }
+
+.edit{
+    color:#242565;
+    font-size:22px
+}
+
+.edit:hover{
+    color:#f01781
+}
+
+@media screen and (max-width:1200){
+    .ContentsubTitleUsers {
+        height: 10vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: 22vh;
+        justify-content: flex-start;
+    }
+}
