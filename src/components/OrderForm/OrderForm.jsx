@@ -57,7 +57,7 @@ const OrderForm = (props) => {
   return (
     <div className={style.mainContainer}>
       <div className={style.bttnContainner}>
-        <Link to='/' className={style.backBttn}><BiArrowBack /></Link>
+        <Link to='/' className={style.bttnClose}><BiArrowBack /></Link>
       </div>
       <div className={style.body}>
         <p>Some content or children or something.</p>
