@@ -19,6 +19,7 @@ import SearchBars from "../SearchBars/SearchBars";
 
 //CSS
 import s from "./Home.module.css";
+import { IoCaretBackCircleSharp, IoCaretForwardCircleSharp } from "react-icons/io5";
 
 export default function Home() {
   const token = useSelector((state) => state.token);
@@ -40,24 +41,36 @@ export default function Home() {
       )}
       <SearchBars />
       <Filter />
-      <CarouselProvider
+        <div className={s.contenedorCarrusel}>
+        <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={20}
-        totalSlides={3}
+        totalSlides={events.length}
         isPlaying="true"
         interval="3000"
+        className={s.carrusel}
       >
+        <ButtonBack className={s.CtbtnBack}> <IoCaretBackCircleSharp className={s.btnBack}/></ButtonBack>
+
         <Slider>
           {events.length &&
             events.map((event) => {
+              {/* console.log(events.length) */}
               return (
                 <Slide>
-                  <img src={event.img}></img>
+                  <img 
+                  src={event.img} 
+                  alt="imagenes del carrusel"
+                  className={s.imgCarrusel}
+                  ></img>
+                  
                 </Slide>
               );
             })}
         </Slider>
+        <ButtonNext className={s.CtbtnNext}><IoCaretForwardCircleSharp className={s.btnNext}/></ButtonNext>
       </CarouselProvider>
+        </div>
       <EventsCards />
       {token === "" ? <CreateEvents /> : null}
       <Footer />
