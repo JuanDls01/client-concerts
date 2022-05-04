@@ -152,8 +152,7 @@ const EventDetail = () => {
             </nav> */}
             
             <img src={event.img} alt="img" className={style.image} />
-
-            <div className={style.todo}>
+            
             
             <div className={style.info}>
             <p className={style.date}>{event.date && getShortMonthName(new Date(`${event.date}`))} {event.date && event.date.slice(8, 10)} - {event.time && event.time.slice(0, 5)} hs</p>
@@ -252,7 +251,6 @@ const EventDetail = () => {
                     <button className={style.button_close}>Close</button>
                   </Link> */}
                 </div>
-            </div>
             </div>
 
           </div>
