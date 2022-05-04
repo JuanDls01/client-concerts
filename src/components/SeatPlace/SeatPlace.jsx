@@ -3,7 +3,7 @@ import LunaPark from "./plantilla/LunaPark/LunaPark";
 import GranRex from "./plantilla/GranRex/GranRex";
 import style from "./SeatPlace.module.css";
 
-export default function SeatPlace() {
+export default function SeatPlace(Planti) {
   const [first, setFirst] = useState("");
   const [cantidad, setCantidad] = useState(0);
 
@@ -14,14 +14,14 @@ export default function SeatPlace() {
   return (
     <div>
       {/* ACA VA A IR EL TIPO DE PLANTILLA DE ACUERDO AL ESCENARIO (POR AHORA SOLO HAY PLANTILLAS DE GRAN REX Y LUNA PARK) */}
-      <GranRex handleonClick={handleonClick} />
+      <Planti handleonClick={handleonClick} />
       <div className={style.conten}>
         <div>
           <h3 className={style.category}>Category:</h3>
           <h3>{first}</h3>
         </div>
         <div className={style.contenCantidad}>
-          <div>
+          {/* <div>
             <button
               className={style.boton1}
               value={cantidad}
@@ -44,7 +44,7 @@ export default function SeatPlace() {
             >
               -
             </button>
-          </div>
+          </div> */}
           <h3>{cantidad}</h3>
         </div>
       </div>

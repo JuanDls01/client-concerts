@@ -12,6 +12,8 @@ import { animateScroll as scroll} from 'react-scroll';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 // import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
+import GranRex  from "../SeatPlace/plantilla/GranRex/GranRex"
+import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
 
 const monthNames = [
   "January",
@@ -83,10 +85,10 @@ const EventDetail = () => {
   });
 
   const handleChange = (e) => {
-    setNumbers(arrayNumbers((e.target.value).replace('name', 'stock')))
-    const price = determinarPrecio(e.target.value);
+    setNumbers(arrayNumbers((e.target.value||e.target.id).replace('name', 'stock')))
+    const price = determinarPrecio(e.target.value||e.target.id);
     const property = e.target.name;
-    const value = e.target.value;
+    const value = e.target.value||e.target.id;
     setPurchase({
       ...purchase,
       [property]: value,
@@ -145,6 +147,13 @@ const EventDetail = () => {
       });
     }
   };
+  const [first, setFirst] = useState("");
+
+  // function handleClick(e) {
+  //   setFirst(e.target.id);
+  // }
+  // console.log(first,"firsssstt")
+  console.log(event.Stage,"lugaresss")
 
   return (
     <>
@@ -160,6 +169,7 @@ const EventDetail = () => {
             </nav> */}
             
             <img src={event.img} alt="img" className={style.image} />
+            
             
             <div className={style.info}>
             <p className={style.date}>{event.date && getShortMonthName(new Date(`${event.date}`))} {event.date && event.date.slice(8, 10)} - {event.time && event.time.slice(0, 5)} hs</p>
@@ -192,15 +202,25 @@ const EventDetail = () => {
               <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
                   <span>{event.description}</span>
-                  {stockTotal === 0 && <span className={style.soldOut}>SOLD OUT!</span>}
                 </p>
               </div>
             </div>
 
+
+
             <div className={style.container_select_button}>
               <div className={style.container_select}>
-                <p className={style.select_title} hidden={stockTotal === 0 ? true : false}>Ticket</p>
-                <select name="ticketCategory" onChange={handleChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
+                <p className={style.select_title}>Ticket : {purchase.ticketName}</p>
+                  
+                {event.Stage && event.Stage.template==="GranRex" ? <>
+                  <GranRex className={style.select} name="ticketCategory" handleonClick={handleChange} />
+                      </>
+                 : 
+                  <>{event.Stage && event.Stage.template==="LunaPark" ? 
+                    <LunaPark className={style.select} name="ticketCategory" handleonClick={handleChange} />
+                    
+                  : <div>
+                    <select name="ticketCategory" onChange={handleChange} className={style.select}>
                   <option value=""></option>
                   {event.stock && event.stock.cat1name && (
                     <option value="cat1name">
@@ -221,21 +241,25 @@ const EventDetail = () => {
                     </option>
                   )}
                 </select>
-                <p className={style.select_title} hidden={stockTotal === 0 ? true : false}>Number</p>
+                    </div>}
+                  </>
+                }
+                <p className={style.select_title}>Number of Tickets</p>
                 
-                <select name="ticketNumber" onChange={handleQChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
+                <div className={style.ultimo}>
+
+                <select name="ticketNumber" onChange={handleQChange} className={style.select}>
                   {numbers.map((number) => {
                     return <option value={number}>{number}</option>;
                   })}
                 </select>
+
+                <button className={style.cartButton} onClick={handleBuy}>Buy Now!</button>
+                </div>
               </div>
               <div className={style.buttonsContainer}>
                   {/* {user.id ? ( */}
                     <>
-                      {/* disabled={token === '' ? true : false} */}
-                      <button className={style.cartButton} onClick={handleBuy} hidden={stockTotal === 0 ? true : false} > 
-                        Buy Now!
-                      </button>
                     </>
                   {/* ) : (
                     "Login to buy your tickets!"
