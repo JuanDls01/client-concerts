@@ -225,7 +225,6 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case REGISTER_USER: {
-      console.log(action.payload)
       const notfound = (authError = action.payload.error) => {
         Swal.fire({
           title: "Hey!",
@@ -243,11 +242,20 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case LOGIN_USER: {
+      const errormsg = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${authError}`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
         token: action.payload.token ? action.payload.token : "",
         authError: action.payload.error,
+        messagge: action.payload.error? errormsg(): "",
       };
     }
 
