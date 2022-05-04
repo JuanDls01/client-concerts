@@ -8,11 +8,11 @@ import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
 // import logo from "../../assets/images/logotipo.png"
-import { animateScroll as scroll} from 'react-scroll';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { animateScroll as scroll } from "react-scroll";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 // import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
-import GranRex  from "../SeatPlace/plantilla/GranRex/GranRex"
+import GranRex from "../SeatPlace/plantilla/GranRex/GranRex";
 import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
 
 const monthNames = [
@@ -55,26 +55,28 @@ const EventDetail = () => {
     scroll.scrollToTop();
     return () => {
       dispatch(cleanEventDetail());
-     };
+    };
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
   const token = useSelector((state) => state.token);
   const event = useSelector((state) => state.details);
-  const [numbers, setNumbers] = useState(['']);
-  const stockTotal = event.stock && event.stock.cat1stock + event.stock.cat2stock + event.stock.cat3stock;
+  const [numbers, setNumbers] = useState([""]);
+  const stockTotal =
+    event.stock &&
+    event.stock.cat1stock + event.stock.cat2stock + event.stock.cat3stock;
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
-    console.log(stock)
+    console.log(stock);
     if (stock >= 5) {
-      number = [0,1,2,3,4,5];
+      number = [0, 1, 2, 3, 4, 5];
     } else {
       for (let i = 0; i <= stock; i++) {
         number.push(i);
       }
     }
     return number;
-  }
+  };
 
   const [purchase, setPurchase] = useState({
     userId: user.id,
@@ -85,10 +87,12 @@ const EventDetail = () => {
   });
 
   const handleChange = (e) => {
-    setNumbers(arrayNumbers((e.target.value||e.target.id).replace('name', 'stock')))
-    const price = determinarPrecio(e.target.value||e.target.id);
+    setNumbers(
+      arrayNumbers((e.target.value || e.target.id).replace("name", "stock"))
+    );
+    const price = determinarPrecio(e.target.value || e.target.id);
     const property = e.target.name;
-    const value = e.target.value||e.target.id;
+    const value = e.target.value || e.target.id;
     setPurchase({
       ...purchase,
       [property]: value,
@@ -115,8 +119,13 @@ const EventDetail = () => {
         },
       ],
     };
-    if (token !== '') {
-      if ( purchase.ticketCategory !== null && purchase.ticketCategory !== "" && purchase.ticketQ !== "" && purchase.ticketQ !== 0) {
+    if (token !== "") {
+      if (
+        purchase.ticketCategory !== null &&
+        purchase.ticketCategory !== "" &&
+        purchase.ticketQ !== "" &&
+        purchase.ticketQ !== 0
+      ) {
         dispatch(savePreference(preference));
         const preOrder = {
           eventId: event.id,
@@ -153,7 +162,7 @@ const EventDetail = () => {
   //   setFirst(e.target.id);
   // }
   // console.log(first,"firsssstt")
-  console.log(event.Stage,"lugaresss")
+  console.log(event.Stage, "lugaresss");
 
   return (
     <>
@@ -167,15 +176,20 @@ const EventDetail = () => {
                 <Link to='/login'><button className={style.button_login}>MI CUENTA</button></Link>
               </div>
             </nav> */}
-            
+
             <img src={event.img} alt="img" className={style.image} />
-            
-            
+
             <div className={style.info}>
-            <p className={style.date}>{event.date && getShortMonthName(new Date(`${event.date}`))} {event.date && event.date.slice(8, 10)} - {event.time && event.time.slice(0, 5)} hs</p>
+              <p className={style.date}>
+                {event.date && getShortMonthName(new Date(`${event.date}`))}{" "}
+                {event.date && event.date.slice(8, 10)} -{" "}
+                {event.time && event.time.slice(0, 5)} hs
+              </p>
               <div className={style.ticket}>
                 <p className={style.stage}>Tickets</p>
-                <span className={`${style.stage} ${style.address}`}>Prices since $ {event.stock && event.stock.cat1price}</span>
+                <span className={`${style.stage} ${style.address}`}>
+                  Prices since $ {event.stock && event.stock.cat1price}
+                </span>
               </div>
               <span className={style.stage}>
                 {event.Stage && event.Stage.name}
@@ -193,83 +207,103 @@ const EventDetail = () => {
                     maxHeight="25%"
                   />
                 ) : (
-                <p>Loading map..</p>
+                  <p>Loading map..</p>
                 )}
               </div>
             </div>
             <div className={style.eventBody}>
               <div className={style.descriptionBody}>
-              <h1 className={style.titulo}>{event.name}</h1>
+                <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
                   <span>{event.description}</span>
                 </p>
               </div>
             </div>
 
-
-
             <div className={style.container_select_button}>
               <div className={style.container_select}>
-                <p className={style.select_title}>Ticket : {purchase.ticketName}</p>
-                  
-                {event.Stage && event.Stage.template==="GranRex" ? <>
-                  <GranRex className={style.select} name="ticketCategory" handleonClick={handleChange} />
-                      </>
-                 : 
-                  <>{event.Stage && event.Stage.template==="LunaPark" ? 
-                    <LunaPark className={style.select} name="ticketCategory" handleonClick={handleChange} />
-                    
-                  : <div>
-                    <select name="ticketCategory" onChange={handleChange} className={style.select}>
-                  <option value=""></option>
-                  {event.stock && event.stock.cat1name && (
-                    <option value="cat1name">
-                      {event.stock.cat1name} - Stock: {event.stock.cat1stock} -
-                      ARS {event.stock.cat1price}
-                    </option>
-                  )}
-                  {event.stock && event.stock.cat2name && (
-                    <option value="cat2name">
-                      {event.stock.cat2name} - Stock: {event.stock.cat2stock} -
-                      ARS {event.stock.cat2price}
-                    </option>
-                  )}
-                  {event.stock && event.stock.cat3name && (
-                    <option value="cat3name">
-                      {event.stock.cat3name} - Stock: {event.stock.cat3stock} -
-                      ARS {event.stock.cat3price}
-                    </option>
-                  )}
-                </select>
-                    </div>}
+                <p className={style.select_title}>
+                  Ticket : {purchase.ticketName}
+                </p>
+
+                {event.Stage && event.Stage.template === "GranRex" ? (
+                  <>
+                    <GranRex
+                      className={style.select}
+                      name="ticketCategory"
+                      handleonClick={handleChange}
+                    />
                   </>
-                }
-                <p className={style.select_title}>Number of Tickets</p>
-                
+                ) : (
+                  <>
+                    {event.Stage && event.Stage.template === "LunaPark" ? (
+                      <LunaPark
+                        className={style.select}
+                        name="ticketCategory"
+                        handleonClick={handleChange}
+                      />
+                    ) : (
+                      <div>
+                        <select
+                          name="ticketCategory"
+                          onChange={handleChange}
+                          className={style.select}
+                        >
+                          <option value=""></option>
+                          {event.stock && event.stock.cat1name && (
+                            <option value="cat1name">
+                              {event.stock.cat1name} - Stock:{" "}
+                              {event.stock.cat1stock} - ARS{" "}
+                              {event.stock.cat1price}
+                            </option>
+                          )}
+                          {event.stock && event.stock.cat2name && (
+                            <option value="cat2name">
+                              {event.stock.cat2name} - Stock:{" "}
+                              {event.stock.cat2stock} - ARS{" "}
+                              {event.stock.cat2price}
+                            </option>
+                          )}
+                          {event.stock && event.stock.cat3name && (
+                            <option value="cat3name">
+                              {event.stock.cat3name} - Stock:{" "}
+                              {event.stock.cat3stock} - ARS{" "}
+                              {event.stock.cat3price}
+                            </option>
+                          )}
+                        </select>
+                      </div>
+                    )}
+                  </>
+                )}
+
                 <div className={style.ultimo}>
-
-                <select name="ticketNumber" onChange={handleQChange} className={style.select}>
-                  {numbers.map((number) => {
-                    return <option value={number}>{number}</option>;
-                  })}
-                </select>
-
-                <button className={style.cartButton} onClick={handleBuy}>Buy Now!</button>
+                  <p className={style.select_title}>Number of Tickets</p>
+                  <select
+                    name="ticketNumber"
+                    onChange={handleQChange}
+                    className={style.select}
+                  >
+                    {numbers.map((number) => {
+                      return <option value={number}>{number}</option>;
+                    })}
+                  </select>
                 </div>
+                <button className={style.cartButton} onClick={handleBuy}>
+                  Buy Now!
+                </button>
               </div>
               <div className={style.buttonsContainer}>
-                  {/* {user.id ? ( */}
-                    <>
-                    </>
-                  {/* ) : (
+                {/* {user.id ? ( */}
+                <></>
+                {/* ) : (
                     "Login to buy your tickets!"
                   )} */}
-                  {/* <Link to="/">
+                {/* <Link to="/">
                     <button className={style.button_close}>Close</button>
                   </Link> */}
-                </div>
+              </div>
             </div>
-
           </div>
         </div>
       ) : (
