@@ -40,7 +40,7 @@ const finalCheck = (form, checkbox, capacity) => {
     if (!cat3name || !cat3price || !cat3stock)
       error.push("Ticket 'Category 3' is selected but data is missing ");
   }
-  console.log(capacity, " ", cat1stock, cat2stock, cat3stock);
+
   if (
     capacity <
     parseInt(cat1stock) + parseInt(cat2stock) + parseInt(cat3stock)

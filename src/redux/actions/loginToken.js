@@ -10,7 +10,7 @@ const loginToken = (token) => {
           Authorization: `Bearer ${token.bodyToken}`,
         },
       });
-      // console.log(json.data)
+
       return dispatch({
         type: LOGIN_TOKEN,
         payload: json.data,

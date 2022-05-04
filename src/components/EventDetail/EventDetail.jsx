@@ -7,10 +7,8 @@ import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-// import logo from "../../assets/images/logotipo.png"
 import { animateScroll as scroll } from "react-scroll";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-// import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
 import GranRex from "../SeatPlace/plantilla/GranRex/GranRex";
 import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
@@ -29,14 +27,6 @@ const monthNames = [
   "November",
   "December",
 ];
-
-// let numbers = [0,1,2,3,4,5];
-
-// const formatPrice = new Intl.NumberFormat("es-AR", {
-//   style: "currency",
-//   currency: "USD",
-// });
-// const formatNumber = new Intl.NumberFormat("es-AR");
 
 const getShortMonthName = (date) => {
   return monthNames[date.getMonth()].substring(0, 3);
@@ -71,7 +61,6 @@ const EventDetail = () => {
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
-    console.log(stock);
     if (stock >= 5) {
       number = [0, 1, 2, 3, 4, 5];
     } else {
@@ -164,10 +153,6 @@ const EventDetail = () => {
   };
   const [first, setFirst] = useState("");
 
-  // function handleClick(e) {
-  //   setFirst(e.target.id);
-  // }
-  // console.log(first,"firsssstt")
   const handleTemplateChange = (e) => {
     setNumbers(
       arrayNumbers((e.target.value || e.target.id).replace("name", "stock"))

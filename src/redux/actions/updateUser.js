@@ -2,8 +2,6 @@ import axios from "axios";
 export const UPDATE_USER = "UPDATE_USER";
 
 const updateUser = (input, id, token) => {
-  // console.log(input);
-
   return async (dispatch) => {
     try {
       const json = await axios.post(`/users/user/update/${id}`, input, {

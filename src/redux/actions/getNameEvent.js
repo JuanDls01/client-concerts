@@ -3,9 +3,6 @@ import axios from "axios";
 export const GET_NAME_EVENT = "GET_NAME_EVENT";
 
 const getNameEvent = (event, artist, stage) => {
-  console.log(event);
-  console.log(artist);
-  console.log(stage);
   return async (dispatch) => {
     try {
       const json = await axios.get(

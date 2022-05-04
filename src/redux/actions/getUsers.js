@@ -10,7 +10,7 @@ const getUsers = (token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // console.log(json.data)
+
       return dispatch({
         type: GET_USERS,
         payload: json.data,

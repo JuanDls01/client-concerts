@@ -49,7 +49,7 @@ const initialState = {
   purchase: {},
   preference: null,
   preOrder: {},
-  getTickets:[]
+  getTickets: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -97,7 +97,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         userDetail: action.payload.error ? state.userDetail : action.payload,
-        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+        userUpdareErr: action.payload.error
+          ? action.payload.error && success(false)
+          : "success" && success(),
       };
     }
     case UPDATE_PROFILE: {
@@ -112,21 +114,27 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.error ? state.userDetail : action.payload,
-        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+        userUpdareErr: action.payload.error
+          ? action.payload.error && success(false)
+          : "success" && success(),
       };
     }
     case UPDATE_PASSWORD: {
       const success = (status = true) => {
         Swal.fire({
           title: "Hey!",
-          text: !status ? action.payload.error : "The password has been updated",
+          text: !status
+            ? action.payload.error
+            : "The password has been updated",
           icon: !status ? "error" : "success",
           confirmButtonText: "Ok",
         });
       };
       return {
         ...state,
-        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+        userUpdareErr: action.payload.error
+          ? action.payload.error && success(false)
+          : "success" && success(),
       };
     }
     case CLEAR_USER: {
@@ -151,7 +159,6 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_GENRES: {
-      // console.log('ejecutando getGenres desde reducer')
       return {
         ...state,
         genres: action.payload,
@@ -204,10 +211,8 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_NAME_EVENT: {
-      console.log(action.payload);
       const eventfinds = action.payload;
-      console.log(eventfinds);
-      console.log(eventfinds.length);
+
       const notfound = () => {
         document.getElementById("nameEvent").focus();
         Swal.fire({
