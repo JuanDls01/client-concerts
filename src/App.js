@@ -25,11 +25,13 @@ import "./App.css";
 
 import actionsCreator from "./redux/actions";
 import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
+import SeatPlace from "./components/SeatPlace/SeatPlace"
 
 import {TicketsPDF} from './components/DashboarUsers/TicketsPDF/TicketsPDF'
 
 
 import Profile from "./components/Profile/Profile";
+import GranRex from "./components/SeatPlace/plantilla/GranRex/GranRex";
 
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
       <Routes>
         {/* Invitado: */}
         <Route index element={<Home />} />
+        {/* <Route index element={<SeatPlace />} /> */}
         <Route path="/recoverPassword" exact element={<ForgetPassword />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />

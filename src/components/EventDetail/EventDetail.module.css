@@ -21,6 +21,7 @@ body {
   border: 5px solid #483d8b;
   border-radius: 0.5rem;
   overflow: hidden;
+  font-family: Poppins;
 }
 .soldOut {
   background-color: black;
@@ -50,7 +51,7 @@ body {
   height: 30em;
 
   margin-top: 4%;
-  margin-bottom: 1%;
+  margin-bottom: 3%;
   border-radius: 10px;
   mix-blend-mode: normal;
   filter: drop-shadow(36px 40px 11px #6d35ca80);
@@ -121,14 +122,17 @@ body {
 .select_title {
   color: white;
   background-color: black;
+  border-radius: 10px;
+  text-align: center;
+  line-height: normal;
   width: 18rem;
   height: 2rem;
 }
 .container_select {
   /* border: 1px solid #242565; */
+
   display: flex;
   flex-direction: column;
-  width: 50%;
   margin-top: 3%;
   margin-left: 2%;
   padding: 1%;
@@ -152,7 +156,6 @@ body {
   height: 30%;
   width: 14%;
   margin-left: 20%;
-  text-align: left;
 }
 .map {
   display: flex;
@@ -272,6 +275,7 @@ body {
   color: #ffffff;
   background-color: black;
   border-radius: 8px;
+  z-index: 99;
 }
 
 .ticket {
@@ -279,14 +283,13 @@ body {
   border: 3px outset lightgray;
   padding: 1.5%;
 }
-
-/* @media screen and (max-width: 400px){
-  .mainContainer {
-    display: block;
-    height: 100%;
-  }
-  .aside {
-    width: 80%
-  }
-};
-   */
+.ultimo {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.todo {
+  display: flex;
+  justify-content: center;
+}
