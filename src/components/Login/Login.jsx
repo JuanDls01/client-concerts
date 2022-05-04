@@ -132,7 +132,7 @@ const Login = () => {
                         inputNext='email' 
                         inputState={input} 
                     />
-                    {autherr ? <div className={style.authError}>{autherr}</div> : null}
+                    {/* {autherr ? <div className={style.authError}>{autherr}</div> : null} */}
                     {/* INICIAR SESIÓN CON GOOGLE */}
                     <div className={style.googleLogin}>
                         <GoogleLogin
