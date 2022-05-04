@@ -24,7 +24,7 @@ const EventsCards = () => {
     // console.log("hola");
     dispatch(getEvents());
     if (token === "") {
-      EVENTSPERPAGE = 9;
+      EVENTSPERPAGE = 6;
     } else EVENTSPERPAGE = 9;
   }, [dispatch, getEvents, token]);
 
