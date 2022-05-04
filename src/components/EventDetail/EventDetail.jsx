@@ -7,17 +7,10 @@ import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-<<<<<<< HEAD
 import logo from "../../assets/images/logo.png";
 // import Loading from "../Loading/Loading";
-import { animateScroll as scroll } from 'react-scroll';
+// import { animateScroll as scroll } from 'react-scroll';
 import Swal from "sweetalert2";
-=======
-// import logo from "../../assets/images/logotipo.png"
-import { animateScroll as scroll } from "react-scroll";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-// import Swal from "sweetalert2";
->>>>>>> 0e94a50131c6affb4a6654de9ce40ea274c41386
 import NavBar from "../NavBar/NavBar";
 import GranRex from "../SeatPlace/plantilla/GranRex/GranRex";
 import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
@@ -54,7 +47,7 @@ const EventDetail = () => {
 
   useEffect(() => {
     dispatch(getEventDetail(id));
-    scroll.scrollToTop();
+    // scroll.scrollToTop();
     // setTimeout(() => {
     //   setIsLoading(false);
     // }, 1500);
@@ -72,7 +65,6 @@ const EventDetail = () => {
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
-    console.log(stock);
     if (stock >= 5) {
       number = [0, 1, 2, 3, 4, 5];
     } else {
@@ -165,7 +157,7 @@ const EventDetail = () => {
           title: "You must be select a ticket and valid number!",
           icon: "warning",
           confirmButtonText: "Ok",
-          color:'#fff',
+          // color:'#fff',
           // background: '#483d8b',
           border: '#000'
         });
@@ -177,7 +169,7 @@ const EventDetail = () => {
         showCancelButton: true,
         confirmButtonText: 'Go to Login...',
         icon: "warning",
-        color:'#fff',
+        // color:'#fff',
         // background: '#483d8b'
       }).then((result) => {
         if (result.isConfirmed) {
@@ -202,13 +194,7 @@ const EventDetail = () => {
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <NavBar />
-            {/* <nav className={style.logoContainner}>
-              <Link to='/'><img src={logo} alt="img" className={style.logo}/></Link>
-              <div>
-                <Link to='/login'><button className={style.button_login}>MI CUENTA</button></Link>
-              </div>
-            </nav> */}
-
+            
             <img src={event.img} alt="img" className={style.image} />
 
             <div className={style.info}>
@@ -243,16 +229,17 @@ const EventDetail = () => {
                 )}
               </div>
             </div>
-            <div className={style.eventBody}>
+            <div className={style.eventBody} >
               <div className={style.descriptionBody}>
                 <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
                   <span>{event.description}</span>
                 </p>
               </div>
+              <p className={style.soldOut} hidden={stockTotal === 0 ? false : true}>SOLD OUT!</p>
             </div>
 
-            <div className={style.container_select_button}>
+            <div className={style.container_select_button} hidden={stockTotal === 0 ? true : false}>
               <div className={style.container_select}>
                 <p className={style.select_title}>
                   Ticket : {purchase.ticketName}

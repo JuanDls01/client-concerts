@@ -31,7 +31,8 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
     const minutes = starttime.split(':')[1]
     const time = `${hours}:${minutes}`
     const date = `${day}th of ${monthName} a las ${time}`
-    const stockTotal = stock.cat1stock + stock.cat2stock + stock.cat3stock;
+    const stockTotal = parseInt(stock.cat1stock) + parseInt(stock.cat2stock) + parseInt(stock.cat3stock);
+    console.log(stockTotal)
     
     // Cuantos días faltan para el evento: 
     const todayDate = Number(today.split(' ')[2]);
@@ -66,8 +67,11 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
                         <p>Band: {artistName}</p>
                     </div>
                 </div>
-                {stockTotal === 0?
+                {
+                stockTotal === 0?
                 <div className={style.soldOut}>SOLD OUT</div>:
+                stockTotal <= 30?
+                <div className={style.lastTickets}>LAST TICKETS!</div>:
                 <>{
                     (day - todayDate < 5) && (todayMonth === monthName) && (year === todayYear)?
                     <div className={style.buybttn}>IS VERY CLOSE</div>:

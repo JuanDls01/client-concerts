@@ -151,7 +151,6 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_GENRES: {
-      // console.log('ejecutando getGenres desde reducer')
       return {
         ...state,
         genres: action.payload,
@@ -211,8 +210,8 @@ const rootReducer = (state = initialState, action) => {
       const notfound = () => {
         document.getElementById("nameEvent").focus();
         Swal.fire({
-          title: "Información",
-          text: "No se encontraron eventos!!!",
+          title: "Information",
+          text: "No events found!",
           icon: "info",
           confirmButtonText: "Ok",
         });
