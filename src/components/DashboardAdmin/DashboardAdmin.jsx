@@ -14,15 +14,23 @@ import {
   subtile,
   cardConteiner,
   btnPublish,
+  table,
 } from './DashboardAdmin.module.css'
 
 const DashboardAdmin = ({children}) => {
   useRoleProtected(['super admin', 'admin']);
   const user = useSelector((state) => state.user);
+  const users = useSelector((state) => state.usersList);
+
+  // console.log(users[1].Role.name)
+  let totUsers = users.length?users.length-1:0
+  let vendors = users.length? users.filter(user => user.Role.name == "Vendedor").length :'...'
+  let customers = users.length? users.filter(user => user.Role.name == "User").length :'...'
 
   return (
     <div className={conteiner}>
       <NavBarDash user={user} />
+
       
       <div className={ContentsubTitle}>
         <h1 className={subtile}>Analytics</h1>  
@@ -32,22 +40,30 @@ const DashboardAdmin = ({children}) => {
       <div className={cardConteiner}>
           {/* ACA EN ANALITICS Y ESTADISTICAS PASARLE EL PARAMETRO */}
         <CardAnalitics
-          title="Total Revenue"
-          analitics="$52.63k"
-          estadistics="+3.4"
+          title="Total App Users"
+          analitics={totUsers}
+          estadistics="100%"
           img={imgSubida}
         />
         <CardAnalitics
-          title="Today Revenue"
-          analitics="$1024"
-          estadistics="-5,5%"
+          title="Total Active Sellers"
+          analitics={vendors}
+          // estadistics={vendors/totUsers}
+          estadistics={new Intl.NumberFormat('en-US', { style: 'percent'}).format(vendors/totUsers)}
           img={calen}
         />
-        <CardAnalitics title="Tickets Sold" analitics="$1024" img={carrito} />
+        <CardAnalitics 
+        title="Total customers" 
+        analitics={customers} 
+        estadistics={new Intl.NumberFormat('en-US', { style: 'percent'}).format(customers/totUsers)}
+        img={carrito} />
         <button className={btnPublish}>Publish Event</button>
       </div>
 
-      <Users />
+      <Users className={table}/>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 }

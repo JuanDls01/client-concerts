@@ -7,9 +7,10 @@ import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-import logo from "../../assets/images/logotipo.png"
-import styled from "styled-components";
+// import logo from "../../assets/images/logotipo.png"
 import { animateScroll as scroll} from 'react-scroll';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
 import GranRex  from "../SeatPlace/plantilla/GranRex/GranRex"
 import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
@@ -54,19 +55,19 @@ const EventDetail = () => {
     scroll.scrollToTop();
     return () => {
       dispatch(cleanEventDetail());
-      
-    };
+     };
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
+  const token = useSelector((state) => state.token);
   const event = useSelector((state) => state.details);
   const [numbers, setNumbers] = useState(['']);
-  
+  const stockTotal = event.stock && event.stock.cat1stock + event.stock.cat2stock + event.stock.cat3stock;
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
     console.log(stock)
     if (stock >= 5) {
-      number = [0,1,2,3,4,5]
+      number = [0,1,2,3,4,5];
     } else {
       for (let i = 0; i <= stock; i++) {
         number.push(i);
@@ -96,8 +97,6 @@ const EventDetail = () => {
     });
   };
 
-  
-
   const handleQChange = (e) => {
     setPurchase({ ...purchase, ticketQ: e.target.value });
   };
@@ -116,19 +115,37 @@ const EventDetail = () => {
         },
       ],
     };
-    dispatch(savePreference(preference));
-    const preOrder = {
-      eventId: event.id,
-      userId: user.id,
-      eventName: event.name,
-      eventDate: event.date,
-      eventTime: event.time,
-      ticketName: purchase.ticketName,
-      ticketPrice: purchase.ticketPrice,
-      ticketQ: purchase.ticketQ,
-    };
-    dispatch(savePreOrder(preOrder));
-    navigate("/order");
+    if (token !== '') {
+      if ( purchase.ticketCategory !== null && purchase.ticketCategory !== "" && purchase.ticketQ !== "" && purchase.ticketQ !== 0) {
+        dispatch(savePreference(preference));
+        const preOrder = {
+          eventId: event.id,
+          userId: user.id,
+          eventName: event.name,
+          eventDate: event.date,
+          eventTime: event.time,
+          ticketName: purchase.ticketName,
+          ticketPrice: purchase.ticketPrice,
+          ticketQ: purchase.ticketQ,
+        };
+        dispatch(savePreOrder(preOrder));
+        navigate("/order");
+      } else {
+        Swal.fire({
+          title: "Information",
+          text: "You must be select a ticket and valid number!",
+          icon: "info",
+          confirmButtonText: "Ok",
+        });
+      }
+    } else {
+      Swal.fire({
+        title: "Information",
+        text: "You must be logged for to buy!",
+        icon: "info",
+        confirmButtonText: "Ok",
+      });
+    }
   };
   const [first, setFirst] = useState("");
 

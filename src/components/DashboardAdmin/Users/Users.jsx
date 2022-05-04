@@ -8,8 +8,11 @@ import {
     subtileUsers,
     tablaUsers,
     detailCont,
-    headingsColor
+    headingsColor,
+    edit,
 } from './Users.module.css';
+import { RiFileEditLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
 
 
 const Users = () => {
@@ -17,10 +20,12 @@ const Users = () => {
     const token = useSelector((state) => state.token);
     const { getUsers } = actionsCreator;
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
+// console.log(users) // No tiene propiedad de Activo/Inactivo para incluirla en la tabla
     useEffect(() => {
         dispatch(getUsers(token));
     }, [token]);
+
 
     const columns = [
         {
@@ -44,11 +49,18 @@ const Users = () => {
           name: "Status",
           selector: (row) => row.status,
           sortable: true,
-        },
-        {
-          name: "Actions",
-          selector: (row) => row.actions,
-          sortable: true,
+        }
+        //Comentare Action mientras se define que va en esta parte
+        // ,
+        // {
+        //   name: "Actions",
+        //   selector: (row) => row.actions,
+        //   sortable: true,
+        // }
+        ,
+        { 
+		    button: true,
+		    cell: (row) => <RiFileEditLine onClick={()=>navigate('/admin/dashboard/user/'+row.actions)} className={edit} />,
         }
     ];
     
@@ -58,11 +70,10 @@ const Users = () => {
             email: u.email,
             role: u.Role.name,
             status: 'Active',
-            actions: 'btns'
+            actions:  u.id
         };
     });
     if(data) data = data.filter(d => d.role !== 'Super admin');
-
 
     return (
         <>
@@ -74,7 +85,12 @@ const Users = () => {
             {
                 data && data.length > 0 ?
                 <div className={`container ${tablaUsers}`}>
-                    <DataTable columns={columns} data={data} />
+                    <DataTable 
+                    columns={columns} 
+                    data={data} 
+                    highlightOnHover={true}
+                    // pointerOnHover
+                    />
                 </div>:
                 <div className={`container text-start mb-5 alert alert-danger ${detailCont}`} role="alert">
                     There aren't any users...
