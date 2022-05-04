@@ -225,10 +225,20 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case REGISTER_USER: {
+      console.log(action.payload)
+      const notfound = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: action.payload.user? 'User registered success':`${authError}`,
+          icon: authError === "There are missing parameters" ||  authError === "The email is already in use!"? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? "success" : "error",
-        authError: action.payload.error,
+        authError: action.payload.error? action.payload.error:null,
+        messagge: action.payload && notfound(),
       };
     }
 
