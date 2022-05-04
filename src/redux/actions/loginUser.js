@@ -7,7 +7,7 @@ const loginUser = (input) => {
   return async (dispatch) => {
     try {
       const json = await axios.post("/auth/login", input);
-      console.log(json.data)
+      // console.log(json.data)
       return dispatch({
         type: LOGIN_USER,
         payload: json.data,

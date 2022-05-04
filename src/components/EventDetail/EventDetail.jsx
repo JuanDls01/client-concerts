@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
@@ -63,7 +63,7 @@ const EventDetail = () => {
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
-    console.log(stock)
+    // console.log(stock)
     if (stock >= 5) {
       number = [0,1,2,3,4,5];
     } else {
@@ -150,8 +150,8 @@ const EventDetail = () => {
     <>
       {event ? (
         <div className={style.mainContainer}>
+            <NavBar className={style.navbar}/>
           <div className={style.topBody}>
-            <NavBar />
             {/* <nav className={style.logoContainner}>
               <Link to='/'><img src={logo} alt="img" className={style.logo}/></Link>
               <div>
@@ -161,6 +161,7 @@ const EventDetail = () => {
             
             <img src={event.img} alt="img" className={style.image} />
             
+            <div className={style.parteBaja}>
             <div className={style.info}>
             <p className={style.date}>{event.date && getShortMonthName(new Date(`${event.date}`))} {event.date && event.date.slice(8, 10)} - {event.time && event.time.slice(0, 5)} hs</p>
               <div className={style.ticket}>
@@ -175,19 +176,22 @@ const EventDetail = () => {
               </span>
               <div className={style.map}>
                 {event.Stage ? (
-                  <MapContainer
+                  <MapContainer className={style.internoMap}
                     lat={event.Stage && event.Stage.lat}
                     lon={event.Stage && event.Stage.lon}
-                    marginLeft="0%"
-                    maxWidth="14%"
-                    maxHeight="25%"
+                    width="22vw"
+                    height="35vh"
+                    maxWidth="22vw"
+                    maxHeight="35vh"
+                    borderRadius="14px"
                   />
                 ) : (
                 <p>Loading map..</p>
                 )}
               </div>
             </div>
-            <div className={style.eventBody}>
+                <div className={style.derecha}>
+                <div className={style.eventBody}>
               <div className={style.descriptionBody}>
               <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
@@ -201,21 +205,21 @@ const EventDetail = () => {
               <div className={style.container_select}>
                 <p className={style.select_title} hidden={stockTotal === 0 ? true : false}>Ticket</p>
                 <select name="ticketCategory" onChange={handleChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
-                  <option value=""></option>
+                  <option className={style.option} value=""></option>
                   {event.stock && event.stock.cat1name && (
-                    <option value="cat1name">
+                    <option className={style.option} value="cat1name">
                       {event.stock.cat1name} - Stock: {event.stock.cat1stock} -
                       ARS {event.stock.cat1price}
                     </option>
                   )}
                   {event.stock && event.stock.cat2name && (
-                    <option value="cat2name">
+                    <option className={style.option} value="cat2name">
                       {event.stock.cat2name} - Stock: {event.stock.cat2stock} -
                       ARS {event.stock.cat2price}
                     </option>
                   )}
                   {event.stock && event.stock.cat3name && (
-                    <option value="cat3name">
+                    <option className={style.option} value="cat3name">
                       {event.stock.cat3name} - Stock: {event.stock.cat3stock} -
                       ARS {event.stock.cat3price}
                     </option>
@@ -225,7 +229,8 @@ const EventDetail = () => {
                 
                 <select name="ticketNumber" onChange={handleQChange} className={style.select} hidden={stockTotal === 0 ? true : false}>
                   {numbers.map((number) => {
-                    return <option value={number}>{number}</option>;
+                    console.log(number)
+                    return <option className={style.option} value={number}>{number}</option>;
                   })}
                 </select>
               </div>
@@ -244,6 +249,10 @@ const EventDetail = () => {
                     <button className={style.button_close}>Close</button>
                   </Link> */}
                 </div>
+            </div>
+
+                </div>
+
             </div>
 
           </div>
