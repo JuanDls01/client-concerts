@@ -101,6 +101,21 @@ const EventDetail = () => {
     });
   };
 
+  const handleCategoryChange = (e) => {
+    setNumbers(
+      arrayNumbers((e.target.value || e.target.id).replace("name", "stock"))
+    );
+    const price = determinarPrecio(e.target.value || e.target.id);
+    const property = "ticketCategory";
+    const value = e.target.value || e.target.id;
+    setPurchase({
+      ...purchase,
+      [property]: value,
+      ticketName: event.stock[value],
+      ticketPrice: event.stock[price],
+    });
+  };
+
   const handleQChange = (e) => {
     setPurchase({ ...purchase, ticketQ: e.target.value });
   };
@@ -231,7 +246,7 @@ const EventDetail = () => {
                     <GranRex
                       className={style.select}
                       name="ticketCategory"
-                      handleonClick={handleChange}
+                      handleonClick={handleCategoryChange}
                     />
                   </>
                 ) : (
@@ -240,7 +255,7 @@ const EventDetail = () => {
                       <LunaPark
                         className={style.select}
                         name="ticketCategory"
-                        handleonClick={handleChange}
+                        handleonClick={handleCategoryChange}
                       />
                     ) : (
                       <div>
