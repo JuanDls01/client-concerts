@@ -2,13 +2,12 @@ import * as React from "react"
 import styles from "./GranRex.module.css"
 
 const GranRex = ({handleonClick}) => (
-  <div>
+  <div  name="ticketCategory">
   <svg
     width={685}
     height={281}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    // {...props}
   >
     <g filter="url(#a)">
       <path
@@ -17,7 +16,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="3"
+        id="cat1name"
         onClick={(e)=>handleonClick(e)}
         
       />
@@ -31,7 +30,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="1"
+        id="cat3name"
         onClick={(e)=>handleonClick(e)}
       />
       <path
@@ -44,7 +43,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="2"
+        id="cat2name"
         onClick={(e)=>handleonClick(e)}
       />
       <path
@@ -57,7 +56,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="3"
+        id="cat1name"
         onClick={(e)=>handleonClick(e)}
       />
       <path
@@ -70,7 +69,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="3"
+        id="cat1name"
         onClick={(e)=>handleonClick(e)}
       />
       <path
@@ -83,7 +82,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
-        id="2"
+        id="cat2name"
         onClick={(e)=>handleonClick(e)}
       />
       <path
