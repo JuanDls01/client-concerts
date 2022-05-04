@@ -37,8 +37,6 @@ const EventCard = ({ id, name, imgEvent, startdate, starttime, artistName, stage
     const todayDate = Number(today.split(' ')[2]);
     const todayMonth = today.split(' ')[1];
     const todayYear = Number(today.split(' ')[3]);
-    console.log(year);
-    console.log(todayYear);
     
     return (
         <div className={style.cardEvent}>

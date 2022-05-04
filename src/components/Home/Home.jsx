@@ -55,8 +55,6 @@ export default function Home() {
         <Slider>
           {events.length &&
             events.map((event) => {
-              console.log(event.id);
-
               return (
                 <Slide>
                 <Link to={`/${event.id}`} >
