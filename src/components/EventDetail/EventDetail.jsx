@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-// import logo from "../../assets/images/logotipo.png"
-import { animateScroll as scroll} from 'react-scroll';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-// import Swal from "sweetalert2";
+import logo from "../../assets/images/logo.png";
+// import Loading from "../Loading/Loading";
+import { animateScroll as scroll } from 'react-scroll';
+import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
 
 const monthNames = [
@@ -30,12 +30,6 @@ const monthNames = [
 
 // let numbers = [0,1,2,3,4,5];
 
-// const formatPrice = new Intl.NumberFormat("es-AR", {
-//   style: "currency",
-//   currency: "USD",
-// });
-// const formatNumber = new Intl.NumberFormat("es-AR");
-
 const getShortMonthName = (date) => {
   return monthNames[date.getMonth()].substring(0, 3);
 };
@@ -45,12 +39,16 @@ const EventDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState(true)
 
   const { getEventDetail, cleanEventDetail } = actionsCreator;
 
   useEffect(() => {
     dispatch(getEventDetail(id));
     scroll.scrollToTop();
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1500);
     return () => {
       dispatch(cleanEventDetail());
      };
@@ -130,25 +128,37 @@ const EventDetail = () => {
         navigate("/order");
       } else {
         Swal.fire({
-          title: "Information",
-          text: "You must be select a ticket and valid number!",
-          icon: "info",
+          html: `<img style="width:11rem" src=${logo} alt={logo}/>`,
+          title: "You must be select a ticket and valid number!",
+          icon: "warning",
           confirmButtonText: "Ok",
+          color:'#fff',
+          // background: '#483d8b',
+          border: '#000'
         });
       }
     } else {
       Swal.fire({
-        title: "Information",
-        text: "You must be logged for to buy!",
-        icon: "info",
-        confirmButtonText: "Ok",
-      });
+        html: `<img style="width:11rem" src=${logo} alt={logo}/>`,
+        title: 'You must be logged to buy!',
+        showCancelButton: true,
+        confirmButtonText: 'Go to Login...',
+        icon: "warning",
+        color:'#fff',
+        // background: '#483d8b'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login')
+        }
+      })
     }
   };
 
   return (
     <>
-      {event ? (
+      {/* isLoading === true ? <Loading /> : */}
+      {
+      event ? (
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <NavBar />
@@ -249,7 +259,7 @@ const EventDetail = () => {
           </div>
         </div>
       ) : (
-        <p>loading...</p>
+        <p>Loading...</p>
       )}
     </>
   );

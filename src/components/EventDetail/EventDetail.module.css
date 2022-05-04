@@ -18,7 +18,7 @@ body {
     rgba(245, 22, 126, 0.25) 94.69%
   );
   opacity: 0.9;
-  border: 5px solid darkslateblue;
+  border: 5px solid #483d8b;
   border-radius: 0.5rem;
   overflow: hidden;
 }
@@ -53,17 +53,17 @@ body {
   margin-bottom: 1%;
   border-radius: 10px;
   mix-blend-mode: normal;
-  filter: drop-shadow(36px 40px 11px rgba(109, 53, 202, 0.5));
+  filter: drop-shadow(36px 40px 11px #6d35ca80);
   object-fit: cover;
 }
 
 .logo {
-  position: absolute;
+  /* position: absolute; */
   width: auto;
   height: 10rem;
-  top: -3%;
-  left: 15%;
-  transition: transform 0.2s;
+  /* top: -3%; */
+  /* left: 15%; */
+  /* transition: transform 0.2s; */
 }
 
 .logo:hover {
