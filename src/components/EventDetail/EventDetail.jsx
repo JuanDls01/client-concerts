@@ -58,6 +58,10 @@ const EventDetail = () => {
     };
   }, [dispatch, id, cleanEventDetail, getEventDetail]);
 
+  useEffect(() => {
+    setPurchase({ ...purchase, userId: user.id });
+  }, [user]);
+
   const token = useSelector((state) => state.token);
   const event = useSelector((state) => state.details);
   const [numbers, setNumbers] = useState([""]);
@@ -91,7 +95,9 @@ const EventDetail = () => {
       arrayNumbers((e.target.value || e.target.id).replace("name", "stock"))
     );
     const price = determinarPrecio(e.target.value || e.target.id);
-    const property = e.target.name;
+    const property = e.target.name || e.target.id;
+    console.log(property);
+
     const value = e.target.value || e.target.id;
     setPurchase({
       ...purchase,
@@ -162,7 +168,21 @@ const EventDetail = () => {
   //   setFirst(e.target.id);
   // }
   // console.log(first,"firsssstt")
-  console.log(event.Stage, "lugaresss");
+  const handleTemplateChange = (e) => {
+    setNumbers(
+      arrayNumbers((e.target.value || e.target.id).replace("name", "stock"))
+    );
+    const price = determinarPrecio(e.target.value || e.target.id);
+    const property = "ticketCategory";
+
+    const value = e.target.value || e.target.id;
+    setPurchase({
+      ...purchase,
+      [property]: value,
+      ticketName: event.stock[value],
+      ticketPrice: event.stock[price],
+    });
+  };
 
   return (
     <>
@@ -170,12 +190,6 @@ const EventDetail = () => {
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <NavBar />
-            {/* <nav className={style.logoContainner}>
-              <Link to='/'><img src={logo} alt="img" className={style.logo}/></Link>
-              <div>
-                <Link to='/login'><button className={style.button_login}>MI CUENTA</button></Link>
-              </div>
-            </nav> */}
 
             <img src={event.img} alt="img" className={style.image} />
 
@@ -226,21 +240,29 @@ const EventDetail = () => {
                   Ticket : {purchase.ticketName}
                 </p>
 
-                {event.Stage && event.Stage.template === "GranRex" ? (
+                {event.Stage &&
+                event.Stage.template === "GranRex" &&
+                event.stock.cat1name &&
+                event.stock.cat2name &&
+                event.stock.cat2name ? (
                   <>
                     <GranRex
                       className={style.select}
                       name="ticketCategory"
-                      handleonClick={handleChange}
+                      handleonClick={handleTemplateChange}
                     />
                   </>
                 ) : (
                   <>
-                    {event.Stage && event.Stage.template === "LunaPark" ? (
+                    {event.Stage &&
+                    event.Stage.template === "LunaPark" &&
+                    event.stock.cat1name &&
+                    event.stock.cat2name &&
+                    event.stock.cat2name ? (
                       <LunaPark
                         className={style.select}
                         name="ticketCategory"
-                        handleonClick={handleChange}
+                        handleonClick={handleTemplateChange}
                       />
                     ) : (
                       <div>
