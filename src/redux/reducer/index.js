@@ -21,6 +21,7 @@ const {
   GET_TICKETS,
   SEND_EMAIL_RECOVER,
   SEND_EMAIL_REGISTER,
+  SEND_EMAIL_BUY,
   GET_USER,
   CLEAR_USER,
   GET_USERS,
@@ -28,6 +29,7 @@ const {
   CLEAR_UPDATE_ERR,
   UPDATE_PASSWORD,
   UPDATE_PROFILE,
+
 } = actions;
 
 const initialState = {
@@ -253,6 +255,20 @@ const rootReducer = (state = initialState, action) => {
     case POST_STAGE: {
       return {
         ...state,
+      };
+    }
+    case SEND_EMAIL_BUY: {
+      const notfound = (info = action.payload) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${info}`,
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
       };
     }
     case SEND_EMAIL_RECOVER: {

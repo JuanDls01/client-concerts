@@ -31,7 +31,7 @@ import {TicketsPDF} from './components/DashboarUsers/TicketsPDF/TicketsPDF'
 
 
 import Profile from "./components/Profile/Profile";
-import GranRex from "./components/SeatPlace/plantilla/GranRex/GranRex";
+
 
 
 function App() {

@@ -16,6 +16,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat1name"
         onClick={(e)=>handleonClick(e)}
         
@@ -30,6 +31,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat3name"
         onClick={(e)=>handleonClick(e)}
       />
@@ -43,6 +45,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat2name"
         onClick={(e)=>handleonClick(e)}
       />
@@ -56,6 +59,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat1name"
         onClick={(e)=>handleonClick(e)}
       />
@@ -69,6 +73,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat1name"
         onClick={(e)=>handleonClick(e)}
       />
@@ -82,6 +87,7 @@ const GranRex = ({handleonClick}) => (
         stroke="#000"
         strokeWidth={2}
         strokeLinejoin="bevel"
+        name="ticketCategory"
         id="cat2name"
         onClick={(e)=>handleonClick(e)}
       />
