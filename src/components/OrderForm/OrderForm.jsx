@@ -6,12 +6,14 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { BiArrowBack } from 'react-icons/bi';
+import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import checkTicket from "../../utils/checkTickets";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
   const event = useSelector((state) => state.details);
+  const [allowBuy, setAllowBuy] = useState(false);
   const preOrder = useSelector((state) => state.preOrder);
 
   const preference = useSelector((state) => state.preference);
@@ -52,12 +54,15 @@ const OrderForm = (props) => {
     let temporaryArray = [...order.tickets];
     temporaryArray[index][property] = value;
     setOrder({ ...order, tickets: temporaryArray });
+    setAllowBuy(checkTicket(order.tickets));
   };
 
   return (
     <div className={style.mainContainer}>
       <div className={style.bttnContainner}>
-        <Link to='/' className={style.bttnClose}><BiArrowBack /></Link>
+        <Link to="/" className={style.bttnClose}>
+          <BiArrowBack />
+        </Link>
       </div>
       <div className={style.body}>
         <p>Some content or children or something.</p>
@@ -109,7 +114,7 @@ const OrderForm = (props) => {
           })}
       </div>
 
-      {preference && (
+      {preference && allowBuy && (
         <Paypal
           order={preference}
           userId={preOrder.userId}
