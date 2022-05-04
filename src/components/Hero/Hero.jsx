@@ -1,6 +1,6 @@
 import s from "./Hero.module.css";
 import logo from "../../assets/images/logotipo.png";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 // import { useState } from "react";
 // import CreateStage from "../CreateStage/CreateStage";
 // import Contact from "../Contact/Contact";
@@ -36,19 +36,19 @@ export default function Hero() {
         <p className={s.parrafo}>
           Find the best events, artists, concerts, plays and more. Plus
           everything from the comfort of your home. Search them by place, date,
-          artist or genre{" "}
+          or artist{" "}
         </p>
         <div className={s.bttns}>
           {/* <button onClick={openStageModal} className={s.btn1}>
             Get Ticket
           </button>
           {modal && <CreateStage closeStageModal={closeStageModal} />} */}
-          <Link to='/login'><button className={s.btn1}>
-            Get Ticket
-          </button></Link>
-          <Link to='/contact'><button className={s.btn2}>
-            Contact Us
-          </button></Link>
+          <Link to="/login">
+            <button className={s.btn1}>Get Ticket</button>
+          </Link>
+          <Link to="/contact">
+            <button className={s.btn2}>Contact Us</button>
+          </Link>
         </div>
       </div>
     </div>
