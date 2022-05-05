@@ -21,6 +21,7 @@ const {
   GET_TICKETS,
   SEND_EMAIL_RECOVER,
   SEND_EMAIL_REGISTER,
+  SEND_EMAIL_BUY,
   GET_USER,
   CLEAR_USER,
   GET_USERS,
@@ -28,6 +29,7 @@ const {
   CLEAR_UPDATE_ERR,
   UPDATE_PASSWORD,
   UPDATE_PROFILE,
+
 } = actions;
 
 const initialState = {
@@ -224,19 +226,37 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case REGISTER_USER: {
+      const notfound = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: action.payload.user? 'User registered success':`${authError}`,
+          icon: authError === "There are missing parameters" ||  authError === "The email is already in use!"? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? "success" : "error",
-        authError: action.payload.error,
+        authError: action.payload.error? action.payload.error:null,
+        messagge: action.payload && notfound(),
       };
     }
 
     case LOGIN_USER: {
+      const errormsg = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${authError}`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
         token: action.payload.token ? action.payload.token : "",
         authError: action.payload.error,
+        messagge: action.payload.error? errormsg(): "",
       };
     }
 
@@ -252,6 +272,20 @@ const rootReducer = (state = initialState, action) => {
     case POST_STAGE: {
       return {
         ...state,
+      };
+    }
+    case SEND_EMAIL_BUY: {
+      const notfound = (info = action.payload) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${info}`,
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
       };
     }
     case SEND_EMAIL_RECOVER: {
