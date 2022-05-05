@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "./EventDetail.module.css";
 import actionsCreator from "../../redux/actions/index";
 import MapContainer from "../MapContainer/MapContainer";
 import determinarPrecio from "../../utils/determinarPrecio";
 import savePreference from "../../redux/actions/savePreference";
 import savePreOrder from "../../redux/actions/savePreOrder";
-// import logo from "../../assets/images/logotipo.png"
-import { animateScroll as scroll } from "react-scroll";
-import Swal from "sweetalert2/dist/sweetalert2.js";
-// import Swal from "sweetalert2";
+import logo from "../../assets/images/logo.png";
+// import Loading from "../Loading/Loading";
+// import { animateScroll as scroll } from 'react-scroll';
+import Swal from "sweetalert2";
 import NavBar from "../NavBar/NavBar";
 import GranRex from "../SeatPlace/plantilla/GranRex/GranRex";
 import LunaPark from "../SeatPlace/plantilla/LunaPark/LunaPark";
@@ -32,12 +32,6 @@ const monthNames = [
 
 // let numbers = [0,1,2,3,4,5];
 
-// const formatPrice = new Intl.NumberFormat("es-AR", {
-//   style: "currency",
-//   currency: "USD",
-// });
-// const formatNumber = new Intl.NumberFormat("es-AR");
-
 const getShortMonthName = (date) => {
   return monthNames[date.getMonth()].substring(0, 3);
 };
@@ -47,12 +41,16 @@ const EventDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState(true)
 
   const { getEventDetail, cleanEventDetail } = actionsCreator;
 
   useEffect(() => {
     dispatch(getEventDetail(id));
-    scroll.scrollToTop();
+    // scroll.scrollToTop();
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1500);
     return () => {
       dispatch(cleanEventDetail());
     };
@@ -67,7 +65,6 @@ const EventDetail = () => {
   const arrayNumbers = (cat) => {
     let number = [];
     let stock = event.stock && event.stock[`${cat}`];
-    console.log(stock);
     if (stock >= 5) {
       number = [0, 1, 2, 3, 4, 5];
     } else {
@@ -156,19 +153,29 @@ const EventDetail = () => {
         navigate("/order");
       } else {
         Swal.fire({
-          title: "Information",
-          text: "You must be select a ticket and valid number!",
-          icon: "info",
+          html: `<img style="width:11rem" src=${logo} alt={logo}/>`,
+          title: "You must be select a ticket and valid number!",
+          icon: "warning",
           confirmButtonText: "Ok",
+          // color:'#fff',
+          // background: '#483d8b',
+          border: '#000'
         });
       }
     } else {
       Swal.fire({
-        title: "Information",
-        text: "You must be logged for to buy!",
-        icon: "info",
-        confirmButtonText: "Ok",
-      });
+        html: `<img style="width:11rem" src=${logo} alt={logo}/>`,
+        title: 'You must be logged to buy!',
+        showCancelButton: true,
+        confirmButtonText: 'Go to Login...',
+        icon: "warning",
+        // color:'#fff',
+        // background: '#483d8b'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/login')
+        }
+      })
     }
   };
   const [first, setFirst] = useState("");
@@ -181,17 +188,13 @@ const EventDetail = () => {
 
   return (
     <>
-      {event ? (
+      {
+      event ? (
+        
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <NavBar />
-            {/* <nav className={style.logoContainner}>
-              <Link to='/'><img src={logo} alt="img" className={style.logo}/></Link>
-              <div>
-                <Link to='/login'><button className={style.button_login}>MI CUENTA</button></Link>
-              </div>
-            </nav> */}
-
+            
             <img src={event.img} alt="img" className={style.image} />
 
             <div className={style.info}>
@@ -226,16 +229,17 @@ const EventDetail = () => {
                 )}
               </div>
             </div>
-            <div className={style.eventBody}>
+            <div className={style.eventBody} >
               <div className={style.descriptionBody}>
                 <h1 className={style.titulo}>{event.name}</h1>
                 <p className={style.description}>
                   <span>{event.description}</span>
                 </p>
               </div>
+              <p className={style.soldOut} hidden={stockTotal === 0 ? false : true}>SOLD OUT!</p>
             </div>
 
-            <div className={style.container_select_button}>
+            <div className={style.container_select_button} hidden={stockTotal === 0 ? true : false}>
               <div className={style.container_select}>
                 <p className={style.select_title}>
                   Ticket : {purchase.ticketName}
@@ -322,7 +326,7 @@ const EventDetail = () => {
           </div>
         </div>
       ) : (
-        <p>loading...</p>
+        <p>Loading...</p>
       )}
     </>
   );
