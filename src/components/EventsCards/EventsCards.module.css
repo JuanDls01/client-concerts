@@ -9,13 +9,12 @@
 }
 
 .EventsCardsContainner {
-    width: 100vw;
-    /* height: 110vh; */
+    width: 1500px;
+    /* height: 700px; */
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1vh;   
+    flex-wrap: wrap;    
 }
 
 .paginatedContainner {

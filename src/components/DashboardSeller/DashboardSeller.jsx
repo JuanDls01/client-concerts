@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import style from "./DashboardSeller.module.css";
-// import logo from "../../assets/images/logotipo.png";
+import logo from "../../assets/images/logotipo.png";
 import CardAnalitics from "./CardAnalitics";
 import imgSubida from "../../assets/images/subida.png";
 import calen from "../../assets/images/calen.png";
-import money from "../../assets/images/money.png";
-import entradas from "../../assets/images/entradas.png";
+import carrito from "../../assets/images/carrito.png";
 import { useSelector } from "react-redux";
 import useRoleProtected from "../Hooks/useRoleProtected";
 import actionsCreator from "../../redux/actions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DataTable from "react-data-table-component";
-// import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import NavBar from '../NavBar/NavBar';
-import { ImTicket } from "react-icons/im";
 
 export default function DashboardSeller() {
   const { getUser } = actionsCreator;
@@ -49,24 +47,16 @@ export default function DashboardSeller() {
         //para obtener la fecha de hoy "fecha"  2022-05-02
         let date = new Date();
         let day = `${date.getDate()}`.padStart(2, "0");
-        let previousDay = `${date.getDate()-1}`.padStart(2, "0");
         let month = `${date.getMonth() + 1}`.padStart(2, "0");
         let year = date.getFullYear();
-        let yesterday = `${year}-${month}-${previousDay}`
         let fecha = `${year}-${month}-${day}`
         // console.log(fecha)
 
         //console.log(userdetail.Orders) // aqui esta la fecha de compra 
         //console.log(userdetail.Events) // de aca saco los montos
         let arrOrders = userdetail.Orders?.filter((order) =>order.date == fecha) //filtro por fecha de compra de hoy
-        // let arrDiaAnterior = userdetail.Orders?.filter((order) =>order.date == yesterday) //filtro por fecha de compra de hoy
 
         // console.log(arrOrders)
-        // let obtenerTicketsDiaAnterior = arrDiaAnterior?.map((order) =>{
-        //   return order.Tickets.map((ticket) =>ticket.id)
-        // })
-        // obtenerTicketsDiaAnterior = obtenerTicketsDiaAnterior?.flat()
-        ///////////////////////////////////////////////////////////////////////
         let obtenerTicketsDia = arrOrders?.map((order) =>{
           return order.Tickets.map((ticket) =>ticket.id)
         })
@@ -169,7 +159,7 @@ export default function DashboardSeller() {
         <CardAnalitics
           title="Total Revenue"
           // analitics="$52.63k"
-          estadistics="100%"
+          estadistics="+3.4"
           analitics={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalRevenues)}
           img={imgSubida}
         />
@@ -177,14 +167,14 @@ export default function DashboardSeller() {
         //totalRevenuesToday
           title="Today Revenue"
           analitics={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalRevenuesToday)}
-          estadistics={new Intl.NumberFormat('en-US', { style: 'percent' }).format(totalRevenuesToday/totalRevenues)}
-          img={money}
+          estadistics="-5,5%"
+          img={calen}
         />
         <CardAnalitics 
         title="Tickets Sold" 
         analitics={totalTickets}
-        // estadistics=" "
-        img={entradas} />
+        estadistics=" "
+        img={carrito} />
         <Link to="/createEvent">
           <button className={style.btnPublish}>Publish Event</button>
         </Link>
