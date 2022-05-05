@@ -26,8 +26,7 @@
 }
 
 .FilterContainner {
-  /* position: relative;
-  top: -180px; */
+
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -65,8 +64,6 @@
   align-items: center;
   color: #ffffff;
   font-family: Poppins;
-  /* width: 1080px;
-  height: 40px; */
 }
 
 #UpcomingEvents {
