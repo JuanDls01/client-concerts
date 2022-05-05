@@ -15,6 +15,7 @@ import clearAuthError, { CLEAR_AUTH_ERR } from "./clearAuthErr";
 import logout, { LOGOUT } from "./logout";
 import sendEmailRecover, { SEND_EMAIL_RECOVER } from "./sendEmailRecover";
 import sendEmailRegister, { SEND_EMAIL_REGISTER } from "./sendEmailRegister";
+import sendEmailBuy , {SEND_EMAIL_BUY} from "./sendEmailBuy";
 import getUser, { GET_USER } from "./getUser";
 import getUsers, { GET_USERS } from "./getUsers";
 import clearUser, { CLEAR_USER } from "./clearUser";
@@ -42,6 +43,7 @@ export const actions = {
   LOGOUT,
   SEND_EMAIL_RECOVER,
   SEND_EMAIL_REGISTER,
+  SEND_EMAIL_BUY,
   GET_USER,
   GET_USERS,
   CLEAR_USER,
@@ -69,6 +71,7 @@ const actionsCreator = {
   logout,
   sendEmailRecover,
   sendEmailRegister,
+  sendEmailBuy,
   getUser,
   getUsers,
   clearUser,
