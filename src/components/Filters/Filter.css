@@ -1,6 +1,9 @@
 .DateRangePicker div {
   border-radius: 50px !important;
-  color: #000 !important;
+  /* color: #000 !important; */
+  display: flex;
+  align-items: center;
+  margin: 0.2vw;
 }
 .DateRangePickerInput__withBorder {
   background-color: #f2f4ff !important;
@@ -53,7 +56,8 @@
 .FilterBox {
   width: 1080px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
 
 .FilterTitle {
@@ -64,6 +68,11 @@
   align-items: center;
   color: #ffffff;
   font-family: Poppins;
+}
+
+h2{
+  font-size:3.5vw;
+  margin-left: 0.9vw;
 }
 
 #UpcomingEvents {
@@ -78,6 +87,7 @@
 }
 
 .botonFilter {
+
   height: 42px;
   width: 150px;
   font-family: Poppins;
@@ -85,8 +95,9 @@
   border-radius: 50px;
   border-style: none;
   color: #484848;
-  font-size: 15px;
+  font-size: 1.8vw;
   cursor: pointer;
+  margin-right: 0.9vw;
 }
 .botonFilter:hover {
   transform: scale(1.03);

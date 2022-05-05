@@ -138,7 +138,7 @@ const OrderForm = (props) => {
                       type="text"
                       id={ticket.internalId}
                       name="clientId"
-                      placeholder={`Client ID`}
+                      placeholder={`Client DNI`}
                       onChange={handleTicketsChange}
                     />
                     <div className={style.borde}>{""}</div>

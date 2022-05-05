@@ -106,10 +106,11 @@ const CreateStage = ({ closeStageModal, isScriptLoaded, isScriptLoadSucceed }) =
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postStage(input))
-    Swal.fire({ title: 'Success!', 
-                text: 'Stage create succesful!', 
-                icon: 'success', 
-                confirmButtonText: 'Ok'
+    Swal.fire({ 
+      title: 'Success!', 
+      text: 'Stage create succesful!', 
+      icon: 'success', 
+      confirmButtonText: 'Ok'
     })
     setInput({
       name: "",
