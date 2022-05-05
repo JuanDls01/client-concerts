@@ -42,7 +42,7 @@ export default function SearchBars() {
         if (nameEvent === '' && nameArtist === '' && nameStage === '') {
             document.getElementById('nameEvent').focus();
             Swal.fire({ title: 'Error!', 
-                        text: 'Debe ingresar algo!!!', 
+                        text: 'You must enter something!', 
                         icon: 'warning', 
                         confirmButtonText: 'Ok'
             })
