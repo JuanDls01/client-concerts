@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 
 const EventForm = () => {
-  //useRoleProtected("vendedor");
+  useRoleProtected("vendedor");
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
@@ -122,9 +122,17 @@ const EventForm = () => {
       <p>Stage: ${conStage[0].name}</p>
       <p>Date: ${form.date}</p>
       <p>Time: ${form.time}</p>
-      <p>${form.stock.cat1name}: (Stock - ${form.stock.cat1stock}) (Price - ${form.stock.cat1price})</p>,
-      <p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>,
-      <p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`,
+      <p>${form.stock.cat1name}: (Stock - ${form.stock.cat1stock}) (Price - ${
+        form.stock.cat1price
+      })</p>
+      ${
+        form.stock.cat2name &&
+        `<p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>`
+      }
+      ${
+        form.stock.cat3name &&
+        `<p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`
+      }`,
     }).then(async (result) => {
       if (result.isConfirmed) {
         setIsActive(!isActive);
