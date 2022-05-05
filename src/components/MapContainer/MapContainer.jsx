@@ -9,7 +9,6 @@ const MapContainer = (props) => {
         marginLeft: props.marginLeft,
         maxWidth: props.maxWidth,
         maxHeight: props.maxHeight,
-        borderRadius: props.borderRadius,
       }}
       initialCenter={{ lat: Number(props.lat), lng: Number(props.lon) }}
       zoom={10}
