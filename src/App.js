@@ -20,6 +20,7 @@ import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
 import ShoppyngHistory from "./components/DashboarUsers/DashboardUser";
 
 import OrderForm from "./components/OrderForm/OrderForm";
+import Contenido from './components/Chatbot/Chatbot';
 
 import "./App.css";
 
@@ -65,6 +66,7 @@ function App() {
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/chatbot" element={<Contenido />} />
         {/* ADMIN */}
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
         <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />
