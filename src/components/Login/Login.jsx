@@ -88,12 +88,14 @@ const Login = () => {
     // }
 
     const responseGoogle = (response) => {
+        console.log('response',response);
         const input = {
             googleId: response.profileObj.googleId,
             email: response.profileObj.email,
             firstName: response.profileObj.givenName,
             lastName: response.profileObj.familyName
         }
+        console.log(input);
         dispatch(loginGoogle(input))
     }
 
