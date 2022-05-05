@@ -12,7 +12,7 @@
   .imgCard {
     width: 55px;
     height: 55px;
-    /* background-color: #c6e2f9; */
+    background-color: #000;
     position: absolute;
     left: 10px;
   }

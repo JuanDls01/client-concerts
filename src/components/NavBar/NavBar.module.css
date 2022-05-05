@@ -17,10 +17,9 @@
     /* display: flex; */
     justify-content: space-evenly;
     flex-direction: row;
-    height: 12vh;
-    margin-bottom: 3vh;
+    height: 20%;
+    background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
     background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
-
 }
 
 .navegacionUser ul {

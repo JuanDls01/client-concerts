@@ -7,7 +7,7 @@ import getTickets from '../../redux/actions/getTickets'
 import useRoleProtected from "../Hooks/useRoleProtected";
 import DataTable, {createTheme} from 'react-data-table-component';
 import Footer from '../footer/footer';
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import getUser from "../../redux/actions/getUser";
 import clearUser from "../../redux/actions/clearUser";
 import Modal from '../Modal/Modal';
@@ -16,15 +16,15 @@ import NavBar from '../NavBar/NavBar';
 
 //css
 import style from "./DashboardUser.module.css";
-// import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import "style-components";
 
 //assets
 // import { ImEye } from "react-icons/im";
 import logo from "../../assets/images/logotipo.png";
 import imgSubida from "../../assets/images/subida.png";
-import calen from "../../assets/images/entradas.png";
-import carrito from "../../assets/images/money.png";
+import calen from "../../assets/images/calen.png";
+import carrito from "../../assets/images/carrito.png";
 
 //Datos mokeados
 
