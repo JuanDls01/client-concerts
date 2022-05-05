@@ -148,3 +148,13 @@ p {
     font-weight: bold;
     color: #FFFFFF;
 }
+
+.lastTickets {
+    border-bottom-left-radius: 18.9529px;
+    border-bottom-right-radius: 18.9529px;
+    border: none;
+    background-color: darkkhaki;
+    font-size: large;
+    font-weight: bold;
+    color: #FFFFFF;
+}

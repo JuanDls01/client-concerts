@@ -15,10 +15,10 @@ import { Navigate, useNavigate } from "react-router-dom";
 import checkInput from "../../utils/checkInput";
 import finalCheck from "../../utils/finalCheck";
 import { Link } from "react-router-dom";
-import { BiArrowBack } from 'react-icons/bi';
+import { BiArrowBack } from "react-icons/bi";
 
 const EventForm = () => {
-  //useRoleProtected("vendedor");
+  useRoleProtected("vendedor");
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
@@ -122,9 +122,17 @@ const EventForm = () => {
       <p>Stage: ${conStage[0].name}</p>
       <p>Date: ${form.date}</p>
       <p>Time: ${form.time}</p>
-      <p>${form.stock.cat1name}: (Stock - ${form.stock.cat1stock}) (Price - ${form.stock.cat1price})</p>,
-      <p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>,
-      <p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`,
+      <p>${form.stock.cat1name}: (Stock - ${form.stock.cat1stock}) (Price - ${
+        form.stock.cat1price
+      })</p>
+      ${
+        form.stock.cat2name &&
+        `<p>${form.stock.cat2name}: (Stock - ${form.stock.cat2stock}) (Price - ${form.stock.cat2price})</p>`
+      }
+      ${
+        form.stock.cat3name &&
+        `<p>${form.stock.cat3name}: (Stock - ${form.stock.cat3stock}) (Price - ${form.stock.cat3price})</p>`
+      }`,
     }).then(async (result) => {
       if (result.isConfirmed) {
         setIsActive(!isActive);
@@ -215,12 +223,12 @@ const EventForm = () => {
     const property = e.target.name;
 
     setCheckbox({ ...checkbox, [property]: !checkbox[property] });
-    if (checkbox.category2 === true)
+    if (property === "category2" && checkbox.category2 === true)
       setForm({
         ...form,
         stock: { ...form.stock, cat2name: "", cat2price: 0, cat2stock: 0 },
       });
-    if (checkbox.category3 === true)
+    if (property === "category3" && checkbox.category3 === true)
       setForm({
         ...form,
         stock: { ...form.stock, cat3name: "", cat3price: 0, cat3stock: 0 },
@@ -231,14 +239,16 @@ const EventForm = () => {
     <LoadingOverlay>
       <div className={style.pageContainer}>
         <div className={style.logoContainner}>
-        <Link to="/">
-          <img src={logo} className={style.logo} alt={logo} />
-              </Link>
+          <Link to="/">
+            <img src={logo} className={style.logo} alt={logo} />
+          </Link>
         </div>
 
         <div className={style.formContainer}>
           <div className={style.bttnContainner}>
-            <Link to='/vendedor/dashboard' className={style.backBttn}><BiArrowBack /></Link>
+            <Link to="/vendedor/dashboard" className={style.backBttn}>
+              <BiArrowBack />
+            </Link>
           </div>
           <h1 className={style.titleForm}>Create your own event</h1>
           <form autoComplete="off" className={style.formContent}>
