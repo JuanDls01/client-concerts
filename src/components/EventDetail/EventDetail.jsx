@@ -235,6 +235,7 @@ const EventDetail = () => {
               </div>
             </div>
 
+{/* hola */}
             <div className={style.container_select_button}>
               <div className={style.container_select}>
                 <p className={style.select_title}>
