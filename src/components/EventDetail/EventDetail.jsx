@@ -188,9 +188,9 @@ const EventDetail = () => {
 
   return (
     <>
-      {/* isLoading === true ? <Loading /> : */}
       {
       event ? (
+        
         <div className={style.mainContainer}>
           <div className={style.topBody}>
             <NavBar />
