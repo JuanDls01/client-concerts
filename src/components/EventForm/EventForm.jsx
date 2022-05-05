@@ -22,7 +22,7 @@ const EventForm = () => {
   const dispatch = useDispatch();
   const artists = useSelector((state) => state.artists);
   const stages = useSelector((state) => state.stages);
-  console.log(stages);
+
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -31,8 +31,11 @@ const EventForm = () => {
 
   useEffect(() => {
     dispatch(getStages());
+  }, [dispatch, stageModal]);
+
+  useEffect(() => {
     dispatch(getArtists());
-  }, [dispatch, artistModal, stageModal]);
+  }, [dispatch, artistModal]);
 
   const handleArtistModal = () => {
     setArtistModal(!artistModal);
