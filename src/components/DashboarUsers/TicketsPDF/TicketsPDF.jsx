@@ -1,0 +1,92 @@
+import {useSelector} from 'react-redux';
+import TicketPDF from '../TicketPDF/TicketPDF';
+
+
+import {PDFViewer, Document, Page, View, Text} from '@react-pdf/renderer';
+
+import React from 'react'
+
+import s from './TicketsPDF.module.css'
+
+export function TicketsPDF({onClose}){
+    let tik = useSelector((state) => state.getTickets)
+
+    console.log(tik)
+
+    return (
+          <div className={s.container}>
+          {/* <button>Close</button> */}
+          <div className={s.divbtn}><button className={s.button} onClick={onClose}> Close </button></div>
+            <div className={s.divIn}>
+            <PDFViewer style={{width:'100%', height: '90vh'}  }>
+            <Document>
+              <Page size="A4">
+              {/* <View> */}
+          {/* <Text className={s.title}>These are your tickets</Text> */}
+          {/* <div className={s.botones}>
+          <div className={s.divbtn}><button className={s.button} onClick={onClose}> Close </button></div>
+          </div> */}
+            <View className={s.containerTicket}>
+                {tik.Tickets?.map((t) => {
+                let obj = {
+                Folio: t.id.substring(0, 8),
+                Event: t.Event.name,
+                nameT: t.clientName,
+                email: t.clientMail,
+                date: t.Event.date,
+                stage: tik.Tickets[0].Event.StageId,
+                adress:tik.data,
+                price: t.price,
+                category: t.category,
+                img: t.Event.img,
+                };
+                return <TicketPDF props={obj} key={obj.Folio} />
+                })}
+            </View>
+        
+      {/* </View> */}
+              </Page>
+          </Document>
+          </PDFViewer>
+          </div>
+          </div>
+    );
+}
+
+
+
+// import {useSelector} from 'react-redux';
+// import TicketPDF from '../TicketPDF/TicketPDF'
+// // import {PDFViewer} from '@react-pdf/renderer';
+// import s from './TicketsPDF.module.css'
+
+// export default function TicketsPDF({onClose, tik}){
+//     // let tik = useSelector((state) => state.getTickets)
+
+//     return (
+//       <div>
+//         <div className={s.container}>
+//           <p className={s.title}>These are your tickets</p>
+//           <div className={s.divbtn}><button className={s.button} onClick={onClose}> Close </button></div>
+//             <div className={s.containerTicket}>
+//                 {tik.Tickets?.map((t) => {
+//                 let obj = {
+//                 Folio: t.id.substring(0, 8),
+//                 Event: t.Event.name,
+//                 nameT: t.clientName,
+//                 email: t.clientMail,
+//                 date: t.Event.date,
+//                 stage: "tik[1][0].Stage.name",
+//                 adress:" tik[1][0].Stage.address",
+//                 price: t.price,
+//                 category: t.category,
+//                 img: t.Event.img,
+//                 };
+//                 return <TicketPDF  props={obj} key={obj.Folio} />
+//                 })}
+//             </div>
+//         </div>
+//       </div>
+//     );
+// }
+

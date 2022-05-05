@@ -81,7 +81,24 @@
     padding-left: 10px;
     border-radius: 10px;
 }
-table {
-    width: 80%;
-    border: #000;
+.tableCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+.tabla {
+  width: 70%;
+}
+
+.iconoUser{
+  width: 30%;
+  height: auto;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.iconoUser:hover
+{color:#242565}
+
+h5:hover
+{color:#242565}

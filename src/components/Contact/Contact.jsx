@@ -1,6 +1,40 @@
-import React, { useState } from "react";
+// import React, { useRef } from 'react';
+// import emailjs from '@emailjs/browser';
+
+// export default function Contact ()  {
+//   const form = useRef();
+
+//   const sendEmail = (e) => {
+//     e.preventDefault();
+//     console.log(form.current)
+//     emailjs.sendForm('service_yjfg1ts', 'template_hayjh9f', form.current, 'veTpopn0-22AcyjQ3')
+//       .then((result) => {
+//           console.log(result.text);
+//       }, (error) => {
+//           console.log(error.text);
+//       });
+//   };
+
+//   return (
+//     <form ref={form} onSubmit={sendEmail}>
+//       <label>Name</label>
+//       <input type="text" name="user_name" />
+//       <label>Email</label>
+//       <input type="email" name="user_email" />
+//       <label>Message</label>
+//       <textarea name="message" />
+//       <input type="submit" value="Send" />
+//     </form>
+//   );
+// };
+
+
+
+import React, { useState, useRef  } from "react";
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Link } from "react-router-dom";
+import emailjs from '@emailjs/browser';
 // import FormBttn from "../Common/FormBttn/FormBttn";
 // import InputText from '../Common/InputText/InputText';
 
@@ -12,22 +46,22 @@ const validator = (input) => {
     let errors = {};
     let testEmail = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
 
-    if(!input.email) errors.email = 'Enter your email';
-    else if(!testEmail.test(input.email)) errors.email = 'Please enter a valid email'
-    if (!input.name) {
-        errors.name = 'Name is require!';
+    if(!input.user_email) errors.user_email = 'Enter your email';
+    else if(!testEmail.test(input.user_email)) errors.user_email = 'Please enter a valid email'
+    if (!input.user_name) {
+        errors.user_name = 'Name is require!';
     } 
-    else if (input.name.length > 40){
+    else if (input.user_name.length > 40){
         errors.name = 'Up to 40 characters!'
     }
-    if (!input.subject) {
-        errors.subject = 'Subject is require!';
+    if (!input.user_subject) {
+        errors.user_subject = 'Subject is require!';
     } 
-    else if (input.subject.length > 40){
-        errors.subject = 'Up to 40 characters!'
+    else if (input.user_subject.length > 40){
+        errors.user_subject = 'Up to 40 characters!'
     }
-    if (!input.comments) {
-        errors.comments = 'Comments are require!';
+    if (!input.message) {
+        errors.message = 'Comments are require!';
     }
    
     return errors;
@@ -35,13 +69,14 @@ const validator = (input) => {
 
 export default function Contact(){
     const navigate = useNavigate();
+    const form = useRef();
 
     //Info del Usuario:
     const [input, setInput] = useState({
-        name:'',
-        email:'',
-        subject:'',
-        comments:'',
+        user_name:'',
+        user_email:'',
+        user_subject:'',
+        message:'',
     });
 
     //Guardo posibles errores:
@@ -58,7 +93,9 @@ export default function Contact(){
     //Handle para que el usuario pueda ingresar:
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(input.name ==="" || input.email ==="" || input.subject ==="" || input.comments ===""){
+        console.log("Entro al submit")
+        console.log(form.current.user_name)
+        if(input.user_name ==="" || input.user_email ==="" || input.user_subject ==="" || input.message ===""){
             Swal.fire({
                 icon: 'error',
                 title: 'you need to fill all the fields...',
@@ -67,6 +104,25 @@ export default function Contact(){
               })
               return
         }else{
+            // let data = {
+            //     service_id: 'service_yjfg1ts',
+            //     template_id: 'template_hayjh9f',
+            //     user_id: 'veTpopn0-22AcyjQ3',
+            //     template_params: {
+            //         'username': input.user_name,
+            //         'useremail': input.user_email,
+            //         'subject': input.user_subject,
+            //         'message': input.message,
+            //         'g-recaptcha-response': '03AHJ_ASjnLA214KSNKFJAK12sfKASfehbmfd...'
+            //     }
+            // };
+            emailjs.sendForm('service_yjfg1ts', 'template_hayjh9f', form.current, 'veTpopn0-22AcyjQ3')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+
             console.log("Este es el mensaje enviado")
             console.log(input)
             Swal.fire({ title: 'Success!', 
@@ -81,47 +137,48 @@ export default function Contact(){
     return(
     <div className={style.pageContainner}>
         <div className={style.logoContainner}>
-            <img src={logo} className={style.logo} alt={logo}/>
+            <Link className={style.linkhome} to="/"><img src={logo} className={style.logo} alt={logo}/></Link>
         </div>
         <div className={style.formContainner}>
             
                 <h1 className={style.titleForm}>Hello, leave us your comments, they are very important to us. </h1>
-                <form className={style.formContent} onSubmit={handleSubmit}>
+                <form ref={form} className={style.formContent} onSubmit={handleSubmit}>
 
                     {/* Name */}
                     <input
                         className={style.input} 
-                        name='name' 
+                        name='user_name' 
                         type='text' 
                         placeholder='Name' 
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        autoFocus
                     />
-                    {errors.name?<div className={style.error}>{errors.name}</div>:null}
+                    {errors.user_name?<div className={style.error}>{errors.user_name}</div>:null}
 
                     {/* Email */}
                     <input 
                     className={style.input}
-                        name='email' 
+                        name='user_email' 
                         type='email' 
                         placeholder='Email' 
                         onChange={handleChange}  
                     />
-                    {errors.email?<div className={style.error}>{errors.email}</div>:null}
+                    {errors.user_email?<div className={style.error}>{errors.user_email}</div>:null}
                     
                     {/* subject */}
                     <input 
                     className={style.input}
-                        name='subject' 
+                        name='user_subject' 
                         type='text' 
                         placeholder='Subject, example, congratulations, comment, complaint' 
                         onChange={handleChange}  
                     />
-                      {errors.subject?<div className={style.error}>{errors.subject}</div>:null} 
+                      {errors.user_subject?<div className={style.error}>{errors.user_subject}</div>:null} 
 
                     {/* Comments */}
                     <textarea 
                     className={style.textarea}
-                        name='comments' 
+                        name='message' 
                         type='textarea' 
                         rows='5'
                         cols='54'
@@ -131,10 +188,10 @@ export default function Contact(){
                         // inputNext='password' 
                         // inputState={input} 
                     />
-                     {errors.comments?<div className={style.error}>{errors.comments}</div>:null}
+                     {errors.message?<div className={style.error}>{errors.message}</div>:null}
                    
                     {/* Submit */}
-                    <button type="submit" className={(input.name ==="" || input.email ==="" || input.subject ==="" || input.comments ==="" ) ?style.buttonDisabled:style.button} disabled={(input.name ==="" || input.description ==="" || input.genreId ==="") ? true:false}> Send </button>
+                    <button type="submit" className={(input.user_name ==="" || input.user_email ==="" || input.user_subject ==="" || input.message ==="" ) ?style.buttonDisabled:style.button} disabled={(input.user_name ==="" || input.description ==="" || input.genreId ==="") ? true:false}> Send </button>
 
                     <button className={style.button2} onClick={()=> navigate("/")}>Cancel </button>
                 </form>

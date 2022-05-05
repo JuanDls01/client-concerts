@@ -5,7 +5,7 @@ export const GET_ARTISTS = "GET_ARTISTS";
 const getArtists = () => {
   return async (dispatch) => {
     try {
-      const artists = await axios.get("http://localhost:3001/artist");
+      const artists = await axios.get("/artist");
       return dispatch({
         type: GET_ARTISTS,
         payload: artists.data,

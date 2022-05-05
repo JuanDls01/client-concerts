@@ -2,22 +2,24 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    height: 250px;
+    width: 100%;
+    height: 30%;
     background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
     background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
 }
 
 .logoContainner {
-    width: 300px;
-    height: 100%;
+    width: 100vw;
+    height: 25vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .logo {
-    width: 200px;
-    height: 150px;
+    width: 34vw;
+    display: flex;
+
 }
 
 .titleForm {
@@ -73,7 +75,7 @@
 
 .registerBttn {
     background: #FFFFFF;
-    width: 497;
+    width: 100%;
     border-radius: 8px;
     border: 2px solid #242565;
     border-color: #242565;
@@ -89,7 +91,8 @@
 }
 
 .registerBttn:hover{
-    color: #242565
+    color: #242565;
+    box-shadow: 3px 3px #24256580
 }
 
 /* .registerBttn a {
@@ -135,6 +138,30 @@
     margin-top: 15px;
 }
 
+.googleLogin{
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 8px;
+    /* border: .5px solid rgba(36, 37, 101, 0.502);
+    box-shadow: 2px 2px #24256580;
+    padding:0; */
+    border: 2px 
+
+}
+
+.googleLogin:hover{
+    /* border: 1px solid #242565 */
+    box-shadow: 3px 3px #24256580
+}
+
+.googleLogin button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
 /* Extra small devices (portrait phones, less than 576px) */
 @media (max-width: 575.98px) { 
     .pageContainner {
@@ -167,5 +194,42 @@
         border-radius: 6px;
         position: static;
         /* top: -10px; */
+    }
+}
+
+@media (max-width: 575.96px) { 
+    .pageContainner {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        width: 120px;
+        height: 90px;
+        margin-left: 5px;
+    }
+    .logoContainner {
+        width: 100%;
+        height: 90px;
+        background: -o-linear-gradient(331.02deg, #ED4690 -2.11%, #5522CC 63.58%);
+        background: linear-gradient(118.98deg, #ED4690 -2.11%, #5522CC 63.58%);
+        display: flex;
+    }
+    .formContainner {
+        width: 69%;
+        display: flex;
+        position: relative;
+        top: 28vh;
+        margin: 5;
+        left: 36vw;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 4px 47.38px rgb(0 0 0 / 25%);
+        border-radius: 6px;
+    }
+    .formContent{
+        width: 85%;
+        display: flex;
+        flex-direction: column;
     }
 }

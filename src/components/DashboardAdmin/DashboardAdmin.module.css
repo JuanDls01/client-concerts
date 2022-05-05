@@ -1,25 +1,6 @@
 .conteiner {
   font-family: Poppins;
 }
-.header {
-  width: 100%;
-  height: 90px;
-  background: linear-gradient(87.59deg, #5522cc 0%, #f5167e 100%);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 70px;
-  padding-right: 70px;
-}
-.imgHeader {
-  width: 235px;
-}
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
 .user img {
     width: 20px;
     height: 20px;
@@ -70,7 +51,7 @@
     border-style: none;
 }
 .tabla{
-    width: 100%;
+    width: 50%;
     display: flex;
     justify-content: center;
 }
@@ -85,3 +66,42 @@ table {
     width: 80%;
     border: #000;
 }
+
+.table{
+  margin-bottom: 20px;
+
+}
+
+@media (max-width: 1200px){
+
+  .cardConteiner {
+    width: 100%;
+    height: 150px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 40px;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 20vh;
+}
+
+.tablaUsers{
+  width: 85%;
+  display: flex;
+  justify-content: center;
+}
+
+.ContentsubTitle {
+  height: 12vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 1.5px;
+  justify-content: space-between;
+}
+
+}
+
+

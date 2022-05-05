@@ -48,7 +48,7 @@ const RegisterForm = ({closeRegisterModal}) => {
     const { registerUser, clearAuthError ,sendEmailRegister} = actionsCreator;
     const navigate = useNavigate();
 
-    // const user = useSelector((state) => state.user);
+    const messagge = useSelector((state) => state.messagge);
     const autherr = useSelector((state) => state.authError);
 
     const [input, setInput] = useState({
@@ -94,18 +94,7 @@ const RegisterForm = ({closeRegisterModal}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-
-        var dataMail={
-            name:input.firstName,
-            email:input.email
-        }
-        // console.log(dataMail)
-        dispatch(sendEmailRegister(dataMail))
-        // console.log(input);
         dispatch(registerUser(input));
-        
-//         if(!autherr) navigate('/register/success');
-
     }
 
     //componentWillUnmount
@@ -139,7 +128,8 @@ const RegisterForm = ({closeRegisterModal}) => {
                     handleChange={handleChangeInput} 
                     errors={inputErros} 
                     inputNext='lastName' 
-                    inputState={input} 
+                    inputState={input}
+                    autoFocus
                 />
 
                 {/* lastName */}
@@ -198,7 +188,7 @@ const RegisterForm = ({closeRegisterModal}) => {
                 />
 
                 {/* submit */}
-                {autherr ? <div className={style.authError}>{autherr}</div> : null}
+                {/* {autherr ? <div className={style.authError}>{autherr}</div> : null} */}
                 
                 <FormBttn 
                     firstValue={input.firstName}

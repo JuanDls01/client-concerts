@@ -17,18 +17,18 @@ const EventsCards = () => {
   // Eventos traídos del estado global:
   const events = useSelector((state) => state.events);
   const token = useSelector((state) => state.token);
-  console.log(token)
+  // console.log(token)
 
   // Si inicie sesión muestro 9 cartas, sino 6:
   useEffect(() => {
     // console.log("hola");
     dispatch(getEvents());
-    if(token === ''){
+    if (token === "") {
       EVENTSPERPAGE = 6;
     } else EVENTSPERPAGE = 9;
   }, [dispatch, getEvents, token]);
-  
-  console.log('EventsPerPga', EVENTSPERPAGE)
+
+  // console.log('EventsPerPga', EVENTSPERPAGE)
 
   // Estado que indica la página actual:
   const [currentPage, setCurrentPage] = useState(INITIALPAGE);
@@ -45,7 +45,7 @@ const EventsCards = () => {
     <div className={style.EventsPaginatedContainner}>
       <div className={style.EventsCardsContainner}>
         {currentEvents.length &&
-          currentEvents.map((event) => {
+          currentEvents?.map((event) => {
             return (
               <EventCard
                 key={event.id}
@@ -54,10 +54,10 @@ const EventsCards = () => {
                 imgEvent={event.img}
                 startdate={event.date}
                 starttime={event.time}
-                artistName={event.Artist.name}
-                stageName={event.Stage.name}
+                artistName={event.Artist && event.Artist.name}
+                stageName={event.Stage && event.Stage.name}
                 price={event.lowestPrice}
-                // location={event.stage.location}
+                stock={event.stock}
               />
             );
           })}

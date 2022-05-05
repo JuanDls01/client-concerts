@@ -1,69 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
-import style from "../DashboardAdmin.module.css"
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import DataTable from "react-data-table-component";
+import actionsCreator from "../../../redux/actions";
+import {
+    ContentsubTitleUsers,
+    subtileUsers,
+    tablaUsers,
+    detailCont,
+    headingsColor,
+    edit,
+} from './Users.module.css';
+import { RiFileEditLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
+
 
 const Users = () => {
-    const [users, setUsers] = useState([]);
+    const users = useSelector((state) => state.usersList);
     const token = useSelector((state) => state.token);
-    let colums = ['name', 'email', 'role', 'status'];
-
+    const { getUsers } = actionsCreator;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+// console.log(users) // No tiene propiedad de Activo/Inactivo para incluirla en la tabla
     useEffect(() => {
-        grabUserHandler();
-    }, []);
-
-    useEffect(() => {
-        grabUserHandler();
+        dispatch(getUsers(token));
     }, [token]);
 
-    const grabUserHandler = async () => {
-        if(users.length === 0 && token !== '') {
-            try {
-                const response = await axios.get('http://localhost:3001/auth/users', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setUsers(response.data);
-            } catch (error) {
-                console.log('err', error);
-                setUsers({error: error.response.data.message});
-            }
+
+    const columns = [
+        {
+          name: "Name",
+          selector: (row) => row.name,
+          sortable: true,
+          grow: 2,
+        },
+        {
+          name: "Email",
+          selector: (row) => row.email,
+          sortable: true,
+          grow: 2
+        },
+        {
+          name: "Role",
+          selector: (row) => row.role,
+          sortable: true,
+        },
+        {
+          name: "Status",
+          selector: (row) => row.status,
+          sortable: true,
         }
-    }
+        //Comentare Action mientras se define que va en esta parte
+        // ,
+        // {
+        //   name: "Actions",
+        //   selector: (row) => row.actions,
+        //   sortable: true,
+        // }
+        ,
+        { 
+		    button: true,
+		    cell: (row) => <RiFileEditLine onClick={()=>navigate('/admin/dashboard/user/'+row.actions)} className={edit} />,
+        }
+    ];
+    
+    let data = !users.hasOwnProperty('error') && Object.keys(users).length > 0 && users.map(u => {
+        return {
+            name: <Link to={`/admin/dashboard/user/${u.id}`} className={headingsColor}><strong>{`${u.firstName} ${u.lastName}`}</strong></Link>,
+            email: u.email,
+            role: u.Role.name,
+            status: 'Active',
+            actions:  u.id
+        };
+    });
+    if(data) data = data.filter(d => d.role !== 'Super admin');
 
     return (
         <>
-            <div className={style.ContentsubTitle}>
-                <h1 className={style.subtile}>Users</h1>
+            <div className={ContentsubTitleUsers}>
+                <h1 className={subtileUsers}>Users</h1>
             </div>
 
             {/* EN ESTA TABLA SE VA A RENDERIZAR UNA FILA POR CADA EVENTO QUE TENGA EL VENDEDOR */}
-            <div className={style.tabla}>
-                    <table>
-                    <thead className={style.columns}>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    {/* AQUI VAN A IR LOS DATOS DE CADA EVENTO  */}
-                    <tbody>
-                        {!users.error && users.map(u => {
-                            return (
-                                <tr key={u.id}>
-                                    <td>{`${u.firstName} ${u.lastName}`}</td>
-                                    <td>{u.email}</td>
-                                    <td>{u.Role.name}</td>
-                                    <td className='text-success'>Active</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
+            {
+                data && data.length > 0 ?
+                <div className={`container ${tablaUsers}`}>
+                    <DataTable 
+                    columns={columns} 
+                    data={data} 
+                    highlightOnHover={true}
+                    // pointerOnHover
+                    />
+                </div>:
+                <div className={`container text-start mb-5 alert alert-danger ${detailCont}`} role="alert">
+                    There aren't any users...
+                </div>
+            }
         </>
     );
 };

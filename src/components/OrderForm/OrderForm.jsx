@@ -1,13 +1,24 @@
 import style from "./OrderForm.module.css";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useMercadopago } from "react-sdk-mercadopago";
+import Paypal from "./Paypal";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
+
+import logo from "../../assets/images/logotipo.png";
+import checkTicket from "../../utils/checkTicket";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
+  const event = useSelector((state) => state.details);
+  const preOrder = useSelector((state) => state.preOrder);
+  const [allowBuy, setAllowBuy] = useState(false);
+
+  const preference = useSelector((state) => state.preference);
   const navigate = useNavigate();
 
   const handleTimeout = () => {
@@ -15,47 +26,129 @@ const OrderForm = (props) => {
     navigate("/");
   };
 
-  const mercadopago = useMercadopago.v2(
-    "TEST-cefc5873-9a5f-4f12-a1fa-d564350b7466",
-    {
-      locale: "en-US",
-    }
-  );
-  console.log(mercadopago);
-
+  let miArray = [];
   useEffect(() => {
-    if (mercadopago) {
-      const miMercado = mercadopago.checkout({
-        preference: {
-          id: "249975492-6d9e0050-9c9a-4f9e-a947-1bfb7c793137",
-        },
-        render: {
-          container: "#mercado",
-          label: "Pay",
-        },
+    for (let i = 0; i < preOrder.ticketQ; i++) {
+      miArray.push({
+        internalId: i,
+        clientName: "",
+        clientMail: "",
+        clientId: "",
+        category: preOrder.ticketName,
+        price: preOrder.ticketPrice,
       });
-      console.log(miMercado);
     }
-  }, [mercadopago]);
+  }, [preOrder]);
+
+  const [order, setOrder] = useState({
+    userId: preOrder.userId,
+    tickets: miArray,
+    eventId: preOrder.eventId,
+    ticketsName: preOrder.ticketName,
+    ticketPrice: preOrder.ticketPrice,
+    ticketQ: preOrder.ticketQ,
+  });
+
+  const handleTicketsChange = (e) => {
+    const index = e.target.id;
+    const property = e.target.name;
+    const value = e.target.value;
+    let temporaryArray = [...order.tickets];
+    temporaryArray[index][property] = value;
+    setOrder({ ...order, tickets: temporaryArray });
+    setAllowBuy(checkTicket(order.tickets));
+  };
 
   return (
-    <>
-      <Countdown
-        date={Date.now() + 600000}
-        onComplete={handleTimeout}
-      ></Countdown>
-
-      <h1>Formulario de Compra</h1>
-      <div id="mercado"></div>
-      <div className={style.infoBody}>
-        <span>Recital de Metallica</span>
-        <span>2022/04/25</span>
-        <span>Entrada General</span>
-        <span>5</span>
-        <span>$10000</span>
+    <div className={style.contenedor}>
+      <div className={style.mitarArriba}>
+        <img src={logo} className={style.logo} alt={logo} />
+        <p className={style.letrasFondo}>
+          <strong>Pay With Your Paypal Account</strong>
+        </p>
       </div>
-      <button type="button">Buy</button>
-    </>
+
+      <div className={style.interno}>
+        <div className={style.izquierda}>
+          <div className={style.encabezadoIzquierda}>
+            <Link to="/" className={style.bttnClose}>
+              <BiArrowBack />
+            </Link>
+            <p className={style.checkout}>
+              <strong>Checkout</strong>
+            </p>
+          </div>
+          <div className={style.infoBody}>
+            <span className={style.span}>
+              <strong>Event Name:</strong>{" "}
+              {preOrder.eventName && preOrder.eventName}
+            </span>
+            <span className={style.span}>
+              <strong>Date:</strong> {preOrder.eventDate}
+            </span>
+            <span className={style.span}>
+              <strong>Ticket category:</strong> {preOrder.ticketName}
+            </span>
+            <span className={style.span}>
+              <strong>Tickets: </strong> {preOrder.ticketQ} x
+            </span>
+            <span className={style.span}>
+              <strong>Price Ticket:</strong> ${preOrder.ticketPrice}
+            </span>
+            <span className={style.spanTotal}>
+              <strong>Total: </strong> $
+              {parseInt(preOrder.ticketQ) * parseInt(preOrder.ticketPrice)}
+            </span>
+          </div>
+          <div className={style.pp}>
+            {preference && allowBuy && (
+              <Paypal
+                order={preference}
+                userId={preOrder.userId}
+                internalOrder={order}
+              ></Paypal>
+            )}
+          </div>
+        </div>
+        <div className={style.derecha}>
+          <div className={style.ticketsInputs}>
+            {order.tickets &&
+              order.tickets.map((ticket) => {
+                return (
+                  <div className={style.inputs} key={ticket.id}>
+                    <div className={style.nameTriangulo}>
+                      <div className={style.triangulo}>{""}</div>
+                      <p>{`${preOrder.ticketName}`}</p>
+                    </div>
+                    <input
+                      type="text"
+                      id={ticket.internalId}
+                      name="clientName"
+                      placeholder={`Client Name`}
+                      onChange={handleTicketsChange}
+                    />
+                    <input
+                      type="text"
+                      id={ticket.internalId}
+                      name="clientMail"
+                      placeholder={`Client E-Mail`}
+                      onChange={handleTicketsChange}
+                    />
+                    <input
+                      type="text"
+                      id={ticket.internalId}
+                      name="clientId"
+                      placeholder={`Client DNI`}
+                      onChange={handleTicketsChange}
+                    />
+                    <div className={style.borde}>{""}</div>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -24,12 +24,12 @@
         );
         }
 ```
- 
+ *El argumento puede ser un STRING o un ARRAY de STRINGS
  ```js
     import { useRoleProtected } from '../../hooks/useRoleProtected';
 
     const MyProtectedComponent = () => {
-        useRoleProtected('admin');
+        useRoleProtected('admin');  //useRoleProtected(['admin', 'vendedor]); 
         return <div>MyComponent</div>;
     }
 ```

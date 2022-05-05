@@ -1,0 +1,30 @@
+.conten {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 900;
+}
+.boton1 , .boton2 {
+    background-color: #F5167E;
+    color:white;
+    font-size: large;
+    border-style: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 10px;
+    font-weight: 900;
+}
+.boton2{
+    background-color: #242565;
+}
+.category {
+    width: 170px;
+    border-radius: 15px;
+    color: white;
+    background-color: #242565;
+    height: 40px;
+    text-align: center;
+}

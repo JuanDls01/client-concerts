@@ -12,23 +12,30 @@ import EventDetail from "./components/EventDetail/EventDetail";
 import ArtistForm from "./components/registerArtist/RegisterArtist";
 import EventForm from "./components/EventForm/EventForm";
 import HomeRegUser from "./components/HomeRegUser/HomeRegUser";
-import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword"
+import ForgetPassword from "../src/components/ForgetPassword/ForgetPassword";
 import "./App.css";
 
 import DashboardSeller from "./components/DashboardSeller/DashboardSeller";
 import DashboardAdmin from "./components/DashboardAdmin/DashboardAdmin";
+import ShoppyngHistory from "./components/DashboarUsers/DashboardUser";
 
 import OrderForm from "./components/OrderForm/OrderForm";
 
 import "./App.css";
 
 import actionsCreator from "./redux/actions";
+import UserDetails from "./components/DashboardAdmin/UserDetails/UserDetails";
+import SeatPlace from "./components/SeatPlace/SeatPlace"
+
+import {TicketsPDF} from './components/DashboarUsers/TicketsPDF/TicketsPDF'
+
+
+import Profile from "./components/Profile/Profile";
+
+
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.token);
-  const authError = useSelector((state) => state.authError);
   const tokenError = useSelector((state) => state.tokenError);
   const { loginToken, logout } = actionsCreator;
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -39,7 +46,7 @@ function App() {
 
   useEffect(() => {
     if (tokenError) {
-      removeCookie('token', { path: '/' });
+      removeCookie("token", { path: "/" });
       dispatch(logout());
     }
   }, [tokenError]);
@@ -49,6 +56,7 @@ function App() {
       <Routes>
         {/* Invitado: */}
         <Route index element={<Home />} />
+        {/* <Route index element={<SeatPlace />} /> */}
         <Route path="/recoverPassword" exact element={<ForgetPassword />} />
         <Route path="/register" exact element={<RegisterForm />} />
         <Route path="/register/success" element={<RegisterSuccess />} />
@@ -56,19 +64,22 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="/:id" element={<EventDetail />} />
+        <Route path="/profile" element={<Profile />} />
         {/* ADMIN */}
         <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+        <Route path="/admin/dashboard/user/:id" element={<UserDetails />} />
         {/* Vendedor: */}
         <Route path="/postartist" element={<ArtistForm />} />
         <Route path="/createEvent" element={<EventForm />} />
+        <Route path="/vendedor/dashboard" element={<DashboardSeller />} />
         {/* Cliente: */}
-        {/* Cambiarle al path que corresponda */}
         <Route path="/HomeRegisteredUser" element={<HomeRegUser />} />
+        <Route path="/pdf" element={<TicketsPDF/>} />
 
         <Route path="/user/dashboard" element={<DashboardSeller />} />
+        <Route path="/user/shoppinghistory/:id" element={<ShoppyngHistory />} />
 
         <Route path="/order" element={<OrderForm />} />
-
       </Routes>
     </div>
   );

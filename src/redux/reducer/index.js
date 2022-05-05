@@ -1,6 +1,7 @@
 import { actions } from "../actions/index";
 import Swal from "sweetalert2";
 import { GET_STAGES } from "../actions/getStages";
+// import { act } from "@testing-library/react";
 //import { act } from "@testing-library/react";
 
 const {
@@ -17,12 +18,23 @@ const {
   CLEAR_AUTH_ERR,
   LOGOUT,
   GET_ARTISTS,
+  GET_TICKETS,
   SEND_EMAIL_RECOVER,
-  SEND_EMAIL_REGISTER
+  SEND_EMAIL_REGISTER,
+  SEND_EMAIL_BUY,
+  GET_USER,
+  CLEAR_USER,
+  GET_USERS,
+  UPDATE_USER,
+  CLEAR_UPDATE_ERR,
+  UPDATE_PASSWORD,
+  UPDATE_PROFILE,
+
 } = actions;
 
 const initialState = {
   events: [],
+  allevents: [],
   searchevents: [],
   details: [],
   genres: [],
@@ -31,8 +43,15 @@ const initialState = {
   token: "",
   tokenError: null,
   authError: null,
+  userUpdareErr: null,
   artists: [],
   stages: [],
+  usersList: {},
+  userDetail: {},
+  purchase: {},
+  preference: null,
+  preOrder: {},
+  getTickets:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -41,14 +60,88 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         events: action.payload,
+        allevents: action.payload,
         searchevents: action.payload,
       };
     }
 
-    case "GET_ARTISTS": {
+    case "SAVE_PREFERENCE": {
+      return { ...state, preference: action.payload };
+    }
+    case "SAVE_PREORDER": {
+      return { ...state, preOrder: action.payload };
+    }
+    case GET_TICKETS: {
+      return { ...state, getTickets: action.payload };
+    }
+
+    case GET_ARTISTS: {
       return {
         ...state,
         artists: action.payload,
+      };
+    }
+    case GET_USER: {
+      return {
+        ...state,
+        userDetail: action.payload,
+      };
+    }
+    case UPDATE_USER: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The user has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        userDetail: action.payload.error ? state.userDetail : action.payload,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case UPDATE_PROFILE: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "Your info has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        user: action.payload.error ? state.userDetail : action.payload,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case UPDATE_PASSWORD: {
+      const success = (status = true) => {
+        Swal.fire({
+          title: "Hey!",
+          text: !status ? action.payload.error : "The password has been updated",
+          icon: !status ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        userUpdareErr: action.payload.error ? action.payload.error && success(false) : "success" && success(),
+      };
+    }
+    case CLEAR_USER: {
+      return {
+        ...state,
+        userDetail: {},
+      };
+    }
+
+    case GET_USERS: {
+      return {
+        ...state,
+        usersList: action.payload,
       };
     }
 
@@ -60,7 +153,6 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_GENRES: {
-      // console.log('ejecutando getGenres desde reducer')
       return {
         ...state,
         genres: action.payload,
@@ -95,6 +187,13 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
+    case CLEAR_UPDATE_ERR: {
+      return {
+        ...state,
+        userUpdareErr: null,
+      };
+    }
+
     case LOGOUT: {
       return {
         ...state,
@@ -106,37 +205,58 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case GET_NAME_EVENT: {
+      console.log(action.payload);
       const eventfinds = action.payload;
+      console.log(eventfinds);
+      console.log(eventfinds.length);
       const notfound = () => {
         document.getElementById("nameEvent").focus();
         Swal.fire({
-          title: "Información",
-          text: "No se encontraron eventos!!!",
+          title: "Information",
+          text: "No events found!",
           icon: "info",
           confirmButtonText: "Ok",
         });
       };
       return {
         ...state,
-        events: eventfinds.length > 0 ? action.payload : state.events,
+        events: eventfinds.length !== 0 ? action.payload : state.allevents,
         messagge: eventfinds.length === 0 && notfound(),
       };
     }
 
     case REGISTER_USER: {
+      const notfound = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: action.payload.user? 'User registered success':`${authError}`,
+          icon: authError === "There are missing parameters" ||  authError === "The email is already in use!"? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? "success" : "error",
-        authError: action.payload.error,
+        authError: action.payload.error? action.payload.error:null,
+        messagge: action.payload && notfound(),
       };
     }
 
     case LOGIN_USER: {
+      const errormsg = (authError = action.payload.error) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${authError}`,
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+      };
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token ? action.payload.token: "",
+        token: action.payload.token ? action.payload.token : "",
         authError: action.payload.error,
+        messagge: action.payload.error? errormsg(): "",
       };
     }
 
@@ -144,7 +264,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user ? action.payload.user : "error",
-        token: action.payload.token ? action.payload.token: "",
+        token: action.payload.token ? action.payload.token : "",
         tokenError: action.payload.error,
       };
     }
@@ -154,29 +274,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     }
-    case SEND_EMAIL_RECOVER:{
-    
-        const notfound = (info=action.payload) => {
-          Swal.fire({
-            title: "Hey!" ,
-            text: `${info}`,
-            icon: info==="This email is not registered!" ? "error" : "success" ,
-            confirmButtonText: "Ok",
-          });
-        };
-        return {
-          ...state,
-          messagge: action.payload && notfound(),
-        };
-    
-    }
-    case SEND_EMAIL_REGISTER:{
-        
-      const notfound = (info=action.payload) => {
+    case SEND_EMAIL_BUY: {
+      const notfound = (info = action.payload) => {
         Swal.fire({
           title: "Hey!",
-          text:`${info}`,
-          icon: info==="user existent" ? "error" : "success" ,
+          text: `${info}`,
+          icon: "success",
           confirmButtonText: "Ok",
         });
       };
@@ -184,8 +287,35 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         messagge: action.payload && notfound(),
       };
-  
-  }
+    }
+    case SEND_EMAIL_RECOVER: {
+      const notfound = (info = action.payload) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${info}`,
+          icon: info === "This email is not registered!" ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
+      };
+    }
+    case SEND_EMAIL_REGISTER: {
+      const notfound = (info = action.payload) => {
+        Swal.fire({
+          title: "Hey!",
+          text: `${info}`,
+          icon: info === "user existent" ? "error" : "success",
+          confirmButtonText: "Ok",
+        });
+      };
+      return {
+        ...state,
+        messagge: action.payload && notfound(),
+      };
+    }
 
     default:
       return state;
