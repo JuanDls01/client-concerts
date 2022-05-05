@@ -2,7 +2,7 @@ import style from "./OrderForm.module.css";
 import Countdown from "react-countdown";
 import { useNavigate } from "react-router-dom";
 import Paypal from "./Paypal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -11,15 +11,24 @@ import { Link } from "react-router-dom";
 
 import logo from "../../assets/images/logotipo.png";
 import checkTicket from "../../utils/checkTicket";
+import savePreference from "../../redux/actions/savePreference";
 
 const OrderForm = (props) => {
   const user = useSelector((state) => state.user);
   const event = useSelector((state) => state.details);
   const preOrder = useSelector((state) => state.preOrder);
   const [allowBuy, setAllowBuy] = useState(false);
+  const dispatch = useDispatch();
 
   const preference = useSelector((state) => state.preference);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!preference) navigate(-1);
+    return () => {
+      dispatch(savePreference(""));
+    };
+  }, [preference, navigate]);
 
   const handleTimeout = () => {
     alert("Timeout: try again");
